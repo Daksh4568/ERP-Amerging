@@ -13,9 +13,17 @@ function Login() {
   };
 
   return (
-    <div className="w-dvw flex justify-center items-center h-screen bg-gradient-to-r from-blue-200 to-red-100">
+    <div className="w-dvw flex flex-wrap  justify-center items-center h-dvh bg-gradient-to-r from-blue-200 to-red-100 p-4">
+      {/* <div
+        className='h-96 w-full max-w-md mx-auto rounded-lg bg-cover bg-center bg-no-repeat'
+        style={{
+          backgroundImage: `url('https://images.pexels.com/photos/1365795/pexels-photo-1365795.jpeg?auto=compress&cs=tinysrgb&w=600')`,
+        }}
+      >
+      </div> */}
+
       <form
-        className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md md:w-96"
+        className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md mx-w-auto"
         onSubmit={handleSubmit}
       >
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
