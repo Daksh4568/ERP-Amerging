@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom'
-import { LeftOutlined, PieChartOutlined, DesktopOutlined, TeamOutlined, RightOutlined, UserOutlined, FileOutlined } from '@ant-design/icons'
+import {useNavigate, Outlet} from 'react-router-dom'
+import { LeftOutlined, PieChartOutlined, DesktopOutlined, TeamOutlined, RightOutlined, UserOutlined, FileOutlined, SettingOutlined } from '@ant-design/icons'
 import { Breadcrumb, Button, Layout, Menu, theme } from 'antd';
 
 const { Header, Sider, Content} = Layout;
@@ -14,6 +14,12 @@ function Dashboard() {
   // };
 
   const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
+
+  const handleMenuClick = (e) => {
+    navigate(e.key);
+  }
+
   const {
     token : {colorBgContainer, borderRadiusLG},
   } = theme.useToken();
@@ -120,8 +126,10 @@ function Dashboard() {
       getItem('Create new user', '4'),
       getItem('Exit form', '5'),
     ]),
-    getItem('Employee', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '9')]),
-    getItem('Files', '9', <FileOutlined />),
+    getItem('Employee', 'sub2', <TeamOutlined />, [
+      getItem('Team 1', '6'), getItem('Team 2', '9')
+    ]),
+    getItem('Settings', '9', <SettingOutlined/>),
   ];
 
   return (
@@ -134,6 +142,7 @@ function Dashboard() {
           mode='inline'
           defaultSelectedKeys={['1']}
           items={items}
+          onClick={handleMenuClick}
         />
       </Sider>
       <Layout>
@@ -154,6 +163,9 @@ function Dashboard() {
             }}
           />
         </Header>
+        <div style={{ padding: '20px', background: '#f0f2f5' }}>
+          <Outlet /> /* This renders the selected form based on route */
+        </div>
       </Layout>
     </Layout>
 
