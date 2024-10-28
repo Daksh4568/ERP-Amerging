@@ -97,7 +97,12 @@ function JoiningForm(){
         </Form.Item>
       
         <Form.Item label="Address">
-          <TextArea rows={4} />
+          <div className='bg-gray-200 w-full h-full p-3' >
+            <Input className='mb-2' placeholder='Permanent Address'/>
+            <InputNumber/>
+          </div>
+          <Checkbox >Same as Permanent Address</Checkbox>
+          <Input placeholder='Temporary Address'/>
         </Form.Item>
         <Form.Item label="Employee Type">
           <Select>
