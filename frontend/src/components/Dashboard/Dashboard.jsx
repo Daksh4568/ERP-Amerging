@@ -122,22 +122,24 @@ function Dashboard() {
 
   const items = [
     getItem('HR Module', 'sub1', <UserOutlined />, [
-      getItem('Joining Form', '3'),
-      getItem('Create new user', '4'),
-      getItem('Exit form', '5'),
+      getItem('Joining Form', 'joining-form'),
+      getItem('Create new user', 'create-new-user'),
+      getItem('Exit form', 'exit-form'),
     ]),
     getItem('Employee', 'sub2', <TeamOutlined />, [
-      getItem('Team 1', '6'), getItem('Team 2', '9')
+      getItem('Team 1', 'team-1'),
+      getItem('Team 2', 'team-2'),
     ]),
-    getItem('Settings', '9', <SettingOutlined/>),
+    getItem('Files', 'files', <FileOutlined />),
   ];
 
   return (
-    <Layout className='w-dvw h-dvh'>
-      <Sider className='p-3' trigger={null} collapsible collapsed={collapsed}>
-        <div className='demo-logo-vertical'/>
+    <Layout className='w-dvw h-dvh '>
+      <Sider className='p-3 ' trigger={null} collapsible collapsed={collapsed}>
+        <div className='demo-logo-vertical' />
         
-        <Menu 
+        <Menu
+          className='' 
           theme='dark'
           mode='inline'
           defaultSelectedKeys={['1']}
@@ -164,7 +166,7 @@ function Dashboard() {
           />
         </Header>
         <div style={{ padding: '20px', background: '#f0f2f5' }}>
-          <Outlet /> /* This renders the selected form based on route */
+          <Outlet /> 
         </div>
       </Layout>
     </Layout>

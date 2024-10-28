@@ -1,10 +1,164 @@
-import React from 'react';
-import { DatePicker } from 'antd';
+import {React, useState} from 'react';
+import { PlusOutlined, EyeInvisibleOutlined, EyeTwoTone  } from '@ant-design/icons';
+import {
+  Button,
+  Cascader,
+  Checkbox,
+  ColorPicker,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Space,
+  Radio,
+  Rate,
+  Select,
+  Slider,
+  Switch,
+  TreeSelect,
+  Upload,
+} from 'antd';
 
-const App = () => {
-  return (
-    <div>Joining Form</div>
-  )
+const { RangePicker } = DatePicker;
+const { TextArea } = Input;
+const normFile = (e) => {
+  if (Array.isArray(e)) {
+    return e;
+  }
+  return e?.fileList;
 };
 
-export default App;
+function JoiningForm(){
+  const [componentDisabled, setcomponentDisabled] = useState(true);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [value, setValue] = useState(0);
+
+  const onChange= (e) => {
+    setValue(e.target.value);
+  }
+
+  return (
+    <>
+      <div className="flex items-center justify-center h-full w-full">
+      <Form
+        className="p-8 shadow-lg rounded-lg bg-white"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        layout="horizontal"
+        style={{
+          maxWidth: 800,
+          width: '100%',
+        }}
+      >
+        <Form.Item label="Employee ID">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Full Name">
+          <Input />
+        </Form.Item>
+        <Form.Item label="DOB">
+          <DatePicker />
+        </Form.Item>
+        <Form.Item label="Gender">
+          <Select>
+            <Select.Option value="male">Male</Select.Option>
+            <Select.Option value="female">Female</Select.Option>
+            <Select.Option value="other">Other</Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label="Marital Status">
+          <Select>
+            <Select.Option value="single">Single</Select.Option>
+            <Select.Option value="married">Married</Select.Option>
+            <Select.Option value="other">Other</Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label="Contact Number">
+          <InputNumber style={{ width: '100%' }} />
+        </Form.Item>
+        <Form.Item label="Alternate Number">
+          <InputNumber style={{ width: '100%' }} />
+        </Form.Item>
+        <Form.Item  label="Personal Email">
+          <Input placeholder='example@mail.com'/>
+        </Form.Item>
+        <Form.Item label="Official Email">
+          <Input placeholder='example@mail.com'/>
+        </Form.Item>
+        <Form.Item label='Password'>
+          <Input.Password placeholder="Create Password" />
+        </Form.Item>       
+        <Form.Item label="Blood Group">
+          <Input />
+        </Form.Item>
+      
+        <Form.Item label="Address">
+          <TextArea rows={4} />
+        </Form.Item>
+        <Form.Item label="Employee Type">
+          <Select>
+            <Select.Option value="full-time">Full-Time</Select.Option>
+            <Select.Option value="part-time">Part-time</Select.Option>
+            <Select.Option value="contract">Contract</Select.Option>
+            <Select.Option value="consultant">Consultant</Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item label="Aadhar Card ">
+          <InputNumber placeholder='XXXX-XXXX-XXXX' style={{ width: '100%' }} />
+        </Form.Item>
+        <Form.Item label="PAN">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Passport">
+          <Radio.Group onChange={onChange} value={value} >
+            <Radio value={1}>Yes</Radio>
+            <Radio value={2}>No</Radio>
+          </Radio.Group>
+        </Form.Item>
+        {
+          value === 1 && (
+            <Form.Item label="Passport Number">
+              <Input placeholder='Enter Passport Number'/>
+            </Form.Item>
+          )
+        }
+        <Form.Item  label="Documents" valuePropName="fileList" getValueFromEvent={normFile}>
+          <Upload action="/upload.do" listType="picture-card">
+            <button
+              style={{ border: 0, background: 'none' }}
+              type="button"
+            >
+              <PlusOutlined />
+              <div style={{ marginTop: 2 }}>Upload</div>
+            </button>
+          </Upload>
+        </Form.Item>
+        <Form.Item label="Employee Type">
+          <Select>
+            <Select.Option value="regular">Regular</Select.Option>
+            <Select.Option value="relieved">Relieved</Select.Option>
+            <Select.Option value="resigned">Resigned</Select.Option>
+          </Select>
+        </Form.Item>
+        
+        <Form.Item >
+          <Button>Submit</Button>
+        </Form.Item>
+        <Form.Item label="Slider">
+          <Slider />
+        </Form.Item>
+        <Form.Item label="Rate">
+          <Rate />
+        </Form.Item>
+      </Form>
+    </div>
+      
+    </>
+  )
+}
+
+export default JoiningForm;

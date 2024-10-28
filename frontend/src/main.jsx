@@ -6,7 +6,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import Layout from './Layout.jsx'
 import Dashboard from './components/Dashboard/Dashboard.jsx'
 import Login from './components/Forms/Login.jsx'
-import LoginForm from './components/Forms/JoiningForm'
+import JoiningForm from './components/Forms/JoiningForm'
 
 
 const router = createBrowserRouter(
