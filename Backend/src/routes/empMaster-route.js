@@ -83,7 +83,18 @@ router.post('/emp/login' ,async (req,res)=> {
         res.status(500).send(e)
     }
  })
-
+ router.post('/emp/authorization',async(req,res)=>{
+  try{
+      req.employee.tokens = req.employee.tokens.filter((token)=>{
+          return token.token !== req.token
+      })
+      await req.employee.save()
+      res.send()
+      console.log("Authorization executed")
+  }catch(e){
+      res.status(500).send(e)
+  }
+})
  
 router.patch('/emp/:id',auth ,  async (req,res)=>{
     const updates =Object.keys(req.body)
