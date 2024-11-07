@@ -21,4 +21,12 @@ const auth =async (req,res,next)=>{
     }
 }
 
+const auhtorize = (...allowedRoles) =>{
+    return (req , res , next) =>{
+        if(!allowedRoles.includes(req.employee.role)){
+            return res.status(403).send({error:'Access Denied'});
+        }
+        next();
+    };
+};
 module.exports = auth;  //export the auth middleware function  
