@@ -1,6 +1,6 @@
 import React from 'react'
 import {Outlet} from 'react-router-dom';
-import Dashboard from './components/Dashboard/Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 
 function Layout() {
     

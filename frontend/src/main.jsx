@@ -4,9 +4,9 @@ import App from './App.jsx'
 import './index.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import Layout from './Layout.jsx'
-import Dashboard from './components/Dashboard/Dashboard.jsx'
-import Login from './components/Forms/Login.jsx'
-import JoiningForm from './components/Forms/JoiningForm'
+import Dashboard from './Dashboard/Dashboard.jsx'
+import Login from './Forms/Login.jsx'
+import JoiningForm from './Forms/JoiningForm'
 
 
 const router = createBrowserRouter(
