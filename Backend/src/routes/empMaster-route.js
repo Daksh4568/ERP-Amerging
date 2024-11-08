@@ -6,7 +6,7 @@ const mongoose = require('mongoose');// Import the Mongoose library for MongoDB 
 const bcrypt = require('bcryptjs');// Import the bcryptjs library for hashing passwords
 const router = new express.Router();// Create a new Express router instance
 const employee = require('../models/empMaster-model');// Import the Employees model from the empMaster-model file
-const auth = require('../middleware/auth')
+const {auth , authorize} = require('../middleware/auth')
 
 
 //custom schema
@@ -27,7 +27,7 @@ router.get('/getemp',async (req,res)=>{
     }
 })
 // Route to get total regular employees and total male and female employees
-router.get('/emp/stats', async (req, res) => {
+router.get('/emp/stats', auth , authorize('admin') , async (req, res) => {
     try {
       const totalRegularEmployees = await employee.countDocuments({ stat: 'Regular' });
       const totalMaleEmployees = await employee.countDocuments({stat: 'Regular', gender: 'Male' });
@@ -42,10 +42,10 @@ router.get('/emp/stats', async (req, res) => {
       res.status(400).send('db error');
     }
   });
-
-router.post('/regemp', auth , async (req,res)=> {
+router.post('/regemp', async (req,res)=> {
    const emp = new employee(req.body);
    try {
+        console.log("Welcome to Admin Dashboard")
         const lastEmpCount=await updateEmpCounter("read");//read 1 write 0
         emp.eID ='AT-' + String(lastEmpCount.counter+1).padStart(3, '0');
         emp.stat="Regular";
@@ -57,6 +57,7 @@ router.post('/regemp', auth , async (req,res)=> {
         res.status(201).send({emp,token});
         console.log("Employee added in the database")
    } catch (e) {
+    console.log("Manager and Admin access only")
         console.log(e);
         res.status(400).send(e);
    }
@@ -85,7 +86,7 @@ router.post('/emp/login' ,async (req,res)=> {
  })
 
  
-router.patch('/emp/:id',auth ,  async (req,res)=>{
+router.patch('/emp/:id', async (req,res)=>{
     const updates =Object.keys(req.body)
     const allowedUpdates =['name', 'password' ,'address','address.city'];
     const isValidOperation =updates.every((update)=>allowedUpdates.includes(update))

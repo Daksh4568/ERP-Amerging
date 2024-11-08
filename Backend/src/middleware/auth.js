@@ -21,7 +21,7 @@ const auth =async (req,res,next)=>{
     }
 }
 
-const auhtorize = (...allowedRoles) =>{
+const authorize = (...allowedRoles) =>{
     return (req , res , next) =>{
         if(!allowedRoles.includes(req.employee.role)){
             return res.status(403).send({error:'Access Denied'});
@@ -29,4 +29,4 @@ const auhtorize = (...allowedRoles) =>{
         next();
     };
 };
-module.exports = auth;  //export the auth middleware function  
+module.exports = {auth , authorize}; //export the auth middleware function  
