@@ -6,7 +6,8 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import Layout from './Layout.jsx'
 import Dashboard from './Dashboard/Dashboard.jsx'
 import Login from './Forms/Login.jsx'
-import JoiningForm from './Forms/JoiningForm'
+import JoiningForm from './Modules/HRModule/JoiningForm'
+import SelfEvalFrom from './Forms/SelfEvalFrom.jsx'
 
 
 const router = createBrowserRouter(
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
       <Route path='' element={<Login/>}/>
       <Route path='dashboard' element={<Dashboard/>}>
         <Route path='joining-form' element={<JoiningForm/>}/>
+        <Route path='selfeval-form' element={<SelfEvalFrom />}/>
       </Route>
     </Route>
   )

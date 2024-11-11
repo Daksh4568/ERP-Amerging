@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {useNavigate, Outlet} from 'react-router-dom'
 import { LeftOutlined, PieChartOutlined, DesktopOutlined, TeamOutlined, RightOutlined, UserOutlined, FileOutlined, SettingOutlined } from '@ant-design/icons'
-import { Breadcrumb, Button, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Button, Layout, Menu, theme, Space ,Input } from 'antd';
+import Search from 'antd/es/transfer/search';
 
 const { Header, Sider, Content} = Layout;
 function Dashboard() {
@@ -15,6 +16,7 @@ function Dashboard() {
 
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
+  const  { Search } = Input;
 
   const handleMenuClick = (e) => {
     navigate(e.key);
@@ -164,8 +166,17 @@ function Dashboard() {
               height: 64,
             }}
           />
+
+          <Space direction='vertical'>  
+            <Search 
+              className='flex items-center p-2'
+              placeholder='Search Box'
+              enterButton='search'
+              size='large'
+            />
+          </Space>
         </Header>
-        <div style={{ padding: '20px', background: '#f0f2f5' }}>
+        <div style={{ padding: '20px', background: '#f0f2f5', height: 'dvh' }}>
           <Outlet /> 
         </div>
       </Layout>
