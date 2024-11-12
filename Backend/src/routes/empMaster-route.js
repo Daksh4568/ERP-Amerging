@@ -7,17 +7,12 @@ const bcrypt = require('bcryptjs');// Import the bcryptjs library for hashing pa
 const router = new express.Router();// Create a new Express router instance
 const employee = require('../models/empMaster-model');// Import the Employees model from the empMaster-model file
 const {auth , authorize} = require('../middleware/auth')
-
-
+const EmployeeEvaluation = require('../models/employeeEvaluationSchema'); // Import the Evaluation model
 //custom schema
-const counters = require ('../models/counterMaster')
+const counters = require ('../models/counterMaster');
 
-/**
- * @route   GET /emp
- * @desc    Retrieve all employee records
- * @access  Public
- * @returns {Array} Array of employee objects
- */
+
+// All the routes are defined here
 router.get('/getemp',async (req,res)=>{
     try {        
        const employees = await employee.find({});
@@ -26,8 +21,17 @@ router.get('/getemp',async (req,res)=>{
         res.status(500).send(e)
     }
 })
+router.get('/emp/evaluationdata' , async(req,res)=>{
+   try {
+    const empevaluationData = await EmployeeEvaluation.find({});// It will retrieve all the data
+    res.status(200).send(empevaluationData);
+   } catch(e){
+    console.error("Error retrieving evaluation data:" , e);
+    res.status(500).send({error : "Error while fetching the data"});
+   }
+});
 // Route to get total regular employees and total male and female employees
-router.get('/emp/stats', auth , authorize('admin') , async (req, res) => {
+router.get('/emp/stats',  async (req, res) => {
     try {
       const totalRegularEmployees = await employee.countDocuments({ stat: 'Regular' });
       const totalMaleEmployees = await employee.countDocuments({stat: 'Regular', gender: 'Male' });
@@ -42,7 +46,7 @@ router.get('/emp/stats', auth , authorize('admin') , async (req, res) => {
       res.status(400).send('db error');
     }
   });
-router.post('/regemp', async (req,res)=> {
+router.post('/regemp' ,auth , authorize('admin'),async (req,res)=> {
    const emp = new employee(req.body);
    try {
         console.log("Welcome to Admin Dashboard")
@@ -83,6 +87,17 @@ router.post('/emp/login' ,async (req,res)=> {
     }catch(e){
         res.status(500).send(e)
     }
+ })
+ router.post('/emp/evaluation' , async( req, res) =>{
+  try{
+    const evaluationData = new EmployeeEvaluation(req.body); //It will populate from the request body
+    await evaluationData.save();
+    res.status(201).send(evaluationData); // Send the saved data as response
+    console.log(evaluationData)
+  } catch(e){
+    console.error("Error saving the evaluation data:" , e);
+    res.status(400).send(e)
+  }
  })
 
  
@@ -135,5 +150,4 @@ const updateEmpCounter = async (action) => {
       throw new Error('db error');
     }
   };
-
 module.exports=router
