@@ -38,9 +38,9 @@ function JoiningForm(){
   }
 
   return (
-    <div className="flex items-center justify-center h-full w-full">
+    <div className="">
     <Form
-      className="p-3 shadow-lg rounded-lg bg-white w-full grid grid-cols-1 md:grid-cols-2 gap-2"
+      className="p-3 shadow-lg rounded-lg bg-white w-full grid grid-cols-4 gap-2"
       labelCol={{
         span: 8,
       }}
@@ -54,15 +54,15 @@ function JoiningForm(){
           <Input />
         </Form.Item>
 
-        <Form.Item label="Full Name" className="col-span-1">
+        <Form.Item label="Full Name" >
           <Input />
         </Form.Item>
 
-        <Form.Item label="DOB" className="col-span-1">
+        <Form.Item label="DOB" >
           <DatePicker />
         </Form.Item>
 
-        <Form.Item label="Gender" className="col-span-1">
+        <Form.Item label="Gender" >
           <Select>
             <Select.Option value="male">Male</Select.Option>
             <Select.Option value="female">Female</Select.Option>
@@ -70,7 +70,7 @@ function JoiningForm(){
           </Select>
         </Form.Item>
 
-        <Form.Item label="Marital Status" className="col-span-1">
+        <Form.Item label="Marital Status" >
           <Select>
             <Select.Option value="single">Single</Select.Option>
             <Select.Option value="married">Married</Select.Option>
@@ -78,31 +78,31 @@ function JoiningForm(){
           </Select>
         </Form.Item>
 
-        <Form.Item label="Contact Number" className="col-span-1">
+        <Form.Item label="Contact Number" >
           <InputNumber style={{ width: '100%' }} />
         </Form.Item>
 
-        <Form.Item label="Alternate Number" className="col-span-1">
+        <Form.Item label="Alternate Number" >
           <InputNumber style={{ width: '100%' }} />
         </Form.Item>
 
-        <Form.Item label="Personal Email" className="col-span-1">
+        <Form.Item label="Personal Email" >
           <Input placeholder="example@mail.com" />
         </Form.Item>
 
-        <Form.Item label="Official Email" className="col-span-1">
+        <Form.Item label="Official Email" >
           <Input placeholder="example@mail.com" />
         </Form.Item>
 
-        <Form.Item label="Password" className="col-span-1">
+        <Form.Item label="Password" >
           <Input.Password placeholder="Create Password" />
         </Form.Item>
 
-        <Form.Item label="Blood Group" className="col-span-1">
+        <Form.Item label="Blood Group" >
           <Input />
         </Form.Item>
 
-        <Form.Item label="Address" className="col-span-2">
+        <Form.Item label="Address" className="col-span-1">
           <div className="bg-gray-200 w-full h-full p-3">
             <Input className="mb-2" placeholder="Permanent Address" />
             <InputNumber />
@@ -111,7 +111,7 @@ function JoiningForm(){
           <Input placeholder="Temporary Address" />
         </Form.Item>
 
-        <Form.Item label="Employee Type" className="col-span-1">
+        <Form.Item label="Employee Type" >
           <Select>
             <Select.Option value="full-time">Full-Time</Select.Option>
             <Select.Option value="part-time">Part-time</Select.Option>
@@ -120,7 +120,7 @@ function JoiningForm(){
           </Select>
         </Form.Item>
 
-        <Form.Item label="Aadhar Card" className="col-span-1">
+        <Form.Item label="Aadhar Card" >
           <InputNumber placeholder="XXXX-XXXX-XXXX" style={{ width: '100%' }} />
         </Form.Item>
 
@@ -128,7 +128,7 @@ function JoiningForm(){
           <Input />
         </Form.Item>
 
-        <Form.Item label="Passport" className="col-span-1">
+        <Form.Item label="Passport" >
           <Radio.Group onChange={onChange} value={value}>
             <Radio value={1}>Yes</Radio>
             <Radio value={2}>No</Radio>
@@ -136,12 +136,12 @@ function JoiningForm(){
         </Form.Item>
 
         {value === 1 && (
-          <Form.Item label="Passport Number" className="col-span-1">
+          <Form.Item label="Passport Number" >
             <Input placeholder="Enter Passport Number" />
           </Form.Item>
         )}
 
-        <Form.Item label="Documents" valuePropName="fileList" getValueFromEvent={normFile} className="col-span-1">
+        <Form.Item label="Documents" valuePropName="fileList" getValueFromEvent={normFile} >
           <Upload action="/upload.do" listType="picture-card">
             <button style={{ border: 0, background: 'none' }} type="button">
               <PlusOutlined />
@@ -150,7 +150,7 @@ function JoiningForm(){
           </Upload>
         </Form.Item>
 
-        <Form.Item label="Employee Status" className="col-span-1">
+        <Form.Item label="Employee Status" >
           <Select>
             <Select.Option value="regular">Regular</Select.Option>
             <Select.Option value="relieved">Relieved</Select.Option>

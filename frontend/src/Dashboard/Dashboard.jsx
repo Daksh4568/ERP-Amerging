@@ -125,7 +125,7 @@ function Dashboard() {
   const items = [
     getItem('HR Module', 'sub1', <UserOutlined />, [
       getItem('Joining Form', 'joining-form'),
-      getItem('Performance Evaluation Form', 'create-new-user'),
+      getItem('Performance Evaluation Form', 'selfeval-form'),
       getItem('Exit form', 'exit-form'),
     ]),
     getItem('Employee', 'sub2', <TeamOutlined />, [
@@ -149,6 +149,7 @@ function Dashboard() {
           onClick={handleMenuClick}
         />
       </Sider>
+
       <Layout>
         <Header
           style={{

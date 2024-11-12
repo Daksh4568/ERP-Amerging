@@ -8,6 +8,7 @@ import Dashboard from './Dashboard/Dashboard.jsx'
 import Login from './Forms/Login.jsx'
 import JoiningForm from './Modules/HRModule/JoiningForm'
 import SelfEvalFrom from './Forms/SelfEvalFrom.jsx'
+import ExitForm from './Forms/ExitForm.jsx'
 
 
 const router = createBrowserRouter(
@@ -15,8 +16,9 @@ const router = createBrowserRouter(
     <Route path='/' elements={<Layout/>} >
       <Route path='' element={<Login/>}/>
       <Route path='dashboard' element={<Dashboard/>}>
-        <Route path='joining-form' element={<JoiningForm/>}/>
+        <Route className='' path='joining-form' element={<JoiningForm/>}/>
         <Route path='selfeval-form' element={<SelfEvalFrom />}/>
+        <Route path='exit-form' element={<ExitForm />}/>
       </Route>
     </Route>
   )
