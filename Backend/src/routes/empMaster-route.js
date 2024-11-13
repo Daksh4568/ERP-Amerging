@@ -7,11 +7,13 @@ const bcrypt = require('bcryptjs');// Import the bcryptjs library for hashing pa
 const router = new express.Router();// Create a new Express router instance
 const employee = require('../models/empMaster-model');// Import the Employees model from the empMaster-model file
 const {auth , authorize} = require('../middleware/auth')
-const EmployeeEvaluation = require('../models/employeeEvaluationSchema'); // Import the Evaluation model
+const EmployeeEvaluation = require('../models/employeeEvaluationModel'); // Import the Evaluation model
+const exitEmployeeController = require('../controllers/exitEmployeeController');
+
 //custom schema
 const counters = require ('../models/counterMaster');
 
-
+router.post('/exit-form', exitEmployeeController.createExitForm);
 // All the routes are defined here
 router.get('/getemp',async (req,res)=>{
     try {        
