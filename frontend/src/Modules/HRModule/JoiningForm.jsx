@@ -290,8 +290,7 @@ function JoiningForm(){
 
         <Form.Item className='flex justify-end'>
           <Button className='bg-blue-500 w-40 text-white'>Submit</Button>
-        </Form.Item>
-        
+        </Form.Item>        
       
       </Form>
     </div>
