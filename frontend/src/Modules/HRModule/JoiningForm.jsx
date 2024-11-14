@@ -287,13 +287,14 @@ function JoiningForm(){
             </button>
           </Upload>
         </Form.Item>
+
+        <Form.Item className='flex justify-end'>
+          <Button className='bg-blue-500 w-40 text-white'>Submit</Button>
+        </Form.Item>
+        
+      
       </Form>
-
-      <Form.Item className='flex justify-end'>
-        <Button className='bg-blue-500 w-40 text-white'>Submit</Button>
-      </Form.Item>
-</div>
-
+    </div>
 
   )
 }

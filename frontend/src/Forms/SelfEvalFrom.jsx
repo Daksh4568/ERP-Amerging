@@ -195,13 +195,13 @@ const SelfEvaluationForm = () => {
             <TextArea autoSize={{ minRows: 2 }} />
           </Form.Item>
 
-          
-        </Form>
         <Form.Item className='flex justify-end'>
             <Button className='' type="primary" htmlType="submit" block>
-              Submit Evaluation
+              Submit
             </Button>
         </Form.Item>
+
+      </Form>
     </div>
   );
 };

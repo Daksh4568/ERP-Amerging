@@ -192,7 +192,7 @@ function ExitForm() {
             </Form>
             <Form.Item className='flex justify-end'>
                 <Button type="primary" htmlType="submit" block>
-                  Submit Evaluation
+                  Submit
                 </Button>
             </Form.Item>
         </div>
