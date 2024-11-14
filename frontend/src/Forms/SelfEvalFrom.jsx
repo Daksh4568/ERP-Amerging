@@ -64,19 +64,19 @@ const SelfEvaluationForm = () => {
           onValuesChange={handleFormChange}
           onFinish={handleSubmit}
         >
-          <Form.Item className='col-span-2' label="Employee Name" name="employeeName" rules={[{ required: true }]}>
+          <Form.Item className='col-span-2' label="Employee Name" name="employeeName" required>
             <Input />
           </Form.Item>
 
-          <Form.Item className='col-span-2' label="Date of Review" name="dateOfReview" rules={[{ required: true }]}>
-            <DatePicker style={{ width: '100%' }} />
+          <Form.Item className='col-span-2' label="Date of Review" name="dateOfReview" required>
+            <DatePicker className='w-full'/>
           </Form.Item>
           
-          <Form.Item className='col-span-2'  label="Designation" name="designation" rules={[{ required: true }]}>
+          <Form.Item className='col-span-2'  label="Designation" name="designation" required>
             <Input />
           </Form.Item>
 
-          <Form.Item className='col-span-2'  label="Department" name="department" rules={[{ required: true }]}>
+          <Form.Item className='col-span-2'  label="Department" name="department" required>
             <Select>
               <Select.Option value="Sales">Sales</Select.Option>
               <Select.Option value="Marketing">Design</Select.Option>
@@ -86,32 +86,32 @@ const SelfEvaluationForm = () => {
             </Select>
           </Form.Item>
 
-          <Form.Item className='col-span-2' label="Joining Date" name="joiningDate" rules={[{ required: true }]}>
+          <Form.Item className='col-span-2' label="Joining Date" name="joiningDate" required>
             <DatePicker style={{ width: '100%' }} />
           </Form.Item>
 
-          <Form.Item className='col-span-2' label="Total Tenure (years)" name="totalTenure" rules={[{ required: true }]}>
+          <Form.Item className='col-span-2' label="Total Tenure (years)" name="totalTenure" required>
             <InputNumber min={0} style={{ width: '100%' }} />
           </Form.Item>
 
-          <Form.Item className='col-span-2' label="Previous Salary" name="previousSalary" rules={[{ required: true }]}>
+          <Form.Item className='col-span-2' label="Previous Salary" name="previousSalary" required>
             <InputNumber min={0} style={{ width: '100%' }} />
           </Form.Item>
 
-          <Form.Item className='col-span-2' label="Incremented Salary" name="incrementedSalary" rules={[{ required: true }]}>
+          <Form.Item className='col-span-2' label="Incremented Salary" name="incrementedSalary" required>
             <InputNumber min={0} style={{ width: '100%' }} />
           </Form.Item>
 
-          <Form.Item className='col-span-2' label="Date of Last Increment" name="incrementSalaryDate" rules={[{ required: true }]}>
+          <Form.Item className='col-span-2' label="Date of Last Increment" name="incrementSalaryDate" required>
             <DatePicker style={{ width: '100%' }} />
           </Form.Item>
 
-          <Form.Item className='col-span-2' label="Number of Projects Handled" name="numberOfProjectsHandled" rules={[{ required: true }]}>
+          <Form.Item className='col-span-2' label="Number of Projects Handled" name="numberOfProjectsHandled" required>
             <InputNumber min={0} style={{ width: '100%' }} />
           </Form.Item>
 
           <div className='col-span-4 border'>
-            <Form.Item label="Current Responsibility" name="currentResponsibility" rules={[{ required: true }]}>
+            <Form.Item label="Current Responsibility" name="currentResponsibility" required>
               <Input />
             </Form.Item>
 
@@ -198,7 +198,7 @@ const SelfEvaluationForm = () => {
           
         </Form>
         <Form.Item className='flex justify-end'>
-            <Button type="primary" htmlType="submit" block>
+            <Button className='' type="primary" htmlType="submit" block>
               Submit Evaluation
             </Button>
         </Form.Item>

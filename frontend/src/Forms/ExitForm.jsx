@@ -106,15 +106,15 @@ function ExitForm() {
               onFinish={handleSubmit}
               >
                 
-                <Form.Item className='col-span-2' label="Employee Name" name="employeeName" rules={[{ required: true }]}>
+                <Form.Item className='col-span-2' label="Employee Name" name="employeeName" required>
                 <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-2'  label="Designation" name="designation" rules={[{ required: true }]}>
+                <Form.Item className='col-span-2'  label="Designation" name="designation" required>
                 <Input />
                 </Form.Item>
         
-                <Form.Item className='col-span-2'  label="Department" name="department" rules={[{ required: true }]}>
+                <Form.Item className='col-span-2'  label="Department" name="department" required>
                   <Select>
                     <Select.Option value="Sales">Sales</Select.Option>
                     <Select.Option value="Design">Design</Select.Option>
@@ -124,7 +124,7 @@ function ExitForm() {
                   </Select>
                 </Form.Item>
         
-                <Form.Item className='col-span-2' label="Last Working Day" name="lastWorkingDate" rules={[{ required: true }]}>
+                <Form.Item className='col-span-2' label="Last Working Day" name="lastWorkingDate" required>
                   <DatePicker style={{ width: '100%' }} />
                 </Form.Item> 
 
@@ -132,31 +132,31 @@ function ExitForm() {
                 I kindly request that you take a few moments to provide your input by responding to the questions below. Please rest assured that all your responses will be treated with the utmost confidentiality. Your cooperation is greatly appreciated. Thank you.
                 </Title>
 
-                <Form.Item className='col-span-4' label="Reason for leaving the Company ?" name="reasonOfLeaving" rules={[{ required: true }]}>
+                <Form.Item className='col-span-4' label="Reason for leaving the Company ?" name="reasonOfLeaving" required>
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="How was your experience working at the company ?" name="reasonOfLeaving" rules={[{ required: true }]}>
+                <Form.Item className='col-span-4' label="How was your experience working at the company ?" name="reasonOfLeaving" required>
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="Did you feel that your skills and talents were effectively utilized in your role ?" name="reasonOfLeaving" rules={[{ required: true }]}>
+                <Form.Item className='col-span-4' label="Did you feel that your skills and talents were effectively utilized in your role ?" name="reasonOfLeaving" required>
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="Did you receive the necessary training and support to perform your job effectively ?" name="reasonOfLeaving" rules={[{ required: true }]}>
+                <Form.Item className='col-span-4' label="Did you receive the necessary training and support to perform your job effectively ?" name="reasonOfLeaving" required>
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="Did you feel that your ideas and opinions were valued and heard within the company ?" name="reasonOfLeaving" rules={[{ required: true }]}>
+                <Form.Item className='col-span-4' label="Did you feel that your ideas and opinions were valued and heard within the company ?" name="reasonOfLeaving" required>
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="What areas do you think the company could improve upon ?" name="reasonOfLeaving" rules={[{ required: true }]}>
+                <Form.Item className='col-span-4' label="What areas do you think the company could improve upon ?" name="reasonOfLeaving" required>
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="Do you have any final comments or suggestions for the company ?" name="reasonOfLeaving" rules={[{ required: true }]}>
+                <Form.Item className='col-span-4' label="Do you have any final comments or suggestions for the company ?" name="reasonOfLeaving" required>
                     <Input />
                 </Form.Item>
 
@@ -184,7 +184,7 @@ function ExitForm() {
                     bordered
                 />
 
-                <Form.Item className='col-span-4 flex items-center' label='I have no knowledge of any violation of the law or any corporate policies or standards of conduct by me or any other employees while I have been employed at the company. If I recall any suspected violations in the future, I will immediately report them to the Compliance Officer.' rules={[{ required: true }]}>
+                <Form.Item className='col-span-4 flex items-center' label='I have no knowledge of any violation of the law or any corporate policies or standards of conduct by me or any other employees while I have been employed at the company. If I recall any suspected violations in the future, I will immediately report them to the Compliance Officer.' required>
                     <Checkbox />
                     
                 </Form.Item> 
