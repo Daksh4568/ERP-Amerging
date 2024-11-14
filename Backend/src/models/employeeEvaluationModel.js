@@ -59,7 +59,11 @@ const employeeEvaluationSchema = new mongoose.Schema({
         type: String,
         required: true,
       }
-    });
+    }, 
+    { 
+      timestamps: true 
+    }
+  );
 
 const EmployeeEvaluation = mongoose.model('empEvaluationSchema' , employeeEvaluationSchema)
 

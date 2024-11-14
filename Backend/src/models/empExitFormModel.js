@@ -1,23 +1,20 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-
-// This is the mongoose schema for the employee exit form
-// I have taken the reference for the schema from emloyee exit form 
+// Employee exit form schema
 const exitEmployeeSchema = new mongoose.Schema({
-
-    date:{
-        type : Date,
-        default: Date.now , 
+    date: {
+        type: Date,
+        default: Date.now,
         required: true
-    }, 
+    },
     employeeName: {
-        tpye : String , 
-        required : true
-    } , 
+        type: String, // Corrected typo here
+        required: true
+    },
     department: {
-        type : String ,
-        required : true
-    }, 
+        type: String,
+        required: true
+    },
     designation: {
         type: String,
         required: true
@@ -147,12 +144,16 @@ const exitEmployeeSchema = new mongoose.Schema({
             default: false
         },
         acknowledgementDate: {
-            type: Date.now,
+            type: Date,
+            default: Date.now, // Correct usage of Date.now
             required: true
         }
     }
+}, 
+{ 
+    timestamps: true 
 });
 
-const exitForm = mongoose.model('ExitEmployee',  exitEmployeeSchema);
-  
-  module.exports = exitForm;
+const ExitForm = mongoose.model('ExitEmployee', exitEmployeeSchema);
+
+module.exports = ExitForm;

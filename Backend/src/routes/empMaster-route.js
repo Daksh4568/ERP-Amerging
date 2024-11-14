@@ -2,13 +2,13 @@
  * Express application setup and employee retrieval route
  */
 const express = require('express');// Import the Express library
-const mongoose = require('mongoose');// Import the Mongoose library for MongoDB interactions
-const bcrypt = require('bcryptjs');// Import the bcryptjs library for hashing passwords
+//const mongoose = require('mongoose');// Import the Mongoose library for MongoDB interactions
+//const bcrypt = require('bcryptjs');// Import the bcryptjs library for hashing passwords
 const router = new express.Router();// Create a new Express router instance
 const employee = require('../models/empMaster-model');// Import the Employees model from the empMaster-model file
 const {auth , authorize} = require('../middleware/auth')
-const EmployeeEvaluation = require('../models/employeeEvaluationModel'); // Import the Evaluation model
-const exitEmployeeController = require('../controllers/exitEmployeeController');
+const employeeEvaluationController = require('../Controllers/empEvaluation')
+const exitEmployeeController = require('../Controllers/EmpExit');
 
 //custom schema
 const counters = require ('../models/counterMaster');
@@ -48,6 +48,8 @@ router.get('/emp/stats',  async (req, res) => {
       res.status(400).send('db error');
     }
   });
+
+  router.post('/employee-evaluation' , auth , authorize('HR' ,'admin' , 'Manager') , employeeEvaluationController.createEmployeeEvaluation)
 router.post('/regemp' ,auth , authorize('admin'),async (req,res)=> {
    const emp = new employee(req.body);
    try {
@@ -68,6 +70,7 @@ router.post('/regemp' ,auth , authorize('admin'),async (req,res)=> {
         res.status(400).send(e);
    }
 })
+
 router.post('/emp/login' ,async (req,res)=> {
     try {
        const emp = await employee.findByCredentials(req.body.officialEmail,req.body.password)

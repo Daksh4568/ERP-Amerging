@@ -154,7 +154,10 @@ const employeeSchema = new mongoose.Schema({
         required: true
       }
     }],
-  }//  { timestamps: true }
+  }, 
+  { 
+    timestamps: true 
+  }
   );
   employeeSchema.methods.generateAuthToken = async function(){
     const emp = this
