@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const db = require('./db/db')
 const app = express();
-const port = 3000;
+const port = 5000;
 const employeeMasterRounter = require('./routes/empMaster-route')
 const imageToBase64 = require('image-to-base64');
 

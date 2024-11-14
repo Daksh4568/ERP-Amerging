@@ -38,7 +38,7 @@ const employeeSchema = new mongoose.Schema({
           type: String,
         }
     },
-    personalEmail:{
+    personalEmail:{ 
       type: String,
       required: true,
       //unique: true,
@@ -129,6 +129,18 @@ const employeeSchema = new mongoose.Schema({
         }
       }
     ],
+     role:{
+      type : String, 
+      required : true,
+      enum : ['admin' , 'manager' , 'employee'],
+      default : 'employee'
+     } , 
+     tokens: [{
+      token :{
+        type: String,
+        required: true
+      }
+     }],
     stat:{ //Current Status 
       type: String,
       enum: ['Regular','Relieved','Resigned'],

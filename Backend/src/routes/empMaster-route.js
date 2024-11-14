@@ -6,18 +6,13 @@ const mongoose = require('mongoose');// Import the Mongoose library for MongoDB 
 const bcrypt = require('bcryptjs');// Import the bcryptjs library for hashing passwords
 const router = new express.Router();// Create a new Express router instance
 const employee = require('../models/empMaster-model');// Import the Employees model from the empMaster-model file
-const auth = require('../middleware/auth')
-
-
+const {auth , authorize} = require('../middleware/auth')
+const EmployeeEvaluation = require('../models/employeeEvaluationSchema'); // Import the Evaluation model
 //custom schema
-const counters = require ('../models/counterMaster')
+const counters = require ('../models/counterMaster');
 
-/**
- * @route   GET /emp
- * @desc    Retrieve all employee records
- * @access  Public
- * @returns {Array} Array of employee objects
- */
+
+// All the routes are defined here
 router.get('/getemp',async (req,res)=>{
     try {        
        const employees = await employee.find({});
@@ -26,8 +21,17 @@ router.get('/getemp',async (req,res)=>{
         res.status(500).send(e)
     }
 })
+router.get('/emp/evaluationdata' , async(req,res)=>{
+   try {
+    const empevaluationData = await EmployeeEvaluation.find({});// It will retrieve all the data
+    res.status(200).send(empevaluationData);
+   } catch(e){
+    console.error("Error retrieving evaluation data:" , e);
+    res.status(500).send({error : "Error while fetching the data"});
+   }
+});
 // Route to get total regular employees and total male and female employees
-router.get('/emp/stats', async (req, res) => {
+router.get('/emp/stats',  async (req, res) => {
     try {
       const totalRegularEmployees = await employee.countDocuments({ stat: 'Regular' });
       const totalMaleEmployees = await employee.countDocuments({stat: 'Regular', gender: 'Male' });
@@ -42,10 +46,10 @@ router.get('/emp/stats', async (req, res) => {
       res.status(400).send('db error');
     }
   });
-
-router.post('/regemp', auth , async (req,res)=> {
+router.post('/regemp' ,auth , authorize('admin'),async (req,res)=> {
    const emp = new employee(req.body);
    try {
+        console.log("Welcome to Admin Dashboard")
         const lastEmpCount=await updateEmpCounter("read");//read 1 write 0
         emp.eID ='AT-' + String(lastEmpCount.counter+1).padStart(3, '0');
         emp.stat="Regular";
@@ -57,6 +61,7 @@ router.post('/regemp', auth , async (req,res)=> {
         res.status(201).send({emp,token});
         console.log("Employee added in the database")
    } catch (e) {
+    console.log("Manager and Admin access only")
         console.log(e);
         res.status(400).send(e);
    }
@@ -68,6 +73,7 @@ router.post('/emp/login' ,async (req,res)=> {
        res.send({emp,token})
     } catch (e) { 
         res.status(400).send(e)
+  
     }
  }) 
 
@@ -77,26 +83,25 @@ router.post('/emp/login' ,async (req,res)=> {
             return token.token !== req.token
         })
         await req.employee.save()
-        res.send()
-        console.log("")
+        
     }catch(e){
         res.status(500).send(e)
     }
  })
- router.post('/emp/authorization',async(req,res)=>{
+ router.post('/emp/evaluation' , async( req, res) =>{
   try{
-      req.employee.tokens = req.employee.tokens.filter((token)=>{
-          return token.token !== req.token
-      })
-      await req.employee.save()
-      res.send()
-      console.log("Authorization executed")
-  }catch(e){
-      res.status(500).send(e)
+    const evaluationData = new EmployeeEvaluation(req.body); //It will populate from the request body
+    await evaluationData.save();
+    res.status(201).send(evaluationData); // Send the saved data as response
+    console.log(evaluationData)
+  } catch(e){
+    console.error("Error saving the evaluation data:" , e);
+    res.status(400).send(e)
   }
-})
+ })
+
  
-router.patch('/emp/:id',auth ,  async (req,res)=>{
+router.patch('/emp/:id', async (req,res)=>{
     const updates =Object.keys(req.body)
     const allowedUpdates =['name', 'password' ,'address','address.city'];
     const isValidOperation =updates.every((update)=>allowedUpdates.includes(update))
@@ -145,5 +150,4 @@ const updateEmpCounter = async (action) => {
       throw new Error('db error');
     }
   };
-
 module.exports=router
