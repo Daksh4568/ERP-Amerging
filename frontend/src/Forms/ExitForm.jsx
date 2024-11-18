@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Button, Select, DatePicker, Typography, Checkbox, Table, InputNumber, List, Row, Col } from 'antd';
+import { Form, Input, Button, Select, DatePicker, Typography, Checkbox, Table, InputNumber, List, Row, Col, Rate } from 'antd';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -16,34 +16,9 @@ function ExitForm() {
         "Welcomes suggestions",
         "Maintains discipline",
     ]
-    const managerRatingOptions = ["Always", "Usually", "Sometimes", "Never"];
+    const managerRatingOptions = ["Never", "Sometimes", "Usually", "Always"];
 
-    // defining columns of the table with eact rating option as a column
-    const columns = [
-        {
-          title: '',
-          dataIndex: 'rateManagerQuestion',
-          key: 'rateManagerQuestion',
-          width: '40%',
-        },
-        ...managerRatingOptions.map((option) => ({
-          title: option,
-          dataIndex: option.toLowerCase(),
-          key: option.toLowerCase(),
-          render: () => <Checkbox />,
-          width: '15%',
-          className:'text-center'
-        })),
-    ];
-    // mapping questions to data source for the table
-    const dataSourceManager = rateManagerQuestions.map((rateManagerQuestion, index) => ({
-        key: index,
-        rateManagerQuestion,
-        always: false,
-        usually: false,
-        sometimes: false,
-        never: false,
-    }));
+    const [form] = Form.useForm();
     
     const rateDepartmentQuestions = [
         "Cooperation/teamwork in the department",
@@ -54,44 +29,10 @@ function ExitForm() {
         "Work Schedule",
     ]
     const departmentRatingOptions = ["Excellent", "Good", "Fair", "Poor"]
-
-    const columnsOp = [
-        {
-            title: '',
-            dataIndex: 'rateDepartmentQuestions',
-            key: 'rateDepartmentQuestions',
-            width: '40%',
-        },
-        
-        ...departmentRatingOptions.map((options) => ({
-            title: options,
-            dateIndex: options.toLowerCase(),
-            key: options.toLowerCase(),
-            render: () => <Checkbox /> ,
-            width: '15%',
-            className:'text-center'
-        })),       
-    ]
-
-    const dataSourceDepartment = rateDepartmentQuestions.map((rateDepartmentQuestions, index) => ({
-        key: index,
-        rateDepartmentQuestions,
-        always: false,
-        usually: false,
-        sometimes: false,
-        never: false,
-    }))
-
     
-
-
-    const handleFormChange = (changedValues) => {
-        setFormData((prev) => ({ ...prev, ...changedValues }));
-      };
-    
-    const handleSubmit = () => {
-       console.log('Form Data:', formData);
-       // Add form submission logic here
+    const handleSubmit = (values) => {
+       console.log(values);
+       form.resetFields();
     };
 
     return (
@@ -100,10 +41,11 @@ function ExitForm() {
                 Exit Form
             </Title>
             <Form
-              className='grid grid-cols-4 gap-x-16'
-              layout='vertical'
-              onValuesChange={handleFormChange}
-              onFinish={handleSubmit}
+                form={form}
+                className='grid grid-cols-4 gap-x-16'
+                layout='vertical'
+            //   onValuesChange={handleFormChange}
+                onFinish={handleSubmit}
               >
                 
                 <Form.Item className='col-span-2' label="Employee Name" name="employeeName" rules={[{required: true, message: 'This is a required field.',}]}>
@@ -136,27 +78,27 @@ function ExitForm() {
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="How was your experience working at the company ?" name="reasonOfLeaving" rules={[{required: true, message: 'This is a required field.',}]}>
+                <Form.Item className='col-span-4' label="How was your experience working at the company ?" name="workingExperience" rules={[{required: true, message: 'This is a required field.',}]}>
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="Did you feel that your skills and talents were effectively utilized in your role ?" name="reasonOfLeaving" rules={[{required: true, message: 'This is a required field.',}]}>
+                <Form.Item className='col-span-4' label="Did you feel that your skills and talents were effectively utilized in your role ?" name="skillsUsedEffectively" rules={[{required: true, message: 'This is a required field.',}]}>
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="Did you receive the necessary training and support to perform your job effectively ?" name="reasonOfLeaving" rules={[{required: true, message: 'This is a required field.',}]}>
+                <Form.Item className='col-span-4' label="Did you receive the necessary training and support to perform your job effectively ?" name="receivedTrainingAndSupport" rules={[{required: true, message: 'This is a required field.',}]}>
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="Did you feel that your ideas and opinions were valued and heard within the company ?" name="reasonOfLeaving" rules={[{required: true, message: 'This is a required field.',}]}>
+                <Form.Item className='col-span-4' label="Did you feel that your ideas and opinions were valued and heard within the company ?" name="ideasAndOpinionsValued" rules={[{required: true, message: 'This is a required field.',}]}>
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="What areas do you think the company could improve upon ?" name="reasonOfLeaving" rules={[{required: true, message: 'This is a required field.',}]}>
+                <Form.Item className='col-span-4' label="What areas do you think the company could improve upon ?" name="improvementForCompany" rules={[{required: true, message: 'This is a required field.',}]}>
                     <Input />
                 </Form.Item>
 
-                <Form.Item className='col-span-4' label="Do you have any final comments or suggestions for the company ?" name="reasonOfLeaving" rules={[{required: true, message: 'This is a required field.',}]}>
+                <Form.Item className='col-span-4' label="Do you have any final comments or suggestions for the company ?" name="finalComments" rules={[{required: true, message: 'This is a required field.',}]}>
                     <Input />
                 </Form.Item>
 
@@ -164,36 +106,48 @@ function ExitForm() {
                     Rate your manager on the following
                 </Title>
 
-                <Table 
-                    className='col-span-4 mb-4'
-                    columns={columns}
-                    dataSource={dataSourceManager}
-                    pagination={false}
-                    bordered
-                />
+                <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager' label="Follow policies & procedures">
+                    <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
+                </Form.Item>
 
+                <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager2' label="Treats employees in a fair and equal way">
+                    <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
+                </Form.Item>
+                <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager3' label="Provides recognition for a job well done">
+                    <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
+                </Form.Item>
+                <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager4' label="Resolves complaints and problems">
+                    <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
+                </Form.Item>
+                <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager5' label="Gives needed information">
+                    <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
+                </Form.Item>
+                <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager6' label="Keeps employees busy">
+                    <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
+                </Form.Item>
+                <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager7' label="Knows his/her job well">
+                    <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
+                </Form.Item>
+                
                 <Title level={5} className='col-span-4 text-start underline'>
                     What do you think of the following in your Department ?
                 </Title>
 
-                <Table
-                    className='col-span-4 mb-4'
-                    columns={columnsOp}
-                    dataSource={dataSourceDepartment}
-                    pagination={false}
-                    bordered
-                />
+                <Form.Item className='col-span-4 border bg-white p-3' name='second' label="Follow policies & procedures">
+                    <Rate className='' defaultValue={0} tooltips={departmentRatingOptions} count={4} />
+                </Form.Item>
 
                 <Form.Item className='col-span-4 flex items-center' label='I have no knowledge of any violation of the law or any corporate policies or standards of conduct by me or any other employees while I have been employed at the company. If I recall any suspected violations in the future, I will immediately report them to the Compliance Officer.' rules={[{required: true, message: 'Your Acknowledgement is required.',}]}>
                     <Checkbox />
                     
                 </Form.Item> 
 
-            <Form.Item className='flex justify-end'>
-                <Button type="primary" htmlType="submit" >
-                  Submit
-                </Button>
-            </Form.Item>
+
+                <Form.Item className='flex justify-end'>
+                    <Button type="primary" htmlType="submit" >
+                      Submit
+                    </Button>
+                </Form.Item>
             </Form>
         </div>
     )
