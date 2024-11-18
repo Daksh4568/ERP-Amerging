@@ -7,25 +7,27 @@ const { Title } = Typography;
 const { TextArea } = Input;
 
 const SelfEvaluationForm = () => {
-  const [formData, setFormData] = useState({
-    employeeName: '',
-    designation: '',
-    department: '',
-    dateOfReview: null,
-    joiningDate: null,
-    totalTenure: '',
-    previousSalary: '',
-    incrementedSalary: '',
-    incrementDate: null,
-    numberOfProjects: '',
-    keyResponsibility: '',
-    additionalResponsibility: '',
-    performanceGoals: [],
-    challengesFaced: '',
-  });
+  // const [formData, setFormData] = useState({
+  //   employeeName: '',
+  //   designation: '',
+  //   department: '',
+  //   dateOfReview: null,
+  //   joiningDate: null,
+  //   totalTenure: '',
+  //   previousSalary: '',
+  //   incrementedSalary: '',
+  //   incrementDate: null,
+  //   numberOfProjects: '',
+  //   keyResponsibility: '',
+  //   additionalResponsibility: '',
+  //   performanceGoals: [],
+  //   challengesFaced: '',
+  // });
   const [keyResponsibilities, setKeyResponsibilities] = useState(['']);
 
   const [goalInput, setGoalInput] = useState('');
+  
+  const [form] = Form.useForm()
 
   // const handleAddGoal = () => {
   //   if (goalInput) {
@@ -44,12 +46,13 @@ const SelfEvaluationForm = () => {
   //   }));
   // };
 
-  const handleFormChange = (changedValues) => {
-    setFormData((prev) => ({ ...prev, ...changedValues }));
-  };
+  // const handleFormChange = (changedValues) => {
+  //   setFormData((prev) => ({ ...prev, ...changedValues }));
+  // };
 
-  const handleSubmit = () => {
-    console.log('Form Data:', formData);
+  const handleSubmit = (values) => {
+    console.log(values);
+    form.resetFields();
     
   };
 
@@ -61,7 +64,8 @@ const SelfEvaluationForm = () => {
         <Form
           className='w-full h-full grid grid-cols-4 gap-x-16 '
           layout="vertical"
-          onValuesChange={handleFormChange}
+          // onValuesChange={handleFormChange}
+          form={form}
           onFinish={handleSubmit}
         >
           <Form.Item className='col-span-2' label="Employee Name" name="employeeName" rules={[{required: true,
@@ -207,7 +211,7 @@ const SelfEvaluationForm = () => {
           </Form.Item>
 
         <Form.Item className='flex justify-end'>
-            <Button Html type="primary" htmlType="submit" block>
+            <Button htmlType='submit' type="primary" block>
               Submit
             </Button>
         </Form.Item>
