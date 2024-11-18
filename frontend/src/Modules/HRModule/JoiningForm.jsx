@@ -1,21 +1,14 @@
 import {React, useState} from 'react';
-import { PlusOutlined, EyeInvisibleOutlined, EyeTwoTone  } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import {
   Button,
-  Cascader,
   Checkbox,
-  ColorPicker,
   DatePicker,
   Form,
   Input,
   InputNumber,
-  Space,
   Radio,
-  Rate,
   Select,
-  Slider,
-  Switch,
-  TreeSelect,
   Upload,
 } from 'antd';
 
@@ -29,9 +22,38 @@ const normFile = (e) => {
 };
 
 function JoiningForm(){
-  const [componentDisabled, setcomponentDisabled] = useState(true);
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [value, setValue] = useState(0);
+  // const [componentDisabled, setcomponentDisabled] = useState(true);
+  // const [passwordVisible, setPasswordVisible] = useState(false);
+  const [value, setValue] = useState();
+  const [form] = Form.useForm();
+
+  const handleForm = (values) => {
+    // to include address 
+    const fullFormData = {
+      ...values, permanentAddress, temporaryAddress
+    }
+
+    console.log(fullFormData);
+    form.resetFields();
+
+    setPermanentAddress({
+      street: '',
+      city: '',
+      state: '',
+      pinCode: '',
+    });
+  
+    setTemporaryAddress({
+      street: '',
+      city: '',
+      state: '',
+      pinCode: '',
+    });
+  
+    // Reset the "Same as Permanent Address" checkbox
+    setisSameAddress(false);
+  }
+  
   const [permanentAddress, setPermanentAddress] = useState({
     street:'',
     city: '',
@@ -83,73 +105,89 @@ function JoiningForm(){
   }
 
   return (
-    <div >
+    <div>
+
+      
       <Form
+        form={form}
         className=" grid grid-cols-4 gap-x-16"
         layout='vertical'
+        onFinish={handleForm}
         >
         
-          <Form.Item label="Employee ID" className="col-span-2" required>
-            <Input />
+          <Form.Item label="Employee ID" name='employeeId' className="col-span-2" rules={[{required: true,
+              message: 'This is a required field.'}]}>
+            <Input type='text'  />
           </Form.Item>
 
-          <Form.Item label="Full Name" className="col-span-2" required>
-            <Input />
+          <Form.Item label="Full Name" className="col-span-2" name='employeeName' rules={[{required: true,
+              message: 'This is a required field.'}]}>
+            <Input type='text'  />
           </Form.Item>
 
-          <Form.Item label="DOB" className="col-span-2" required>
-            <DatePicker className='w-full'/>
+          <Form.Item label="DOB" className="col-span-2" name='dateOFBirth' rules={[{required: true,
+              message: 'This is a required field.'}]}>
+            <DatePicker type='date' className='w-full'  />
           </Form.Item>
 
-          <Form.Item label="Gender" className="col-span-2" required>
-            <Select>
-              <Select.Option value="male">Male</Select.Option>
-              <Select.Option value="female">Female</Select.Option>
-              <Select.Option value="other">Other</Select.Option>
+          <Form.Item label="Gender" name='gender' className="col-span-2" rules={[
+            {
+              required: true,
+              message: 'This is a required field.',
+            }, ]}>
+            <Select >
+              <Select.Option value='male'>Male</Select.Option>
+              <Select.Option value='female'>Female</Select.Option>
+              <Select.Option value='others'>Others</Select.Option>
             </Select>
           </Form.Item>
 
-          <Form.Item label="Marital Status" className="col-span-2" required>
-            <Select>
-              <Select.Option value="single">Single</Select.Option>
-              <Select.Option value="married">Married</Select.Option>
-              <Select.Option value="other">Other</Select.Option>
+          <Form.Item label="Marital Status" name='maritalStatus' className="col-span-2" rules={[{required: true,
+              message: 'This is a required field.'}]}>
+            <Select  >
+              <Select.Option value='single'>Single</Select.Option>
+              <Select.Option value='married'>Married</Select.Option>
             </Select>
           </Form.Item>
 
-          <Form.Item label="Contact Number" className="col-span-2" required>
-            <InputNumber style={{ width: '100%' }} />
+          <Form.Item label="Contact Number" name='contactNumber' className="col-span-2" rules={[{required: true,
+              message: 'This is a required field.'}]}>
+            <InputNumber  type='number' style={{ width: '100%' }} />
           </Form.Item>
 
-          <Form.Item label="Alternate Number" className="col-span-2" required>
-            <InputNumber style={{ width: '100%' }} />
+          <Form.Item label="Alternate Number" name='alternateNumber' className="col-span-2" rules={[{required: true,
+              message: 'This is a required field.'}]}>
+            <InputNumber  type='number' style={{ width: '100%' }} />
           </Form.Item>
 
-          <Form.Item label="Personal Email" className="col-span-2" required>
-            <Input placeholder="example@mail.com" />
+          <Form.Item label="Personal Email" name='personalEmail' className="col-span-2" rules={[{required: true,
+              message: 'This is a required field.'}]}>
+            <Input  type='email' placeholder="example@mail.com" />
           </Form.Item>
 
-          <Form.Item label="Official Email" className="col-span-2" >
-            <Input placeholder="example@mail.com" />
+          <Form.Item label="Official Email" name='officialEmail' className="col-span-2" >
+            <Input  type='email' placeholder="example@mail.com" />
           </Form.Item>
 
-          <Form.Item label="Password" className="col-span-2" required>
-            <Input.Password placeholder="Create Password" />
+          <Form.Item label="Password" className="col-span-2" name='createPassword' rules={[{required: true,
+              message: 'This is a required field.'}]}>
+            <Input.Password type='password'  placeholder="Create Password" />
           </Form.Item>
 
-          <Form.Item label="Blood Group" className="col-span-2" >
-            <Input />
+          <Form.Item label="Blood Group" name='bloodGroup' className="col-span-2" >
+            <Input type='text'  />
           </Form.Item>
 
-          <Form.Item label="Employee Status" className="col-span-2" >
-            <Select>
-              <Select.Option value="regular">Regular</Select.Option>
-              <Select.Option value="relieved">Relieved</Select.Option>
-              <Select.Option value="resigned">Resigned</Select.Option>
+          <Form.Item label="Employee Status" name='employeeStatus' className="col-span-2" >
+            <Select  >
+              <Select.Option value='Regular'>Regular</Select.Option>
+              <Select.Option value='Relieved'>Relieved</Select.Option>
+              <Select.Option value='Resigned'>Resigned</Select.Option>
             </Select>
           </Form.Item>
 
-          <Form.Item label="Address" className="col-span-4" required>
+          <Form.Item name='address' label="Address" className="col-span-4" rules={[{required: true,
+              message: 'This is a required field.'}]}>
             <div className="bg-indigo-100 w-full p-4 rounded grid grid-cols-4 gap-x-8">       
 
               <Form.Item className='col-span-2' label="Street">
@@ -249,20 +287,22 @@ function JoiningForm(){
             </div>
         </Form.Item>
 
-        <Form.Item label="Employee Type" className="col-span-2" required>
-          <Select>
-            <Select.Option value="full-time">Full-Time</Select.Option>
-            <Select.Option value="part-time">Part-time</Select.Option>
-            <Select.Option value="contract">Contract</Select.Option>
-            <Select.Option value="consultant">Consultant</Select.Option>
+        <Form.Item label="Employee Type" name='employeeType' className="col-span-2" rules={[{required: true,
+              message: 'This is a required field.'}]}>
+          <Select  >
+            <Select.Option value='Full-time'>Full-time</Select.Option>
+            <Select.Option value='Part-time'>Part-time</Select.Option>
+            <Select.Option value='Contract'>Contract</Select.Option>
+            <Select.Option value='Consultant'>Consultant</Select.Option>
           </Select>
         </Form.Item>
 
-        <Form.Item label="Aadhar Card" className="col-span-2" required>
-          <InputNumber placeholder="XXXX-XXXX-XXXX" style={{ width: '100%' }} />
+        <Form.Item label="Aadhar Card" name='aadharNumber' className="col-span-2" rules={[{required: true,
+              message: 'This is a required field.'}]}>
+          <InputNumber maxLength={12} placeholder="XXXX-XXXX-XXXX" style={{ width: '100%' }} />
         </Form.Item>
 
-        <Form.Item label="PAN" className="col-span-2" >
+        <Form.Item label="PAN" name='panNumber' className="col-span-2" >
           <Input />
         </Form.Item>
 
@@ -274,13 +314,14 @@ function JoiningForm(){
         </Form.Item>
 
         {value === 1 && (
-          <Form.Item label="Passport Number" className="col-span-2" required>
+          <Form.Item label="Passport Number" name='panNumber' className="col-span-2" rules={[{required: true,
+            message: 'This is a required field.'}]}>
             <Input placeholder="Enter Passport Number" />
           </Form.Item>
         )}
 
-        <Form.Item className="col-span-2" label="Documents" valuePropName="fileList" getValueFromEvent={normFile} >
-          <Upload action="/upload.do" listType="picture-card">
+        <Form.Item className="col-span-2" name='document' label="Documents" valuePropName="fileList" getValueFromEvent={normFile} >
+          <Upload action="/endpoint.do" listType="picture-card">
             <button style={{ border: 0, background: 'none' }} type="button">
               <PlusOutlined />
               <div style={{ marginTop: 0 }}>Upload</div>
@@ -289,7 +330,7 @@ function JoiningForm(){
         </Form.Item>
 
         <Form.Item className='flex justify-end'>
-          <Button className='bg-blue-500 w-40 text-white'>Submit</Button>
+          <Button htmlType='submit' className='bg-blue-500 w-40 text-white'>Submit</Button>
         </Form.Item>        
       
       </Form>
