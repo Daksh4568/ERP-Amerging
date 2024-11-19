@@ -111,6 +111,16 @@ function JoiningForm() {
     gender: "",
     maritalStatus: "",
     contactNumber: "",
+    alternateNumber: "",
+    personalEmail: "",
+    officialEmail: "",
+    password: "",
+    bloodGroup: "",
+    employeeType: "",
+    aadharCardNumber: "",
+    passportNumber: "",
+    employeeStatus: "",
+    document: "",
   });
 
   const handleChanges = (e) => {
@@ -119,17 +129,35 @@ function JoiningForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = JSON.stringify(values);
+    const formData = JSON.stringify(values);  /* converting object values to JSON*/
     console.log(formData);
 
-    setValues({
-      employeeId: "",
-      employeeName: "",
-      dateOfBirth: "",
-      gender: "",
-      maritalStatus: "",
-      contactNumber: "",
-    });
+    // fetch('https://', {
+    //   method: 'POST',
+    //   headers: {'Content-Type': 'appplication/json'},
+    //   body: formData,
+    // }).then(response => response.json())
+    // .then(data => console.log(data));
+
+
+    // setValues({
+    //   employeeId: "",
+    //   employeeName: "",
+    //   dateOfBirth: "",
+    //   gender: "",
+    //   maritalStatus: "",
+    //   contactNumber: "",
+    //   alternateNumber: "",
+    //   prsonalEmail: "",
+    //   officialEmail: "",
+    //   password: "",
+    //   bloodGroup: "",
+    //   employeeType: "",
+    //   aadharCardNumber: "",
+    //   passportNumber: "",
+    //   employeeStatus: "",
+    //   document: "",
+    // });
   };
 
   return (
@@ -376,6 +404,7 @@ function JoiningForm() {
           className="w-full bg-white block p-2 text-sm rounded-md border"
           type="text"
           name="employeeId"
+          value={values.employeeId}
           onChange={handleChanges}
           required
         />
@@ -391,8 +420,9 @@ function JoiningForm() {
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
           type="text"
-          placeholder="Enter employee Name"
+          // placeholder="Enter employee Name"
           name="employeeName"
+          value={values.employeeName}
           onChange={handleChanges}
           required
         />
@@ -406,10 +436,11 @@ function JoiningForm() {
           Date of Birth
         </label>
         <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
+          className="w-full bg-gray-200 block p-2 text-sm rounded-md border"
           type="date"
-          placeholder="Enter employee Name"
+          // placeholder="Enter employee Name"
           name="dateOfBirth"
+          value={values.dateOfBirth}
           onChange={handleChanges}
           required
         />
@@ -425,6 +456,7 @@ function JoiningForm() {
         <select
           className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
           name="gender"
+          value={values.gender}
           onChange={handleChanges}
           required
         >
@@ -445,6 +477,7 @@ function JoiningForm() {
         <select
           className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
           name="maritalStatus"
+          value={values.maritalStatus}
           onChange={handleChanges}
           required
         >
@@ -462,17 +495,198 @@ function JoiningForm() {
           Contact Number
         </label>
         <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
-          type="text"
-          placeholder="Contact Number"
+          className=" w-full bg-white block p-2 text-sm rounded-md border"
+          type="number"
+          // placeholder="Contact Number"
           name="contactNumber"
+          value={values.contactNumber}
           onChange={handleChanges}
           required
         />
       </div>
 
-      <div className="col-span-3">
-        <button className="bg-blue-500 " type="submit">
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="alternateNumber"
+        >
+          Alternate Number
+        </label>
+        <input
+          className=" w-full bg-white block p-2 text-sm rounded-md border"
+          type="number"
+          // placeholder="Alternate Number"
+          name="alternateNumber"
+          value={values.alternateNumber}
+          onChange={handleChanges}
+        />
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="personalEmail"
+        >
+          Personal Email
+        </label>
+        <input
+          className=" w-full bg-white block p-2 text-sm rounded-md border"
+          type="email"
+          placeholder="example@mail.com"
+          name="personalEmail"
+          value={values.personalEmail}
+          onChange={handleChanges}
+          required
+        />
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="officialEmail"
+        >
+          Official Email
+        </label>
+        <input
+          className=" w-full bg-white block p-2 text-sm rounded-md border"
+          type="email"
+          placeholder="example@mail.com"
+          name="officialEmail"
+          value={values.officialEmail}
+          onChange={handleChanges}
+        />
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="password"
+        >
+          Create Password
+        </label>
+        <input
+          className=" w-full bg-white block p-2 text-sm rounded-md border"
+          type="password"
+          placeholder=""
+          name="password"
+          value={values.password}
+          onChange={handleChanges}
+        />
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="bloodGroup"
+        >
+          Blood Group
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          // placeholder="Enter employee Name"
+          name="bloodGroup"
+          value={values.bloodGroup}
+          onChange={handleChanges}
+          required
+        />
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="employeeType"
+        >
+          Employee Type
+        </label>
+        <select
+          className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
+          name="employeeType"
+          value={values.employeeType}
+          onChange={handleChanges}
+          required
+        >
+          <option value="">--Select--</option>
+          <option value="full-time">Full-time</option>
+          <option value="part-time">Part-time</option>
+          <option value="contract">Contract</option>
+          <option value="consultant">Consultant</option>
+        </select>
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="aadharCardNumber"
+        >
+          Aadhar Card Number
+        </label>
+        <input
+          className=" w-full bg-white block p-2 text-sm rounded-md border"
+          type="number"
+          placeholder="XXXX-XXXX-XXXX"
+          name="aadharCardNumber"
+          value={values.aadharCardNumber}
+          onChange={handleChanges}
+        />
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="passportNumber"
+        >
+          Passport Number (if Any)
+        </label>
+        <input
+          className=" w-full bg-white block p-2 text-sm rounded-md border"
+          type="number"
+          // placeholder="XXXX-XXXX-XXXX"
+          name="passportNumber"
+          value={values.passportNumber}
+          onChange={handleChanges}
+        />
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="employeeStatus"
+        >
+          Employee Status
+        </label>
+        <select
+          className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
+          name="employeeStatus"
+          value={values.employeeStatus}
+          onChange={handleChanges}
+          required
+        >
+          <option value="">--Select--</option>
+          <option value="regular">Regular</option>
+          <option value="releived">Releived</option>
+          <option value="resigned">Resigned</option>
+        </select>
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="document"
+        >
+          Document
+        </label>
+        <input
+          type="file"
+          name="document"
+          value={values.document}
+          onChange={handleChanges}
+          required
+        />
+      </div>
+
+      <div className="col-span-3 ">
+        <button className="bg-blue-500" type="submit">
           Submit
         </button>
       </div>
