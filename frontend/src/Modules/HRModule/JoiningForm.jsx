@@ -690,6 +690,7 @@ function JoiningForm() {
           Submit
         </button>
       </div>
+      
     </form>
   );
 }
