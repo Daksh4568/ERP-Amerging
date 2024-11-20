@@ -58,7 +58,7 @@ const SelfEvaluationForm = () => {
 
     
     const handleChanges = (e) => {
-      setFormData({ ...formData, [e.target.name] : e.target.value})
+      setFormData({ ...formData, [e.target.name] : e.target.value});
     }
 
     const handleSubmit = (e) => {
@@ -511,7 +511,7 @@ const SelfEvaluationForm = () => {
         />
       </div>
 
-      <div className="col-span-3 ">
+      <div className="col-span-3 mt-3">
         <button className="bg-blue-500" type="submit">
           Submit
         </button>

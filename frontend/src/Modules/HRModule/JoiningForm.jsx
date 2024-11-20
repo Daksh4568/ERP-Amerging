@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -21,7 +22,7 @@ import {
 //   return e?.fileList;
 // };
 
-function JoiningForm() {
+function JoiningForm() { 
   // const [componentDisabled, setcomponentDisabled] = useState(true);
   // const [passwordVisible, setPasswordVisible] = useState(false);
   // const [value, setValue] = useState();
@@ -104,6 +105,8 @@ function JoiningForm() {
   //   setValue(e.target.value);
   // }
 
+  const [formSubmissionData, setFormSubmissionData] = useState([])
+
   const [values, setValues] = useState({
     employeeId: "",
     employeeName: "",
@@ -123,22 +126,70 @@ function JoiningForm() {
     document: "",
   });
 
+
+  const [permanentAddress, setPermanentAddress] = useState({
+    street: '',
+    city: '',
+    state: '',
+    pinCode: '',
+  });
+
+  const [temporaryAddress, setTemporaryAddress] = useState({
+    street: '',
+    city: '',
+    state: '',
+    pinCode: '',
+  });
+
+  const [isSameAddress, setIsSameAddress] = useState(false);
+
+  const handlePermanentAddressChange = (field, value) => {
+    setPermanentAddress({ ...permanentAddress, [field]: value });
+    if (isSameAddress) {
+      setTemporaryAddress({ ...permanentAddress, [field]: value });
+    }
+  };
+
+  const handleCheckboxChange = (e) => {
+    setIsSameAddress(e.target.checked);
+    if (e.target.checked) {
+      setTemporaryAddress(permanentAddress);
+    }
+  };
+
   const handleChanges = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = JSON.stringify(values);  /* converting object values to JSON*/
-    console.log(formData);
 
-    // fetch('https://', {
-    //   method: 'POST',
-    //   headers: {'Content-Type': 'appplication/json'},
-    //   body: formData,
-    // }).then(response => response.json())
-    // .then(data => console.log(data));
+    // combining all the data
+    const finalData = {
+      ...values,
+      Address: {
+        permanentAddress,
+        temporaryAddress,
+      },
+    };
 
+    // tryign with axios
+    try {
+      const response = await axios.post(
+        "https://jsonplaceholder.typicode.com/posts", finalData);
+        
+        const jsonResponseData = JSON.stringify(response.data);
+        console.log(jsonResponseData);
+    } 
+    catch (error) {
+      console.log("Error submitting form data: ", error);
+    }
+
+    // setFormSubmissionData([...formSubmissionData, values]);
+
+    // const formData = JSON.stringify(values);  /* converting object values to JSON*/
+
+    // console.log(formSubmissionData);
 
     // setValues({
     //   employeeId: "",
@@ -574,6 +625,186 @@ function JoiningForm() {
         />
       </div>
 
+      <div className="bg-gray-200 mt-5 w-full p-4 rounded col-span-4 gap-x-8">
+      {/* Permanent Address */}
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="street"
+        >
+          Street
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          name="street"
+          value={permanentAddress.street}
+          onChange={(e) =>
+            handlePermanentAddressChange('street', e.target.value)
+          }
+        />
+      </div>
+
+      <div className="col-span-2">
+      <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="city"
+        >
+          City
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          name="city"
+          value={permanentAddress.city}
+          onChange={(e) =>
+            handlePermanentAddressChange('city', e.target.value)
+          }
+        />
+      </div>
+
+      <div className="col-span-2">
+        
+      <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="state"
+        >
+          State
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          name="state"
+          value={permanentAddress.state}
+          onChange={(e) =>
+            handlePermanentAddressChange('state', e.target.value)
+          }
+        />
+      </div>
+
+      <div className="col-span-2">
+      <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="pincode"
+        >
+          Pincode
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          name="pincode"
+          maxLength={6}
+          value={permanentAddress.pinCode}
+          onChange={(e) =>
+            handlePermanentAddressChange('pinCode', e.target.value)
+          }
+        />
+      </div>
+
+      {/* Checkbox for Same Address */}
+      <div className="col-span-4 mt-4">
+        <label className="inline-flex items-center">
+          <input
+            type="checkbox"
+            className="mr-2"
+            checked={isSameAddress}
+            onChange={handleCheckboxChange}
+          />
+          Same as Permanent Address
+        </label>
+      </div>
+
+      {/* Temporary Address */}
+      <div className="col-span-2">
+      <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="street"
+        >
+          Street
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          name="street"
+          value={temporaryAddress.street}
+          onChange={(e) =>
+            setTemporaryAddress({
+              ...temporaryAddress,
+              street: e.target.value,
+            })
+          }
+          disabled={isSameAddress}
+        />
+      </div>
+
+      <div className="col-span-2">
+      <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="city"
+        >
+          City
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          name="city"
+          value={temporaryAddress.city}
+          onChange={(e) =>
+            setTemporaryAddress({
+              ...temporaryAddress,
+              city: e.target.value,
+            })
+          }
+          disabled={isSameAddress}
+        />
+      </div>
+
+      <div className="col-span-2">
+      <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="state"
+        >
+          State
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          name="state"
+          value={temporaryAddress.state}
+          onChange={(e) =>
+            setTemporaryAddress({
+              ...temporaryAddress,
+              state: e.target.value,
+            })
+          }
+          disabled={isSameAddress}
+        />
+      </div>
+
+      <div className="col-span-2">
+      <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="pincode"
+        >
+          Pincode
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          name="pincode"
+          maxLength={6}
+          value={temporaryAddress.pinCode}
+          onChange={(e) =>
+            setTemporaryAddress({
+              ...temporaryAddress,
+              pinCode: e.target.value,
+            })
+          }
+          disabled={isSameAddress}
+        />
+      </div>
+    </div>
+
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
@@ -640,7 +871,7 @@ function JoiningForm() {
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          type="number"
+          type="text"
           // placeholder="XXXX-XXXX-XXXX"
           name="passportNumber"
           value={values.passportNumber}
@@ -671,7 +902,7 @@ function JoiningForm() {
 
       <div className="col-span-2">
         <label
-          className="text-base block w-full mt-2 mb-1 text-left "
+          className="text-base block w-full mt-2  text-left "
           htmlFor="document"
         >
           Document
@@ -685,7 +916,7 @@ function JoiningForm() {
         />
       </div>
 
-      <div className="col-span-3 ">
+      <div className="col-span-3 mt-3">
         <button className="bg-blue-500" type="submit">
           Submit
         </button>

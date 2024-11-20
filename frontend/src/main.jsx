@@ -5,10 +5,10 @@ import './index.css'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import Layout from './Layout.jsx'
 import Dashboard from './Dashboard/Dashboard.jsx'
-import Login from './Forms/Login.jsx'
+import Login from './components/Molecules/Login'
 import JoiningForm from './Modules/HRModule/JoiningForm'
-import SelfEvalFrom from './Forms/SelfEvalFrom.jsx'
-import ExitForm from './Forms/ExitForm.jsx'
+import SelfEvalFrom from './components/Molecules/SelfEvalFrom'
+import ExitForm from './components/Molecules/ExitForm'
 
 
 const router = createBrowserRouter(
