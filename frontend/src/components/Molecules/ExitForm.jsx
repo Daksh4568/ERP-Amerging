@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"
+import axios from "axios";
+import ReactStars from "react-rating-stars-component";
 // import {
 //   Form,
 //   Input,
@@ -51,42 +52,51 @@ function ExitForm() {
     department: "",
     lastWorkingDay: "",
     questionsToBeAnswered: "",
+    managerRating: {
+      policyRating: 0,
+      fairRating: 0,
+      policyRating: 0,
+      policyRating: 0,
+    },
   });
 
   useEffect(() => {
     const fetchData = async () => {
+      try {
+        // const response = await axios.get("https://jsonplaceholder.typicode.com/users/1");
+        const fetchedData = {
+          employeeName: "Abhijeet Kumar",
+          employeeId: "AT47",
+          department: "Embedded",
+          lastWorkingDay: "2024-12-20",
+        };
 
-        try {
-            // const response = await axios.get("https://jsonplaceholder.typicode.com/users/1"); 
-            const fetchedData = {
-              employeeName: "Abhijeet Kumar", 
-              employeeId: "AT47",
-              department: "Embedded",   
-              lastWorkingDay: "2024-12-20", 
-            };
-    
-            // Merging fetched data with formData
-            setFormData((prevData) => ({
-              ...prevData,
-              ...fetchedData,
-            }));
-        } 
-        catch (error) {
-            console.error("Error fetching data:", error);
-        }
+        // Merging fetched data with formData
+        setFormData((prevData) => ({
+          ...prevData,
+          ...fetchedData,
+        }));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     fetchData();
   }, []);
 
+  const handleChanges = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-
-  const handleChanges = (e) => { 
-    setFormData({ ...formData, [e.target.name] : e.target.value});
-  }
+  const handleRatingChange = (field, newRating) => {
+    setFormData((prevData) => ({
+      ...prevData.managerRating,
+      policyRating: newRating,
+      [field] : newRating,
+    }));
+  };
 
   const handleSubmit = (e) => {
-    
     e.preventDefault();
 
     const values = JSON.stringify(formData);
@@ -285,7 +295,12 @@ function ExitForm() {
       </div>
 
       <div className="col-span-4">
-        <title className="text-base block w-full mt-2 mb-1 text-left ">I kindly request that you take a few moments to provide your input by responding to the questions below. Please rest assured that all your responses will be treated with the utmost confidentiality. Your cooperation is greatly appreciated. Thank you.</title>
+        <title className="text-base block w-full mt-2 mb-1 text-left ">
+          I kindly request that you take a few moments to provide your input by
+          responding to the questions below. Please rest assured that all your
+          responses will be treated with the utmost confidentiality. Your
+          cooperation is greatly appreciated. Thank you.
+        </title>
       </div>
 
       <div className="col-span-4">
@@ -297,7 +312,7 @@ function ExitForm() {
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='2'
+          rows="2"
           name="questionsToBeAnswered"
           value={formData.questionsToBeAnswered}
           onChange={handleChanges}
@@ -309,11 +324,11 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="questionsToBeAnswered"
         >
-           How was your experience working at the company?
+          How was your experience working at the company?
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='2'
+          rows="2"
           name="questionsToBeAnswered"
           value={formData.questionsToBeAnswered}
           onChange={handleChanges}
@@ -325,11 +340,12 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="questionsToBeAnswered"
         >
-          Did you feel that your skills and talents were effectively utilized in your role?
+          Did you feel that your skills and talents were effectively utilized in
+          your role?
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='2'
+          rows="2"
           name="questionsToBeAnswered"
           value={formData.questionsToBeAnswered}
           onChange={handleChanges}
@@ -340,11 +356,12 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="questionsToBeAnswered"
         >
-           Did you receive the necessary training and support to perform your job effectively?
+          Did you receive the necessary training and support to perform your job
+          effectively?
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='2'
+          rows="2"
           name="questionsToBeAnswered"
           value={formData.questionsToBeAnswered}
           onChange={handleChanges}
@@ -355,11 +372,12 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="questionsToBeAnswered"
         >
-          Did you feel that your ideas and opinions were valued and heard within the company?
+          Did you feel that your ideas and opinions were valued and heard within
+          the company?
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='2'
+          rows="2"
           name="questionsToBeAnswered"
           value={formData.questionsToBeAnswered}
           onChange={handleChanges}
@@ -374,7 +392,7 @@ function ExitForm() {
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='2'
+          rows="2"
           name="questionsToBeAnswered"
           value={formData.questionsToBeAnswered}
           onChange={handleChanges}
@@ -389,11 +407,181 @@ function ExitForm() {
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='2'
+          rows="2"
           name="questionsToBeAnswered"
           value={formData.questionsToBeAnswered}
           onChange={handleChanges}
         />
+      </div>
+
+      <div className="col-span-4">
+        <title className="text-base block w-full mt-2 mb-1 text-left underline">
+          Rate your Manager on the following:
+        </title>
+      </div>
+
+      <div className="col-span-4 border p-3 bg-gray-200">
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="policyRating"
+          >
+            Follow policies & procedures
+          </label>
+          <ReactStars
+            count={5}
+            name="policyRating"
+            value={Number(formData.managerRating.policyRating)}
+            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            size={35}
+            activeColor="gold"
+            isHalf={true}
+          />
+        </div>
+
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="fairRating"
+          >
+            Treats employees in a fair and equal way
+          </label>
+          <ReactStars
+            count={5}
+            name="fairRating"
+            value={Number(formData.managerRating.fairRating)}
+            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            size={35}
+            activeColor="gold"
+            isHalf={true}
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="policyRating"
+          >
+            Provides recognition for a job well done
+          </label>
+          <ReactStars
+            count={5}
+            name="policyRating"
+            value={Number(formData.policyRating)}
+            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            size={35}
+            activeColor="gold"
+            isHalf={true}
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="policyRating"
+          >
+            Resolves complaints and problems
+          </label>
+          <ReactStars
+            count={5}
+            name="policyRating"
+            value={Number(formData.policyRating)}
+            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            size={35}
+            activeColor="gold"
+            isHalf={true}
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="policyRating"
+          >
+            Gives needed informations
+          </label>
+          <ReactStars
+            count={5}
+            name="policyRating"
+            value={Number(formData.policyRating)}
+            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            size={35}
+            activeColor="gold"
+            isHalf={true}
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="policyRating"
+          >
+            Keeps employees busy
+          </label>
+          <ReactStars
+            count={5}
+            name="policyRating"
+            value={Number(formData.policyRating)}
+            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            size={35}
+            activeColor="gold"
+            isHalf={true}
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="policyRating"
+          >
+            Knows his/her job well
+          </label>
+          <ReactStars
+            count={5}
+            name="policyRating"
+            value={Number(formData.policyRating)}
+            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            size={35}
+            activeColor="gold"
+            isHalf={true}
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="policyRating"
+          >
+            Welcomes suggestions
+          </label>
+          <ReactStars
+            count={5}
+            name="policyRating"
+            value={Number(formData.policyRating)}
+            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            size={35}
+            activeColor="gold"
+            isHalf={true}
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="policyRating"
+          >
+            Maintains discipline
+          </label>
+          <ReactStars
+            count={5}
+            name="policyRating"
+            value={Number(formData.policyRating)}
+            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            size={35}
+            activeColor="gold"
+            isHalf={true}
+          />
+        </div>
       </div>
 
       <div className="col-span-3 mt-3">
@@ -401,7 +589,6 @@ function ExitForm() {
           Submit
         </button>
       </div>
-      
     </form>
   );
 }
