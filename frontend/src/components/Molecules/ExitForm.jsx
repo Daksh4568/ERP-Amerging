@@ -65,7 +65,7 @@ function ExitForm() {
               lastWorkingDay: "2024-12-20", 
             };
     
-            // Merge fetched data with formData
+            // Merging fetched data with formData
             setFormData((prevData) => ({
               ...prevData,
               ...fetchedData,
