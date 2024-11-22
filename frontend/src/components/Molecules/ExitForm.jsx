@@ -51,7 +51,15 @@ function ExitForm() {
     employeeId: "",
     department: "",
     lastWorkingDay: "",
-    questionsToBeAnswered: "",
+    exitFeedback: {
+      reasonForLeaving: "",
+      experience: "",
+      skillUtilization: "",
+      trainingSupport: "",
+      ideasValued: "",
+      improvementSuggestions: "",
+      finalComments: "",
+    },
     managerRating: {
       followPolicies: "",
       fairTreatment: "",
@@ -62,6 +70,14 @@ function ExitForm() {
       knowsJobWell: "",
       welcomesSuggestions: "",
       maintainsDiscipline: "",
+    },
+    departmentFeedback: {
+      teamwork: "",
+      interDepartmentCooperation: "",
+      training: "",
+      communication: "",
+      workingConditions: "",
+      workSchedule: "",
     },
   });
 
@@ -93,12 +109,22 @@ function ExitForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleRatingChange = (field, newRating) => {
+  const handleManagerRatingChange = (field, newRating) => {
     setFormData((prevData) => ({
       ...prevData,
       managerRating: {
         ...prevData.managerRating,
-        [field] : newRating,
+        [field]: newRating,
+      },
+    }));
+  };
+
+  const handleDepartmentRatingChange = (field, newRating) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      departmentFeedback: {
+        ...prevData.departmentFeedback,
+        [field]: newRating,
       },
     }));
   };
@@ -438,11 +464,12 @@ function ExitForm() {
           <ReactStars
             count={5}
             name="followPolicies"
-            value={formData.managerRating.followPolicies}
-            onChange={(rating) => handleRatingChange("followPolicies", rating)}
+            value={formData.followPolicies}
+            onChange={(rating) =>
+              handleManagerRatingChange("followPolicies", rating)
+            }
             size={35}
             activeColor="gold"
-
           />
         </div>
 
@@ -456,11 +483,12 @@ function ExitForm() {
           <ReactStars
             count={5}
             name="fairTreatment"
-            value={formData.managerRating.fairTreatment}
-            onChange={(rating) => handleRatingChange("fairTreatment", rating)}
+            value={formData.fairTreatment}
+            onChange={(rating) =>
+              handleManagerRatingChange("fairTreatment", rating)
+            }
             size={35}
             activeColor="gold"
-
           />
         </div>
 
@@ -474,11 +502,12 @@ function ExitForm() {
           <ReactStars
             count={5}
             name="recognitionForJob"
-            value={formData.managerRating.recognitionForJob}
-            onChange={(rating) => handleRatingChange("recognitionForJob", rating)}
+            value={formData.recognitionForJob}
+            onChange={(rating) =>
+              handleManagerRatingChange("recognitionForJob", rating)
+            }
             size={35}
             activeColor="gold"
-
           />
         </div>
 
@@ -492,11 +521,12 @@ function ExitForm() {
           <ReactStars
             count={5}
             name="resolvesComplaints"
-            value={formData.managerRating.resolvesComplaints}
-            onChange={(rating) => handleRatingChange("resolvesComplaints", rating)}
+            value={formData.resolvesComplaints}
+            onChange={(rating) =>
+              handleManagerRatingChange("resolvesComplaints", rating)
+            }
             size={35}
             activeColor="gold"
-
           />
         </div>
 
@@ -511,10 +541,11 @@ function ExitForm() {
             count={5}
             name="givesInformation"
             value={formData.givesInformation}
-            onChange={(rating) => handleRatingChange("givesInformation", rating)}
+            onChange={(rating) =>
+              handleManagerRatingChange("givesInformation", rating)
+            }
             size={35}
             activeColor="gold"
-
           />
         </div>
 
@@ -529,10 +560,11 @@ function ExitForm() {
             count={5}
             name="keepsBusy"
             value={formData.keepsBusy}
-            onChange={(rating) => handleRatingChange("keepsBusy", rating)}
+            onChange={(rating) =>
+              handleManagerRatingChange("keepsBusy", rating)
+            }
             size={35}
             activeColor="gold"
-
           />
         </div>
 
@@ -547,10 +579,11 @@ function ExitForm() {
             count={5}
             name="knowsJobWell"
             value={formData.knowsJobWell}
-            onChange={(rating) => handleRatingChange("knowsJobWell", rating)}
+            onChange={(rating) =>
+              handleManagerRatingChange("knowsJobWell", rating)
+            }
             size={35}
             activeColor="gold"
-
           />
         </div>
 
@@ -565,10 +598,11 @@ function ExitForm() {
             count={5}
             name="welcomesSuggestions"
             value={formData.welcomesSuggestions}
-            onChange={(rating) => handleRatingChange("welcomesSuggestions", rating)}
+            onChange={(rating) =>
+              handleManagerRatingChange("welcomesSuggestions", rating)
+            }
             size={35}
             activeColor="gold"
-
           />
         </div>
 
@@ -583,10 +617,133 @@ function ExitForm() {
             count={5}
             name="maintainsDiscipline"
             value={formData.maintainsDiscipline}
-            onChange={(rating) => handleRatingChange("maintainsDiscipline", rating)}
+            onChange={(rating) =>
+              handleManagerRatingChange("maintainsDiscipline", rating)
+            }
             size={35}
             activeColor="gold"
+          />
+        </div>
+      </div>
 
+      <div className="col-span-4">
+        <title className="text-base block w-full mt-2 mb-1 text-left underline">
+          Rate your Manager on the following:
+        </title>
+      </div>
+
+      <div className="col-span-4 border p-3 bg-gray-200">
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="teamwork"
+          >
+            Cooperation/teamwork in the department
+          </label>
+          <ReactStars
+            count={5}
+            name="teamwork"
+            value={formData.teamwork}
+            onChange={(rating) =>
+              handleDepartmentRatingChange("teamwork", rating)
+            }
+            size={35}
+            activeColor="gold"
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="interDepartmentCooperation"
+          >
+            Cooperation with other departments
+          </label>
+          <ReactStars
+            count={5}
+            name="interDepartmentCooperation"
+            value={formData.interDepartmentCooperation}
+            onChange={(rating) =>
+              handleDepartmentRatingChange("interDepartmentCooperation", rating)
+            }
+            size={35}
+            activeColor="gold"
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="training"
+          >
+            Department training and OTJ training
+          </label>
+          <ReactStars
+            count={5}
+            name="training"
+            value={formData.training}
+            onChange={(rating) =>
+              handleDepartmentRatingChange("training", rating)
+            }
+            size={35}
+            activeColor="gold"
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="communication"
+          >
+            Communication
+          </label>
+          <ReactStars
+            count={5}
+            name="communication"
+            value={formData.communication}
+            onChange={(rating) =>
+              handleDepartmentRatingChange("communication", rating)
+            }
+            size={35}
+            activeColor="gold"
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="workingConditions"
+          >
+            working Conditions
+          </label>
+          <ReactStars
+            count={5}
+            name="workingConditions"
+            value={formData.workingConditions}
+            onChange={(rating) =>
+              handleDepartmentRatingChange("workingConditions", rating)
+            }
+            size={35}
+            activeColor="gold"
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label
+            className="text-base block w-full mt-2 text-left "
+            htmlFor="workSchedule"
+          >
+            Work Schedule
+          </label>
+          <ReactStars
+            count={5}
+            name="workSchedule"
+            value={formData.workSchedule}
+            onChange={(rating) =>
+              handleDepartmentRatingChange("workSchedule", rating)
+            }
+            size={35}
+            activeColor="gold"
           />
         </div>
       </div>
