@@ -109,6 +109,16 @@ function ExitForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleExitFeedbackChange = (field, message) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      exitFeedback: {
+        ...prevData.exitFeedback,
+        [field]: message,
+      }
+    }))
+  }
+
   const handleManagerRatingChange = (field, newRating) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -132,7 +142,7 @@ function ExitForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const values = JSON.stringify(formData);
+    const values = JSON.stringify(formData, null, 2);
     console.log(values);
   };
 
@@ -339,39 +349,43 @@ function ExitForm() {
       <div className="col-span-4">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="questionsToBeAnswered"
+          htmlFor="reasonForLeaving"
         >
           Reason for leaving the company?
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           rows="2"
-          name="questionsToBeAnswered"
-          value={formData.questionsToBeAnswered}
-          onChange={handleChanges}
+          name="reasonForLeaving"
+          value={formData.reasonForLeaving}
+          onChange={(e) =>
+            handleExitFeedbackChange("reasonForLeaving", e.target.value)
+          }
         />
       </div>
 
       <div className="col-span-4">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="questionsToBeAnswered"
+          htmlFor="experience"
         >
           How was your experience working at the company?
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           rows="2"
-          name="questionsToBeAnswered"
-          value={formData.questionsToBeAnswered}
-          onChange={handleChanges}
+          name="experience"
+          value={formData.experience}
+          onChange={(e) =>
+            handleExitFeedbackChange("experience", e.target.value)
+          }
         />
       </div>
 
       <div className="col-span-4">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="questionsToBeAnswered"
+          htmlFor="skillUtilization"
         >
           Did you feel that your skills and talents were effectively utilized in
           your role?
@@ -379,15 +393,17 @@ function ExitForm() {
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           rows="2"
-          name="questionsToBeAnswered"
-          value={formData.questionsToBeAnswered}
-          onChange={handleChanges}
+          name="skillUtilization"
+          value={formData.skillUtilization}
+          onChange={(e) =>
+            handleExitFeedbackChange("skillUtilization", e.target.value)
+          }
         />
       </div>
       <div className="col-span-4">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="questionsToBeAnswered"
+          htmlFor="trainingSupport"
         >
           Did you receive the necessary training and support to perform your job
           effectively?
@@ -395,15 +411,17 @@ function ExitForm() {
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           rows="2"
-          name="questionsToBeAnswered"
-          value={formData.questionsToBeAnswered}
-          onChange={handleChanges}
+          name="trainingSupport"
+          value={formData.trainingSupport}
+          onChange={(e) =>
+            handleExitFeedbackChange("trainingSupport", e.target.value)
+          }
         />
       </div>
       <div className="col-span-4">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="questionsToBeAnswered"
+          htmlFor="ideasValued"
         >
           Did you feel that your ideas and opinions were valued and heard within
           the company?
@@ -411,39 +429,45 @@ function ExitForm() {
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           rows="2"
-          name="questionsToBeAnswered"
-          value={formData.questionsToBeAnswered}
-          onChange={handleChanges}
+          name="ideasValued"
+          value={formData.ideasValued}
+          onChange={(e) =>
+            handleExitFeedbackChange("ideasValued", e.target.value)
+          }
         />
       </div>
       <div className="col-span-4">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="questionsToBeAnswered"
+          htmlFor="improvementSuggestions"
         >
           What areas do you think the company could improve upon?
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           rows="2"
-          name="questionsToBeAnswered"
-          value={formData.questionsToBeAnswered}
-          onChange={handleChanges}
+          name="improvementSuggestions"
+          value={formData.improvementSuggestions}
+          onChange={(e) =>
+            handleExitFeedbackChange("improvementSuggestions", e.target.value)
+          }
         />
       </div>
       <div className="col-span-4">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="questionsToBeAnswered"
+          htmlFor="finalComments"
         >
           Do you have any final comments or suggestions for the company?
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           rows="2"
-          name="questionsToBeAnswered"
-          value={formData.questionsToBeAnswered}
-          onChange={handleChanges}
+          name="finalComments"
+          value={formData.finalComments}
+          onChange={(e) =>
+            handleExitFeedbackChange("finalComments", e.target.value)
+          }
         />
       </div>
 
