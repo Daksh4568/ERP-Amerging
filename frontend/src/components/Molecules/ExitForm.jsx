@@ -53,10 +53,15 @@ function ExitForm() {
     lastWorkingDay: "",
     questionsToBeAnswered: "",
     managerRating: {
-      policyRating: 0,
-      fairRating: 0,
-      policyRating: 0,
-      policyRating: 0,
+      followPolicies: "",
+      fairTreatment: "",
+      recognitionForJob: "",
+      resolvesComplaints: "",
+      givesInformation: "",
+      keepsBusy: "",
+      knowsJobWell: "",
+      welcomesSuggestions: "",
+      maintainsDiscipline: "",
     },
   });
 
@@ -90,9 +95,11 @@ function ExitForm() {
 
   const handleRatingChange = (field, newRating) => {
     setFormData((prevData) => ({
-      ...prevData.managerRating,
-      policyRating: newRating,
-      [field] : newRating,
+      ...prevData,
+      managerRating: {
+        ...prevData.managerRating,
+        [field] : newRating,
+      },
     }));
   };
 
@@ -424,162 +431,162 @@ function ExitForm() {
         <div className="col-span-2">
           <label
             className="text-base block w-full mt-2 text-left "
-            htmlFor="policyRating"
+            htmlFor="followPolicies"
           >
             Follow policies & procedures
           </label>
           <ReactStars
             count={5}
-            name="policyRating"
-            value={Number(formData.managerRating.policyRating)}
-            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            name="followPolicies"
+            value={formData.managerRating.followPolicies}
+            onChange={(rating) => handleRatingChange("followPolicies", rating)}
             size={35}
             activeColor="gold"
-            isHalf={true}
+
           />
         </div>
 
         <div className="col-span-2">
           <label
             className="text-base block w-full mt-2 text-left "
-            htmlFor="fairRating"
+            htmlFor="fairTreatment"
           >
             Treats employees in a fair and equal way
           </label>
           <ReactStars
             count={5}
-            name="fairRating"
-            value={Number(formData.managerRating.fairRating)}
-            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            name="fairTreatment"
+            value={formData.managerRating.fairTreatment}
+            onChange={(rating) => handleRatingChange("fairTreatment", rating)}
             size={35}
             activeColor="gold"
-            isHalf={true}
+
           />
         </div>
 
         <div className="col-span-4">
           <label
             className="text-base block w-full mt-2 text-left "
-            htmlFor="policyRating"
+            htmlFor="recognitionForJob"
           >
             Provides recognition for a job well done
           </label>
           <ReactStars
             count={5}
-            name="policyRating"
-            value={Number(formData.policyRating)}
-            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            name="recognitionForJob"
+            value={formData.managerRating.recognitionForJob}
+            onChange={(rating) => handleRatingChange("recognitionForJob", rating)}
             size={35}
             activeColor="gold"
-            isHalf={true}
+
           />
         </div>
 
         <div className="col-span-4">
           <label
             className="text-base block w-full mt-2 text-left "
-            htmlFor="policyRating"
+            htmlFor="resolvesComplaints"
           >
             Resolves complaints and problems
           </label>
           <ReactStars
             count={5}
-            name="policyRating"
-            value={Number(formData.policyRating)}
-            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            name="resolvesComplaints"
+            value={formData.managerRating.resolvesComplaints}
+            onChange={(rating) => handleRatingChange("resolvesComplaints", rating)}
             size={35}
             activeColor="gold"
-            isHalf={true}
+
           />
         </div>
 
         <div className="col-span-4">
           <label
             className="text-base block w-full mt-2 text-left "
-            htmlFor="policyRating"
+            htmlFor="givesInformation"
           >
             Gives needed informations
           </label>
           <ReactStars
             count={5}
-            name="policyRating"
-            value={Number(formData.policyRating)}
-            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            name="givesInformation"
+            value={formData.givesInformation}
+            onChange={(rating) => handleRatingChange("givesInformation", rating)}
             size={35}
             activeColor="gold"
-            isHalf={true}
+
           />
         </div>
 
         <div className="col-span-4">
           <label
             className="text-base block w-full mt-2 text-left "
-            htmlFor="policyRating"
+            htmlFor="keepsBusy"
           >
             Keeps employees busy
           </label>
           <ReactStars
             count={5}
-            name="policyRating"
-            value={Number(formData.policyRating)}
-            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            name="keepsBusy"
+            value={formData.keepsBusy}
+            onChange={(rating) => handleRatingChange("keepsBusy", rating)}
             size={35}
             activeColor="gold"
-            isHalf={true}
+
           />
         </div>
 
         <div className="col-span-4">
           <label
             className="text-base block w-full mt-2 text-left "
-            htmlFor="policyRating"
+            htmlFor="knowsJobWell"
           >
             Knows his/her job well
           </label>
           <ReactStars
             count={5}
-            name="policyRating"
-            value={Number(formData.policyRating)}
-            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            name="knowsJobWell"
+            value={formData.knowsJobWell}
+            onChange={(rating) => handleRatingChange("knowsJobWell", rating)}
             size={35}
             activeColor="gold"
-            isHalf={true}
+
           />
         </div>
 
         <div className="col-span-4">
           <label
             className="text-base block w-full mt-2 text-left "
-            htmlFor="policyRating"
+            htmlFor="welcomesSuggestions"
           >
             Welcomes suggestions
           </label>
           <ReactStars
             count={5}
-            name="policyRating"
-            value={Number(formData.policyRating)}
-            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            name="welcomesSuggestions"
+            value={formData.welcomesSuggestions}
+            onChange={(rating) => handleRatingChange("welcomesSuggestions", rating)}
             size={35}
             activeColor="gold"
-            isHalf={true}
+
           />
         </div>
 
         <div className="col-span-4">
           <label
             className="text-base block w-full mt-2 text-left "
-            htmlFor="policyRating"
+            htmlFor="maintainsDiscipline"
           >
             Maintains discipline
           </label>
           <ReactStars
             count={5}
-            name="policyRating"
-            value={Number(formData.policyRating)}
-            onChange={(rating) => handleRatingChange("policyRating", rating)}
+            name="maintainsDiscipline"
+            value={formData.maintainsDiscipline}
+            onChange={(rating) => handleRatingChange("maintainsDiscipline", rating)}
             size={35}
             activeColor="gold"
-            isHalf={true}
+
           />
         </div>
       </div>
