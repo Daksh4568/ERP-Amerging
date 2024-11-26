@@ -8,7 +8,7 @@ const exitEmployeeSchema = new mongoose.Schema({
         required: true
     },
     employeeName: {
-        type: String, // Corrected typo here
+        type: String,
         required: true
     },
     department: {
@@ -145,13 +145,23 @@ const exitEmployeeSchema = new mongoose.Schema({
         },
         acknowledgementDate: {
             type: Date,
-            default: Date.now, // Correct usage of Date.now
+            default: Date.now,
             required: true
+        }
+    },
+    enteredBy: {
+        name: {
+            type: String,
+            required: true // Ensures the submitter's name is included
+        },
+        role: {
+            type: String,
+            required: true // Ensures the submitter's role is included
         }
     }
 }, 
 { 
-    timestamps: true 
+    timestamps: true // Automatically adds `createdAt` and `updatedAt` fields
 });
 
 const ExitForm = mongoose.model('ExitEmployee', exitEmployeeSchema);

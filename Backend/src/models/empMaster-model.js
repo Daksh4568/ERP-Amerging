@@ -132,7 +132,7 @@ const employeeSchema = new mongoose.Schema({
      role:{
       type : String, 
       required : true,
-      enum : ['admin' , 'manager' , 'employee'],
+      enum : ['admin' , 'HR' , 'Employee'],
       default : 'employee'
      } , 
      tokens: [{

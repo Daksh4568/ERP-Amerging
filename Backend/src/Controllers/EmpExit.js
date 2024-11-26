@@ -4,8 +4,20 @@ const ExitEmployee = require('../models/empExitFormModel');
 // Create a new exit form entry
 exports.createExitForm = async (req, res) => {
     try {
-        const exitFormData = new ExitEmployee(req.body);
+        // Automatically add `enteredBy` details
+        const exitFormData = new ExitEmployee({
+            ...req.body,
+            enteredBy: {
+                name: req.employee.name, // Automatically fetched from auth middleware
+                role: req.employee.role  // Automatically fetched from auth middleware
+            }
+        });
+
         const savedData = await exitFormData.save();
+
+        // Log for auditing purposes
+        console.log(`Exit form successfully submitted by ${req.employee.name} (${req.employee.role}).`);
+
         res.status(201).json({
             message: 'Exit form data saved successfully',
             data: savedData

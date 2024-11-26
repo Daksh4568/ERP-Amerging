@@ -50,10 +50,10 @@ router.get('/emp/stats',  async (req, res) => {
   });
 
   router.post('/employee-evaluation' , auth , authorize('HR' ,'admin' , 'Manager') , employeeEvaluationController.createEmployeeEvaluation)
-router.post('/regemp' ,auth , authorize('admin'),async (req,res)=> {
+router.post('/regemp' ,async (req,res)=> {
    const emp = new employee(req.body);
    try {
-        console.log("Welcome to Admin Dashboard")
+       // console.log("Welcome to Admin/HR Dashboard")
         const lastEmpCount=await updateEmpCounter("read");//read 1 write 0
         emp.eID ='AT-' + String(lastEmpCount.counter+1).padStart(3, '0');
         emp.stat="Regular";
@@ -65,7 +65,7 @@ router.post('/regemp' ,auth , authorize('admin'),async (req,res)=> {
         res.status(201).send({emp,token});
         console.log("Employee added in the database")
    } catch (e) {
-    console.log("Manager and Admin access only")
+    //console.log("Manager and Admin access only")
         console.log(e);
         res.status(400).send(e);
    }
@@ -135,7 +135,7 @@ const updateEmpCounter = async (action) => {
         // If empCount is empty, create a new counter document
         const rowData = {
           counterField: 'empCounter',
-          counter: 1
+          counter: 0
         };        
         const newCounter = new counters(rowData);
         const dat = await newCounter.save();
