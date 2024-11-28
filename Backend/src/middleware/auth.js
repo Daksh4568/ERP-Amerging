@@ -30,35 +30,39 @@
 //     };
 // };
 // module.exports = {auth , authorize}; //export the auth middleware function  
+
+// Authentication Middleware
 const jwt = require('jsonwebtoken');
 const employees = require('../models/empMaster-model');
 
 // Authentication Middleware
 const auth = async (req, res, next) => {
     try {
-        // Get the token from the header and remove the "Bearer " prefix
+        // Extract token from Authorization header
         const token = req.header('Authorization')?.replace('Bearer ', '');
         if (!token) {
             return res.status(401).send({ error: 'Access Denied. No token provided.' });
         }
 
-        // Verify the token and decode it
+        // Verify the token and decode the payload
         const decoded = jwt.verify(token, 'amergingtech5757');
-        
-        // Find the user by decoded ID and the token in their tokens array
-        const employee = await employees.findOne({ _id: decoded._id, 'tokens.token': token });
+
+        // Find the employee using eID and verify token exists in their tokens array
+        const employee = await employees.findOne({ eID: decoded.eID, 'tokens.token': token });
         if (!employee) {
-            return res.status(401).send({ error: 'Authentication Error. User not found.' });
+            return res.status(401).send({ error: 'Authentication Error. Employee not found.' });
         }
 
-        // Attach token and employee details to the request for downstream usage
+        // Attach employee and token to request for downstream handlers
         req.token = token;
         req.employee = employee;
         next();
     } catch (e) {
-        res.status(401).send({ error: 'Authentication Error' });
+        res.status(401).send({ error: 'Authentication Error. Invalid token.' });
     }
 };
+
+module.exports = { auth };
 
 // Authorization Middleware
 const authorize = (...allowedRoles) => {

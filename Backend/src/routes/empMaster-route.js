@@ -50,7 +50,7 @@ router.get('/emp/stats',  async (req, res) => {
   });
 
   router.post('/employee-evaluation' , auth , authorize('HR' ,'admin' , 'Manager') , employeeEvaluationController.createEmployeeEvaluation)
-router.post('/regemp' ,async (req,res)=> {
+router.post('/regemp' , auth , authorize('HR' ,'admin' , 'Manager') ,async (req,res)=> {
    const emp = new employee(req.body);
    try {
        // console.log("Welcome to Admin/HR Dashboard")
@@ -106,7 +106,7 @@ router.post('/emp/login' ,async (req,res)=> {
  })
 
  
-router.patch('/emp/:id', async (req,res)=>{
+router.patch('/emp/:eID', async (req,res)=>{
     const updates =Object.keys(req.body)
     const allowedUpdates =['name', 'password' ,'address','address.city'];
     const isValidOperation =updates.every((update)=>allowedUpdates.includes(update))
@@ -115,9 +115,12 @@ router.patch('/emp/:id', async (req,res)=>{
         return res.status(400).send({error: 'Invalid updates'})
     }
     try {
-        const _id= req.params.id;
-        const emp = await employees.findById({_id});
-        
+        const eID= req.params.eID;
+        const emp = await employees.findById({eID});
+        // Find the employee by 'eID'
+        if (!emp) {
+          return res.status(404).send({ error: 'Employee not found' });
+      }
         updates.forEach((update)=>emp[update] =req.body[update])
         console.log(updates)
         await emp.save()
@@ -128,7 +131,6 @@ router.patch('/emp/:id', async (req,res)=>{
 })
 const updateEmpCounter = async (action) => {
     try {
-      // Find the counter document for empCounter
       const empCount = await counters.find({counterField : 'empCounter'})
       
       if (empCount.length === 0) {

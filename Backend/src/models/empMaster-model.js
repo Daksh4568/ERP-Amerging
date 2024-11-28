@@ -159,14 +159,17 @@ const employeeSchema = new mongoose.Schema({
     timestamps: true 
   }
   );
-  employeeSchema.methods.generateAuthToken = async function(){
-    const emp = this
-    const token = jwt.sign({_id: emp._id.toString()},'amergingtech5757')
+  employeeSchema.methods.generateAuthToken = async function () {
+    const emp = this;
+
     
-    emp.tokens = emp.tokens.concat({ token });   
-   await emp.save()
-    return token
-  }
+    const token = jwt.sign({ eID: emp.eID }, 'amergingtech5757', { expiresIn: '1h' });
+
+    emp.tokens = emp.tokens.concat({ token });
+    await emp.save();
+ 
+    return token;
+};
   employeeSchema.methods.toJSON = function (){
     
     const emp = this;
