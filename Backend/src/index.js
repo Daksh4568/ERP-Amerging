@@ -24,34 +24,34 @@ app.use(morgan('combined'));
 
 // CORS configuration
 const corsOptions = {
-    origin: ['http://example.com', 'http://another-domain.com'], // Allow multiple origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
-    exposedHeaders: ['Content-Length', 'X-Kuma-Revision'], // Expose specific headers
-    credentials: true, // Allow credentials
-    optionsSuccessStatus: 200 // Response status for preflight requests
+  origin: ['http://localhost:5173', 'http://another-domain.com'], // Allow multiple origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+  exposedHeaders: ['Content-Length', 'X-Kuma-Revision'], // Expose specific headers
+  credentials: true, // Allow credentials
+  optionsSuccessStatus: 200 // Response status for preflight requests
 };
 app.use(cors(corsOptions));
 // Rate limiting
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
 //app.use(cors());
 // Basic route to handle requests to the root URL
 
-app.use(employeeMasterRounter);      
+app.use(employeeMasterRounter);
 app.get('/', (req, res) => {
   res.send('Hello , We are live ');
   console.log("The page is running live")
 });
-app.post('/test',async (req, res) => {
-  const img  = req.body.img; // Assuming the image URL is passed in the request body
-  try{
+app.post('/test', async (req, res) => {
+  const img = req.body.img; // Assuming the image URL is passed in the request body
+  try {
     const bin = await imagetoBin(img)
-    res.send({"img2bin" :bin});
-  }catch(e){
+    res.send({ "img2bin": bin });
+  } catch (e) {
     res.status(400).send(e)
   }
 });
@@ -66,4 +66,4 @@ async function imagetoBin(img) {
   }
 }
 // Start the server
-app.listen(port, () => { console.log(`Server is up on port http://localhost:${port}`);})
+app.listen(port, () => { console.log(`Server is up on port http://localhost:${port}`); })

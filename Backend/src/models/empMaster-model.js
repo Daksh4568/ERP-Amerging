@@ -1,55 +1,54 @@
-const mongoose = require ('mongoose')
-const validator =require('validator')
-const bcrypt =require ('bcryptjs')
-const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose');
+const validator = require('validator');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const util = require('util');
-const { token } = require('morgan');
 
 // Define the employee schema
-const employeeSchema = new mongoose.Schema({
+const employeeSchema = new mongoose.Schema(
+  {
     eID: {
       type: String,
-      //required: true,
-      unique: true
+      unique: true,
+      required: true,
     },
     name: {
       type: String,
-      //required: true
-    },    
+      required: true,
+    },
     DOB: {
       type: Date,
-      //required: true
+      required: true,
     },
     gender: {
       type: String,
       enum: ['Male', 'Female', 'Other'],
-      required: true
+      required: true,
     },
     maritalStatus: {
       type: String,
       enum: ['Single', 'Married', 'Other'],
-      required: true
+      required: true,
     },
     contact: {
-        personal: {
-          type: String,
-        },
-        alternatePhone: {
-          type: String,
-        }
+      personal: {
+        type: String,
+      },
+      alternatePhone: {
+        type: String,
+      },
     },
-    personalEmail:{ 
+    personalEmail: {
       type: String,
       required: true,
-      //unique: true,
+      unique: true,
     },
     officialEmail: {
-        type: String,
-     },
-    password:{
-      type:String,
+      type: String,
+    },
+    password: {
+      type: String,
       required: true,
-      //unique: true
     },
     bloodGroup: {
       type: String,
@@ -63,61 +62,61 @@ const employeeSchema = new mongoose.Schema({
           type: String,
           required: true,
           validate: {
-            validator: function(v) {
+            validator: function (v) {
               return /\d{6}/.test(v); // Validate that postal code is 6 digits
             },
-            message: props => `${props.value} is not a valid postal code!`
-          }
+            message: (props) => `${props.value} is not a valid postal code!`,
+          },
         },
-        country: String
+        country: String,
       },
-      current:{
+      current: {
         street: String,
         city: String,
         state: String,
-        postalCode: { 
+        postalCode: {
           type: String,
           required: true,
           validate: {
-            validator: function(v) {
+            validator: function (v) {
               return /\d{6}/.test(v); // Validate that postal code is 6 digits
             },
-            message: props => `${props.value} is not a valid postal code!`
-          }
+            message: (props) => `${props.value} is not a valid postal code!`,
+          },
         },
-        country: String        
-      }
+        country: String,
+      },
     },
     employmentType: {
       type: String,
-      enum: ['Full-time', 'Part-time', 'Contract','Consultant'],
-      required: true
+      enum: ['Full-time', 'Part-time', 'Contract', 'Consultant'],
+      required: true,
     },
-    nominee:{
-      name:{
-        type : String
+    nominee: {
+      name: {
+        type: String,
       },
-      relation:{
-        type : String
+      relation: {
+        type: String,
       },
-      contact:{
-        type: String
+      contact: {
+        type: String,
       },
-      aadharCard:{
-        type: String
-      }
+      aadharCard: {
+        type: String,
+      },
     },
     image: {
-      type: String,      
+      type: String,
     },
-    empPan:{
-      type: String
+    empPan: {
+      type: String,
     },
-    empAadhar:{
-      type: String
+    empAadhar: {
+      type: String,
     },
-    passportNumber:{
-      type: String
+    passportNumber: {
+      type: String,
     },
     documents: [
       {
@@ -126,82 +125,95 @@ const employeeSchema = new mongoose.Schema({
         },
         documentImage: {
           type: String,
-        }
-      }
+        },
+      },
     ],
-     role:{
-      type : String, 
-      required : true,
-      enum : ['admin' , 'HR' , 'Employee'],
-      default : 'employee'
-     } , 
-     tokens: [{
-      token :{
-        type: String,
-        required: true
-      }
-     }],
-    stat:{ //Current Status 
+    role: {
       type: String,
-      enum: ['Regular','Relieved','Resigned'],
-      required: true
+      required: true,
+      enum: ['admin', 'HR', 'Employee' ,'Manager'],
+      default: 'Employee',
     },
-    moduleAccess:{ type : Number},// The modules access on bit wise if 1 means basic module is accessable if its 3 it means 2 modules access able
-    docLinks:{ type: String},// Google doc address 
-    tokens: [{
-      token: {
+    stat: {
+      type: String,
+      enum: ['Regular', 'Relieved', 'Resigned'],
+      required: true,
+    },
+    moduleAccess: {
+      type: Number,
+    },
+    docLinks: {
+      type: String,
+    },
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    addedBy: {
+      name: {
         type: String,
-        required: true
-      }
-    }],
-  }, 
-  { 
-    timestamps: true 
+        //required: true,
+      },
+      role: {
+        type: String,
+        //required: true,
+      },
+    },
+  },
+  {
+    timestamps: true, // Enables createdAt and updatedAt fields
   }
-  );
-  employeeSchema.methods.generateAuthToken = async function () {
-    const emp = this;
+);
 
-    
-    const token = jwt.sign({ eID: emp.eID }, 'amergingtech5757', { expiresIn: '1h' });
 
-    emp.tokens = emp.tokens.concat({ token });
-    await emp.save();
- 
-    return token;
+// Generate auth token
+employeeSchema.methods.generateAuthToken = async function () {
+  const emp = this;
+  const token = jwt.sign({ eID: emp.eID }, 'amergingtech5757', { expiresIn: '1h' });
+  emp.tokens = emp.tokens.concat({ token });
+  await emp.save();
+  return token;
 };
-  employeeSchema.methods.toJSON = function (){
-    
-    const emp = this;
-    const empObject = emp.toObject();
 
-    delete empObject.password;
-    delete empObject.tokens;
-    return empObject;
-  }
-  employeeSchema.statics.findByCredentials = async(officialEmail, password)=>{
-       const emp = await Employee.findOne({officialEmail})       
-       if(!emp){
-         throw new Error('Unable to login')
-       }
-       const compare = util.promisify(bcrypt.compare);
-       const isMatch = await compare(password, emp.password);
-       if(!isMatch){
-        throw new Error('Unable to login')
-      }
-      return emp
+// Customize the JSON response
+employeeSchema.methods.toJSON = function () {
+  const emp = this;
+  const empObject = emp.toObject();
+  delete empObject.password; // Remove password from the response
+  delete empObject.tokens; // Remove tokens from the response
+  return empObject;
+};
+
+// Find employee by credentials
+employeeSchema.statics.findByCredentials = async (officialEmail, password) => {
+  const emp = await Employee.findOne({ officialEmail });
+  if (!emp) {
+    throw new Error('Unable to login');
   }
 
-  //Hash the plain text password before save
-  employeeSchema.pre('save',async function(next) {
-    const emp = this ;
-    if(emp.isModified('password')){
-      const hash = util.promisify(bcrypt.hash);
-      emp.password = await hash(emp.password,8)
-    }
-    next()//this must call else it will hang forever in this function
-  })
-  // Create and export the model
-  const Employee = mongoose.model('employeeMaster', employeeSchema);
-  
-  module.exports = Employee;
+  const compare = util.promisify(bcrypt.compare);
+  const isMatch = await compare(password, emp.password);
+  if (!isMatch) {
+    throw new Error('Unable to login');
+  }
+  return emp;
+};
+
+// Hash the plain text password before saving
+employeeSchema.pre('save', async function (next) {
+  const emp = this;
+  if (emp.isModified('password')) {
+    const hash = util.promisify(bcrypt.hash);
+    emp.password = await hash(emp.password, 8);
+  }
+  next(); // Call next to proceed
+});
+
+// Create and export the model
+const Employee = mongoose.model('employeeMaster', employeeSchema);
+
+module.exports = Employee;

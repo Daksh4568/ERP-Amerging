@@ -7,7 +7,7 @@ exports.createExitForm = async (req, res) => {
         // Automatically add `enteredBy` details
         const exitFormData = new ExitEmployee({
             ...req.body,
-            enteredBy: {
+            addedBy: {
                 name: req.employee.name, // Automatically fetched from auth middleware
                 role: req.employee.role  // Automatically fetched from auth middleware
             }

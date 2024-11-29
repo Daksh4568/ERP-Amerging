@@ -59,7 +59,7 @@ const employeeEvaluationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    evaluatedBy: {
+    addedBy: {
         name: {
             type: String,
             required: true, // Evaluator's name

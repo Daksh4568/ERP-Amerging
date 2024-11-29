@@ -5,7 +5,7 @@ exports.createEmployeeEvaluation = async (req, res) => {
         // Automatically populating `evaluatedBy` from `req.employee`
         const evaluationData = new EmployeeEvaluation({
             ...req.body,
-            evaluatedBy: {
+            addedBy: {
                 name: req.employee.name, // Automatically fetched
                 role: req.employee.role // Automatically fetched
             }
