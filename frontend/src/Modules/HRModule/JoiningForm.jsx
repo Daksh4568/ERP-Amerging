@@ -176,7 +176,8 @@ function JoiningForm() {
     // tryign with axios
     try {
       const response = await axios.post(
-        "https://jsonplaceholder.typicode.com/posts", finalData);
+        "https://localhost:5000/regemp", finalData);
+
         
         const jsonResponseData = JSON.stringify(response.data);
         console.log(jsonResponseData);

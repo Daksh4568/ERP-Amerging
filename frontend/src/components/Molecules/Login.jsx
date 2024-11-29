@@ -1,36 +1,50 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const mockUsers= [
     {
-      username: "keshav",
+      emailAddress: "keshav@amerging.com",
       password: "keshav123",
     },
     {
-      username: "daksh",
+      emailAddress: "daksh@amerging.com",
       password: "daksh123",
     },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user = mockUsers.find(
-      (mockUsers) => mockUsers.username === username && mockUsers.password === password
-    );
+    try {
+      const response = await axios.post("http://localhost:5000/emp/login", {
+      emailAddress,
+      password,
+    })
+    console.log(response.data);
 
-    if(user){
+    if(response.status === 200) {
+      console.log("Login successful: ", response.data);
       navigate('/dashboard');
     }
-    else{
-      alert("Invalid usernamae or password");
-      setUsername("");
-      setPassword("");
+    } catch (error) {
+      // handling invalid credentials
+      if(error.response && error.response.status === 401){
+        alert("Invalid usernamae or password");
+      }
+      else {
+      console.error("Error submitting form data:", error);
+      alert("An error occurred. Please try again later.");
+      }
+
+      // clear input fields
+      setEmailAddress("");
+      setPassword("");    
     }
 
   }; 
@@ -54,14 +68,14 @@ function Login() {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="username" className="block text-gray-700">
-            Username
+          <label htmlFor="emailAddress" className="block text-gray-700">
+            Email Address
           </label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            id="emailAddress"
+            value={emailAddress}
+            onChange={(e) => setEmailAddress(e.target.value)}
             className="w-full mt-1 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
             required
           />
