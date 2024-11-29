@@ -3,39 +3,37 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 function Login() {
-  const [emailAddress, setEmailAddress] = useState('');
+  const [officialEmail, setOfficialEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
-  const mockUsers= [
-    {
-      emailAddress: "keshav@amerging.com",
-      password: "keshav123",
-    },
-    {
-      emailAddress: "daksh@amerging.com",
-      password: "daksh123",
-    },
-  ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post("http://localhost:5000/emp/login", {
-      emailAddress,
-      password,
-    })
-    console.log(response.data);
-
-    if(response.status === 200) {
-      console.log("Login successful: ", response.data);
-      navigate('/dashboard');
+    const loginData = {
+      officialEmail,
+      password
     }
+    
+
+    try {
+      const response = await axios.post("http://localhost:5000/emp/login", loginData, {
+        headers: {
+          'Content-Type' : 'application/json',
+        }
+      });
+      console.log(response.data);
+
+      if(response.status === 200) {
+        // console.log("Login successful: ", response.data);
+        navigate('/dashboard');
+      }
+
     } catch (error) {
       // handling invalid credentials
-      if(error.response && error.response.status === 401){
+      if(error.response && error.response.status === 400){
         alert("Invalid usernamae or password");
+        console.log("Invalid usernamae or password");
       }
       else {
       console.error("Error submitting form data:", error);
@@ -43,7 +41,7 @@ function Login() {
       }
 
       // clear input fields
-      setEmailAddress("");
+      setOfficialEmail("");
       setPassword("");    
     }
 
@@ -51,13 +49,6 @@ function Login() {
 
   return (
     <div className="w-dvw flex flex-wrap  justify-center items-center h-dvh bg-gradient-to-r from-blue-200 to-red-100 p-4">
-      {/* <div
-        className='h-96 w-full max-w-md mx-auto rounded-lg bg-cover bg-center bg-no-repeat'
-        style={{
-          backgroundImage: `url('https://images.pexels.com/photos/1365795/pexels-photo-1365795.jpeg?auto=compress&cs=tinysrgb&w=600')`,
-        }}
-      >
-      </div> */}
 
       <form
         className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md mx-w-auto"
@@ -68,14 +59,14 @@ function Login() {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="emailAddress" className="block text-gray-700">
-            Email Address
+          <label htmlFor="officialEmail" className="block text-gray-700">
+            Official Email Address
           </label>
           <input
             type="email"
-            id="emailAddress"
-            value={emailAddress}
-            onChange={(e) => setEmailAddress(e.target.value)}
+            id="officialEmail"
+            value={officialEmail}
+            onChange={(e) => setOfficialEmail(e.target.value)}
             className="w-full mt-1 p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
             required
           />
