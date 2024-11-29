@@ -84,7 +84,7 @@ router.post('/emp/login', async (req, res) => {
   try {
     const emp = await employee.findByCredentials(req.body.officialEmail, req.body.password)
     const token = await emp.generateAuthToken()
-    res.send({ emp, token })
+    res.status(200).send({ token })
   } catch (e) {
     res.status(400).send(e)
 
