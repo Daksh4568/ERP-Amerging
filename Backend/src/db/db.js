@@ -15,18 +15,16 @@
 const mongoose = require('mongoose')
 
 
-const connectionURL = 'mongodb+srv://raam1krishna123:G4MOkBneFVlqEw7z@erpcluster.9beil.mongodb.net/?retryWrites=true&w=majority&appName=ERPCluster'; 
+const connectionURL = 'mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/';
 
 // This is how we can use mongoose to create a model for our erp software
 const connectToMongoDB = async ()=>{
    try {
        const connectionDB = await mongoose.connect(connectionURL);
         console.log(`MongoDB connected: ${connectionDB.connection.host}`)
-       //console.log("connected to database ")
    
     } catch (error) {
-   //   console.log(error)
-      
+      console.log(error)
     }
 }
 connectToMongoDB()
