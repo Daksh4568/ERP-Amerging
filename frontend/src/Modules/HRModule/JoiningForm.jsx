@@ -176,7 +176,11 @@ function JoiningForm() {
     // tryign with axios
     try {
       const response = await axios.post(
-        "https://localhost:5000/regemp", finalData);
+        "https://localhost:5000/regemp", finalData, {
+          headers: {
+            'Content-Type' : 'application/json',
+          }
+        });
 
         
         const jsonResponseData = JSON.stringify(response.data);

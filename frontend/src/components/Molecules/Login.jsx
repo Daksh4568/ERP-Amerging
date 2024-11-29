@@ -25,7 +25,12 @@ function Login() {
       console.log(response.data);
 
       if(response.status === 200) {
-        // console.log("Login successful: ", response.data);
+        const { token } = response.data;
+        console.log(token);
+        
+        // store in local storage
+        localStorage.setItem('authToken', token);
+
         navigate('/dashboard');
       }
 
