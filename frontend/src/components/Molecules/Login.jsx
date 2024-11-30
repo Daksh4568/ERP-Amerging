@@ -31,7 +31,7 @@ function Login() {
         const { token } = response.data;
         console.log(token);
 
-        // store in local storage
+        // storing tokens in local storage
         localStorage.setItem("authToken", token);
 
         navigate("/dashboard");
@@ -39,7 +39,7 @@ function Login() {
     } catch (error) {
       // handling invalid credentials
       if (error.response && error.response.status === 400) {
-        alert("Invalid usernamae or password");
+        alert("Invalid usernae or password");
         console.log("Invalid usernamae or password");
       } else {
         console.error("Error submitting form data:", error);

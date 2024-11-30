@@ -105,12 +105,12 @@ function JoiningForm() {
   //   setValue(e.target.value);
   // }
 
-  const [formSubmissionData, setFormSubmissionData] = useState([])
+  // const [formSubmissionData, setFormSubmissionData] = useState([])
 
   const [values, setValues] = useState({
-    employeeId: "",
-    employeeName: "",
-    dateOfBirth: "",
+    eID: "",
+    name: "",
+    DOB: "",
     gender: "",
     maritalStatus: "",
     contactNumber: "",
@@ -176,7 +176,7 @@ function JoiningForm() {
     // tryign with axios
     try {
       const response = await axios.post(
-        "https://localhost:5000/regemp", finalData, {
+        "http://localhost:5000/regemp", finalData, {
           headers: {
             'Content-Type' : 'application/json',
           }
@@ -197,9 +197,9 @@ function JoiningForm() {
     // console.log(formSubmissionData);
 
     // setValues({
-    //   employeeId: "",
-    //   employeeName: "",
-    //   dateOfBirth: "",
+    //   eID: "",
+    //   name: "",
+    //   DOB: "",
     //   gender: "",
     //   maritalStatus: "",
     //   contactNumber: "",
@@ -225,17 +225,17 @@ function JoiningForm() {
     //     onFinish={handleForm}
     //     >
 
-    //       <Form.Item label="Employee ID" name='employeeId' className="col-span-2" rules={[{required: true,
+    //       <Form.Item label="Employee ID" name='eID' className="col-span-2" rules={[{required: true,
     //           message: 'This is a required field.'}]}>
     //         <Input type='text'  />
     //       </Form.Item>
 
-    //       <Form.Item label="Full Name" className="col-span-2" name='employeeName' rules={[{required: true,
+    //       <Form.Item label="Full Name" className="col-span-2" name='name' rules={[{required: true,
     //           message: 'This is a required field.'}]}>
     //         <Input type='text'  />
     //       </Form.Item>
 
-    //       <Form.Item label="DOB" className="col-span-2" name='dateOFBirth' rules={[{required: true,
+    //       <Form.Item label="DOB" className="col-span-2" name='DOB' rules={[{required: true,
     //           message: 'This is a required field.'}]}>
     //         <DatePicker type='date' className='w-full'  />
     //       </Form.Item>
@@ -452,15 +452,15 @@ function JoiningForm() {
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="employeeId"
+          htmlFor="eID"
         >
           Employee ID
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
           type="text"
-          name="employeeId"
-          value={values.employeeId}
+          name="eID"
+          value={values.eID}
           onChange={handleChanges}
           required
         />
@@ -469,7 +469,7 @@ function JoiningForm() {
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="employeeName"
+          htmlFor="name"
         >
           Employee Name
         </label>
@@ -477,8 +477,8 @@ function JoiningForm() {
           className="w-full bg-white block p-2 text-sm rounded-md border"
           type="text"
           // placeholder="Enter employee Name"
-          name="employeeName"
-          value={values.employeeName}
+          name="name"
+          value={values.name}
           onChange={handleChanges}
           required
         />
@@ -487,7 +487,7 @@ function JoiningForm() {
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="dateOfBirth"
+          htmlFor="DOB"
         >
           Date of Birth
         </label>
@@ -495,8 +495,8 @@ function JoiningForm() {
           className="w-full bg-gray-200 block p-2 text-sm rounded-md border"
           type="date"
           // placeholder="Enter employee Name"
-          name="dateOfBirth"
-          value={values.dateOfBirth}
+          name="DOB"
+          value={values.DOB}
           onChange={handleChanges}
           required
         />
@@ -552,9 +552,10 @@ function JoiningForm() {
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          type="number"
+          type="text"
           // placeholder="Contact Number"
           name="contactNumber"
+          maxLength={10}
           value={values.contactNumber}
           onChange={handleChanges}
           required
@@ -570,9 +571,10 @@ function JoiningForm() {
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          type="number"
+          type="text"
           // placeholder="Alternate Number"
           name="alternateNumber"
+          maxLength={10}
           value={values.alternateNumber}
           onChange={handleChanges}
         />
@@ -859,9 +861,11 @@ function JoiningForm() {
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          type="number"
+          type="text"
           placeholder="XXXX-XXXX-XXXX"
           name="aadharCardNumber"
+          minLength={12}
+          maxLength={12}
           value={values.aadharCardNumber}
           onChange={handleChanges}
         />
