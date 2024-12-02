@@ -53,7 +53,7 @@ const employeeEvaluationSchema = new mongoose.Schema({
     },
     additionalContributions: {
         type: String,
-        required: true,
+        // required: false,
     },
     challenges: {
         type: String,

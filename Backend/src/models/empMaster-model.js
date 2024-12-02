@@ -30,14 +30,14 @@ const employeeSchema = new mongoose.Schema(
       enum: ['Single', 'Married', 'Other'],
       required: true,
     },
-    contact: {
-      personal: {
-        type: String,
-      },
-      alternatePhone: {
-        type: String,
-      },
+
+    personalContactNumber: {
+      type: String,
     },
+    alternateContactNumber: {
+      type: String,
+    },
+
     personalEmail: {
       type: String,
       required: true,
@@ -106,9 +106,9 @@ const employeeSchema = new mongoose.Schema(
         type: String,
       },
     },
-    image: {
-      type: String,
-    },
+    // image: {
+    //   type: String,
+    // },
     empPan: {
       type: String,
     },
@@ -131,7 +131,7 @@ const employeeSchema = new mongoose.Schema(
     role: {
       type: String,
       required: true,
-      enum: ['admin', 'HR', 'Employee' ,'Manager'],
+      enum: ['admin', 'HR', 'Employee', 'Manager'],
       default: 'Employee',
     },
     stat: {

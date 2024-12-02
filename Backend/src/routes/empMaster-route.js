@@ -50,10 +50,10 @@ router.get('/emp/stats', async (req, res) => {
 });
 
 // all the post requests are here 
-router.post('/exit-form', auth, authorize('HR', 'admin', 'Manager', 'Employee'), exitEmployeeController.createExitForm);
+router.post('/exit-form', auth, authorize('HR', 'Admin', 'Manager', 'Employee'), exitEmployeeController.createExitForm);
 
 router.post('/employee-evaluation', auth, authorize('HR', 'Employee'), employeeEvaluationController.createEmployeeEvaluation)
-router.post('/regemp', auth, async (req, res) => {
+router.post('/regemp', auth, authorize('HR', 'admin'), async (req, res) => {
   const emp = new regEmployee({
     ...req.body,
     addedBy: {
@@ -64,14 +64,16 @@ router.post('/regemp', auth, async (req, res) => {
 
   try {
     const lastEmpCount = await updateEmpCounter('read'); // Read counter
-    emp.eID = 'AT-' + String(lastEmpCount.counter + 1).padStart(3, '0'); // Generate new eID
+    emp.eID = 'AT-' + String(lastEmpCount.counter + 1).padStart(2, '0'); // Generate new eID
     emp.stat = 'Regular'; // Default status
     if (!emp.moduleAccess) emp.moduleAccess = 1; // Default module access
     await emp.save();
     const token = await emp.generateAuthToken(); // Generate token for new employee
     await updateEmpCounter('write'); // Increment counter
     res.status(201).send({ emp, token });
-    console.log('Employee added to the database');
+    console.log(
+      `Employee ${emp.name} (eID: ${emp.eID}) added to the database by ${emp.addedBy.name} (${emp.addedBy.role})`
+    );
   } catch (e) {
     console.error(e);
     res.status(400).send(e);
@@ -84,6 +86,8 @@ router.post('/emp/login', async (req, res) => {
   try {
     const emp = await employee.findByCredentials(req.body.officialEmail, req.body.password)
     const token = await emp.generateAuthToken()
+
+    console.log(`${emp.role} ${emp.name} has now logged in the system`)
     res.status(200).send({ token })
   } catch (e) {
     res.status(400).send(e)
@@ -100,17 +104,6 @@ router.post('/emp/logout', async (req, res) => {
 
   } catch (e) {
     res.status(500).send(e)
-  }
-})
-router.post('/emp/evaluation', async (req, res) => {
-  try {
-    const evaluationData = new EmployeeEvaluation(req.body); //It will populate from the request body
-    await evaluationData.save();
-    res.status(201).send(evaluationData); // Send the saved data as response
-    console.log(evaluationData)
-  } catch (e) {
-    console.error("Error saving the evaluation data:", e);
-    res.status(400).send(e)
   }
 })
 
