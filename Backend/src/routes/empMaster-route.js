@@ -87,7 +87,12 @@ router.post('/emp/login', async (req, res) => {
     const emp = await employee.findByCredentials(req.body.officialEmail, req.body.password)
     const token = await emp.generateAuthToken()
 
+
     console.log(`${emp.role} ${emp.name} has now logged in the system`)
+
+    console.log(`${emp.role} ${emp.name} has now logged in the system`)
+
+
     res.status(200).send({ token })
   } catch (e) {
     res.status(400).send(e)
@@ -106,7 +111,6 @@ router.post('/emp/logout', async (req, res) => {
     res.status(500).send(e)
   }
 })
-
 
 router.patch('/emp/:eID', async (req, res) => {
   const updates = Object.keys(req.body)
