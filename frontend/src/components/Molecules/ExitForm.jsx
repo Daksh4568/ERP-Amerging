@@ -48,8 +48,8 @@ function ExitForm() {
 
   const [formData, setFormData] = useState({
     employeeName: "",
-    employeeId: "",
     department: "",
+    designation: "",
     lastWorkingDay: "",
     exitFeedback: {
       reasonForLeaving: "",
@@ -79,7 +79,23 @@ function ExitForm() {
       workingConditions: "",
       workSchedule: "",
     },
+    corporateComplianceAcknowledgement: {
+      hasViolations: false,
+      acknowledgementDate: "",
+    },
   });
+
+  const handleComplianceChange = (e) => {
+    const { name, type, checked, value } = e.target;
+    
+    setFormData((prev) => ({
+      ...prev,
+      corporateComplianceAcknowledgement: {
+        ...prev.corporateComplianceAcknowledgement,
+        [name]: type === "checkbox" ? checked : value,
+      },
+    }));
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,8 +103,8 @@ function ExitForm() {
         // const response = await axios.get("https://jsonplaceholder.typicode.com/users/1");
         const fetchedData = {
           employeeName: "Abhijeet Kumar",
-          employeeId: "AT47",
           department: "Embedded",
+          designation: "SDE",
           lastWorkingDay: "2024-12-20",
         };
 
@@ -115,9 +131,9 @@ function ExitForm() {
       exitFeedback: {
         ...prevData.exitFeedback,
         [field]: message,
-      }
-    }))
-  }
+      },
+    }));
+  };
 
   const handleManagerRatingChange = (field, newRating) => {
     setFormData((prevData) => ({
@@ -139,8 +155,37 @@ function ExitForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const token = localStorage.getItem("authToken");
+
+      if (!token) {
+        alert("No token available, please log in again.");
+        return;
+      }
+      console.log(JSON.stringify(formData));
+
+      const response = await axios.post("http://localhost:5000/exit-form", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status === 201) {
+        console.log("Exit form successfully submitted");
+        alert("Exit form successfully submitted");
+        // navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        alert("Unauthorized: Please check your login or token.");
+      } else {
+        alert("Error submitting Exit form.", error.response.data);
+      }
+    }
 
     const values = JSON.stringify(formData, null, 2);
     console.log(values);
@@ -293,11 +338,12 @@ function ExitForm() {
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
           type="text"
-          // placeholder="Enter employee Name"
+          placeholder="AT-47"
           name="employeeId"
           value={formData.employeeId}
           onChange={handleChanges}
           required
+          disabled
         />
       </div>
 
@@ -314,6 +360,24 @@ function ExitForm() {
           // placeholder="Enter employee Name"
           name="department"
           value={formData.department}
+          onChange={handleChanges}
+          required
+        />
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="designation"
+        >
+          Designation
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          // placeholder="Enter employee Name"
+          name="designation"
+          value={formData.designation}
           onChange={handleChanges}
           required
         />
@@ -770,6 +834,42 @@ function ExitForm() {
             activeColor="gold"
           />
         </div>
+      </div>
+
+      <div className="col-span-4">
+        {/* Checkbox for hasViolations */}
+        <label className="text-base block w-full mt-2 mb-1 text-left underline">
+          Corporate Compliance Violations
+        </label>
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            name="hasViolations"
+            checked={formData.corporateComplianceAcknowledgement.hasViolations}
+            onChange={(e) => handleComplianceChange(e)}
+          />
+          <span className="ml-2 text-sm">I have no knowledge of any violation of the law or any corporate policies or standards of conduct by me or any other employees while I
+          have been employed at the company. If I recall any suspected
+          violations in the future, I will immediately report them to the
+          Compliance Officer.</span>
+        </div>
+      </div>
+
+      <div className="col-span-4 mt-4">
+        {/* Date input for acknowledgementDate */}
+        <label className="text-base block w-full mt-2 mb-1 text-left">
+          Acknowledgement Date
+        </label>
+        <input
+          type="date"
+          name="acknowledgementDate"
+          className=" bg-white block p-2 text-sm rounded-md border"
+          value={
+            formData.corporateComplianceAcknowledgement.acknowledgementDate
+          }
+          onChange={(e) => handleComplianceChange(e)}
+          required
+        />
       </div>
 
       <div className="col-span-3 mt-3">

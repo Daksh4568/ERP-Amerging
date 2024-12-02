@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -14,6 +15,9 @@ import {
 } from "antd";
 
 function JoiningForm() {
+
+  const navigate = useNavigate();
+
   const [values, setValues] = useState({
     eID: "",
     name: "",
@@ -131,9 +135,11 @@ function JoiningForm() {
         }
       );
 
-      if (response.status === 200) {
-        console.log("New Employee Registered", response.data);
+      if (response.status === 201) {
+        console.log("New Employee Registered");
         alert("New employee Registered");
+        navigate("/dashboard");
+
       }
     } catch (error) {
       console.error("Error registering new employee:", error);
