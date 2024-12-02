@@ -13,147 +13,81 @@ import {
   Upload,
 } from "antd";
 
-// const { RangePicker } = DatePicker;
-// const { TextArea } = Input;
-// const normFile = (e) => {
-//   if (Array.isArray(e)) {
-//     return e;
-//   }
-//   return e?.fileList;
-// };
-
-function JoiningForm() { 
-  // const [componentDisabled, setcomponentDisabled] = useState(true);
-  // const [passwordVisible, setPasswordVisible] = useState(false);
-  // const [value, setValue] = useState();
-  // const [form] = Form.useForm();
-
-  // const handleForm = (values) => {
-  //   // to include address
-  //   const fullFormData = {
-  //     ...values, permanentAddress, temporaryAddress
-  //   }
-
-  //   console.log(fullFormData);
-  //   form.resetFields();
-
-  //   setPermanentAddress({
-  //     street: '',
-  //     city: '',
-  //     state: '',
-  //     pinCode: '',
-  //   });
-
-  //   setTemporaryAddress({
-  //     street: '',
-  //     city: '',
-  //     state: '',
-  //     pinCode: '',
-  //   });
-
-  //   // Reset the "Same as Permanent Address" checkbox
-  //   setisSameAddress(false);
-  // }
-
-  // const [permanentAddress, setPermanentAddress] = useState({
-  //   street:'',
-  //   city: '',
-  //   state: '',
-  //   pinCode: '',
-  // });
-
-  // const [temporaryAddress, setTemporaryAddress] = useState({
-  //   street:'',
-  //   city: '',
-  //   state: '',
-  //   pinCode: '',
-  // });
-
-  // const [isSameAddress, setisSameAddress] = useState(false);
-
-  // // handling eprmanent address input change
-  // const handlePermanentAddressChange = (field, value) => {
-  //   const updatedAddress = { ...permanentAddress, [field]: value};
-  //   setPermanentAddress(updatedAddress);
-
-  //   if(isSameAddress)
-  //   {
-  //     setTemporaryAddress(updatedAddress);
-  //   }
-  // }
-
-  // // address checkbox toggle
-  // const handleCheckboxChange = (e) => {
-  //   const checked = e.target.checked;
-  //   setisSameAddress(checked);
-
-  //   // temporary adddress handler
-  //   if(checked) {
-  //     setTemporaryAddress(permanentAddress);
-  //   }
-  //   else {
-  //     setTemporaryAddress({
-  //       street:'',
-  //       city: '',
-  //       state: '',
-  //       pinCode: '',
-  //     });
-  //   }
-  // }
-
-  // const onChange= (e) => {
-  //   setValue(e.target.value);
-  // }
-
-  // const [formSubmissionData, setFormSubmissionData] = useState([])
-
+function JoiningForm() {
   const [values, setValues] = useState({
     eID: "",
     name: "",
     DOB: "",
     gender: "",
     maritalStatus: "",
-    contactNumber: "",
-    alternateNumber: "",
+    personalContactNumber: "",
+    alternateContactNumber: "",
     personalEmail: "",
     officialEmail: "",
     password: "",
     bloodGroup: "",
-    employeeType: "",
-    aadharCardNumber: "",
+    employmentType: "",
+    empPan: "",
+    empAadhar: "",
     passportNumber: "",
-    employeeStatus: "",
+    role: "",
+    stat: "",
     document: "",
   });
 
-
-  const [permanentAddress, setPermanentAddress] = useState({
-    street: '',
-    city: '',
-    state: '',
-    pinCode: '',
+  const [permanent, setPermanentAddress] = useState({
+    street: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    country: "",
   });
 
-  const [temporaryAddress, setTemporaryAddress] = useState({
-    street: '',
-    city: '',
-    state: '',
-    pinCode: '',
+  const [current, setCurrentAddress] = useState({
+    street: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    country: "",
   });
 
   const [isSameAddress, setIsSameAddress] = useState(false);
 
+  const [nominee, setNominee] = useState({
+    name: "",
+    relation: "",
+    contact: "",
+    aadharCard: "",
+  });
+
+  const [documents, setDocuments] = useState([]);
+
+  const handleDocumentChange = (e) => {
+    const files = Array.from(e.target.files);
+
+    const updatedDocuments = files.map((file) => ({
+      documentName: file.name,
+      documentImage: URL.createObjectURL(file), //to generate the temporary preview URL
+    }));
+
+    setDocuments((prevDocuments) => [...prevDocuments, ...updatedDocuments]);
+  };
+
+  const handleNomineeChange = (e) => {
+    setNominee({ ...nominee, [e.target.name]: e.target.value });
+  };
+
   const handlePermanentAddressChange = (field, value) => {
-    setPermanentAddress({ ...permanentAddress, [field]: value });
+    setPermanentAddress({ ...permanent, [field]: value });
     if (isSameAddress) {
-      setTemporaryAddress({ ...permanentAddress, [field]: value });
+      setCurrentAddress({ ...permanent, [field]: value });
     }
   };
 
   const handleCheckboxChange = (e) => {
     setIsSameAddress(e.target.checked);
     if (e.target.checked) {
-      setTemporaryAddress(permanentAddress);
+      setCurrentAddress(permanent);
     }
   };
 
@@ -167,27 +101,47 @@ function JoiningForm() {
     // combining all the data
     const finalData = {
       ...values,
-      Address: {
-        permanentAddress,
-        temporaryAddress,
+      address: {
+        permanent,
+        current,
       },
+      nominee,
+      documents: documents.map((doc) => ({
+        documentName: doc.documentName,
+        documentImage: doc.documentImage, // Replace this with base64 or form data upload in production
+      })),
     };
 
-    // tryign with axios
+    // calling the API
     try {
-      const response = await axios.post(
-        "http://localhost:5000/regemp", finalData, {
-          headers: {
-            'Content-Type' : 'application/json',
-          }
-        });
+      const token = localStorage.getItem("authToken");
+      if (!token) {
+        alert("No token available, please log in again.");
+        return;
+      }
 
-        
-        const jsonResponseData = JSON.stringify(response.data);
-        console.log(jsonResponseData);
-    } 
-    catch (error) {
-      console.log("Error submitting form data: ", error);
+      const response = await axios.post(
+        "http://localhost:5000/regemp",
+        finalData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("New Employee Registered", response.data);
+        alert("New employee Registered");
+      }
+    } catch (error) {
+      console.error("Error registering new employee:", error);
+      if (error.response && error.response.status === 401) {
+        alert("Unauthorized: Please check your login or token.");
+      } else {
+        alert("An error occurred. Please try again later.");
+      }
     }
 
     // setFormSubmissionData([...formSubmissionData, values]);
@@ -202,249 +156,21 @@ function JoiningForm() {
     //   DOB: "",
     //   gender: "",
     //   maritalStatus: "",
-    //   contactNumber: "",
-    //   alternateNumber: "",
+    //   personalContactNumber: "",
+    //   alternateContactNumber: "",
     //   prsonalEmail: "",
     //   officialEmail: "",
     //   password: "",
     //   bloodGroup: "",
-    //   employeeType: "",
-    //   aadharCardNumber: "",
+    //   employmentType: "",
+    //   empAadhar: "",
     //   passportNumber: "",
-    //   employeeStatus: "",
+    //   stat: "",
     //   document: "",
     // });
   };
 
   return (
-    // <div>
-    //   <Form
-    //     form={form}
-    //     className=" grid grid-cols-4 gap-x-16"
-    //     layout='vertical'
-    //     onFinish={handleForm}
-    //     >
-
-    //       <Form.Item label="Employee ID" name='eID' className="col-span-2" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <Input type='text'  />
-    //       </Form.Item>
-
-    //       <Form.Item label="Full Name" className="col-span-2" name='name' rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <Input type='text'  />
-    //       </Form.Item>
-
-    //       <Form.Item label="DOB" className="col-span-2" name='DOB' rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <DatePicker type='date' className='w-full'  />
-    //       </Form.Item>
-
-    //       <Form.Item label="Gender" name='gender' className="col-span-2" rules={[
-    //         {
-    //           required: true,
-    //           message: 'This is a required field.',
-    //         }, ]}>
-    //         <Select >
-    //           <Select.Option value='male'>Male</Select.Option>
-    //           <Select.Option value='female'>Female</Select.Option>
-    //           <Select.Option value='others'>Others</Select.Option>
-    //         </Select>
-    //       </Form.Item>
-
-    //       <Form.Item label="Marital Status" name='maritalStatus' className="col-span-2" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <Select  >
-    //           <Select.Option value='single'>Single</Select.Option>
-    //           <Select.Option value='married'>Married</Select.Option>
-    //         </Select>
-    //       </Form.Item>
-
-    //       <Form.Item label="Contact Number" name='contactNumber' className="col-span-2" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <InputNumber  type='number' style={{ width: '100%' }} />
-    //       </Form.Item>
-
-    //       <Form.Item label="Alternate Number" name='alternateNumber' className="col-span-2" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <InputNumber  type='number' style={{ width: '100%' }} />
-    //       </Form.Item>
-
-    //       <Form.Item label="Personal Email" name='personalEmail' className="col-span-2" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <Input  type='email' placeholder="example@mail.com" />
-    //       </Form.Item>
-
-    //       <Form.Item label="Official Email" name='officialEmail' className="col-span-2" >
-    //         <Input  type='email' placeholder="example@mail.com" />
-    //       </Form.Item>
-
-    //       <Form.Item label="Password" className="col-span-2" name='createPassword' rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <Input.Password type='password'  placeholder="Create Password" />
-    //       </Form.Item>
-
-    //       <Form.Item label="Blood Group" name='bloodGroup' className="col-span-2" >
-    //         <Input type='text'  />
-    //       </Form.Item>
-
-    //       <Form.Item label="Employee Status" name='employeeStatus' className="col-span-2" >
-    //         <Select  >
-    //           <Select.Option value='Regular'>Regular</Select.Option>
-    //           <Select.Option value='Relieved'>Relieved</Select.Option>
-    //           <Select.Option value='Resigned'>Resigned</Select.Option>
-    //         </Select>
-    //       </Form.Item>
-
-    //       <Form.Item name='address' label="Address" className="col-span-4" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <div className="bg-indigo-100 w-full p-4 rounded grid grid-cols-4 gap-x-8">
-
-    //           <Form.Item className='col-span-2' label="Street">
-    //             <Input
-    //                 value={permanentAddress.street}
-    //                 onChange={(e) => handlePermanentAddressChange('street', e.target.value)}
-    //             />
-    //           </Form.Item>
-
-    //           <Form.Item className='col-span-2' label="City">
-    //             <Input
-    //               value={permanentAddress.city}
-    //               onChange={(e) => handlePermanentAddressChange('city', e.target.value)}
-    //             />
-    //           </Form.Item>
-
-    //           <Form.Item className='col-span-2' label="State">
-    //             <Input
-    //               value={permanentAddress.state}
-    //                 onChange={(e) => handlePermanentAddressChange('state', e.target.value)}
-    //             />
-    //           </Form.Item>
-
-    //           <Form.Item
-    //             className='col-span-2'
-    //             label="Pin Code"
-    //             rules={[
-    //               {
-    //                 required: true,
-    //                 message: 'Pin Code must be 6 digits.',
-    //                 len: 6,
-    //               },
-    //             ]}
-    //           >
-    //             <Input
-    //               maxLength={6}
-    //               value={permanentAddress.pinCode}
-    //               onChange={(e) => handlePermanentAddressChange('pinCode', e.target.value)}
-    //             />
-    //           </Form.Item>
-
-    //           <Checkbox
-    //             checked={isSameAddress}
-    //             onChange={handleCheckboxChange}
-    //             className="mb-2 col-span-4"
-    //           >
-    //             Same as Permanent Address
-    //           </Checkbox>
-
-    //           <Form.Item label="Street" className='col-span-2'>
-    //             <Input
-    //               placeholder="Temporary Street"
-    //               value={temporaryAddress.street}
-    //               onChange={(e) => setTemporaryAddress({ ...temporaryAddress, street: e.target.value })}
-    //               disabled={isSameAddress}
-    //             />
-    //           </Form.Item>
-
-    //           <Form.Item label="City" className='col-span-2'>
-    //             <Input
-    //               placeholder="Temporary City"
-    //               value={temporaryAddress.city}
-    //               onChange={(e) => setTemporaryAddress({ ...temporaryAddress, city: e.target.value })}
-    //               disabled={isSameAddress}
-    //             />
-    //           </Form.Item>
-
-    //           <Form.Item label="State" className='col-span-2'>
-    //             <Input
-    //               placeholder="Temporary State"
-    //               value={temporaryAddress.state}
-    //               onChange={(e) => setTemporaryAddress({ ...temporaryAddress, state: e.target.value })}
-    //               disabled={isSameAddress}
-    //             />
-    //           </Form.Item>
-
-    //           <Form.Item
-    //             className='col-span-2'
-    //             label="Pin Code"
-    //             rules={[
-    //               {
-    //                 required: true,
-    //                 message: 'Pin Code must be 6 digits.',
-    //                 len: 6,
-    //             },
-    //             ]}
-    //           >
-    //             <Input
-    //               placeholder="Temporary Pin Code"
-    //               maxLength={6}
-    //               value={temporaryAddress.pinCode}
-    //               onChange={(e) => setTemporaryAddress({ ...temporaryAddress, pinCode: e.target.value })}
-    //               disabled={isSameAddress}
-    //             />
-    //           </Form.Item>
-    //         </div>
-    //     </Form.Item>
-
-    //     <Form.Item label="Employee Type" name='employeeType' className="col-span-2" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //       <Select  >
-    //         <Select.Option value='Full-time'>Full-time</Select.Option>
-    //         <Select.Option value='Part-time'>Part-time</Select.Option>
-    //         <Select.Option value='Contract'>Contract</Select.Option>
-    //         <Select.Option value='Consultant'>Consultant</Select.Option>
-    //       </Select>
-    //     </Form.Item>
-
-    //     <Form.Item label="Aadhar Card" name='aadharNumber' className="col-span-2" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //       <InputNumber maxLength={12} placeholder="XXXX-XXXX-XXXX" style={{ width: '100%' }} />
-    //     </Form.Item>
-
-    //     <Form.Item label="PAN" name='panNumber' className="col-span-2" >
-    //       <Input />
-    //     </Form.Item>
-
-    //     <Form.Item label="Passport" className="col-span-2" >
-    //       <Radio.Group onChange={onChange} value={value}>
-    //         <Radio value={1}>Yes</Radio>
-    //         <Radio value={2}>No</Radio>
-    //       </Radio.Group>
-    //     </Form.Item>
-
-    //     {value === 1 && (
-    //       <Form.Item label="Passport Number" name='panNumber' className="col-span-2" rules={[{required: true,
-    //         message: 'This is a required field.'}]}>
-    //         <Input placeholder="Enter Passport Number" />
-    //       </Form.Item>
-    //     )}
-
-    //     <Form.Item className="col-span-2" name='document' label="Documents" valuePropName="fileList" getValueFromEvent={normFile} >
-    //       <Upload action="/endpoint.do" listType="picture-card">
-    //         <button style={{ border: 0, background: 'none' }} type="button">
-    //           <PlusOutlined />
-    //           <div style={{ marginTop: 0 }}>Upload</div>
-    //         </button>
-    //       </Upload>
-    //     </Form.Item>
-
-    //     <Form.Item className='flex justify-end'>
-    //       <Button htmlType='submit' className='bg-blue-500 w-40 text-white'>Submit</Button>
-    //     </Form.Item>
-
-    //   </Form>
-    // </div>
-
     <form
       onSubmit={handleSubmit}
       className="text-black grid grid-cols-4 gap-x-20 gap-y-2"
@@ -458,11 +184,13 @@ function JoiningForm() {
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
+          placeholder="AT-00"
           type="text"
           name="eID"
           value={values.eID}
           onChange={handleChanges}
           required
+          disabled
         />
       </div>
 
@@ -517,9 +245,9 @@ function JoiningForm() {
           required
         >
           <option value="">--Select--</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="others">Others</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Others">Others</option>
         </select>
       </div>
 
@@ -538,15 +266,16 @@ function JoiningForm() {
           required
         >
           <option value="">--Select--</option>
-          <option value="single">Single</option>
-          <option value="married">Married</option>
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+          <option value="Others">Others</option>
         </select>
       </div>
 
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="contactNumber"
+          htmlFor="personalContactNumber"
         >
           Contact Number
         </label>
@@ -554,9 +283,9 @@ function JoiningForm() {
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           type="text"
           // placeholder="Contact Number"
-          name="contactNumber"
+          name="personalContactNumber"
           maxLength={10}
-          value={values.contactNumber}
+          value={values.personalContactNumber}
           onChange={handleChanges}
           required
         />
@@ -565,7 +294,7 @@ function JoiningForm() {
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="alternateNumber"
+          htmlFor="alternateContactNumber"
         >
           Alternate Number
         </label>
@@ -573,9 +302,9 @@ function JoiningForm() {
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           type="text"
           // placeholder="Alternate Number"
-          name="alternateNumber"
+          name="alternateContactNumber"
           maxLength={10}
-          value={values.alternateNumber}
+          value={values.alternateContactNumber}
           onChange={handleChanges}
         />
       </div>
@@ -633,184 +362,223 @@ function JoiningForm() {
       </div>
 
       <div className="bg-gray-200 mt-5 w-full p-4 rounded col-span-4 gap-x-8">
-      {/* Permanent Address */}
-      <div className="col-span-2">
-        <label
-          className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="street"
-        >
-          Street
-        </label>
-        <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
-          type="text"
-          name="street"
-          value={permanentAddress.street}
-          onChange={(e) =>
-            handlePermanentAddressChange('street', e.target.value)
-          }
-        />
-      </div>
-
-      <div className="col-span-2">
-      <label
-          className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="city"
-        >
-          City
-        </label>
-        <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
-          type="text"
-          name="city"
-          value={permanentAddress.city}
-          onChange={(e) =>
-            handlePermanentAddressChange('city', e.target.value)
-          }
-        />
-      </div>
-
-      <div className="col-span-2">
-        
-      <label
-          className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="state"
-        >
-          State
-        </label>
-        <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
-          type="text"
-          name="state"
-          value={permanentAddress.state}
-          onChange={(e) =>
-            handlePermanentAddressChange('state', e.target.value)
-          }
-        />
-      </div>
-
-      <div className="col-span-2">
-      <label
-          className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="pincode"
-        >
-          Pincode
-        </label>
-        <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
-          type="text"
-          name="pincode"
-          maxLength={6}
-          value={permanentAddress.pinCode}
-          onChange={(e) =>
-            handlePermanentAddressChange('pinCode', e.target.value)
-          }
-        />
-      </div>
-
-      {/* Checkbox for Same Address */}
-      <div className="col-span-4 mt-4">
-        <label className="inline-flex items-center">
+        {/* Permanent Address */}
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 mb-1 text-left "
+            htmlFor="street"
+          >
+            Street
+          </label>
           <input
-            type="checkbox"
-            className="mr-2"
-            checked={isSameAddress}
-            onChange={handleCheckboxChange}
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            name="street"
+            value={permanent.street}
+            onChange={(e) =>
+              handlePermanentAddressChange("street", e.target.value)
+            }
           />
-          Same as Permanent Address
-        </label>
-      </div>
+        </div>
 
-      {/* Temporary Address */}
-      <div className="col-span-2">
-      <label
-          className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="street"
-        >
-          Street
-        </label>
-        <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
-          type="text"
-          name="street"
-          value={temporaryAddress.street}
-          onChange={(e) =>
-            setTemporaryAddress({
-              ...temporaryAddress,
-              street: e.target.value,
-            })
-          }
-          disabled={isSameAddress}
-        />
-      </div>
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 mb-1 text-left "
+            htmlFor="city"
+          >
+            City
+          </label>
+          <input
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            name="city"
+            value={permanent.city}
+            onChange={(e) =>
+              handlePermanentAddressChange("city", e.target.value)
+            }
+          />
+        </div>
 
-      <div className="col-span-2">
-      <label
-          className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="city"
-        >
-          City
-        </label>
-        <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
-          type="text"
-          name="city"
-          value={temporaryAddress.city}
-          onChange={(e) =>
-            setTemporaryAddress({
-              ...temporaryAddress,
-              city: e.target.value,
-            })
-          }
-          disabled={isSameAddress}
-        />
-      </div>
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 mb-1 text-left "
+            htmlFor="state"
+          >
+            State
+          </label>
+          <input
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            name="state"
+            value={permanent.state}
+            onChange={(e) =>
+              handlePermanentAddressChange("state", e.target.value)
+            }
+          />
+        </div>
 
-      <div className="col-span-2">
-      <label
-          className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="state"
-        >
-          State
-        </label>
-        <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
-          type="text"
-          name="state"
-          value={temporaryAddress.state}
-          onChange={(e) =>
-            setTemporaryAddress({
-              ...temporaryAddress,
-              state: e.target.value,
-            })
-          }
-          disabled={isSameAddress}
-        />
-      </div>
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 mb-1 text-left "
+            htmlFor="postalCode"
+          >
+            postalCode
+          </label>
+          <input
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            name="postalCode"
+            maxLength={6}
+            value={permanent.postalCode}
+            onChange={(e) =>
+              handlePermanentAddressChange("postalCode", e.target.value)
+            }
+          />
+        </div>
 
-      <div className="col-span-2">
-      <label
-          className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="pincode"
-        >
-          Pincode
-        </label>
-        <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
-          type="text"
-          name="pincode"
-          maxLength={6}
-          value={temporaryAddress.pinCode}
-          onChange={(e) =>
-            setTemporaryAddress({
-              ...temporaryAddress,
-              pinCode: e.target.value,
-            })
-          }
-          disabled={isSameAddress}
-        />
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 mb-1 text-left "
+            htmlFor="country"
+          >
+            Country
+          </label>
+          <input
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            name="country"
+            value={permanent.country}
+            onChange={(e) =>
+              handlePermanentAddressChange("country", e.target.value)
+            }
+          />
+        </div>
+
+        {/* Checkbox for Same Address */}
+        <div className="col-span-4 mt-4">
+          <label className="inline-flex items-center">
+            <input
+              type="checkbox"
+              className="mr-2"
+              checked={isSameAddress}
+              onChange={handleCheckboxChange}
+            />
+            Same as Permanent Address
+          </label>
+        </div>
+
+        {/* current Address */}
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 mb-1 text-left "
+            htmlFor="street"
+          >
+            Street
+          </label>
+          <input
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            name="street"
+            value={current.street}
+            onChange={(e) =>
+              setCurrentAddress({
+                ...current,
+                street: e.target.value,
+              })
+            }
+            disabled={isSameAddress}
+          />
+        </div>
+
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 mb-1 text-left "
+            htmlFor="city"
+          >
+            City
+          </label>
+          <input
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            name="city"
+            value={current.city}
+            onChange={(e) =>
+              setCurrentAddress({
+                ...current,
+                city: e.target.value,
+              })
+            }
+            disabled={isSameAddress}
+          />
+        </div>
+
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 mb-1 text-left "
+            htmlFor="state"
+          >
+            State
+          </label>
+          <input
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            name="state"
+            value={current.state}
+            onChange={(e) =>
+              setCurrentAddress({
+                ...current,
+                state: e.target.value,
+              })
+            }
+            disabled={isSameAddress}
+          />
+        </div>
+
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 mb-1 text-left "
+            htmlFor="postalCode"
+          >
+            postalCode
+          </label>
+          <input
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            name="postalCode"
+            maxLength={6}
+            value={current.postalCode}
+            onChange={(e) =>
+              setCurrentAddress({
+                ...current,
+                postalCode: e.target.value,
+              })
+            }
+            disabled={isSameAddress}
+          />
+        </div>
+
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full mt-2 mb-1 text-left "
+            htmlFor="country"
+          >
+            Country
+          </label>
+          <input
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            name="country"
+            value={current.country}
+            onChange={(e) =>
+              setCurrentAddress({
+                ...current,
+                country: e.target.value,
+              })
+            }
+            disabled={isSameAddress}
+          />
+        </div>
       </div>
-    </div>
 
       <div className="col-span-2">
         <label
@@ -833,29 +601,125 @@ function JoiningForm() {
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="employeeType"
+          htmlFor="employmentType"
         >
           Employee Type
         </label>
         <select
           className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
-          name="employeeType"
-          value={values.employeeType}
+          name="employmentType"
+          value={values.employmentType}
           onChange={handleChanges}
           required
         >
           <option value="">--Select--</option>
-          <option value="full-time">Full-time</option>
-          <option value="part-time">Part-time</option>
-          <option value="contract">Contract</option>
-          <option value="consultant">Consultant</option>
+          <option value="Full-time">Full-time</option>
+          <option value="Part-time">Part-time</option>
+          <option value="Contract">Contract</option>
+          <option value="Consultant">Consultant</option>
         </select>
+      </div>
+
+      {/* Nominee Details*/}
+      <div className="bg-gray-200 mt-5 w-full p-4 rounded col-span-4 gap-x-8">
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full m-2 mb-1 text-left "
+            htmlFor="name"
+          >
+            Nominee Name
+          </label>
+          <input
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            // placeholder="Enter employee Name"
+            name="name"
+            value={nominee.name}
+            onChange={handleNomineeChange}
+            required
+          />
+        </div>
+
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full m-2 mb-1 text-left "
+            htmlFor="relation"
+          >
+            Relation
+          </label>
+          <input
+            className="w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            // placeholder="Enter employee Name"
+            name="relation"
+            value={nominee.relation}
+            onChange={handleNomineeChange}
+            required
+          />
+        </div>
+
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full m-2 mb-1 text-left "
+            htmlFor="contact"
+          >
+            Contact Number
+          </label>
+          <input
+            className=" w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            // placeholder="Contact Number"
+            name="contact"
+            maxLength={10}
+            value={nominee.contact}
+            onChange={handleNomineeChange}
+            required
+          />
+        </div>
+
+        <div className="col-span-2">
+          <label
+            className="text-base block w-full m-2 mb-1 text-left "
+            htmlFor="aadharCard"
+          >
+            Aadhar Card Number
+          </label>
+          <input
+            className=" w-full bg-white block p-2 text-sm rounded-md border"
+            type="text"
+            placeholder="XXXX-XXXX-XXXX"
+            name="aadharCard"
+            minLength={12}
+            maxLength={12}
+            value={nominee.aadharCard}
+            onChange={handleNomineeChange}
+          />
+        </div>
       </div>
 
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="aadharCardNumber"
+          htmlFor="empPan"
+        >
+          PAN Card Number
+        </label>
+        <input
+          className=" w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          name="empPan"
+          minLength={10}
+          maxLength={10}
+          value={values.empPan}
+          onChange={handleChanges}
+          required
+        />
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="empAadhar"
         >
           Aadhar Card Number
         </label>
@@ -863,10 +727,10 @@ function JoiningForm() {
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           type="text"
           placeholder="XXXX-XXXX-XXXX"
-          name="aadharCardNumber"
+          name="empAadhar"
           minLength={12}
           maxLength={12}
-          value={values.aadharCardNumber}
+          value={values.empAadhar}
           onChange={handleChanges}
         />
       </div>
@@ -891,14 +755,36 @@ function JoiningForm() {
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="employeeStatus"
+          htmlFor="role"
+        >
+          Role
+        </label>
+        <select
+          className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
+          name="role"
+          value={values.role}
+          onChange={handleChanges}
+          required
+        >
+          <option value="">--Select--</option>
+          <option value="Employee">Employee</option>
+          <option value="admin">Admin</option>
+          <option value="HR">HR</option>
+          <option value="Manager">Manager</option>
+        </select>
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="stat"
         >
           Employee Status
         </label>
         <select
           className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
-          name="employeeStatus"
-          value={values.employeeStatus}
+          name="stat"
+          value={values.stat}
           onChange={handleChanges}
           required
         >
@@ -909,7 +795,7 @@ function JoiningForm() {
         </select>
       </div>
 
-      <div className="col-span-2">
+      {/* <div className="col-span-2">
         <label
           className="text-base block w-full mt-2  text-left "
           htmlFor="document"
@@ -922,7 +808,39 @@ function JoiningForm() {
           value={values.document}
           onChange={handleChanges}
           required
+          multiple
         />
+      </div> */}
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 text-left"
+          htmlFor="document"
+        >
+          Upload Documents
+        </label>
+        <input
+          type="file"
+          name="document"
+          onChange={handleDocumentChange}
+          multiple
+          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          required
+        />
+      </div>
+
+      {/* Display uploaded documents */}
+      <div className="mt-4">
+        {documents.map((doc, index) => (
+          <div key={index} className="flex items-center space-x-4 mb-2">
+            <span className="font-medium">{doc.documentName}</span>
+            <img
+              src={doc.documentImage}
+              alt="Preview"
+              className="w-16 h-16 object-cover border"
+            />
+          </div>
+        ))}
       </div>
 
       <div className="col-span-3 mt-3">
@@ -930,7 +848,6 @@ function JoiningForm() {
           Submit
         </button>
       </div>
-      
     </form>
   );
 }
