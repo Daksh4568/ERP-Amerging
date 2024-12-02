@@ -17,7 +17,7 @@ const employeeEvaluationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    joinedAmergingOn: {
+    dateOfJoining: {
         type: Date,
         required: true,
     },
@@ -43,6 +43,13 @@ const employeeEvaluationSchema = new mongoose.Schema({
         keyResponsibilities: [String],
         additionalResponsibilities: [String],
     },
+
+    // keyResponsibilities: {
+    //     type: String,
+    // },
+    // additionalResponsibilities: {
+    //     type: String,
+    // },
     performanceGoals: {
         type: String,
         required: true,
@@ -53,7 +60,7 @@ const employeeEvaluationSchema = new mongoose.Schema({
     },
     additionalContributions: {
         type: String,
-        required: true,
+        //required: true,
     },
     challenges: {
         type: String,
@@ -69,10 +76,10 @@ const employeeEvaluationSchema = new mongoose.Schema({
             required: true, // Evaluator's role (e.g., Admin, HR, Manager)
         },
     }
-}, 
-{ 
-    timestamps: true // Automatically adds `createdAt` and `updatedAt` fields
-});
+},
+    {
+        timestamps: true // Automatically adds `createdAt` and `updatedAt` fields
+    });
 
 const EmployeeEvaluation = mongoose.model('EmployeeEvaluation', employeeEvaluationSchema);
 

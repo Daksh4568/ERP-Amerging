@@ -1,11 +1,13 @@
+import { Header } from 'antd/es/layout/layout';
 import React from 'react'
 import {Outlet} from 'react-router-dom';
-import Dashboard from './components/Dashboard/Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 
 function Layout() {
     
     return (
         <>
+            <Header/>
             <Dashboard/>
             <Outlet/>
         </>

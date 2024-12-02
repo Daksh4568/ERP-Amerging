@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Dashboard from './components/Dashboard/Dashboard';
-import JoiningForm from './components/Forms/JoiningForm'; 
+import Dashboard from './Dashboard/Dashboard';
+import JoiningForm from './Modules/HRModule/JoiningForm'; 
 import './App.css'
-import Login from './components/Forms/Login';
+import Login from './components/Molecules/Login';
 
 function App() {
 
   return (
-  <></>
+    <>
+      
+    </>
   );
 }
 
