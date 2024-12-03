@@ -93,6 +93,15 @@ function JoiningForm() {
     if (e.target.checked) {
       setCurrentAddress(permanent);
     }
+    else{
+      setCurrentAddress({
+        street: '',
+        city: '',
+        state: '',
+        postalCode: '',
+        country: '',
+      });
+    }
   };
 
   const handleChanges = (e) => {
@@ -830,13 +839,13 @@ function JoiningForm() {
           name="document"
           onChange={handleDocumentChange}
           multiple
-          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          className="w-full p-2 border bg-white border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:outline-none"
           required
         />
       </div>
 
       {/* Display uploaded documents */}
-      <div className="mt-4">
+      <div className="mt-4 col-span-4">
         {documents.map((doc, index) => (
           <div key={index} className="flex items-center space-x-4 mb-2">
             <span className="font-medium">{doc.documentName}</span>

@@ -25,22 +25,26 @@ function Login() {
           },
         }
       );
-      console.log(response.data);
 
       if (response.status === 200) {
         const { token } = response.data;
-        console.log(token);
-
+        // console.log(token);
+        
+        const { emp } = response.data;
+        // console.log(emp);        
+        
         // storing tokens in local storage
         localStorage.setItem("authToken", token);
+        // employee data in local storage
+        localStorage.setItem("empData", JSON.stringify(emp));
 
         navigate("/dashboard");
       }
     } catch (error) {
       // handling invalid credentials
       if (error.response && error.response.status === 400) {
-        alert("Invalid usernae or password");
-        console.log("Invalid usernamae or password");
+        alert("Invalid username or password");
+        console.log("Invalid username or password");
       } else {
         console.error("Error submitting form data:", error);
         alert("An error occurred. Please try again later.");

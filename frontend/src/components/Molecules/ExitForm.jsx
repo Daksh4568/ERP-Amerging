@@ -100,12 +100,14 @@ function ExitForm() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.get("https://jsonplaceholder.typicode.com/users/1");
+
+        const storedData = JSON.parse(localStorage.getItem("empData"));
+
         const fetchedData = {
-          employeeName: "Abhijeet Kumar",
+          employeeId: storedData.eID,
+          employeeName: storedData.name,
           department: "Embedded",
           designation: "SDE",
-          lastWorkingDay: "2024-12-20",
         };
 
         // Merging fetched data with formData
