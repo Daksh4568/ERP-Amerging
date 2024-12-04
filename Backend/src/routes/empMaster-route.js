@@ -10,12 +10,13 @@ const { auth, authorize } = require('../middleware/auth')
 const employeeEvaluationController = require('../Controllers/empEvaluation')
 const exitEmployeeController = require('../Controllers/EmpExit');
 const regEmployee = require('../models/empMaster-model');
+const sendEmployeeCredentials = require('../Controllers/sendMail')
 
 //custom schema
 const counters = require('../models/counterMaster');
 
 // All the get requests are defined here
-router.get('/getemp', async (req, res) => {
+router.get('/getemp', auth, authorize('HR', 'admin', 'Manager', 'Employee'), async (req, res) => {
   try {
     const employees = await employee.find({});
     res.send(employees)
@@ -24,6 +25,7 @@ router.get('/getemp', async (req, res) => {
   }
 })
 router.get('/emp/evaluationdata', async (req, res) => {
+  ``
   try {
     const empevaluationData = await EmployeeEvaluation.find({});// It will retrieve all the data
     res.status(200).send(empevaluationData);
@@ -50,9 +52,36 @@ router.get('/emp/stats', async (req, res) => {
 });
 
 // all the post requests are here 
-router.post('/exit-form', auth, authorize('HR', 'Admin', 'Manager', 'Employee'), exitEmployeeController.createExitForm);
+router.post('/exit-form', auth, authorize('HR', 'admin', 'Manager', 'Employee'), exitEmployeeController.createExitForm);
 
 router.post('/employee-evaluation', auth, authorize('HR', 'Employee'), employeeEvaluationController.createEmployeeEvaluation)
+// router.post('/regemp', auth, authorize('HR', 'admin'), async (req, res) => {
+//   const emp = new regEmployee({
+//     ...req.body,
+//     addedBy: {
+//       name: req.employee.name, // Authenticated user's name
+//       role: req.employee.role, // Authenticated user's role
+//     },
+//   });
+
+//   try {
+//     const lastEmpCount = await updateEmpCounter('read'); // Read counter
+//     emp.eID = 'AT-' + String(lastEmpCount.counter + 1).padStart(2, '0'); // Generate new eID
+//     emp.stat = 'Regular'; // Default status
+//     if (!emp.moduleAccess) emp.moduleAccess = 1; // Default module access
+//     await emp.save();
+//     const token = await emp.generateAuthToken(); // Generate token for new employee
+//     await updateEmpCounter('write'); // Increment counter
+//     res.status(201).send({ emp, token });
+//     console.log("Employee Details :", emp)
+//     console.log(
+//       `Employee ${emp.name} (eID: ${emp.eID}) added to the database by ${emp.addedBy.name} (${emp.addedBy.role})`
+//     );
+//   } catch (e) {
+//     console.error(e);
+//     res.status(400).send(e);
+//   }
+// });
 router.post('/regemp', auth, authorize('HR', 'admin'), async (req, res) => {
   const emp = new regEmployee({
     ...req.body,
@@ -70,7 +99,15 @@ router.post('/regemp', auth, authorize('HR', 'admin'), async (req, res) => {
     await emp.save();
     const token = await emp.generateAuthToken(); // Generate token for new employee
     await updateEmpCounter('write'); // Increment counter
+
+    // Calling the email function once the employee is registered
+    const { officialEmail, personalEmail } = emp; // Replace with the correct fields
+    const password = req.body.password; // The password set by HR or generated
+    const empName = req.body.name
+    await sendEmployeeCredentials(personalEmail, officialEmail, password, empName);
+
     res.status(201).send({ emp, token });
+    console.log("Employee Details :", emp);
     console.log(
       `Employee ${emp.name} (eID: ${emp.eID}) added to the database by ${emp.addedBy.name} (${emp.addedBy.role})`
     );
@@ -79,7 +116,6 @@ router.post('/regemp', auth, authorize('HR', 'admin'), async (req, res) => {
     res.status(400).send(e);
   }
 });
-
 module.exports = router;
 
 router.post('/emp/login', async (req, res) => {
@@ -90,24 +126,25 @@ router.post('/emp/login', async (req, res) => {
 
     console.log(`${emp.role} ${emp.name} has now logged in the system`)
 
+
     console.log(`${emp.role} ${emp.name} has now logged in the system`)
 
-
-    res.status(200).send({ token })
+    res.status(200).send({ emp, token })
   } catch (e) {
     res.status(400).send(e)
 
   }
 })
 
-router.post('/emp/logout', async (req, res) => {
+router.post('/emp/logout', auth, async (req, res) => {
   try {
     req.employee.tokens = req.employee.tokens.filter((token) => {
       return token.token !== req.token
     })
     await req.employee.save()
-
+    res.status(200).send({ message: "Logout successfull" });
   } catch (e) {
+    console.error('Error during logout', e)
     res.status(500).send(e)
   }
 })
