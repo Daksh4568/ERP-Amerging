@@ -100,10 +100,11 @@ router.post('/regemp', auth, authorize('HR', 'admin'), async (req, res) => {
     const token = await emp.generateAuthToken(); // Generate token for new employee
     await updateEmpCounter('write'); // Increment counter
 
-    // Call the email function after the employee is saved
-    const { officialEmail, email } = emp; // Replace with the correct fields
+    // Calling the email function once the employee is registered
+    const { officialEmail, personalEmail } = emp; // Replace with the correct fields
     const password = req.body.password; // The password set by HR or generated
-    await sendEmployeeCredentials(email, officialEmail, password);
+    const empName = req.body.name
+    await sendEmployeeCredentials(personalEmail, officialEmail, password, empName);
 
     res.status(201).send({ emp, token });
     console.log("Employee Details :", emp);
@@ -130,14 +131,15 @@ router.post('/emp/login', async (req, res) => {
   }
 })
 
-router.post('/emp/logout', async (req, res) => {
+router.post('/emp/logout', auth, async (req, res) => {
   try {
     req.employee.tokens = req.employee.tokens.filter((token) => {
       return token.token !== req.token
     })
     await req.employee.save()
-
+    res.status(200).send({ message: "Logout successfull" });
   } catch (e) {
+    console.error('Error during logout', e)
     res.status(500).send(e)
   }
 })
