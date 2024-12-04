@@ -12,7 +12,6 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Button, Layout, Menu, theme, Space, Input } from "antd";
-import { Sidebar, MenuItem, SubMenu } from "react-pro-sidebar";
 import Search from "antd/es/transfer/search";
 import axios from "axios";
 
@@ -118,10 +117,6 @@ function Dashboard() {
       <Layout>
         <Header
           className=" flex flex-row items-center justify-between bg-white p-2"
-          // style={{
-          //   padding:0,
-          //   background: colorBgContainer,
-          // }}
         >
           <Button
             className="basis-1 h-full"
@@ -150,7 +145,7 @@ function Dashboard() {
         </Header>
 
         {/* main content */}
-        <div className="p-5 bg-gray-100 h-dvh ">
+        <div className="p-5  h-dvh ">
           <Outlet />
           
         </div>

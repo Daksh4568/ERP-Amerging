@@ -21,6 +21,8 @@ function JoiningForm() {
   const [values, setValues] = useState({
     eID: "",
     name: "",
+    department: "",
+    designation: "",
     DOB: "",
     gender: "",
     maritalStatus: "",
@@ -222,6 +224,48 @@ function JoiningForm() {
           // placeholder="Enter employee Name"
           name="name"
           value={values.name}
+          onChange={handleChanges}
+          required
+        />
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="gender"
+        >
+          Department
+        </label>
+        <select
+          className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
+          name="gender"
+          value={values.department}
+          onChange={handleChanges}
+          required
+        >
+          <option value="">--Select--</option>
+          <option value="Design">Design</option>
+          <option value="Instrumentation">Instrumentation</option>
+          <option value="HR">HR</option>
+          <option value="R&D">R&D</option>
+          <option value="IT">IT</option>
+          <option value="Sales">Sales</option>
+        </select>
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="designation"
+        >
+          Designation
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          // placeholder="Enter employee Name"
+          name="designation"
+          value={values.designation}
           onChange={handleChanges}
           required
         />
