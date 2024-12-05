@@ -160,6 +160,7 @@ function ExitForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // exit-form apit
     try {
       const token = localStorage.getItem("authToken");
 
@@ -390,7 +391,7 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="lastWorkingDay"
         >
-          Last Working Day
+          Last Working Day <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-gray-200 block p-2 text-sm rounded-md border"
@@ -417,7 +418,7 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="reasonForLeaving"
         >
-          Reason for leaving the company?
+          Reason for leaving the company? <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -435,7 +436,7 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="experience"
         >
-          How was your experience working at the company?
+          How was your experience working at the company? <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -454,7 +455,7 @@ function ExitForm() {
           htmlFor="skillUtilization"
         >
           Did you feel that your skills and talents were effectively utilized in
-          your role?
+          your role? <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -472,7 +473,7 @@ function ExitForm() {
           htmlFor="trainingSupport"
         >
           Did you receive the necessary training and support to perform your job
-          effectively?
+          effectively? <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -490,7 +491,7 @@ function ExitForm() {
           htmlFor="ideasValued"
         >
           Did you feel that your ideas and opinions were valued and heard within
-          the company?
+          the company? <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -507,7 +508,7 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="improvementSuggestions"
         >
-          What areas do you think the company could improve upon?
+          What areas do you think the company could improve upon? <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -524,7 +525,7 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="finalComments"
         >
-          Do you have any final comments or suggestions for the company?
+          Do you have any final comments or suggestions for the company? <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -539,7 +540,7 @@ function ExitForm() {
 
       <div className="col-span-4">
         <title className="text-base block w-full mt-2 mb-1 text-left underline">
-          Rate your Manager on the following:
+          Rate your Manager on the following: <span className="text-red-600">*</span>
         </title>
       </div>
 
@@ -549,7 +550,7 @@ function ExitForm() {
             className="text-base block w-full mt-2 text-left "
             htmlFor="followPolicies"
           >
-            Follow policies & procedures
+            Follow policies & procedures 
           </label>
           <ReactStars
             count={5}
@@ -568,7 +569,7 @@ function ExitForm() {
             className="text-base block w-full mt-2 text-left "
             htmlFor="fairTreatment"
           >
-            Treats employees in a fair and equal way
+            Treats employees in a fair and equal way 
           </label>
           <ReactStars
             count={5}
@@ -718,7 +719,7 @@ function ExitForm() {
 
       <div className="col-span-4">
         <title className="text-base block w-full mt-2 mb-1 text-left underline">
-          Rate your Manager on the following:
+          Rate your Manager on the following: <span className="text-red-600 no-underline">*</span>
         </title>
       </div>
 
@@ -841,7 +842,7 @@ function ExitForm() {
       <div className="col-span-4">
         {/* Checkbox for hasViolations */}
         <label className="text-base block w-full mt-2 mb-1 text-left underline">
-          Corporate Compliance Violations
+          Corporate Compliance Violations <span className="text-red-600">*</span>
         </label>
         <div className="flex items-center">
           <input
@@ -860,7 +861,7 @@ function ExitForm() {
       <div className="col-span-4 mt-4">
         {/* Date input for acknowledgementDate */}
         <label className="text-base block w-full mt-2 mb-1 text-left">
-          Acknowledgement Date
+          Acknowledgement Date <span className="text-red-600">*</span>
         </label>
         <input
           type="date"

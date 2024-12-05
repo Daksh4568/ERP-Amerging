@@ -86,7 +86,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="employeeName"
         >
-          Employee Name
+          Employee Name <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -104,7 +104,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="dateOfReview"
         >
-          Date of Review
+          Date of Review <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-gray-200 block p-2 text-sm rounded-md border"
@@ -121,7 +121,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="designation"
         >
-          Designation
+          Designation <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -138,7 +138,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="department"
         >
-          Department
+          Department <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -155,7 +155,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="dateOfJoining"
         >
-          Date of Joining
+          Date of Joining <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-gray-200 block p-2 text-sm rounded-md border"
@@ -173,7 +173,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="totalTenure"
         >
-          Total Tenure
+          Total Tenure <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -191,7 +191,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="previousSalary"
         >
-          Previous Salary
+          Previous Salary <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -208,7 +208,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="incrementedSalary"
         >
-          Incremented Salary
+          Incremented Salary <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -225,7 +225,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="incrementedSalaryDate"
         >
-          Incremented Salary Date
+          Incremented Salary Date <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-gray-200 block p-2 text-sm rounded-md border"
@@ -242,7 +242,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="numberOfProjectsHandled"
         >
-          Number of Projects Handled
+          Number of Projects Handled <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -259,7 +259,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="keyResponsibility"
         >
-          Key Responsibility
+          Key Responsibility <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -300,7 +300,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="performanceGoals"
         >
-          Performance Goals
+          Performance Goals <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -316,7 +316,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="surplusResources"
         >
-          Surplus Resources
+          Surplus Resources <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -332,7 +332,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="additionalContributions"
         >
-          Additional Contributions
+          Additional Contributions <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -348,7 +348,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="challenges"
         >
-          Challenges Faced
+          Challenges Faced <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"

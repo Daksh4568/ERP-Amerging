@@ -21,8 +21,8 @@ function JoiningForm() {
   const [values, setValues] = useState({
     eID: "",
     name: "",
-    department: "",
-    designation: "",
+    // department: "",
+    // designation: "",
     DOB: "",
     gender: "",
     maritalStatus: "",
@@ -127,7 +127,7 @@ function JoiningForm() {
       })),
     };
 
-    // calling the API
+    // register API call
     try {
       const token = localStorage.getItem("authToken");
       if (!token) {
@@ -197,7 +197,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="eID"
         >
-          Employee ID
+          Employee ID 
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -216,7 +216,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="name"
         >
-          Employee Name
+          Employee Name <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -232,16 +232,16 @@ function JoiningForm() {
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="gender"
+          htmlFor="department"
         >
-          Department
+          Department <span className="text-red-600">*</span>
         </label>
         <select
           className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
           name="gender"
           value={values.department}
           onChange={handleChanges}
-          required
+          
         >
           <option value="">--Select--</option>
           <option value="Design">Design</option>
@@ -258,7 +258,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="designation"
         >
-          Designation
+          Designation <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -267,7 +267,7 @@ function JoiningForm() {
           name="designation"
           value={values.designation}
           onChange={handleChanges}
-          required
+          
         />
       </div>
 
@@ -276,7 +276,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="DOB"
         >
-          Date of Birth
+          Date of Birth <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-gray-200 block p-2 text-sm rounded-md border"
@@ -294,7 +294,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="gender"
         >
-          Gender
+          Gender <span className="text-red-600">*</span>
         </label>
         <select
           className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
@@ -315,7 +315,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="maritalStatus"
         >
-          Marital Status
+          Marital Status <span className="text-red-600">*</span>
         </label>
         <select
           className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
@@ -336,7 +336,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="personalContactNumber"
         >
-          Contact Number
+          Contact Number <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -373,7 +373,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="personalEmail"
         >
-          Personal Email
+          Personal Email <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -391,7 +391,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="officialEmail"
         >
-          Official Email
+          Official Email <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -400,6 +400,7 @@ function JoiningForm() {
           name="officialEmail"
           value={values.officialEmail}
           onChange={handleChanges}
+          required
         />
       </div>
 
@@ -427,7 +428,7 @@ function JoiningForm() {
             className="text-base block w-full mt-2 mb-1 text-left "
             htmlFor="street"
           >
-            Street
+            Street <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -445,7 +446,7 @@ function JoiningForm() {
             className="text-base block w-full mt-2 mb-1 text-left "
             htmlFor="city"
           >
-            City
+            City <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -463,7 +464,7 @@ function JoiningForm() {
             className="text-base block w-full mt-2 mb-1 text-left "
             htmlFor="state"
           >
-            State
+            State <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -481,7 +482,7 @@ function JoiningForm() {
             className="text-base block w-full mt-2 mb-1 text-left "
             htmlFor="postalCode"
           >
-            postalCode
+            postalCode <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -500,7 +501,7 @@ function JoiningForm() {
             className="text-base block w-full mt-2 mb-1 text-left "
             htmlFor="country"
           >
-            Country
+            Country <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -532,7 +533,7 @@ function JoiningForm() {
             className="text-base block w-full mt-2 mb-1 text-left "
             htmlFor="street"
           >
-            Street
+            Street <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -554,7 +555,7 @@ function JoiningForm() {
             className="text-base block w-full mt-2 mb-1 text-left "
             htmlFor="city"
           >
-            City
+            City <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -576,7 +577,7 @@ function JoiningForm() {
             className="text-base block w-full mt-2 mb-1 text-left "
             htmlFor="state"
           >
-            State
+            State <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -598,7 +599,7 @@ function JoiningForm() {
             className="text-base block w-full mt-2 mb-1 text-left "
             htmlFor="postalCode"
           >
-            postalCode
+            postalCode <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -621,7 +622,7 @@ function JoiningForm() {
             className="text-base block w-full mt-2 mb-1 text-left "
             htmlFor="country"
           >
-            Country
+            Country <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -644,7 +645,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="bloodGroup"
         >
-          Blood Group
+          Blood Group <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -662,7 +663,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="employmentType"
         >
-          Employee Type
+          Employee Type <span className="text-red-600">*</span>
         </label>
         <select
           className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
@@ -686,7 +687,7 @@ function JoiningForm() {
             className="text-base block w-full m-2 mb-1 text-left "
             htmlFor="name"
           >
-            Nominee Name
+            Nominee Name <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -704,7 +705,7 @@ function JoiningForm() {
             className="text-base block w-full m-2 mb-1 text-left "
             htmlFor="relation"
           >
-            Relation
+            Relation <span className="text-red-600">*</span>
           </label>
           <input
             className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -722,7 +723,7 @@ function JoiningForm() {
             className="text-base block w-full m-2 mb-1 text-left "
             htmlFor="contact"
           >
-            Contact Number
+            Contact Number <span className="text-red-600">*</span>
           </label>
           <input
             className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -741,7 +742,7 @@ function JoiningForm() {
             className="text-base block w-full m-2 mb-1 text-left "
             htmlFor="aadharCard"
           >
-            Aadhar Card Number
+            Aadhar Card Number <span className="text-red-600">*</span>
           </label>
           <input
             className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -761,7 +762,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="empPan"
         >
-          PAN Card Number
+          PAN Card Number <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -780,7 +781,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="empAadhar"
         >
-          Aadhar Card Number
+          Aadhar Card Number <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -816,7 +817,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="role"
         >
-          Role
+          Role <span className="text-red-600">*</span>
         </label>
         <select
           className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
@@ -838,7 +839,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="stat"
         >
-          Employee Status
+          Employee Status <span className="text-red-600">*</span>
         </label>
         <select
           className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
@@ -876,7 +877,7 @@ function JoiningForm() {
           className="text-base block w-full mt-2 text-left"
           htmlFor="document"
         >
-          Upload Documents
+          Upload Documents <span className="text-red-600">*</span>
         </label>
         <input
           type="file"

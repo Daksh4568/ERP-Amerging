@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate, Outlet } from "react-router-dom";
+import {
+  useNavigate,
+  Outlet,
+  Link,
+  Route,
+  Routes,
+  BrowserRouter as Router,
+} from "react-router-dom";
 import {
   LeftOutlined,
   PieChartOutlined,
@@ -8,11 +15,37 @@ import {
   RightOutlined,
   UserOutlined,
   FileOutlined,
+  DashboardOutlined,
+  LineChartOutlined ,
   LogoutOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Button, Layout, Menu, theme, Space, Input } from "antd";
 import Search from "antd/es/transfer/search";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  TextField,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  CssBaseline,
+  Box,
+} from "@mui/material";
+import {
+  Menu as MenuIcon,
+  Home as HomeIcon,
+  Settings as SettingsIcon,
+  Logout,
+  ExpandLess,
+  ExpandMore,
+} from "@mui/icons-material";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+// import './dashboard.css';
 import axios from "axios";
 
 const { Header, Sider, Content } = Layout;
@@ -49,7 +82,7 @@ function Dashboard() {
   const items = [
     getItem("HR Module", "sub1", <UserOutlined />, [
       getItem("Joining Form", "joining-form"),
-      getItem("Performance Evaluation Form", "selfeval-form"),
+      getItem("Self Evaluation Form", "selfeval-form"),
       getItem("Exit form", "exit-form"),
     ]),
     getItem("Employee", "sub2", <TeamOutlined />, [
@@ -70,16 +103,20 @@ function Dashboard() {
         return;
       }
 
-      const response = await axios.post("http://localhost:5000/emp/logout", {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.post(
+        "http://localhost:5000/emp/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
 
       if (response.status === 200) {
         console.log("Logged out successfully");
         alert("Logged out successfully");
-        
+
         localStorage.removeItem("authToken");
         localStorage.removeItem("empData");
 
@@ -94,17 +131,22 @@ function Dashboard() {
         alert("Network error: Please check your connection.");
       }
     }
-
   };
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [hrMenuOpen, setHrMenuOpen] = useState(false);
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const toggleHrMenu = () => setHrMenuOpen(!hrMenuOpen);
+
   return (
-    <Layout className="w-dvw h-dvh ">
+    <Layout className="w-screen min-h-screen flex flex-col">
       {/* sidebar */}
-      <Sider className="p-3 " trigger={null} collapsible collapsed={collapsed}>
+      <Sider className="" trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
 
         <Menu
-          className=""
+          className=" "
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
@@ -116,26 +158,26 @@ function Dashboard() {
       {/* header */}
       <Layout>
         <Header
-          className=" flex flex-row items-center justify-between bg-white p-2"
+          className=" flex flex-row items-center justify-between  p-2"
         >
           <Button
-            className="basis-1 h-full"
+            className="basis-1 "
             type="text"
             icon={collapsed ? <RightOutlined /> : <LeftOutlined />}
             onClick={() => setCollapsed(!collapsed)}
           />
 
-          {/* <Space className=" basis-1/2" direction="vertical">
+          <Space className=" basis-1/2 " direction="vertical">
             <Search
-              className="flex items-center "
+              className="flex items-center  "
               placeholder="Search Box"
               enterButton="Search"
               size="medium"
             />
-          </Space> */}
+          </Space>
 
           <Button
-            className="basis-1 "
+            className="basis-1 bg-black"
             type="primary"
             icon={<LogoutOutlined />}
             onClick={handleLogout}
@@ -145,12 +187,14 @@ function Dashboard() {
         </Header>
 
         {/* main content */}
-        <div className="p-5  h-dvh ">
+        <div className="p-5 text-black overflow-auto">
           <Outlet />
           
         </div>
       </Layout>
+
     </Layout>
+    
   );
 }
 
