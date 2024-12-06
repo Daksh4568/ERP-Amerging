@@ -161,7 +161,7 @@ function Dashboard() {
           className=" flex flex-row items-center justify-between  p-2"
         >
           <Button
-            className="basis-1 "
+            className="basis-1 text-white "
             type="text"
             icon={collapsed ? <RightOutlined /> : <LeftOutlined />}
             onClick={() => setCollapsed(!collapsed)}

@@ -19,7 +19,7 @@ import ProtectedRoute from "./components/Atoms/ProtectedRoute";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" elements={<Layout />}>
-      <Route path="" element={<Login />} />
+      <Route path="/" element={<Login />} />
       {/* protected routes */}
       {/* <Route element={<ProtectedRoute />}> */}
         <Route path="dashboard" element={<Dashboard />}>
