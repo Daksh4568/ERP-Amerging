@@ -41,7 +41,7 @@ const employeeSchema = new mongoose.Schema(
     personalEmail: {
       type: String,
       required: true,
-      unique: true,
+      //unique: true,
     },
     officialEmail: {
       type: String,
@@ -138,6 +138,10 @@ const employeeSchema = new mongoose.Schema(
       type: String,
       enum: ['Regular', 'Relieved', 'Resigned'],
       required: true,
+    },
+    department: {
+      type: String,
+
     },
     moduleAccess: {
       type: Number,
