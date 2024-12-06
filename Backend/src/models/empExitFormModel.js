@@ -56,43 +56,46 @@ const exitEmployeeSchema = new mongoose.Schema({
     },
     noDues: {
         accounts: {
-            intrestLoanAdvance: {
+            cleared: {
                 type: Boolean,
                 default: false
             },
             remarks: String
         },
         stores: {
-            type: Boolean,
-            default: false
-        },
-        admin: {
-            mobileSimHandset: {
-                type: Boolean,
-                default: false
-            }
-        },
-        it: {
-            laptopPendrive: {
+            cleared: {
                 type: Boolean,
                 default: false
             },
-            emailAccess: {
+            remarks: String
+        },
+        admin: {
+            cleared: {
                 type: Boolean,
                 default: false
-            }
+            },
+            remarks: String
+        },
+        it: {
+            cleared: {
+                type: Boolean,
+                default: false
+            },
+            remarks: String
         },
         hr: {
-            idCard: {
+            cleared: {
                 type: Boolean,
                 default: false
-            }
+            },
+            remarks: String
         },
         departmentHead: {
-            departmentData: {
+            cleared: {
                 type: Boolean,
                 default: false
-            }
+            },
+            remarks: String
         },
         others: String
     },
