@@ -5,7 +5,7 @@ import axios from "axios";
 function Login() {
   const [officialEmail, setOfficialEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // useEffect(() => {
   //   const isTokenValid = localStorage.getItem("authToken");
@@ -44,6 +44,7 @@ function Login() {
         localStorage.setItem("authToken", token);
         // employee data in local storage
         localStorage.setItem("empData", JSON.stringify(emp));
+
 
         navigate("/dashboard");
       }

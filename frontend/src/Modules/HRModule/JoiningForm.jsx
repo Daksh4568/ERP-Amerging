@@ -21,8 +21,8 @@ function JoiningForm() {
   const [values, setValues] = useState({
     eID: "",
     name: "",
-    // department: "",
-    // designation: "",
+    department: "",
+    designation: "",
     DOB: "",
     gender: "",
     maritalStatus: "",

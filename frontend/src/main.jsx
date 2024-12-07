@@ -15,19 +15,24 @@ import JoiningForm from "./Modules/HRModule/JoiningForm";
 import SelfEvalFrom from "./components/Molecules/SelfEvalFrom";
 import ExitForm from "./components/Molecules/ExitForm";
 import ProtectedRoute from "./components/Atoms/ProtectedRoute";
+import PublicRoute from "./components/Atoms/PublicRoute.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" elements={<Layout />}>
-      <Route path="/" element={<Login />} />
+      {/* Public route */}
+      <Route element={<PublicRoute />}>
+        <Route path="/" element={<Login />} />
+      </Route>
+
       {/* protected routes */}
-      {/* <Route element={<ProtectedRoute />}> */}
+      <Route element={<ProtectedRoute />}>
         <Route path="dashboard" element={<Dashboard />}>
           <Route className="" path="joining-form" element={<JoiningForm />} />
           <Route path="selfeval-form" element={<SelfEvalFrom />} />
           <Route path="exit-form" element={<ExitForm />} />
         </Route>
-      {/* </Route> */}
+      </Route>
     </Route>
   )
 );

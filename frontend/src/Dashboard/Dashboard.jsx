@@ -177,7 +177,7 @@ function Dashboard() {
           </Space>
 
           <Button
-            className="basis-1 bg-black"
+            className="basis-1 "
             type="primary"
             icon={<LogoutOutlined />}
             onClick={handleLogout}
