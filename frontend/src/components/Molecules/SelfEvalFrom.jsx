@@ -1,246 +1,92 @@
 import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Button,
-  Select,
-  DatePicker,
-  Typography,
-  InputNumber,
-} from "antd";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
-import dayjs from "dayjs";
-import TextArea from "antd/es/input/TextArea";
+import axios from "axios";
+
 
 const SelfEvaluationForm = () => {
-  // const [keyResponsibilities, setKeyResponsibilities] = useState(['']);
-  
-  // const [goalInput, setGoalInput] = useState('');
-  
-  // const handleAddGoal = () => {
-  //     if (goalInput) {
-  //         setFormData((prev) => ({
-  //             ...prev,
-  //             performanceGoals: [...prev.performanceGoals, goalInput],
-  //           }));
-  //           setGoalInput('');
-  //         }
-  //       };
 
-  // const handleDeleteGoal = (index) => {
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     performanceGoals: prev.performanceGoals.filter((_, i) => i !== index),
-  //   }));
-  // };
-  
-  // const handleFormChange = (changedValues) => {
-  //     setFormData((prev) => ({ ...prev, ...changedValues }));
-  //   };
-    
-    const [formData, setFormData] = useState({
-      employeeName: "",
-      dateOfReview: "",
-      designation: "",
-      department: "",
-      dateOfJoining: "",
-      totalTenure: "",
-      previousSalary: "",
-      incrementedSalary: "",
-      incrementedSalaryDate: "",
-      numberOfProjectsHandled: "",
-      keyResponsibility: "",
-      additionalResponsibility: "",
-      performanceGoals: "",
-      surplusResources: "",
-      challengesFaced: "",
-    });
+  const [formData, setFormData] = useState({
+    employeeName: "",
+    dateOfReview: "",
+    designation: "",
+    department: "",
+    dateOfJoining: "",
+    totalTenure: "",
+    previousSalary: "",
+    incrementedSalary: "",
+    incrementedSalaryDate: "",
+    numberOfProjectsHandled: "",
+    currentResponsibilities: {
+      keyResponsibilities: [],
+      additionalResponsibilities: [],
+    },
+    performanceGoals: "",
+    surplusResources: "",
+    additionalContributions: "",
+    challenges: "",
+  });
 
-    
-    const handleChanges = (e) => {
-      setFormData({ ...formData, [e.target.name] : e.target.value});
+  const handleChanges = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleResponsibilitiesChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      currentResponsibilities: {
+        ...prev.currentResponsibilities,
+        [field]: value.split("\n"),
+      },
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // API call
+    try {
+      const token = localStorage.getItem("authToken");
+
+      if (!token) {
+        alert("No token available, please log in again.");
+        return;
+      }
+      console.log(JSON.stringify(formData));
+
+      const response = await axios.post("http://localhost:5000/employee-evaluation", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status === 201) {
+        console.log("Evaluation form successfully submitted");
+        alert("Evaluation form successfully submitted");
+        // navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        alert("Unauthorized: Please check your login or token.");
+      } else {
+        alert("Error submitting evaluation form.", error.response.data);
+      }
     }
+    // const values = JSON.stringify(formData);
+    // console.log(values);
+  };
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
+  return (
 
-      const values = JSON.stringify(formData);
-      console.log(values);
-    };
-    
-    return (
-    //   <div className=''>
-    //       <Title level={3} style={{ textAlign: 'center', marginBottom: '20px' }}>
-    //         Self Evaluation Form
-    //       </Title>
-    //     <Form
-    //       className='w-full h-full grid grid-cols-4 gap-x-16 '
-    //       layout="vertical"
-    //       // onValuesChange={handleFormChange}
-    //       form={form}
-    //       onFinish={handleSubmit}
-    //     >
-    //       <Form.Item className='col-span-2' label="Employee Name" name="employeeName" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <Input />
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2' label="Date of Review" name="dateOfReview" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <DatePicker className='w-full'/>
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2'  label="Designation" name="designation" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <Input />
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2'  label="Department" name="department" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <Select>
-    //           <Select.Option value="Sales">Sales</Select.Option>
-    //           <Select.Option value="Marketing">Design</Select.Option>
-    //           <Select.Option value="Engineering">Process</Select.Option>
-    //           <Select.Option value="HR">HR</Select.Option>
-    //           <Select.Option value="Finance">IT</Select.Option>
-    //         </Select>
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2' label="Joining Date" name="joiningDate" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <DatePicker style={{ width: '100%' }} />
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2' label="Total Tenure (years)" name="totalTenure" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <InputNumber min={0} style={{ width: '100%' }} />
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2' label="Previous Salary" name="previousSalary" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <InputNumber min={0} style={{ width: '100%' }} />
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2' label="Incremented Salary" name="incrementedSalary" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <InputNumber min={0} style={{ width: '100%' }} />
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2' label="Date of Last Increment" name="incrementSalaryDate" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <DatePicker style={{ width: '100%' }} />
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2' label="Number of Projects Handled" name="numberOfProjectsHandled" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //         <InputNumber min={0} style={{ width: '100%' }} />
-    //       </Form.Item>
-
-    //       <div className='col-span-4 border'>
-    //         <Form.Item label="Current Responsibility" name="currentResponsibility" rules={[{required: true,
-    //           message: 'This is a required field.'}]}>
-    //           <Input />
-    //         </Form.Item>
-
-    //         <Form.Item  label="Additional Responsibility" name="additionalResponsibility">
-    //           <TextArea autoSize={{ minRows: 2 }} />
-    //         </Form.Item>
-    //       </div>
-
-    //       {/* <Form.Item label="Key Responsibilities" required>
-    //         <List
-    //           dataSource={keyResponsibilities}
-    //           renderItem={(responsibility, index) => (
-    //             <List.Item>
-    //               <Input
-    //                 placeholder="Key Responsibility"
-    //                 value={responsibility}
-    //                 // onChange={(e) => handleKeyResponsibilityChange(e.target.value, index)}
-    //                 style={{ width: '90%' }}
-    //               />
-    //               <Button
-    //                 type="text"
-    //                 icon={<DeleteOutlined />}
-    //                 // onClick={() => handleDeleteKeyResponsibility(index)}
-    //                 disabled={keyResponsibilities.length === 1}
-    //               />
-    //             </List.Item>
-    //           )}
-    //           footer={
-    //             <Button type="dashed"
-    //             // onClick={handleAddKeyResponsibility}
-    //             icon={<PlusOutlined />}>
-    //               Add Key Responsibility
-    //             </Button>
-    //           }
-    //         />
-    //       </Form.Item>
-
-    //       <Form.Item label="Performance Goals">
-    //         <Input.Group compact>
-    //           <Input
-    //             style={{ width: 'calc(100% - 40px)' }}
-    //             placeholder="Add Performance Goal"
-    //             value={goalInput}
-    //             onChange={(e) => setGoalInput(e.target.value)}
-    //           />
-    //           <Button type="primary" icon={<PlusOutlined />} onClick={handleAddGoal} />
-    //         </Input.Group>
-    //         <List
-    //           bordered
-    //           dataSource={formData.performanceGoals}
-    //           renderItem={(goal, index) => (
-    //             <List.Item
-    //               actions={[
-    //                 <Button
-    //                   type="text"
-    //                   icon={<DeleteOutlined />}
-    //                   onClick={() => handleDeleteGoal(index)}
-    //                 />,
-    //               ]}
-    //             >
-    //               {goal}
-    //             </List.Item>
-    //           )}
-    //           style={{ marginTop: '10px' }}
-    //         />
-    //       </Form.Item> */}
-
-    //       <Form.Item className='col-span-2' label="Performance Goals" name="performanceGoals">
-    //         <TextArea autoSize={{ minRows: 2 }} />
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2' label="Surplus Resources" name="surplusResources">
-    //         <TextArea autoSize={{ minRows: 2 }} />
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2' label="Additional Contribution" name="additionalContribution">
-    //         <TextArea autoSize={{ minRows: 2 }} />
-    //       </Form.Item>
-
-    //       <Form.Item className='col-span-2' label="Challenges Faced" name="challengesFaced">
-    //         <TextArea autoSize={{ minRows: 2 }} />
-    //       </Form.Item>
-
-    //     <Form.Item className='flex justify-end'>
-    //         <Button htmlType='submit' type="primary" block>
-    //           Submit
-    //         </Button>
-    //     </Form.Item>
-
-    //   </Form>
-    // </div>
-
-    <form 
+    <form
       onSubmit={handleSubmit}
-      className="text-black grid grid-cols-4 gap-x-20 gap-y-2">
-
+      className="text-black grid grid-cols-4 gap-x-20 gap-y-2"
+    >
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="employeeName"
         >
-          Employee Name
+          Employee Name <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -258,12 +104,11 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="dateOfReview"
         >
-          Date of Review
+          Date of Review <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-gray-200 block p-2 text-sm rounded-md border"
           type="date"
-          // placeholder="Enter employee Name"
           name="dateOfReview"
           value={formData.dateOfReview}
           onChange={handleChanges}
@@ -276,12 +121,11 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="designation"
         >
-          Designation
+          Designation <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
           type="text"
-          // placeholder="Enter employee Name"
           name="designation"
           value={formData.designation}
           onChange={handleChanges}
@@ -294,12 +138,11 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="department"
         >
-          Department
+          Department <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
           type="text"
-          // placeholder="Enter employee Name"
           name="department"
           value={formData.department}
           onChange={handleChanges}
@@ -312,7 +155,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="dateOfJoining"
         >
-          Date of Joining
+          Date of Joining <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-gray-200 block p-2 text-sm rounded-md border"
@@ -330,7 +173,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="totalTenure"
         >
-          Total Tenure
+          Total Tenure <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -348,12 +191,11 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="previousSalary"
         >
-          Previous Salary
+          Previous Salary <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           type="number"
-          // placeholder="Contact Number"
           name="previousSalary"
           value={formData.previousSalary}
           onChange={handleChanges}
@@ -366,12 +208,11 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="incrementedSalary"
         >
-          Incremented Salary
+          Incremented Salary <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           type="number"
-          // placeholder="Contact Number"
           name="incrementedSalary"
           value={formData.incrementedSalary}
           onChange={handleChanges}
@@ -384,12 +225,11 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="incrementedSalaryDate"
         >
-          Incremented Salary Date
+          Incremented Salary Date <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-gray-200 block p-2 text-sm rounded-md border"
           type="date"
-          // placeholder="Contact Number"
           name="incrementedSalaryDate"
           value={formData.incrementedSalaryDate}
           onChange={handleChanges}
@@ -402,12 +242,11 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="numberOfProjectsHandled"
         >
-          Number of Projects Handled
+          Number of Projects Handled <span className="text-red-600">*</span>
         </label>
         <input
           className=" w-full bg-white block p-2 text-sm rounded-md border"
           type="number"
-          // placeholder="Contact Number"
           name="numberOfProjectsHandled"
           value={formData.numberOfProjectsHandled}
           onChange={handleChanges}
@@ -420,14 +259,18 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="keyResponsibility"
         >
-          Key Responsibility
+          Key Responsibility <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='3'
+          rows="3"
           name="keyResponsibility"
-          value={formData.keyResponsibility}
-          onChange={handleChanges}
+          value={formData.currentResponsibilities.keyResponsibilities.join(
+            "\n"
+          )}
+          onChange={(e) =>
+            handleResponsibilitiesChange("keyResponsibilities", e.target.value)
+          }
         />
       </div>
 
@@ -440,10 +283,15 @@ const SelfEvaluationForm = () => {
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='3'
+          rows="3"
           name="additionalResponsibility"
-          value={formData.additionalResponsibility}
-          onChange={handleChanges}
+          value={formData.currentResponsibilities.additionalResponsibilities}
+          onChange={(e) =>
+            handleResponsibilitiesChange(
+              "additionalResponsibilities",
+              e.target.value
+            )
+          }
         />
       </div>
 
@@ -452,11 +300,11 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="performanceGoals"
         >
-          Performance Goals
+          Performance Goals <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='3'
+          rows="3"
           name="performanceGoals"
           value={formData.performanceGoals}
           onChange={handleChanges}
@@ -468,11 +316,11 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="surplusResources"
         >
-          Surplus Resources
+          Surplus Resources <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='3'
+          rows="3"
           name="surplusResources"
           value={formData.surplusResources}
           onChange={handleChanges}
@@ -482,15 +330,15 @@ const SelfEvaluationForm = () => {
       <div className="col-span-4">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="additionalContribution"
+          htmlFor="additionalContributions"
         >
-          Additional Contribution
+          Additional Contributions <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='3'
-          name="additionalContribution"
-          value={formData.additionalContribution}
+          rows="3"
+          name="additionalContributions"
+          value={formData.additionalContributions}
           onChange={handleChanges}
         />
       </div>
@@ -498,15 +346,15 @@ const SelfEvaluationForm = () => {
       <div className="col-span-4">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
-          htmlFor="challengesFaced"
+          htmlFor="challenges"
         >
-          Challenges Faced
+          Challenges Faced <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
-          rows='3'
-          name="challengesFaced"
-          value={formData.challengesFaced}
+          rows="3"
+          name="challenges"
+          value={formData.challenges}
           onChange={handleChanges}
         />
       </div>
@@ -516,7 +364,6 @@ const SelfEvaluationForm = () => {
           Submit
         </button>
       </div>
-
     </form>
   );
 };

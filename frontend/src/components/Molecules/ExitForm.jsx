@@ -48,8 +48,8 @@ function ExitForm() {
 
   const [formData, setFormData] = useState({
     employeeName: "",
-    employeeId: "",
     department: "",
+    designation: "",
     lastWorkingDay: "",
     exitFeedback: {
       reasonForLeaving: "",
@@ -79,17 +79,42 @@ function ExitForm() {
       workingConditions: "",
       workSchedule: "",
     },
+    corporateComplianceAcknowledgement: {
+      hasViolations: false,
+      acknowledgementDate: "",
+    },
+    noDues: {
+      accounts: { cleared: false, remarks: "" },
+      stores: { cleared: false, remarks: "" },
+      admin: { cleared: false, remarks: "" },
+      it: { cleared: false, remarks: "" },
+      hr: { cleared: false, remarks: "" },
+      departmentHead: { cleared: false, remarks: "" },
+    },
   });
+
+  const handleComplianceChange = (e) => {
+    const { name, type, checked, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      corporateComplianceAcknowledgement: {
+        ...prev.corporateComplianceAcknowledgement,
+        [name]: type === "checkbox" ? checked : value,
+      },
+    }));
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.get("https://jsonplaceholder.typicode.com/users/1");
+        const storedData = JSON.parse(localStorage.getItem("empData"));
+
         const fetchedData = {
-          employeeName: "Abhijeet Kumar",
-          employeeId: "AT47",
+          employeeId: storedData.eID,
+          employeeName: storedData.name,
           department: "Embedded",
-          lastWorkingDay: "2024-12-20",
+          designation: "SDE",
         };
 
         // Merging fetched data with formData
@@ -115,9 +140,9 @@ function ExitForm() {
       exitFeedback: {
         ...prevData.exitFeedback,
         [field]: message,
-      }
-    }))
-  }
+      },
+    }));
+  };
 
   const handleManagerRatingChange = (field, newRating) => {
     setFormData((prevData) => ({
@@ -139,128 +164,71 @@ function ExitForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleNoDuesChange = (dept) => {
+    setFormData({
+      ...formData,
+      noDues: {
+        ...formData.noDues,
+        [dept]: {
+          ...formData.noDues[dept],
+          cleared: !formData.noDues[dept].cleared,
+        },
+      },
+    });
+  };
+
+  const handleRemarksChange = (dept, remarks) => {
+    setFormData({
+      ...formData,
+      noDues: {
+        ...formData.noDues,
+        [dept]: { ...formData.noDues[dept], remarks },
+      },
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // exit-form apit
+    try {
+      const token = localStorage.getItem("authToken");
+
+      if (!token) {
+        alert("No token available, please log in again.");
+        return;
+      }
+      console.log(JSON.stringify(formData));
+
+      const response = await axios.post(
+        "http://localhost:5000/exit-form",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 201) {
+        console.log("Exit form successfully submitted");
+        alert("Exit form successfully submitted");
+        // navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        alert("Unauthorized: Please check your login or token.");
+      } else {
+        alert("Error submitting Exit form.", error.response.data);
+      }
+    }
 
     const values = JSON.stringify(formData, null, 2);
     console.log(values);
   };
 
   return (
-    // <div>
-    //     <Title level={3} style={{ textAlign: 'center', marginBottom: '4px' }}>
-    //         Exit Form
-    //     </Title>
-    //     <Form
-    //         form={form}
-    //         className='grid grid-cols-4 gap-x-16'
-    //         layout='vertical'
-    //     //   onValuesChange={handleFormChange}
-    //         onFinish={handleSubmit}
-    //       >
-
-    //         <Form.Item className='col-span-2' label="Employee Name" name="employeeName" rules={[{required: true, message: 'This is a required field.',}]}>
-    //         <Input />
-    //         </Form.Item>
-
-    //         <Form.Item className='col-span-2'  label="Designation" name="designation" rules={[{required: true, message: 'This is a required field.',}]}>
-    //         <Input />
-    //         </Form.Item>
-
-    //         <Form.Item className='col-span-2'  label="Department" name="department" rules={[{required: true, message: 'This is a required field.',}]}>
-    //           <Select>
-    //             <Select.Option value="Sales">Sales</Select.Option>
-    //             <Select.Option value="Design">Design</Select.Option>
-    //             <Select.Option value="Process">Process</Select.Option>
-    //             <Select.Option value="HR">HR</Select.Option>
-    //             <Select.Option value="IT">IT</Select.Option>
-    //           </Select>
-    //         </Form.Item>
-
-    //         <Form.Item className='col-span-2' label="Last Working Day" name="lastWorkingDate" rules={[{required: true, message: 'This is a required field.',}]}>
-    //           <DatePicker style={{ width: '100%' }} />
-    //         </Form.Item>
-
-    //         <Title level={5} className='col-span-4 text-start '>
-    //         I kindly request that you take a few moments to provide your input by responding to the questions below. Please rest assured that all your responses will be treated with the utmost confidentiality. Your cooperation is greatly appreciated. Thank you.
-    //         </Title>
-
-    //         <Form.Item className='col-span-4' label="Reason for leaving the Company ?" name="reasonOfLeaving" rules={[{required: true, message: 'This is a required field.',}]}>
-    //             <Input />
-    //         </Form.Item>
-
-    //         <Form.Item className='col-span-4' label="How was your experience working at the company ?" name="workingExperience" rules={[{required: true, message: 'This is a required field.',}]}>
-    //             <Input />
-    //         </Form.Item>
-
-    //         <Form.Item className='col-span-4' label="Did you feel that your skills and talents were effectively utilized in your role ?" name="skillsUsedEffectively" rules={[{required: true, message: 'This is a required field.',}]}>
-    //             <Input />
-    //         </Form.Item>
-
-    //         <Form.Item className='col-span-4' label="Did you receive the necessary training and support to perform your job effectively ?" name="receivedTrainingAndSupport" rules={[{required: true, message: 'This is a required field.',}]}>
-    //             <Input />
-    //         </Form.Item>
-
-    //         <Form.Item className='col-span-4' label="Did you feel that your ideas and opinions were valued and heard within the company ?" name="ideasAndOpinionsValued" rules={[{required: true, message: 'This is a required field.',}]}>
-    //             <Input />
-    //         </Form.Item>
-
-    //         <Form.Item className='col-span-4' label="What areas do you think the company could improve upon ?" name="improvementForCompany" rules={[{required: true, message: 'This is a required field.',}]}>
-    //             <Input />
-    //         </Form.Item>
-
-    //         <Form.Item className='col-span-4' label="Do you have any final comments or suggestions for the company ?" name="finalComments" rules={[{required: true, message: 'This is a required field.',}]}>
-    //             <Input />
-    //         </Form.Item>
-
-    //         <Title level={5} className='col-span-4 text-start underline'>
-    //             Rate your manager on the following
-    //         </Title>
-
-    //         <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager' label="Follow policies & procedures">
-    //             <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
-    //         </Form.Item>
-
-    //         <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager2' label="Treats employees in a fair and equal way">
-    //             <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
-    //         </Form.Item>
-    //         <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager3' label="Provides recognition for a job well done">
-    //             <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
-    //         </Form.Item>
-    //         <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager4' label="Resolves complaints and problems">
-    //             <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
-    //         </Form.Item>
-    //         <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager5' label="Gives needed information">
-    //             <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
-    //         </Form.Item>
-    //         <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager6' label="Keeps employees busy">
-    //             <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
-    //         </Form.Item>
-    //         <Form.Item className='col-span-4 border bg-white p-3' name='ratingManager7' label="Knows his/her job well">
-    //             <Rate className='' defaultValue={0} tooltips={managerRatingOptions} count={4} />
-    //         </Form.Item>
-
-    //         <Title level={5} className='col-span-4 text-start underline'>
-    //             What do you think of the following in your Department ?
-    //         </Title>
-
-    //         <Form.Item className='col-span-4 border bg-white p-3' name='second' label="Follow policies & procedures">
-    //             <Rate className='' defaultValue={0} tooltips={departmentRatingOptions} count={4} />
-    //         </Form.Item>
-
-    //         <Form.Item className='col-span-4 flex items-center' label='I have no knowledge of any violation of the law or any corporate policies or standards of conduct by me or any other employees while I have been employed at the company. If I recall any suspected violations in the future, I will immediately report them to the Compliance Officer.' rules={[{required: true, message: 'Your Acknowledgement is required.',}]}>
-    //             <Checkbox />
-
-    //         </Form.Item>
-
-    //         <Form.Item className='flex justify-end'>
-    //             <Button type="primary" htmlType="submit" >
-    //               Submit
-    //             </Button>
-    //         </Form.Item>
-    //     </Form>
-    // </div>
-
     <form
       onSubmit={handleSubmit}
       className="text-black grid grid-cols-4 gap-x-20 gap-y-2"
@@ -288,16 +256,17 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="employeeId"
         >
-          employeeId
+          Employee ID
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
           type="text"
-          // placeholder="Enter employee Name"
+          placeholder="AT-47"
           name="employeeId"
           value={formData.employeeId}
           onChange={handleChanges}
           required
+          disabled
         />
       </div>
 
@@ -322,9 +291,27 @@ function ExitForm() {
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
+          htmlFor="designation"
+        >
+          Designation
+        </label>
+        <input
+          className="w-full bg-white block p-2 text-sm rounded-md border"
+          type="text"
+          // placeholder="Enter employee Name"
+          name="designation"
+          value={formData.designation}
+          onChange={handleChanges}
+          required
+        />
+      </div>
+
+      <div className="col-span-2">
+        <label
+          className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="lastWorkingDay"
         >
-          Last Working Day
+          Last Working Day <span className="text-red-600">*</span>
         </label>
         <input
           className="w-full bg-gray-200 block p-2 text-sm rounded-md border"
@@ -335,6 +322,45 @@ function ExitForm() {
           onChange={handleChanges}
           required
         />
+      </div>
+
+      <div className="col-span-4 mt-4">
+        <h3 className="text-lg font-bold mb-4 underline">
+          No Dues Clearance <span className="text-red-600">*</span>
+        </h3>
+
+        <div className="grid grid-cols-4 gap-4 bg-gray-200 p-4 rounded-lg">
+          <div className="font-semibold col-span-1">Department</div>
+          <div className="font-semibold col-span-1 text-center">Cleared</div>
+          <div className="font-semibold col-span-2 text-left">Remarks</div>
+
+          {Object.keys(formData.noDues).map((dept) => (
+            <React.Fragment key={dept}>
+              <div className="capitalize col-span-1 flex items-center">
+                {dept}
+              </div>
+
+              <div className="col-span-1 flex justify-center items-center">
+                <input
+                  type="checkbox"
+                  checked={formData.noDues[dept].cleared}
+                  onChange={() => handleNoDuesChange(dept)}
+                  className="w-5 h-5"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <textarea
+                  className="w-full p-2 text-sm border rounded-md bg-white"
+                  placeholder={`Remarks for ${dept} (if any)`}
+                  value={formData.noDues[dept].remarks}
+                  onChange={(e) => handleRemarksChange(dept, e.target.value)}
+                  rows="2"
+                />
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
       </div>
 
       <div className="col-span-4">
@@ -351,7 +377,8 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="reasonForLeaving"
         >
-          Reason for leaving the company?
+          Reason for leaving the company?{" "}
+          <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -369,7 +396,8 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="experience"
         >
-          How was your experience working at the company?
+          How was your experience working at the company?{" "}
+          <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -388,7 +416,7 @@ function ExitForm() {
           htmlFor="skillUtilization"
         >
           Did you feel that your skills and talents were effectively utilized in
-          your role?
+          your role? <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -406,7 +434,7 @@ function ExitForm() {
           htmlFor="trainingSupport"
         >
           Did you receive the necessary training and support to perform your job
-          effectively?
+          effectively? <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -424,7 +452,7 @@ function ExitForm() {
           htmlFor="ideasValued"
         >
           Did you feel that your ideas and opinions were valued and heard within
-          the company?
+          the company? <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -441,7 +469,8 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="improvementSuggestions"
         >
-          What areas do you think the company could improve upon?
+          What areas do you think the company could improve upon?{" "}
+          <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -458,7 +487,8 @@ function ExitForm() {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="finalComments"
         >
-          Do you have any final comments or suggestions for the company?
+          Do you have any final comments or suggestions for the company?{" "}
+          <span className="text-red-600">*</span>
         </label>
         <textarea
           className=" w-full bg-white block p-2 text-sm rounded-md border"
@@ -473,7 +503,8 @@ function ExitForm() {
 
       <div className="col-span-4">
         <title className="text-base block w-full mt-2 mb-1 text-left underline">
-          Rate your Manager on the following:
+          Rate your Manager on the following:{" "}
+          <span className="text-red-600">*</span>
         </title>
       </div>
 
@@ -652,7 +683,8 @@ function ExitForm() {
 
       <div className="col-span-4">
         <title className="text-base block w-full mt-2 mb-1 text-left underline">
-          Rate your Manager on the following:
+          Rate your Manager on the following:{" "}
+          <span className="text-red-600 no-underline">*</span>
         </title>
       </div>
 
@@ -770,6 +802,46 @@ function ExitForm() {
             activeColor="gold"
           />
         </div>
+      </div>
+
+      <div className="col-span-4">
+        {/* Checkbox for hasViolations */}
+        <label className="text-base block w-full mt-2 mb-1 text-left underline">
+          Corporate Compliance Violations{" "}
+          <span className="text-red-600">*</span>
+        </label>
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            name="hasViolations"
+            checked={formData.corporateComplianceAcknowledgement.hasViolations}
+            onChange={(e) => handleComplianceChange(e)}
+          />
+          <span className="ml-2 text-sm">
+            I have no knowledge of any violation of the law or any corporate
+            policies or standards of conduct by me or any other employees while
+            I have been employed at the company. If I recall any suspected
+            violations in the future, I will immediately report them to the
+            Compliance Officer.
+          </span>
+        </div>
+      </div>
+
+      <div className="col-span-4 mt-4">
+        {/* Date input for acknowledgementDate */}
+        <label className="text-base block w-full mt-2 mb-1 text-left">
+          Acknowledgement Date <span className="text-red-600">*</span>
+        </label>
+        <input
+          type="date"
+          name="acknowledgementDate"
+          className=" bg-white block p-2 text-sm rounded-md border"
+          value={
+            formData.corporateComplianceAcknowledgement.acknowledgementDate
+          }
+          onChange={(e) => handleComplianceChange(e)}
+          required
+        />
       </div>
 
       <div className="col-span-3 mt-3">
