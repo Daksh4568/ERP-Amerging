@@ -97,7 +97,7 @@ router.post('/emp/login', async (req, res) => {
     const token = await emp.generateAuthToken()
     console.log(`${emp.role} ${emp.name} has now logged in the system`)
 
-    res.status(200).send({ token })
+    res.status(200).send({ emp, token })
   } catch (e) {
     res.status(400).send(e)
     console.log(e)
