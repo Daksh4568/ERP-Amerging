@@ -49,6 +49,7 @@ const employeeSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false,
     },
     bloodGroup: {
       type: String,
@@ -198,9 +199,12 @@ employeeSchema.methods.toJSON = function () {
 
 // Find employee by credentials
 employeeSchema.statics.findByCredentials = async (officialEmail, password) => {
-  const emp = await Employee.findOne({ officialEmail });
+  const emp = await Employee.findOne({ officialEmail }).select('+password');
   if (!emp) {
     throw new Error('Unable to login');
+  }
+  if (!emp.password) {
+    throw new Error('Unable to login: Password is not set');
   }
 
   const compare = util.promisify(bcrypt.compare);

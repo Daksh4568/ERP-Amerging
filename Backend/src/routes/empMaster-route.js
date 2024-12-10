@@ -3,7 +3,7 @@
  */
 const express = require('express');// Import the Express library
 //const mongoose = require('mongoose');// Import the Mongoose library for MongoDB interactions
-//const bcrypt = require('bcryptjs');// Import the bcryptjs library for hashing passwords
+const bcrypt = require('bcryptjs');// Import the bcryptjs library for hashing passwords
 const router = new express.Router();// Create a new Express router instance
 const employee = require('../models/empMaster-model');// Import the Employees model from the empMaster-model file
 const { auth, authorize } = require('../middleware/auth')
@@ -24,6 +24,10 @@ router.get('/getemp', auth, authorize('HR', 'admin', 'Manager', 'Employee'), asy
     res.status(500).send(e)
   }
 })
+// router.get('' , auth , authorize(), async(req , res)=>{
+//            const employees =await employee.find({}) 
+
+// })
 router.get('/emp/evaluationdata', async (req, res) => {
 
   try {
@@ -55,13 +59,13 @@ router.get('/emp/stats', async (req, res) => {
 router.post('/exit-form', auth, authorize('HR', 'admin', 'Manager', 'Employee'), exitEmployeeController.createExitForm);
 
 router.post('/employee-evaluation', auth, authorize('HR', 'Employee'), employeeEvaluationController.createEmployeeEvaluation)
-router.post('/regemp', async (req, res) => {
+router.post('/regemp', auth, authorize('HR', 'admin'), async (req, res) => {
   const emp = new regEmployee({
     ...req.body,
-    // addedBy: {
-    //   name: req.employee.name, // Authenticated user's name
-    //   role: req.employee.role, // Authenticated user's role
-    // },
+    addedBy: {
+      name: req.employee.name, // Authenticated user's name
+      role: req.employee.role, // Authenticated user's role
+    },
   });
 
   try {
@@ -69,15 +73,28 @@ router.post('/regemp', async (req, res) => {
     emp.eID = 'AT-' + String(lastEmpCount.counter + 1).padStart(2, '0'); // Generate new eID
     emp.stat = 'Regular'; // Default status
     if (!emp.moduleAccess) emp.moduleAccess = 1; // Default module access
+
+    const generateRandomPassword = (length = 8) => {
+
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!';
+      let password = '';
+      for (let i = 0; i < length; i++) {
+        password += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return password;
+    }
+    const randomPassword = generateRandomPassword();
+    emp.password = randomPassword;
     await emp.save();
+
+
+    //Calling the email function once the employee is registered
+    const { officialEmail, personalEmail } = emp; // Replace with the correct fields
+    const empName = req.body.name
+    await sendEmployeeCredentials(personalEmail, officialEmail, randomPassword, empName);
+
     const token = await emp.generateAuthToken(); // Generate token for new employee
     await updateEmpCounter('write'); // Increment counter
-
-    // Calling the email function once the employee is registered
-    // const { officialEmail, personalEmail } = emp; // Replace with the correct fields
-    // const password = req.body.password; // The password set by HR or generated
-    // const empName = req.body.name
-    //await sendEmployeeCredentials(personalEmail, officialEmail, password, empName);
 
     res.status(201).send({ emp, token });
     console.log("Employee Details :", emp);
@@ -95,9 +112,6 @@ router.post('/emp/login', async (req, res) => {
   try {
     const emp = await employee.findByCredentials(req.body.officialEmail, req.body.password)
     const token = await emp.generateAuthToken()
-
-
-    console.log(`${emp.role} ${emp.name} has now logged in the system`)
 
 
     console.log(`${emp.role} ${emp.name} has now logged in the system`)
