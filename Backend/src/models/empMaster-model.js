@@ -41,7 +41,6 @@ const employeeSchema = new mongoose.Schema(
     personalEmail: {
       type: String,
       required: true,
-      //unique: true,
     },
     officialEmail: {
       type: String,
@@ -183,9 +182,12 @@ const employeeSchema = new mongoose.Schema(
 employeeSchema.methods.generateAuthToken = async function () {
   const emp = this;
   const token = jwt.sign({ eID: emp.eID }, 'amergingtech5757', { expiresIn: '1h' });
+
+  const decoded = jwt.decode(token);
+
   emp.tokens = emp.tokens.concat({ token });
   await emp.save();
-  return token;
+  return { token, expiresAt: decoded.exp * 1000 }; // convert the expiry to milliseconds
 };
 
 // Customize the JSON response
@@ -199,6 +201,7 @@ employeeSchema.methods.toJSON = function () {
 
 // Find employee by credentials
 employeeSchema.statics.findByCredentials = async (officialEmail, password) => {
+  //+password is added explicitly because we have select-false in the mongoose schema and have to add it 
   const emp = await Employee.findOne({ officialEmail }).select('+password');
   if (!emp) {
     throw new Error('Unable to login');

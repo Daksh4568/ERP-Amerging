@@ -111,12 +111,17 @@ module.exports = router;
 router.post('/emp/login', async (req, res) => {
   try {
     const emp = await employee.findByCredentials(req.body.officialEmail, req.body.password)
-    const token = await emp.generateAuthToken()
+    const { token, expiresAt } = await emp.generateAuthToken()
 
 
     console.log(`${emp.role} ${emp.name} has now logged in the system`)
 
-    res.status(200).send({ emp, token })
+    res.status(200).send({
+      token: {
+        token,
+        expiresAt
+      }
+    });
   } catch (e) {
     res.status(400).send(e)
     console.log(e)
