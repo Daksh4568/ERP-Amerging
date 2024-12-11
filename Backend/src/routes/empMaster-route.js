@@ -24,11 +24,8 @@ router.get('/getemp', auth, authorize('HR', 'admin', 'Manager', 'Employee'), asy
     res.status(500).send(e)
   }
 })
-// router.get('' , auth , authorize(), async(req , res)=>{
-//            const employees =await employee.find({}) 
 
-// })
-router.get('/emp/evaluationdata', async (req, res) => {
+router.get('/emp/evaluationdata', auth, async (req, res) => {
 
   try {
     const empevaluationData = await EmployeeEvaluation.find({});// It will retrieve all the data
@@ -39,7 +36,7 @@ router.get('/emp/evaluationdata', async (req, res) => {
   }
 });
 // Route to get total regular employees and total male and female employees
-router.get('/emp/stats', async (req, res) => {
+router.get('/emp/stats', auth, async (req, res) => {
   try {
     const totalRegularEmployees = await employee.countDocuments({ stat: 'Regular' });
     const totalMaleEmployees = await employee.countDocuments({ stat: 'Regular', gender: 'Male' });
@@ -111,17 +108,11 @@ module.exports = router;
 router.post('/emp/login', async (req, res) => {
   try {
     const emp = await employee.findByCredentials(req.body.officialEmail, req.body.password)
-    const { token, expiresAt } = await emp.generateAuthToken()
-
+    const token = await emp.generateAuthToken()
 
     console.log(`${emp.role} ${emp.name} has now logged in the system`)
+    res.status(200).send({ emp, token })
 
-    res.status(200).send({
-      token: {
-        token,
-        expiresAt
-      }
-    });
   } catch (e) {
     res.status(400).send(e)
     console.log(e)
@@ -141,7 +132,7 @@ router.post('/emp/logout', auth, async (req, res) => {
   }
 })
 
-router.patch('/emp/:eID', async (req, res) => {
+router.patch('/emp/:eID', auth, async (req, res) => {
   const updates = Object.keys(req.body)
   const allowedUpdates = ['name', 'password', 'address', 'address.city'];
   const isValidOperation = updates.every((update) => allowedUpdates.includes(update))

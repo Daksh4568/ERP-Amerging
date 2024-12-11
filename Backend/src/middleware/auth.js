@@ -12,7 +12,16 @@ const auth = async (req, res, next) => {
         }
 
         // Verify the token and decode the payload
-        const decoded = jwt.verify(token, 'amergingtech5757');
+        let decoded;
+        try {
+            decoded = jwt.verify(token, 'amergingtech5757');
+
+        } catch (err) {
+            if (err.name === 'TokenExpiredError') {
+                return res.status(401).send({ error: "Authentication Error . Token has expired" });
+            }
+            return res.status(401).send({ error: 'Authentication Error . Invalid token.' })
+        }
 
         // Find the employee using eID and verify token exists in their tokens array
         const employee = await employees.findOne({ eID: decoded.eID, 'tokens.token': token });

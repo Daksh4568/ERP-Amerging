@@ -52,6 +52,7 @@ const employeeSchema = new mongoose.Schema(
     },
     bloodGroup: {
       type: String,
+      enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
     },
     address: {
       permanent: {
@@ -181,13 +182,14 @@ const employeeSchema = new mongoose.Schema(
 // Generate auth token
 employeeSchema.methods.generateAuthToken = async function () {
   const emp = this;
-  const token = jwt.sign({ eID: emp.eID }, 'amergingtech5757', { expiresIn: '1h' });
+  const token = jwt.sign({ eID: emp.eID }, 'amergingtech5757', { expiresIn: '20' });
 
-  const decoded = jwt.decode(token);
+  // const decoded = jwt.decode(token);
 
   emp.tokens = emp.tokens.concat({ token });
   await emp.save();
-  return { token, expiresAt: decoded.exp * 1000 }; // convert the expiry to milliseconds
+  return token;
+  // return { token, expiresAt: decoded.exp * 1000 }; // convert the expiry to milliseconds
 };
 
 // Customize the JSON response
