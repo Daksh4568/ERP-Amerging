@@ -10,19 +10,22 @@ const auth = async (req, res, next) => {
         if (!token) {
             return res.status(401).send({ error: 'Access Denied. No token provided.' });
         }
+        //         jwt.verify() automatically checks the expiration of a JWT if the token contains an exp (expiration) claim.
+
+        // If the token is expired, jwt.verify() will throw an error with the message "jwt expired".
 
         // Verify the token and decode the payload
-        let decoded;
-        try {
-            decoded = jwt.verify(token, 'amergingtech5757');
+        // let decoded;
+        // try {
+        //     decoded = jwt.verify(token, 'amergingtech5757');
 
-        } catch (err) {
-            if (err.name === 'TokenExpiredError') {
-                return res.status(401).send({ error: "Authentication Error . Token has expired" });
-            }
-            return res.status(401).send({ error: 'Authentication Error . Invalid token.' })
-        }
-
+        // } catch (err) {
+        //     if (err.name === 'TokenExpiredError') {
+        //         return res.status(401).send("token expired");
+        //     }
+        //     return res.status(401).send({ error: 'Authentication Error . Invalid token.' })
+        // }
+        const decoded = jwt.verify(token, 'amergingtech5757')
         // Find the employee using eID and verify token exists in their tokens array
         const employee = await employees.findOne({ eID: decoded.eID, 'tokens.token': token });
         if (!employee) {

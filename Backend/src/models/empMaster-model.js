@@ -182,7 +182,7 @@ const employeeSchema = new mongoose.Schema(
 // Generate auth token
 employeeSchema.methods.generateAuthToken = async function () {
   const emp = this;
-  const token = jwt.sign({ eID: emp.eID }, 'amergingtech5757', { expiresIn: '20' });
+  const token = jwt.sign({ eID: emp.eID }, 'amergingtech5757', { expiresIn: '1h' });
 
   // const decoded = jwt.decode(token);
 

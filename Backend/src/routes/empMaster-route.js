@@ -5,6 +5,7 @@ const express = require('express');// Import the Express library
 //const mongoose = require('mongoose');// Import the Mongoose library for MongoDB interactions
 const bcrypt = require('bcryptjs');// Import the bcryptjs library for hashing passwords
 const router = new express.Router();// Create a new Express router instance
+const jwt = require('jsonwebtoken');
 const employee = require('../models/empMaster-model');// Import the Employees model from the empMaster-model file
 const { auth, authorize } = require('../middleware/auth')
 const employeeEvaluationController = require('../Controllers/empEvaluation')
@@ -132,6 +133,28 @@ router.post('/emp/logout', auth, async (req, res) => {
   }
 })
 
+router.post('/token/verify', async (req, res) => {
+  try {
+    const token = req.header('Authorization')?.replace('Bearer ', '');
+    if (!token) {
+      return res.status(401).send({ error: "No token provided. " })
+    }
+
+    jwt.verify(token, 'amergingtech5757', (err, decoded) => {
+      if (err) {
+        if (err.name === "TokenExpiredError") {
+
+          return res.status(401).send("Token expired")
+        }
+        return res.status(401).send({ error: "Invalid token" });
+      }
+      res.status(200).send({ message: "Token is valid", decoded });
+    });
+
+  } catch (err) {
+    res.status(500).send({ error: 'Internal server error.' });
+  }
+})
 router.patch('/emp/:eID', auth, async (req, res) => {
   const updates = Object.keys(req.body)
   const allowedUpdates = ['name', 'password', 'address', 'address.city'];
