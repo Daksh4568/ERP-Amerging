@@ -16,6 +16,9 @@ const sendEmployeeCredentials = require('../Controllers/sendMail')
 //custom schema
 const counters = require('../models/counterMaster');
 
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
+
+console.log(`Base URl: ${BASE_URL}`)
 // All the get requests are defined here
 router.get('/getemp', auth, authorize('HR', 'admin', 'Manager', 'Employee'), async (req, res) => {
   try {
