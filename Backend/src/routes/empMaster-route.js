@@ -6,15 +6,16 @@ const express = require('express');// Import the Express library
 const bcrypt = require('bcryptjs');// Import the bcryptjs library for hashing passwords
 const router = new express.Router();// Create a new Express router instance
 const jwt = require('jsonwebtoken');
-const employee = require('../models/empMaster-model');// Import the Employees model from the empMaster-model file
-const { auth, authorize } = require('../middleware/auth')
-const employeeEvaluationController = require('../Controllers/empEvaluation')
-const exitEmployeeController = require('../Controllers/EmpExit');
-const regEmployee = require('../models/empMaster-model');
-const sendEmployeeCredentials = require('../Controllers/sendMail')
+const employee = require('../HR Module/models/empMaster-model');// Import the Employees model from the empMaster-model file
+const { auth, authorize } = require('../HR Module/middleware/auth')
+const employeeEvaluationController = require('../HR Module/Controllers/empEvaluation')
+const exitEmployeeController = require('../HR Module/Controllers/EmpExit');
+const regEmployee = require('../HR Module/models/empMaster-model');
+const sendEmployeeCredentials = require('../HR Module/Controllers/sendMail')
+const leaveController = require('../Employee Module/Controllers/empLeave')
 
 //custom schema
-const counters = require('../models/counterMaster');
+const counters = require('../HR Module/models/counterMaster');
 
 const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
 
@@ -55,7 +56,7 @@ router.get('/emp/stats', auth, async (req, res) => {
     res.status(400).send('db error');
   }
 });
-
+router.post('/apply-leave', auth, authorize('HR', 'admin', 'Manager', 'Employee'), leaveController.submitLeaveApplication);
 // all the post requests are here 
 router.post('/exit-form', auth, authorize('HR', 'admin', 'Manager', 'Employee'), exitEmployeeController.createExitForm);
 

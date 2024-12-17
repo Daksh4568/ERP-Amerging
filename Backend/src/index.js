@@ -8,11 +8,12 @@ const xss = require('xss-clean');
 const { body, validationResult } = require('express-validator');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
-const db = require('./db/db')
+const db = require('./HR Module/db/db')
 const app = express();
 const port = 5000;
 const employeeMasterRounter = require('./routes/empMaster-route')
 const imageToBase64 = require('image-to-base64');
+require('dotenv').config();
 
 // Security middleware
 app.use(helmet());
@@ -21,6 +22,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('combined'));
 
+
+console.log(process.env.EMAIL_USER);
+console.log(process.env.EMAIL_PASSWORD);
 
 // CORS configuration
 const corsOptions = {

@@ -3,18 +3,17 @@ const nodemailer = require('nodemailer')
 async function sendEmployeeCredentials(email, officialEmail, password, empName) {
     try {
         const transporter = nodemailer.createTransport({
-
             host: 'smtp.gmail.com',
             port: 587,
-            secure: false,
+            secure: false, // `true` for port 465, `false` for other ports
             auth: {
-                user: 'daksh4568thakur@gmail.com',
-                pass: 'jygu sxbi fvnf sczm',
+                user: process.env.EMAIL_USER, // Gmail email
+                pass: process.env.EMAIL_PASSWORD, // App password
             },
         });
 
         const mailOptions = {
-            from: '"Amerging Technologies" daksh4568thakur@gmail.com',
+            from: process.env.EMAIL_USER,
             to: email,
             subject: 'Welcome to Amerging Technology',
             html: `
