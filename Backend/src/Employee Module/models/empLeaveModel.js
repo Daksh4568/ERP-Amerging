@@ -12,7 +12,7 @@ const leaveApplicationSchema = new mongoose.Schema({
     },
     department: {
         type: String,
-        enum: ['Design', 'Instrumentation', 'Sales', 'IT', 'HR', 'R&D'],
+        //enum: ['Design', 'Instrumentation', 'Sales', 'IT', 'HR', 'R&D'],
         required: true,
     },
     designation: {
@@ -98,14 +98,14 @@ const leaveApplicationSchema = new mongoose.Schema({
 
 // Automatically calculates the number of days
 
-leaveApplicationSchema.pre('validate', function (next) {
-    if (this.startDate && this.endDate) {
-        const diffTime = Math.abs(this.endDate - this.startDate);
+// leaveApplicationSchema.pre('validate', function (next) {
+//     if (this.startDate && this.endDate) {
+//         const diffTime = Math.abs(this.endDate - this.startDate);
 
-        this.numberOfDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-    }
-    next();
-});
+//         this.numberOfDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+//     }
+//     next();
+// });
 
 const LeaveApplication = mongoose.model('LeaveApplication', leaveApplicationSchema);
 

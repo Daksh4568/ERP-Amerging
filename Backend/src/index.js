@@ -23,8 +23,8 @@ app.use(cookieParser());
 app.use(morgan('combined'));
 
 
-console.log(process.env.EMAIL_USER);
-console.log(process.env.EMAIL_PASSWORD);
+// console.log(process.env.EMAIL_USER);
+// console.log(process.env.EMAIL_PASSWORD);
 
 // CORS configuration
 const corsOptions = {

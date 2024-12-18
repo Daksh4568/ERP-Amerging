@@ -56,14 +56,14 @@ exports.submitLeaveApplication = async (req, res) => {
         );
 
         res.status(201).json({
-            message: 'Leave applicatio submitted successfully . Approval email sent to supervisor .',
+            message: 'Leave application submitted successfully . Approval email sent to supervisor .',
             data: savedData
         });
     } catch (e) {
         console.log('Error submitting leave application:', e.message);
 
         res.status(500).json({
-            message: 'Error submittinf leave application',
+            message: 'Error submitting leave application',
             error: e.message,
         });
     }
