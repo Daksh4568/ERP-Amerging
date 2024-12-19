@@ -68,7 +68,6 @@ exports.submitLeaveApplication = async (req, res) => {
         });
     }
 };
-
 const sendApprovalMail = async (supervisorEmail, employeeName, leaveType, startDate, endDate, reason) => {
     try {
         // Configure Nodemailer Transporter

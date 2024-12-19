@@ -182,14 +182,18 @@ const employeeSchema = new mongoose.Schema(
 // Generate auth token
 employeeSchema.methods.generateAuthToken = async function () {
   const emp = this;
-  const token = jwt.sign({ eID: emp.eID }, 'amergingtech5757', { expiresIn: '15m' });
+  const token = jwt.sign({ eID: emp.eID }, 'amergingtech5757', { expiresIn: '30d' });
 
-  // const decoded = jwt.decode(token);
-
+  const decoded = jwt.decode(token);
+  console.log('Expiration time seconds', decoded.exp)
+  console.log('Current time', Math.floor(Date.now() / 1000));
   emp.tokens = emp.tokens.concat({ token });
   await emp.save();
-  return token;
-  // return { token, expiresAt: decoded.exp * 1000 }; // convert the expiry to milliseconds
+  //return token;
+  const expiresAt = decoded.exp * 1000
+  console.log(expiresAt)
+  return { token, expiresAt: decoded.exp * 1000 }; // convert the expiry to milliseconds
+
 };
 
 // Customize the JSON response

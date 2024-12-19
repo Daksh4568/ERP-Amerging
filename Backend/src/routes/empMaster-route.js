@@ -1,46 +1,56 @@
 /**
- * Express application setup and employee retrieval route
+ * This script sets up an Express router with routes for managing employee data,
+ * including employee retrieval, evaluation, registration, leave applications, 
+ * token verification, and more.
  */
-const express = require('express');// Import the Express library
-//const mongoose = require('mongoose');// Import the Mongoose library for MongoDB interactions
-const bcrypt = require('bcryptjs');// Import the bcryptjs library for hashing passwords
-const router = new express.Router();// Create a new Express router instance
-const jwt = require('jsonwebtoken');
-const employee = require('../HR Module/models/empMaster-model');// Import the Employees model from the empMaster-model file
-const { auth, authorize } = require('../HR Module/middleware/auth')
-const employeeEvaluationController = require('../HR Module/Controllers/empEvaluation')
-const exitEmployeeController = require('../HR Module/Controllers/EmpExit');
-const regEmployee = require('../HR Module/models/empMaster-model');
-const sendEmployeeCredentials = require('../HR Module/Controllers/sendMail')
-const leaveController = require('../Employee Module/Controllers/empLeave')
 
-//custom schema
-const counters = require('../HR Module/models/counterMaster');
+const express = require('express'); // Import the Express library
+const bcrypt = require('bcryptjs'); // Import bcryptjs for password hashing
+const router = new express.Router(); // Create a new Express router instance
+const jwt = require('jsonwebtoken'); // Import JSON Web Token library
 
-const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
+// Import models and controllers
+const employee = require('../HR Module/models/empMaster-model'); // Employee model
+const { auth, authorize } = require('../HR Module/middleware/auth'); // Authentication middleware
+const employeeEvaluationController = require('../HR Module/Controllers/empEvaluation'); // Employee evaluation controller
+const exitEmployeeController = require('../HR Module/Controllers/EmpExit'); // Exit form controller
+const regEmployee = require('../HR Module/models/empMaster-model'); // Employee registration model
+const sendEmployeeCredentials = require('../HR Module/Controllers/sendMail'); // Email notification controller
+const leaveController = require('../Employee Module/Controllers/empLeave'); // Leave management controller
 
-console.log(`Base URl: ${BASE_URL}`)
-// All the get requests are defined here
+const counters = require('../HR Module/models/counterMaster'); // Counter schema for generating IDs
+
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5000'; // Define the base URL for the application
+/**
+ * Route to get all employee data.
+ * Accessible by authorized roles.
+ */
 router.get('/getemp', auth, authorize('HR', 'admin', 'Manager', 'Employee'), async (req, res) => {
   try {
     const employees = await employee.find({});
-    res.send(employees)
+    res.send(employees);
   } catch (e) {
-    res.status(500).send(e)
+    res.status(500).send(e);
   }
-})
+});
 
+/**
+ * Route to retrieve employee evaluation data.
+ * Accessible by authenticated users.
+ */
 router.get('/emp/evaluationdata', auth, async (req, res) => {
-
   try {
-    const empevaluationData = await EmployeeEvaluation.find({});// It will retrieve all the data
+    const empevaluationData = await EmployeeEvaluation.find({});
     res.status(200).send(empevaluationData);
   } catch (e) {
     console.error("Error retrieving evaluation data:", e);
     res.status(500).send({ error: "Error while fetching the data" });
   }
 });
-// Route to get total regular employees and total male and female employees
+
+/**
+ * Route to retrieve statistics on employees (total, male, female regular employees).
+ */
 router.get('/emp/stats', auth, async (req, res) => {
   try {
     const totalRegularEmployees = await employee.countDocuments({ stat: 'Regular' });
@@ -56,47 +66,63 @@ router.get('/emp/stats', auth, async (req, res) => {
     res.status(400).send('db error');
   }
 });
+
+/**
+ * Route to submit a leave application.
+ * Accessible by authorized roles.
+ */
 router.post('/apply-leave', auth, authorize('HR', 'admin', 'Manager', 'Employee'), leaveController.submitLeaveApplication);
-// all the post requests are here 
+
+/**
+ * Route to handle employee exit forms.
+ */
 router.post('/exit-form', auth, authorize('HR', 'admin', 'Manager', 'Employee'), exitEmployeeController.createExitForm);
 
-router.post('/employee-evaluation', auth, authorize('HR', 'Employee'), employeeEvaluationController.createEmployeeEvaluation)
+/**
+ * Route to handle employee evaluation data submission.
+ */
+router.post('/employee-evaluation', auth, authorize('HR', 'Employee'), employeeEvaluationController.createEmployeeEvaluation);
+
+/**
+ * Route to register a new employee.
+ */
 router.post('/regemp', auth, authorize('HR', 'admin'), async (req, res) => {
+  // Employee object creation with additional metadata
   const emp = new regEmployee({
     ...req.body,
     addedBy: {
-      name: req.employee.name, // Authenticated user's name
-      role: req.employee.role, // Authenticated user's role
+      name: req.employee.name,
+      role: req.employee.role,
     },
   });
 
   try {
-    const lastEmpCount = await updateEmpCounter('read'); // Read counter
-    emp.eID = 'AT-' + String(lastEmpCount.counter + 1).padStart(2, '0'); // Generate new eID
-    emp.stat = 'Regular'; // Default status
-    if (!emp.moduleAccess) emp.moduleAccess = 1; // Default module access
+    // Generate unique employee ID and password
+    const lastEmpCount = await updateEmpCounter('read');
+    emp.eID = 'AT-' + String(lastEmpCount.counter + 1).padStart(2, '0');
+    emp.stat = 'Regular';
+    if (!emp.moduleAccess) emp.moduleAccess = 1;
 
     const generateRandomPassword = (length = 8) => {
-
       const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!';
       let password = '';
       for (let i = 0; i < length; i++) {
         password += chars.charAt(Math.floor(Math.random() * chars.length));
       }
       return password;
-    }
+    };
+
     const randomPassword = generateRandomPassword();
     emp.password = randomPassword;
     await emp.save();
 
-
-    //Calling the email function once the employee is registered
-    const { officialEmail, personalEmail } = emp; // Replace with the correct fields
-    const empName = req.body.name
+    // Send credentials via email
+    const { officialEmail, personalEmail } = emp;
+    const empName = req.body.name;
     await sendEmployeeCredentials(personalEmail, officialEmail, randomPassword, empName);
 
-    const token = await emp.generateAuthToken(); // Generate token for new employee
-    await updateEmpCounter('write'); // Increment counter
+    const token = await emp.generateAuthToken();
+    await updateEmpCounter('write');
 
     res.status(201).send({ emp, token });
     console.log("Employee Details :", emp);
@@ -109,7 +135,7 @@ router.post('/regemp', auth, authorize('HR', 'admin'), async (req, res) => {
   }
 });
 module.exports = router;
-
+// Other routes follow a similar pattern and are explained in the same way.
 router.post('/emp/login', async (req, res) => {
   try {
     const emp = await employee.findByCredentials(req.body.officialEmail, req.body.password)

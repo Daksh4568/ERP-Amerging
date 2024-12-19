@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 
 const leaveApplicationSchema = new mongoose.Schema({
-    // eID: {
-    //     type: String,
-    //     required: true,
-    //     ref: 'employeeMaster',
-    // },
+    eID: {
+        type: String,
+        required: true,
+        ref: 'employeeMaster',
+        select: false
+    },
     name: {
         type: String,
         required: true,
