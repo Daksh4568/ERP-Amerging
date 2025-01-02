@@ -15,7 +15,7 @@ const employeeMasterRounter = require('./routes/empMaster-route')
 const imageToBase64 = require('image-to-base64');
 require('dotenv').config();
 
-// Security middleware
+//Security middleware
 app.use(helmet());
 app.use(xss());
 app.use(express.json());

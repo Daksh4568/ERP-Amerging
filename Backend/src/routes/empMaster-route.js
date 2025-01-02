@@ -16,8 +16,9 @@ const employeeEvaluationController = require('../HR Module/Controllers/empEvalua
 const exitEmployeeController = require('../HR Module/Controllers/EmpExit'); // Exit form controller
 const regEmployee = require('../HR Module/models/empMaster-model'); // Employee registration model
 const sendEmployeeCredentials = require('../HR Module/Controllers/sendMail'); // Email notification controller
-const leaveController = require('../Employee Module/Controllers/empLeave'); // Leave management controller
-
+// const leaveController = require('../Employee Module/Controllers/empLeave'); // Leave management controller
+const leaveController = require('../Employee Module/Controllers/empLeave');
+const { handleLeaveNotification, getAllNotificationsForManager } = require('../Employee Module/Controllers/handleleave');
 const counters = require('../HR Module/models/counterMaster'); // Counter schema for generating IDs
 
 const BASE_URL = process.env.BASE_URL || 'http://localhost:5000'; // Define the base URL for the application
@@ -78,6 +79,9 @@ router.post('/apply-leave', auth, authorize('HR', 'admin', 'Manager', 'Employee'
  */
 router.post('/exit-form', auth, authorize('HR', 'admin', 'Manager', 'Employee'), exitEmployeeController.createExitForm);
 
+router.get('/notifications/manager', auth, authorize('Manager'), getAllNotificationsForManager);
+router.patch('/notifications/handle', auth, authorize('Manager'), handleLeaveNotification);
+
 /**
  * Route to handle employee evaluation data submission.
  */
@@ -114,6 +118,7 @@ router.post('/regemp', auth, authorize('HR', 'admin'), async (req, res) => {
 
     const randomPassword = generateRandomPassword();
     emp.password = randomPassword;
+
     await emp.save();
 
     // Send credentials via email

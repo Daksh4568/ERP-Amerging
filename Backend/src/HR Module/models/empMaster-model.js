@@ -40,7 +40,7 @@ const employeeSchema = new mongoose.Schema(
 
     personalEmail: {
       type: String,
-      required: true,
+      // required: true,
     },
     officialEmail: {
       type: String,
@@ -174,7 +174,7 @@ const employeeSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // Enables createdAt and updatedAt fields
+    timestamps: true,
   }
 );
 
@@ -185,8 +185,8 @@ employeeSchema.methods.generateAuthToken = async function () {
   const token = jwt.sign({ eID: emp.eID }, 'amergingtech5757', { expiresIn: '30d' });
 
   const decoded = jwt.decode(token);
-  console.log('Expiration time seconds', decoded.exp)
-  console.log('Current time', Math.floor(Date.now() / 1000));
+  // console.log('Expiration time seconds', decoded.exp)
+  // console.log('Current time', Math.floor(Date.now() / 1000));
   emp.tokens = emp.tokens.concat({ token });
   await emp.save();
   //return token;
@@ -210,24 +210,27 @@ employeeSchema.statics.findByCredentials = async (officialEmail, password) => {
   //+password is added explicitly because we have select-false in the mongoose schema and have to add it 
   const emp = await Employee.findOne({ officialEmail }).select('+password');
   if (!emp) {
-    throw new Error('Unable to login');
+    throw new Error('Unable to login . Employee Not found');
   }
   if (!emp.password) {
     throw new Error('Unable to login: Password is not set');
   }
 
+
   const compare = util.promisify(bcrypt.compare);
   const isMatch = await compare(password, emp.password);
+
   if (!isMatch) {
-    throw new Error('Unable to login');
+    throw new Error('Unable to login the employee');
   }
   return emp;
 };
 
-// Hash the plain text password before saving
+//Hash the plain text password before saving
 employeeSchema.pre('save', async function (next) {
   const emp = this;
   if (emp.isModified('password')) {
+    //console.log("Hashing password:", emp.password);
     const hash = util.promisify(bcrypt.hash);
     emp.password = await hash(emp.password, 8);
   }
