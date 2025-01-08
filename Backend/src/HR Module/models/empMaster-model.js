@@ -189,10 +189,7 @@ employeeSchema.methods.generateAuthToken = async function () {
   // console.log('Current time', Math.floor(Date.now() / 1000));
   emp.tokens = emp.tokens.concat({ token });
   await emp.save();
-  //return token;
-  const expiresAt = decoded.exp * 1000
-  console.log(expiresAt)
-  return { token, expiresAt: decoded.exp * 1000 }; // convert the expiry to milliseconds
+  return token;
 
 };
 
