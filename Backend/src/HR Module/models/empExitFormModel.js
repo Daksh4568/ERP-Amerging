@@ -33,6 +33,11 @@ const departmentFeedbackSchema = {
 
 // Employee exit form schema
 const exitEmployeeSchema = new mongoose.Schema({
+    eID: {
+        type: String,
+        unique: true,
+        required: true,
+    },
     date: {
         type: Date,
         default: Date.now,
