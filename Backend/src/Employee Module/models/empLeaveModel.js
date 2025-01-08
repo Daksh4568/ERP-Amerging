@@ -4,6 +4,11 @@ const Employee = require('../../HR Module/models/empMaster-model'); // To fetch 
 const sendMail = require('../Controllers/sendmail'); // Helper for sending emails
 
 const leaveApplicationSchema = new mongoose.Schema({
+    eID: {
+        type: String,
+        unique: true,
+        required: true,
+    },
     name: { type: String, required: true },
     department: { type: String, required: true },
     designation: { type: String },
