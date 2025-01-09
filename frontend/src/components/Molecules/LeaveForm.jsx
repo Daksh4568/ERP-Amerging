@@ -63,9 +63,7 @@ const LeaveForm = () => {
     if (!start || !end) return 0;
 
     const startDate = new Date(start);
-    console.log(startDate);
     const endDate = new Date(end);
-    console.log(endDate);
 
     if (
       startDate.toString() === "Invalid Date" ||
