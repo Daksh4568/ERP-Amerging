@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Space, Input } from "antd";
 import { BellIcon, LogOutIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import Notification from "../Pages/Notification";
 
 const Header = ({ collapsed, toggleSidebar }) => {
   const navigate = useNavigate();
   const { Search } = Input;
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -61,14 +63,22 @@ const Header = ({ collapsed, toggleSidebar }) => {
       </Space> */}
       
       <div className="flex items-center justify-center gap-4">
-        <Button          
+        {/* <Button          
           type="text"
           onClick={() => navigate("/notifications")} // Navigate to Notifications page
         >
           <span>
             <BellIcon />
           </span>
+        </Button> */}
+
+        <Button
+        variant="ghost"
+        onClick={() => setIsDialogOpen(true)}>
+          <BellIcon size={24} />
         </Button>
+
+        <Notification isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} />
 
         <Button onClick={handleLogout}>
           <span>

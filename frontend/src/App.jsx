@@ -12,6 +12,7 @@ import NavLinks from "./components/Organisms/NavLinks";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import LeaveForm from "./components/Molecules/LeaveForm";
 import Notification from "./components/Pages/Notification";
+import LeaveApproval from "./components/Molecules/LeaveApproval";
 
 function MainLayout() {
   return (
@@ -77,6 +78,16 @@ function App() {
             {
               path: "/notifications",
               element: <Notification />,
+            },
+          ],
+        },
+        {
+          path: "/",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/leave-approval/:notificationId",
+              element: <LeaveApproval />,
             },
           ],
         },

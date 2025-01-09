@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LeaveForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     eID: "",
     name: "",
@@ -162,6 +164,7 @@ const LeaveForm = () => {
           additionalNotes: "",
           declaration: false,
         });
+        navigate("/dashboard");
       } else {
         alert(`Unexpected response status: ${response.status}`);
       }
