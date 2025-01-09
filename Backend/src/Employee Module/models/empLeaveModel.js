@@ -7,7 +7,7 @@ const leaveApplicationSchema = new mongoose.Schema({
     eID: {
         type: String,
         unique: true,
-        required: true,
+        // required: true,
     },
     name: { type: String, required: true },
     department: { type: String, required: true },
@@ -19,8 +19,8 @@ const leaveApplicationSchema = new mongoose.Schema({
         required: true,
     },
     specifyIfOthers: { type: String, required: function () { return this.typeOfLeave === 'Others'; } },
-    startDate: { type: Date, required: true },
-    endDate: { type: Date, required: true },
+    startDate: { type: Date },
+    endDate: { type: Date },
     numberOfDays: { type: Number },
     reasonForLeave: { type: String },
     emergencyContact: { type: String, required: true },
@@ -51,6 +51,9 @@ leaveApplicationSchema.pre('save', async function (next) {
             recipientEmail: manager.officialEmail, // Manager's email
             type: 'LeaveApproval', // Fixed type for leave notifications
             title: `Leave Request from ${this.name}`, // Title derived from leave applicant's name
+            reasonForLeave: this.reasonForLeave, // Reason for leave
+            startDate: this.startDate, // Start date of leave
+            endDate: this.endDate, // End date of leave
             message: `${this.name} has applied for leave from ${this.startDate.toDateString()} to ${this.endDate.toDateString()}.`, // Detailed message
             data: {
                 leaveId: this._id, // Reference to the leave application

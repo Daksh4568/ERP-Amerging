@@ -18,6 +18,7 @@ const submitLeaveApplication = async (req, res) => {
         }
 
         const savedLeave = await leaveApplication.save();
+        console.log("Leave data saved", savedLeave);
 
         const notification = new Notification({
             recipientEmpId: leaveApplication.supervisor.name,
@@ -25,10 +26,15 @@ const submitLeaveApplication = async (req, res) => {
             type: 'LeaveApproval',
             title: 'Leave Approval Request',
             message: `${leaveApplication.name} applied for leave.`,
-            data: { leaveId: savedLeave._id },
+            startDate: leaveApplication.startDate,
+            endDate: leaveApplication.endDate,
+            reasonForLeave: leaveApplication.reasonForLeave,
+            data: { leaveId: savedLeave._id }, // the object id will be the leave id of that particular leave and will be sent in the notification
         });
 
+
         await notification.save();
+        console.log("Notification data saved`", notification);
 
         await sendApprovalMail(
             leaveApplication.supervisor.officialEmail,

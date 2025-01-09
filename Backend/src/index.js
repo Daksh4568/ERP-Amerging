@@ -29,7 +29,7 @@ app.use(morgan('combined'));
 // CORS configuration
 const corsOptions = {
   origin: ['http://localhost:5173', 'http://another-domain.com'], // Allow multiple origins
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific methods
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Allow specific methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
   exposedHeaders: ['Content-Length', 'X-Kuma-Revision'], // Expose specific headers
   credentials: true, // Allow credentials
