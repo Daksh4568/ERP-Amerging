@@ -140,7 +140,6 @@ const LeaveForm = () => {
       console.log(formData);
 
       if (response.status === 201) {
-        alert("Form submitted successfully!");
         setFormData({
           eID: "",
           name: "",
@@ -163,6 +162,7 @@ const LeaveForm = () => {
           declaration: false,
         });
         navigate("/dashboard");
+        alert("Form submitted successfully!");
       } else {
         alert(`Unexpected response status: ${response.status}`);
       }
