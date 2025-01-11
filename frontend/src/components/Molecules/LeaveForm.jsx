@@ -90,23 +90,6 @@ const LeaveForm = () => {
     setFormData(updatedData);
   };
 
-  // const handleDateChange = (e) => {
-  //   const { name, value } = e.target;
-
-  //   // Convert the date to Indian format (DD-MM-YYYY)
-  //   const [year, month, day] = value.split("-");
-  //   const formattedDate = `${day}-${month}-${year}`;
-
-  //   const updatedData = { ...formData, [name]: formattedDate };
-
-  //   updatedData.numberOfDays = calculateDays(
-  //     updatedData.startDate,
-  //     updatedData.endDate
-  //   );
-
-  //   setFormData(updatedData);
-  // };
-
   const today = new Date().toISOString().split("T")[0];
 
   const handleSubmit = async (e) => {
@@ -298,9 +281,24 @@ const LeaveForm = () => {
           />
         </div>
 
+        <div className="flex flex-col">
+        <label htmlFor="emergencyContact" className="text-gray-700 font-medium">
+            Emergency Contact
+          </label>
+          <input
+            type="text"
+            id="emergencyContact"
+            name="emergencyContact"
+            value={formData.emergencyContact}
+            onChange={handleChange}
+            maxLength={10}
+            pattern="[0-9]{10}"
+            className="mt-1 p-2 border border-gray-300 bg-white rounded-md"
+          />
+        </div>
+
         {/* Emergency Contact, Address During Leave, Additional Notes */}
         {[
-          { label: "Emergency Contact", name: "emergencyContact" },
           { label: "Address During Leave", name: "addressDuringLeave" },
           { label: "Additional Notes", name: "additionalNotes" },
         ].map(({ label, name }) => (

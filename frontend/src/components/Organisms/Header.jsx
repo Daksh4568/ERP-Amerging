@@ -62,20 +62,12 @@ const Header = ({ collapsed, toggleSidebar }) => {
         <Search placeholder="Search" enterButton="Search" size="medium" />
       </Space> */}
       
-      <div className="flex items-center justify-center gap-4">
-        {/* <Button          
-          type="text"
-          onClick={() => navigate("/notifications")} // Navigate to Notifications page
-        >
-          <span>
-            <BellIcon />
-          </span>
-        </Button> */}
+      <div className="flex items-center justify-center gap-4 ">
 
         <Button
         variant="ghost"
         onClick={() => setIsDialogOpen(true)}>
-          <BellIcon size={24} />
+          <BellIcon className="text-white" />
         </Button>
 
         <Notification isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} />
