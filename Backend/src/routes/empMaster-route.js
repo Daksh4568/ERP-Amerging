@@ -18,6 +18,7 @@ const regEmployee = require('../HR Module/models/empMaster-model'); // Employee 
 const sendEmployeeCredentials = require('../HR Module/Controllers/sendMail'); // Email notification controller
 // const leaveController = require('../Employee Module/Controllers/empLeave'); // Leave management controller
 const leaveController = require('../Employee Module/Controllers/empLeave');
+const LeaveApplication = require('../Employee Module/models/empLeaveModel'); // to get the leave data from the database
 const { handleLeaveNotification, getAllNotificationsForManager } = require('../Employee Module/Controllers/handleleave');
 const counters = require('../HR Module/models/counterMaster'); // Counter schema for generating IDs
 
@@ -34,7 +35,15 @@ router.get('/getemp', auth, authorize('HR', 'admin', 'Manager', 'Employee'), asy
     res.status(500).send(e);
   }
 });
+router.get('/leave-data', auth, async (req, res) => {
+  try {
+    const leaveData = await LeaveApplication.find({});
+    res.status(200).send(leaveData);
+  } catch (e) {
+    res.status(500).send({ e: "Error while fetching the data" });
 
+  }
+})
 /**
  * Route to retrieve employee evaluation data.
  * Accessible by authenticated users.
