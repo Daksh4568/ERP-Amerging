@@ -13,6 +13,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import LeaveForm from "./components/Molecules/LeaveForm";
 import Notification from "./components/Pages/Notification";
 import LeaveApproval from "./components/Molecules/LeaveApproval";
+import LeaveStatusPage from "./components/Pages/LeaveStatusPage";
 
 function MainLayout() {
   return (
@@ -68,6 +69,10 @@ function App() {
             {
               path: "leave-form",
               element: <LeaveForm />,
+            },
+            {
+              path: "leave-status",
+              element: <LeaveStatusPage />,
             },
           ],
         },
