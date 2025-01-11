@@ -103,7 +103,7 @@ const LeaveStatusPage = () => {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="p-2 border rounded-md bg-blue-500 m-4"
+            className="p-2 border rounded-md bg-blue-500 m-2 cursor-pointer"
           >
             <option value="all">All Leaves</option>
             <option value="pending">Pending</option>
@@ -115,7 +115,7 @@ const LeaveStatusPage = () => {
           <select
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
-            className="p-2 border rounded-md bg-blue-500 m-4"
+            className="p-2 border rounded-md bg-blue-500 m-2 cursor-pointer"
           >
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
@@ -123,7 +123,7 @@ const LeaveStatusPage = () => {
         </div>
 
         <div>
-        <Button className='bg-blue-500 text-black' onClick={() => (navigate('/dashboard/leave-form'))}>Apply Leave</Button>
+        <Button className='bg-blue-500 text-black hover:bg-blue-200' onClick={() => (navigate('/dashboard/leave-form'))}>Apply Leave</Button>
         </div>
       </div>
 
