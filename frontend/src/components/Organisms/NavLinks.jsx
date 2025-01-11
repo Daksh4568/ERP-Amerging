@@ -32,8 +32,8 @@ const NavLinks = () => {
 
           {/* Employee Module */}
           <SubMenu className='bg-[#2E3B55]' label="Employee Module">
-            <MenuItem className='bg-[#2E3B55] hover:bg-[#4A90E2] hover:text-black' component={<Link to="/dashboard/leave-form" />}>Leave Form</MenuItem>
-            <MenuItem className='bg-[#2E3B55] hover:bg-[#4A90E2] hover:text-black' component={<Link to="/dashboard/leave-status" />}>Leave Status</MenuItem>
+            {/* <MenuItem className='bg-[#2E3B55] hover:bg-[#4A90E2] hover:text-black' component={<Link to="/dashboard/leave-form" />}>Leave Form</MenuItem> */}
+            <MenuItem className='bg-[#2E3B55] hover:bg-[#4A90E2] hover:text-black' component={<Link to="/dashboard/leave-status" />}>My Leaves</MenuItem>
           </SubMenu>
         </Menu>
       </Sidebar>

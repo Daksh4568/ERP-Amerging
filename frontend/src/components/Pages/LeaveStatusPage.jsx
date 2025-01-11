@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 
 const LeaveStatusPage = () => {
   const [leaves, setLeaves] = useState([]);
@@ -7,8 +9,8 @@ const LeaveStatusPage = () => {
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState("all");
   const [sortOrder, setSortOrder] = useState("newest");
-
   const [employeeData, setEmployeeData] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLeaves = async () => {
@@ -108,9 +110,7 @@ const LeaveStatusPage = () => {
             <option value="approved">Approved</option>
             <option value="rejected">Rejected</option>
           </select>
-        </div>
-
-        <div>
+        
           <label htmlFor="">Sort :</label>
           <select
             value={sortOrder}
@@ -120,6 +120,10 @@ const LeaveStatusPage = () => {
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
           </select>
+        </div>
+
+        <div>
+        <Button className='bg-blue-500 text-black' onClick={() => (navigate('/dashboard/leave-form'))}>Apply Leave</Button>
         </div>
       </div>
 
