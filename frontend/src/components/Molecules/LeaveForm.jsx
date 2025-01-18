@@ -120,7 +120,7 @@ const LeaveForm = () => {
         }
       );
 
-      console.log(formData);
+      // console.log(formData);
 
       if (response.status === 201) {
         setFormData({

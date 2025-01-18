@@ -198,7 +198,7 @@ function ExitForm() {
         alert("No token available, please log in again.");
         return;
       }
-      console.log(JSON.stringify(formData));
+      // console.log(JSON.stringify(formData));
 
       const response = await axios.post(
         "http://localhost:5000/exit-form",
@@ -212,7 +212,7 @@ function ExitForm() {
       );
 
       if (response.status === 201) {
-        console.log("Exit form successfully submitted");
+        // console.log("Exit form successfully submitted");
         alert("Exit form successfully submitted");
         // navigate("/dashboard");
       }
@@ -225,7 +225,7 @@ function ExitForm() {
     }
 
     const values = JSON.stringify(formData, null, 2);
-    console.log(values);
+    // console.log(values);
   };
 
   return (

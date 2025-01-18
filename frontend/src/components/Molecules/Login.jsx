@@ -52,7 +52,7 @@ function Login() {
       // handling invalid credentials
       if (error.response && error.response.status === 400) {
         alert("Invalid username or password");
-        console.log("Invalid username or password");
+        // console.log("Invalid username or password");
       } else {
         console.error("Error submitting form data:", error);
         alert("An error occurred. Please try again later.");

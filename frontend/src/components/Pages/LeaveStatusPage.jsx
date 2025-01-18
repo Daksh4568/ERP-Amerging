@@ -18,7 +18,7 @@ const LeaveStatusPage = () => {
         const token = localStorage.getItem("authToken");
         const employeeData = JSON.parse(localStorage.getItem("empData"));
         const employeeId = employeeData?.eID;
-        console.log(employeeId);
+        // console.log(employeeId);
 
         if (!employeeId) {
           alert("Employee ID not found. Please log in again.");

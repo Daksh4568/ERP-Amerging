@@ -50,7 +50,7 @@ const SelfEvaluationForm = () => {
         alert("No token available, please log in again.");
         return;
       }
-      console.log(JSON.stringify(formData));
+      // console.log(JSON.stringify(formData));
 
       const response = await axios.post("http://localhost:5000/employee-evaluation", formData, {
         headers: {
@@ -60,7 +60,7 @@ const SelfEvaluationForm = () => {
       });
 
       if (response.status === 201) {
-        console.log("Evaluation form successfully submitted");
+        // console.log("Evaluation form successfully submitted");
         alert("Evaluation form successfully submitted");
         // navigate("/dashboard");
       }
