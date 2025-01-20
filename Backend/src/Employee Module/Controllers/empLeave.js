@@ -1,3 +1,4 @@
+// Leave Form
 const LeaveApplication = require('../models/empLeaveModel');
 const Notification = require('../models/notificationSchema');
 const nodemailer = require('nodemailer');
