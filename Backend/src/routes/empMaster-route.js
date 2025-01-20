@@ -35,6 +35,7 @@ router.get('/getemp', auth, authorize('HR', 'admin', 'Manager', 'Employee'), asy
     res.status(500).send(e);
   }
 });
+// GET request to retrieve all leave data
 router.get('/leave-data', auth, async (req, res) => {
   try {
     const leaveData = await LeaveApplication.find({});
