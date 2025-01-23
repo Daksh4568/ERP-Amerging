@@ -136,7 +136,7 @@ function JoiningForm() {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/regemp",
+        "http://localhost:3000/api/regemp",
         finalData,
         {
           headers: {

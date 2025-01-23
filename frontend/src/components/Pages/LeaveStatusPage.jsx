@@ -26,7 +26,7 @@ const LeaveStatusPage = () => {
           return;
         }
 
-        const response = await axios.get("http://localhost:5000/leave-data", {
+        const response = await axios.get("http://localhost:3000/api/leave-data", {
           headers: { Authorization: `Bearer ${token}` },
         });
 

@@ -19,7 +19,7 @@ const Header = ({ collapsed, toggleSidebar }) => {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/emp/logout", {
+      const response = await fetch("http://localhost:3000/api/emp/logout", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

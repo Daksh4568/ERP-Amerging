@@ -201,7 +201,7 @@ function ExitForm() {
       // console.log(JSON.stringify(formData));
 
       const response = await axios.post(
-        "http://localhost:5000/exit-form",
+        "http://localhost:3000/api/exit-form",
         formData,
         {
           headers: {

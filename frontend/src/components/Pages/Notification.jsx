@@ -15,7 +15,7 @@ const NotificationDialog = ({ isOpen, onClose }) => {
     const fetchNotifications = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get("http://localhost:5000/notifications/manager", {
+        const response = await axios.get("http://localhost:3000/api/notifications/manager", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
