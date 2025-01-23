@@ -36,7 +36,7 @@ const exitEmployeeSchema = new mongoose.Schema({
     eID: {
         type: String,
         unique: true,
-        required: true,
+        // required: true,
     },
     date: {
         type: Date,

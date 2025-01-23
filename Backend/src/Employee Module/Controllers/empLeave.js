@@ -1,25 +1,35 @@
 const LeaveApplication = require('../models/empLeaveModel');
 const Notification = require('../models/notificationSchema');
 const nodemailer = require('nodemailer');
+const connectToDatabase = require('../../HR Module/db/db'); // Ensure MongoDB connection
 
 // Submit Leave Application
-const submitLeaveApplication = async (req, res) => {
+const submitLeaveApplication = async (leaveData, user) => {
     try {
+        // Ensure database connection
+        await connectToDatabase();
+
+        // Create a new leave application
         const leaveApplication = new LeaveApplication({
-            ...req.body,
+            ...leaveData,
             addedBy: {
-                name: req.employee.name,
-                role: req.employee.role,
+                name: user.name,
+                role: user.role,
             },
         });
 
         if (!leaveApplication.declaration) {
-            return res.status(400).json({ message: 'You must agree to the declaration before submitting the form.' });
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ message: 'You must agree to the declaration before submitting the form.' }),
+            };
         }
 
+        // Save the leave application
         const savedLeave = await leaveApplication.save();
-        console.log("Leave data saved", savedLeave);
+        console.log('Leave data saved:', savedLeave);
 
+        // Create a notification for the supervisor
         const notification = new Notification({
             recipientEmpId: leaveApplication.supervisor.name,
             recipientEmail: leaveApplication.supervisor.officialEmail,
@@ -29,13 +39,13 @@ const submitLeaveApplication = async (req, res) => {
             startDate: leaveApplication.startDate,
             endDate: leaveApplication.endDate,
             reasonForLeave: leaveApplication.reasonForLeave,
-            data: { leaveId: savedLeave._id }, // the object id will be the leave id of that particular leave and will be sent in the notification
+            data: { leaveId: savedLeave._id },
         });
 
-
         await notification.save();
-        console.log("Notification data saved`", notification);
+        console.log('Notification data saved:', notification);
 
+        // Send approval email to the supervisor
         await sendApprovalMail(
             leaveApplication.supervisor.officialEmail,
             leaveApplication.name,
@@ -45,17 +55,26 @@ const submitLeaveApplication = async (req, res) => {
             leaveApplication.reasonForLeave
         );
 
-        res.status(201).json({
-            message: 'Leave application submitted successfully.',
-            data: savedLeave,
-        });
+        return {
+            statusCode: 201,
+            body: JSON.stringify({
+                message: 'Leave application submitted successfully.',
+                data: savedLeave,
+            }),
+        };
     } catch (error) {
-        res.status(500).json({ message: 'Error submitting leave application', error: error.message });
+        console.error('Error submitting leave application:', error);
+        return {
+            statusCode: 500,
+            body: JSON.stringify({
+                message: 'Error submitting leave application',
+                error: error.message,
+            }),
+        };
     }
 };
 
-
-
+// Send Approval Mail
 const sendApprovalMail = async (supervisorEmail, employeeName, leaveType, startDate, endDate, reason) => {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -71,13 +90,11 @@ const sendApprovalMail = async (supervisorEmail, employeeName, leaveType, startD
         from: process.env.EMAIL_USER,
         to: supervisorEmail,
         subject: `Leave Approval Request: ${employeeName}`,
-        text: `Employee ${employeeName} applied for leave. Please review.`,
+        text: `Employee ${employeeName} applied for leave.\n\nDetails:\n- Leave Type: ${leaveType}\n- Start Date: ${startDate}\n- End Date: ${endDate}\n- Reason: ${reason}\n\nPlease review.`,
     };
 
     await transporter.sendMail(mailOptions);
 };
-
-
 
 module.exports = {
     submitLeaveApplication,
