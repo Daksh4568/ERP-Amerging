@@ -45,7 +45,6 @@ function App() {
       path: "/",
       element: <MainLayout />,
       children: [
-        
         {
           path: "/dashboard",
           element: <ProtectedRoute />,

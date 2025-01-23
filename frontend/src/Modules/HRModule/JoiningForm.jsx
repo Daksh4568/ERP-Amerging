@@ -167,24 +167,7 @@ function JoiningForm() {
 
     // console.log(formSubmissionData);
 
-    // setValues({
-    //   eID: "",
-    //   name: "",
-    //   DOB: "",
-    //   gender: "",
-    //   maritalStatus: "",
-    //   personalContactNumber: "",
-    //   alternateContactNumber: "",
-    //   prsonalEmail: "",
-    //   officialEmail: "",
-    //   password: "",
-    //   bloodGroup: "",
-    //   employmentType: "",
-    //   empAadhar: "",
-    //   passportNumber: "",
-    //   stat: "",
-    //   document: "",
-    // });
+    // 
   };
 
   return (
@@ -238,7 +221,7 @@ function JoiningForm() {
         </label>
         <select
           className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
-          name="gender"
+          name="department"
           value={values.department}
           onChange={handleChanges}
           

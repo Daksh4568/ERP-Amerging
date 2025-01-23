@@ -43,3 +43,65 @@ const NavLinks = () => {
 };
 
 export default NavLinks;
+
+
+
+
+// import { ChevronUp, MenuIcon, User2 } from 'lucide-react';
+// import React, { useState } from 'react';
+// // import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+// import { Link } from 'react-router-dom';
+// import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider } from '../ui/sidebar';
+// import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
+
+// const NavLinks = () => {
+//   const [collapsed, setCollapsed] = useState(false);
+
+//   return (
+//     <div className="flex h-screen bg-[#2E3B55] hover:bg-[#E8E8E8]">
+
+//     <SidebarProvider>
+//       <Sidebar>
+//         <SidebarHeader />
+//         <SidebarContent />
+//         <SidebarFooter>
+//           <SidebarMenu>
+//             <SidebarMenuItem>
+//               <DropdownMenu>
+//                 <DropdownMenuTrigger asChild>
+//                   <SidebarMenuButton>
+//                     <User2 /> Username
+//                     <ChevronUp className="ml-auto" />
+//                   </SidebarMenuButton>
+//                 </DropdownMenuTrigger>
+//                 <DropdownMenuContent
+//                   side="top"
+//                   className="w-[--radix-popper-anchor-width]"
+//                 >
+//                   <DropdownMenuItem>
+//                     <span>Account</span>
+//                   </DropdownMenuItem>
+//                   <DropdownMenuItem>
+//                     <span>Billing</span>
+//                   </DropdownMenuItem>
+//                   <DropdownMenuItem>
+//                     <span>Sign out</span>
+//                   </DropdownMenuItem>
+//                 </DropdownMenuContent>
+//               </DropdownMenu>
+//             </SidebarMenuItem>
+//           </SidebarMenu>
+//         </SidebarFooter>
+//       </Sidebar>
+//     </SidebarProvider>
+  
+
+
+
+
+
+//     </div>
+//   );
+// };
+
+// export default NavLinks;

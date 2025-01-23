@@ -29,9 +29,10 @@ const NotificationDialog = ({ isOpen, onClose }) => {
           alert("Unauthorized. Please log in again.");
         } else if (error.response?.status === 500) {
           alert("Internal server error. Please try later.");
-        } else {
-          alert("Failed to fetch notifications.");
-        }
+        } 
+        // else {
+        //   alert("Failed to fetch notifications.");
+        // }
       } finally {
         setLoading(false);
       }

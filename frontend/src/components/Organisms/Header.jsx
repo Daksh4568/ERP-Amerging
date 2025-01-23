@@ -54,7 +54,7 @@ const Header = ({ collapsed, toggleSidebar }) => {
         />
 
         <span className="company-name flex-grow text-lg text-white font-bold ml-2">
-          Amerging Technologies
+          Amerging Technologies (Beta Version)
         </span>
       </div>
 
