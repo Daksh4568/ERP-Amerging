@@ -1,56 +1,53 @@
-// Authentication Middleware
 const jwt = require('jsonwebtoken');
 const employees = require('../models/empMaster-model');
+const connectToDatabase = require('../db/db'); // Ensure MongoDB connection
 
 // Authentication Middleware
-const auth = async (req, res, next) => {
+const auth = async (headers) => {
     try {
-        // Extract token from Authorization header
-        const token = req.header('Authorization')?.replace('Bearer ', '');
+        // Extract token
+        const token = headers.authorization?.replace('Bearer ', '') || headers.Authorization?.replace('Bearer ', '');
+        //console.log('Extracted Token:', token);
+
         if (!token) {
-            return res.status(401).send({ error: 'Access Denied. No token provided.' });
+            throw new Error('Access Denied. No token provided.');
         }
-        //         jwt.verify() automatically checks the expiration of a JWT if the token contains an exp (expiration) claim.
 
-        // If the token is expired, jwt.verify() will throw an error with the message "jwt expired".
+        // Verify token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        //console.log('Decoded Token:', decoded);
 
-        // Verify the token and decode the payload
-        // let decoded;
-        // try {
-        //     decoded = jwt.verify(token, 'amergingtech5757');
+        // Ensure database connection
+        await connectToDatabase();
 
-        // } catch (err) {
-        //     if (err.name === 'TokenExpiredError') {
-        //         return res.status(401).send("token expired");
-        //     }
-        //     return res.status(401).send({ error: 'Authentication Error . Invalid token.' })
-        // }
-        const decoded = jwt.verify(token, 'amergingtech5757')
-        // Find the employee using eID and verify token exists in their tokens array
-        const employee = await employees.findOne({ eID: decoded.eID, 'tokens.token': token });
+        // Find the employee
+        const employee = await employees.findOne({ eID: decoded.eID, 'tokens.token': token }).select('+role');
+        //console.log('Employee Found:', employee);
+
         if (!employee) {
-            return res.status(401).send({ error: 'Authentication Error. Employee not found.' });
+            throw new Error('Authentication Error. Employee not found.');
         }
 
-        // Attach employee and token to request for downstream handlers
-        req.token = token;
-        req.employee = employee;
-        next();
+        if (!employee.role) {
+            console.error('Employee role is undefined:', employee);
+            throw new Error('Authentication Error. Employee role is missing.');
+        }
+        //console.log('Employee Role:', employee.role);
+        return { employee, token };
     } catch (e) {
-        res.status(401).send({ error: 'Authentication Error. Invalid token.' });
+        console.error('Authentication Error:', e.message);
+        throw new Error(`Authentication Error: ${e.message}`);
     }
 };
 
-module.exports = { auth };
-
 // Authorization Middleware
-const authorize = (...allowedRoles) => {
-    return (req, res, next) => {
-        if (!allowedRoles.includes(req.employee.role)) {
-            return res.status(403).send({ error: 'Access Denied. Insufficient permissions.' });
-        }
-        next();
-    };
+const authorize = (employee, allowedRoles) => {
+
+
+    if (!allowedRoles.includes(employee.role)) {
+        console.error(`Access Denied. Employee role (${employee.role}) not in allowed roles: ${allowedRoles}`);
+        throw new Error('Access Denied. Insufficient permissions.');
+    }
 };
 
 module.exports = { auth, authorize };

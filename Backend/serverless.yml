@@ -1,0 +1,149 @@
+service: enterprise-resource-planning # Name of your service/project
+
+frameworkVersion: "4.4.19"
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-south-1
+  httpApi:
+    cors:
+      allowedOrigins:
+        - "*"
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      maxAge: 86400 # Cache preflight response for 24 hours
+  environment:
+    MONGO_URI: mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/
+    JWT_SECRET: amergingtech5757
+    EMAIL_USER: daksh4568thakur@gmail.com
+    EMAIL_PASSWORD: jygu sxbi fvnf sczm
+
+functions:
+  home:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /
+          method: GET
+
+  getAllEmployees:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/getemp
+          method: GET
+
+  getLeaveData:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/leave-data
+          method: GET
+
+  applyLeave:
+    handler: src/routes/empMaster-route.handler
+    timeout: 30
+    events:
+      - httpApi:
+          path: /api/apply-leave
+          method: POST
+
+  employeeEvaluation:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/employee-evaluation
+          method: POST
+
+  employeeStatistics:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/emp/stats
+          method: GET
+
+  registerEmployee:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/regemp
+          method: POST
+
+  employeeLogin:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/emp/login
+          method: POST
+
+  employeeLogout:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/emp/logout
+          method: POST
+
+  tokenVerify:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/token/verify
+          method: POST
+
+  updateEmployee:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/emp/{eID}
+          method: PATCH
+
+  managerNotifications:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/notifications/manager
+          method: GET
+
+  handleNotifications:
+    handler: src/routes/empMaster-route.handler
+    timeout: 30
+    events:
+      - httpApi:
+          path: /api/notifications/handle
+          method: PATCH
+
+  employeeExitForm:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/exit-form
+          method: POST
+
+plugins:
+  - serverless-offline
+
+resources:
+  Resources:
+    NotificationsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Notifications
+        AttributeDefinitions:
+          - AttributeName: notificationId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: notificationId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+custom:
+  serverless-offline:
+    httpPort: 3000

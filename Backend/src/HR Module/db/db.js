@@ -1,30 +1,38 @@
 // const mongoose = require('mongoose');
 
-// mongoURI ='mongodb://localhost:27017/erpdb-test'
-// async function connectToMongoDB() {
-//     try {
-//       await mongoose.connect(mongoURI);
-//       console.log('Successfully connected to MongoDB');
-//     } catch (error) {
-//         console.error('Error connecting to MongoDB:', error);
-//       }
-//     }
-// connectToMongoDB()
-// Command to start the server locally mongod --dbpath C:\data\db
+// // Global variable to track connection state
+// let isConnected = false; // it will track the state of the databaser connection and it will prevernt creating a new connection 
+// // when the connectiom is true it will use the existing connection
+// // when the connectiom is false it will establish a new connection
 
-const mongoose = require('mongoose')
+// const connectToDatabase = async () => {
+//   if (isConnected) {
+//     console.log('=> Using existing database connection');
+//     return;
+//   }
 
+//   console.log('=> Creating new database connection');
+//   await mongoose.connect(process.env.MONGO_URI)
+//   isConnected = true;
+//   console.log('Successfully connected to the database');
+// };
 
-const connectionURL = 'mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/';
+// module.exports = connectToDatabase;
+const mongoose = require('mongoose');
 
-// This is how we can use mongoose to create a model for our erp software
-const connectToMongoDB = async ()=>{
-   try {
-       const connectionDB = await mongoose.connect(connectionURL);
-        console.log(`MongoDB connected: ${connectionDB.connection.host}`)
-   
-    } catch (error) {
-      console.log(error)
-    }
-}
-connectToMongoDB()
+const connectToDatabase = async () => {
+  if (mongoose.connection.readyState === 1) {
+    console.log('=> Using existing database connection');
+    return;
+  }
+
+  try {
+    await mongoose.connect(process.env.MONGO_URI)
+    console.log('Successfully connected to the database');
+  } catch (error) {
+    console.error('Database connection error:', error);
+    throw error;
+  }
+};
+
+module.exports = connectToDatabase;

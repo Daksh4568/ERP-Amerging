@@ -1,28 +1,43 @@
 const EmployeeEvaluation = require('../models/employeeEvaluationModel');
+const connectToDatabase = require('../../HR Module/db/db'); // Ensure MongoDB connection
 
-exports.createEmployeeEvaluation = async (req, res) => {
+// Create Employee Evaluation
+exports.createEmployeeEvaluation = async (evaluationData, user) => {
     try {
-        // Automatically populating `evaluatedBy` from `req.employee`
-        const evaluationData = new EmployeeEvaluation({
-            ...req.body,
+        // Ensure database connection
+        await connectToDatabase();
+
+        // Create a new EmployeeEvaluation document
+        const evaluation = new EmployeeEvaluation({
+            ...evaluationData,
             addedBy: {
-                name: req.employee.name, // Automatically fetched
-                role: req.employee.role // Automatically fetched
-            }
+                name: user.name,
+                role: user.role,
+            },
         });
 
-        const savedData = await evaluationData.save();
+        const savedData = await evaluation.save();
 
-        console.log(`Employee evaluation form successfully submitted by ${req.employee.name} (${req.employee.role}).`);
+        console.log(
+            `Employee evaluation form successfully submitted by ${user.name} (${user.role}).`
+        );
 
-        res.status(201).json({
-            message: 'Employee evaluation data saved successfully',
-            data: savedData
-        });
+        return {
+            statusCode: 201,
+            body: JSON.stringify({
+                message: 'Employee evaluation data saved successfully',
+                data: savedData,
+            }),
+        };
     } catch (error) {
-        res.status(400).json({
-            message: 'Error saving employee evaluation data',
-            error: error.message
-        });
+        console.error('Error saving employee evaluation data:', error);
+
+        return {
+            statusCode: 400,
+            body: JSON.stringify({
+                message: 'Error saving employee evaluation data',
+                error: error.message,
+            }),
+        };
     }
 };
