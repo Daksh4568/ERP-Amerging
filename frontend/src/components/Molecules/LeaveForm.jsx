@@ -110,7 +110,8 @@ const LeaveForm = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:3000/api/apply-leave",
+        // "http://localhost:3000/api/apply-leave",
+        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/apply-leave",
         formData,
         {
           headers: {

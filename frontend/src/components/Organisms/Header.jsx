@@ -19,7 +19,9 @@ const Header = ({ collapsed, toggleSidebar }) => {
         return;
       }
 
-      const response = await fetch("http://localhost:3000/api/emp/logout", {
+      const response = await fetch(
+        // "http://localhost:3000/api/emp/logout", {
+        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/emp/logout", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -61,16 +63,16 @@ const Header = ({ collapsed, toggleSidebar }) => {
       {/* <Space>
         <Search placeholder="Search" enterButton="Search" size="medium" />
       </Space> */}
-      
-      <div className="flex items-center justify-center gap-4 ">
 
-        <Button
-        variant="ghost"
-        onClick={() => setIsDialogOpen(true)}>
+      <div className="flex items-center justify-center gap-4 ">
+        <Button variant="ghost" onClick={() => setIsDialogOpen(true)}>
           <BellIcon className="text-white" />
         </Button>
 
-        <Notification isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} />
+        <Notification
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+        />
 
         <Button onClick={handleLogout}>
           <span>

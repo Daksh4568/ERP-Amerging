@@ -201,7 +201,8 @@ function ExitForm() {
       // console.log(JSON.stringify(formData));
 
       const response = await axios.post(
-        "http://localhost:3000/api/exit-form",
+        // "http://localhost:3000/api/exit-form",
+        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/exit-form",
         formData,
         {
           headers: {

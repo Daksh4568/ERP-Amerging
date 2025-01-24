@@ -52,7 +52,8 @@ const SelfEvaluationForm = () => {
       }
       // console.log(JSON.stringify(formData));
 
-      const response = await axios.post("http://localhost:3000/api/employee-evaluation", formData, {
+      // const response = await axios.post("http://localhost:3000/api/employee-evaluation", formData, {
+      const response = await axios.post("https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/employee-evaluation", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

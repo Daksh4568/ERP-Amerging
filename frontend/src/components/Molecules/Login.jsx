@@ -24,7 +24,8 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/emp/login",
+        // "http://localhost:3000/api/emp/login",     //local api url
+        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/emp/login", // cloud api url
         loginData,
         {
           headers: {

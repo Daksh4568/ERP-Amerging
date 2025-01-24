@@ -17,7 +17,8 @@ const LeaveApproval = () => {
     const fetchLeaveDetails = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get("http://localhost:3000/api/notifications/manager", {
+        // const response = await axios.get("http://localhost:3000/api/notifications/manager", {
+        const response = await axios.get("https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/notifications/manager", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -54,7 +55,8 @@ const LeaveApproval = () => {
 
       // Send the status update request to the backend
       const response = await axios.patch(
-        `http://localhost:3000/api/notifications/handle`,
+        // `http://localhost:3000/api/notifications/handle`,
+        `https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/notifications/handle`,
         { notificationId, status, managerComment },
         { headers: { Authorization: `Bearer ${token}` } }
       );
