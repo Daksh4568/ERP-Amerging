@@ -26,7 +26,8 @@ const LeaveStatusPage = () => {
           return;
         }
 
-        const response = await axios.get("http://localhost:3000/api/leave-data", {
+        // const response = await axios.get("http://localhost:3000/api/leave-data", {
+        const response = await axios.get("https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/leave-data", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
