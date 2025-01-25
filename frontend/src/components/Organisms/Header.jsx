@@ -5,17 +5,20 @@ import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import Notification from "../Pages/Notification";
 import axios from 'axios';    
+import useDialog from "../Atoms/UseDialog";
 
 const Header = ({ collapsed, toggleSidebar }) => {
   const navigate = useNavigate();
   const { Search } = Input;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  const { DialogComponent, showDialog } = useDialog();
+
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("authToken");
       if (!token) {
-        alert("No token available, please log in again.");
+        showDialog("No token available, please log in again.");
         navigate("/");
         return;
       }
@@ -41,14 +44,13 @@ const Header = ({ collapsed, toggleSidebar }) => {
 
       if (response.ok) {
         localStorage.clear();
-        alert("Logged out successfully");
-        navigate("/");
+        showDialog("Logged out successfully", () => navigate("/"));
       } else {
         throw new Error("Logout failed");
       }
     } catch (error) {
       console.error("Error logging out:", error);
-      alert("An error occurred during logout. Please try again.");
+      showDialog("An error occurred during logout. Please try again.");
     }
   };
 
@@ -58,6 +60,7 @@ const Header = ({ collapsed, toggleSidebar }) => {
 
   return (
     <header className="w-screen flex items-center justify-between p-4 bg-[#2E3B55] shadow-md">
+      <DialogComponent/>
       <div className="logo-container flex items-center justify-center">
         <img
           src="https://www.cphi-online.com/LOGO_Size-comp302721.png"

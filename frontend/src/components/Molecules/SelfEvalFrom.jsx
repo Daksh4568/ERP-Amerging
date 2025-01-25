@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import useDialog from "../Atoms/UseDialog";
+import { useNavigate } from "react-router-dom";
 
 const SelfEvaluationForm = () => {
 
+  const { DialogComponent, showDialog } = useDialog();
+
+  const Navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     employeeName: "",
-    dateOfReview: "",
+    dateOfReview: new Date().toISOString().split("T")[0], // Today's date
     designation: "",
     department: "",
     dateOfJoining: "",
@@ -39,6 +44,31 @@ const SelfEvaluationForm = () => {
     }));
   };
 
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const storedData = JSON.parse(localStorage.getItem("empData"));
+  
+          const fetchedData = {
+            employeeId: storedData.eID,
+            employeeName: storedData.name,
+            department: storedData.department,
+            designation: storedData.designation,
+          };
+  
+          // Merging fetched data with formData
+          setFormData((prevData) => ({
+            ...prevData,
+            ...fetchedData,
+          }));
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+  
+      fetchData();
+    }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -47,7 +77,7 @@ const SelfEvaluationForm = () => {
       const token = localStorage.getItem("authToken");
 
       if (!token) {
-        alert("No token available, please log in again.");
+        showDialog("No token available, please log in again.");
         return;
       }
       // console.log(JSON.stringify(formData));
@@ -62,14 +92,14 @@ const SelfEvaluationForm = () => {
 
       if (response.status === 201) {
         // console.log("Evaluation form successfully submitted");
-        alert("Evaluation form successfully submitted");
+        showDialog("Evaluation form successfully submitted", () => Navigate("/dashboard"));
         // navigate("/dashboard");
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        alert("Unauthorized: Please check your login or token.");
+        showDialog("Unauthorized: Please check your login or token.");
       } else {
-        alert("Error submitting evaluation form.", error.response.data);
+        showDialog("Error submitting evaluation form.", error.response.data);
       }
     }
     // const values = JSON.stringify(formData);
@@ -82,6 +112,7 @@ const SelfEvaluationForm = () => {
       onSubmit={handleSubmit}
       className="text-black grid grid-cols-4 gap-x-20 gap-y-2"
     >
+      <DialogComponent />
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "

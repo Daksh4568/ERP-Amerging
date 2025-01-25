@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import useDialog from "../Atoms/UseDialog";
 import ReactStars from "react-rating-stars-component";
+import { useNavigate } from "react-router-dom";
 // import {
 //   Form,
 //   Input,
@@ -45,6 +47,10 @@ function ExitForm() {
   //     "Work Schedule",
   // ]
   // const departmentRatingOptions = ["Excellent", "Good", "Fair", "Poor"]
+
+  const { DialogComponent, showDialog } = useDialog();
+
+  const Navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     employeeName: "",
@@ -195,7 +201,7 @@ function ExitForm() {
       const token = localStorage.getItem("authToken");
 
       if (!token) {
-        alert("No token available, please log in again.");
+        showDialog("No token available, please log in again.");
         return;
       }
       // console.log(JSON.stringify(formData));
@@ -214,14 +220,14 @@ function ExitForm() {
 
       if (response.status === 201) {
         // console.log("Exit form successfully submitted");
-        alert("Exit form successfully submitted");
-        // navigate("/dashboard");
+        // alert("Exit form successfully submitted");
+        showDialog("Exit form successfully submitted", () => Navigate("/dashboard"));
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        alert("Unauthorized: Please check your login or token.");
+        showDialog("Unauthorized: Please check your login or token.");
       } else {
-        alert("Error submitting Exit form.", error.response.data);
+        showDialog("Error submitting Exit form.", error.response.data);
       }
     }
 
@@ -234,6 +240,7 @@ function ExitForm() {
       onSubmit={handleSubmit}
       className="text-black grid grid-cols-4 gap-x-20 gap-y-2"
     >
+      <DialogComponent />
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "

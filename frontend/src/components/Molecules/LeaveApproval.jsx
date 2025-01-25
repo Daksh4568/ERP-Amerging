@@ -4,6 +4,7 @@ import axios from "axios";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
+import useDialog from "../Atoms/UseDialog";
 
 const LeaveApproval = () => {
   const { notificationId } = useParams(); // Extract notificationId from the route
@@ -12,6 +13,8 @@ const LeaveApproval = () => {
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false); // State for action loading
   const navigate = useNavigate();
+
+  const { DialogComponent, showDialog } = useDialog();
 
   useEffect(() => {
     const fetchLeaveDetails = async () => {
@@ -40,10 +43,10 @@ const LeaveApproval = () => {
             endDate: notification.endDate,
           });
         } else {
-          alert("Notification not found.");
+          showDialog("Notification not found.");
         }
       } catch (error) {
-        alert("An error occurred while fetching leave details.");
+        showDialog("An error occurred while fetching leave details.");
       } finally {
         setLoading(false);
       }
@@ -70,7 +73,7 @@ const LeaveApproval = () => {
       );
 
       if (response.status === 200) {
-        alert(`Leave ${status.toLowerCase()} successfully!`);
+        showDialog(`Leave ${status.toLowerCase()} successfully!`, () => navigate("/dashboard"));
         // Update the status in the UI
         setLeaveDetails((prev) => ({
           ...prev,
@@ -79,10 +82,10 @@ const LeaveApproval = () => {
         }));
         navigate("/dashboard"); // Redirect to notifications page
       } else {
-        alert("Failed to update leave status.");
+        showDialog("Failed to update leave status.");
       }
     } catch (error) {
-      alert("An error occurred while updating leave status.");
+      showDialog("An error occurred while updating leave status.");
     } finally {
       setActionLoading(false); // Stop processing
     }
@@ -100,6 +103,7 @@ const LeaveApproval = () => {
 
   return (
     <div className="p-6">
+      <DialogComponent/>
       <Card className="max-w-3xl mx-auto">
         <CardHeader>
           <h1 className="text-2xl font-bold">Leave Approval</h1>
