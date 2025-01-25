@@ -18,9 +18,13 @@ const LeaveApproval = () => {
       try {
         const token = localStorage.getItem("authToken");
         // const response = await axios.get("http://localhost:3000/api/notifications/manager", {
-        const response = await axios.get("https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/notifications/manager", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/notifications/manager",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+            "Content-Type": "application/json",
+          }
+        );
 
         // Find the notification by notificationId
         const notification = response.data.find(
@@ -58,7 +62,11 @@ const LeaveApproval = () => {
         // `http://localhost:3000/api/notifications/handle`,
         `https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/notifications/handle`,
         { notificationId, status, managerComment },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { 
+          Authorization: `Bearer ${token}` ,
+          "Content-Type": "application/json",
+        } 
+      }
       );
 
       if (response.status === 200) {
@@ -101,7 +109,8 @@ const LeaveApproval = () => {
             <strong>Employee Name:</strong> {leaveDetails.employeeName}
           </p>
           <p>
-            <strong>Leave Dates:</strong> {new Date(leaveDetails.startDate).toDateString()} to{" "}
+            <strong>Leave Dates:</strong>{" "}
+            {new Date(leaveDetails.startDate).toDateString()} to{" "}
             {new Date(leaveDetails.endDate).toDateString()}
           </p>
           <p>
@@ -115,7 +124,7 @@ const LeaveApproval = () => {
             value={managerComment}
             onChange={(e) => setManagerComment(e.target.value)}
             className="resize-none mt-2"
-            disabled={actionLoading || isProcessed} 
+            disabled={actionLoading || isProcessed}
           />
           {actionLoading && (
             <p className="text-center text-blue-500 mt-2">Loading...</p>
@@ -126,14 +135,14 @@ const LeaveApproval = () => {
             className="bg-green-500"
             variant="success"
             onClick={() => handleAction("Approved")}
-            disabled={actionLoading || isProcessed} 
+            disabled={actionLoading || isProcessed}
           >
             Approve
           </Button>
           <Button
             variant="destructive"
             onClick={() => handleAction("Rejected")}
-            disabled={actionLoading || isProcessed} 
+            disabled={actionLoading || isProcessed}
           >
             Reject
           </Button>

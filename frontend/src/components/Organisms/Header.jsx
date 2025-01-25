@@ -20,23 +20,24 @@ const Header = ({ collapsed, toggleSidebar }) => {
         return;
       }
 
-      // const response = await fetch(
-      //   // "http://localhost:3000/api/emp/logout", {
-      //   "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/emp/logout", {
-      //   method: "POST",
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // });
+      const response = await fetch(
+        // "http://localhost:3000/api/emp/logout", {
+        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/emp/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
-      const response = await axios.post(
-        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/emp/logout", {  }, 
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, 
-            "Content-Type": "application/json",
-          }
-        });
+      // const response = await axios.post(
+      //   "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/emp/logout",  
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`, 
+      //       "Content-Type": "application/json",
+      //     }
+      //   });
 
       if (response.ok) {
         localStorage.clear();
