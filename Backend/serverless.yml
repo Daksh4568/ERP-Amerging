@@ -1,11 +1,13 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: developer4568
 service: enterprise-resource-planning # Name of your service/project
 
-frameworkVersion: "4.4.19"
 
 provider:
   name: aws
   runtime: nodejs20.x
   region: ap-south-1
+  timeout: 30
   httpApi:
     cors:
       allowedOrigins:

@@ -44,6 +44,7 @@ const employeeSchema = new mongoose.Schema(
     },
     officialEmail: {
       type: String,
+      unique: true,
     },
     password: {
       type: String,
@@ -142,7 +143,7 @@ const employeeSchema = new mongoose.Schema(
     },
     department: {
       type: String,
-      enum: ['Design', 'Instumentaion', 'Sales', 'IT', 'HR', 'R&D'],
+      enum: ['Design', 'Instrumentation', 'Sales', 'IT', 'HR', 'R&D'],
       required: true,
     },
     designation: {

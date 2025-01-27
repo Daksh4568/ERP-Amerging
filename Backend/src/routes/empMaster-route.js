@@ -8,7 +8,7 @@ const LeaveApplication = require('../Employee Module/models/empLeaveModel'); // 
 const { handleLeaveNotification, getAllNotificationsForManager } = require('../Employee Module/Controllers/handleleave');
 const counters = require('../HR Module/models/counterMaster'); // Counter schema for generating IDs
 const connectToDatabase = require('../HR Module/db/db'); // MongoDB connection handler
-
+const sendEmployeeCredentials = require('../HR Module/Controllers/sendMail'); // Email notification controller
 exports.handler = async (event) => {
   try {
     // MongoDB connection
@@ -39,7 +39,7 @@ exports.handler = async (event) => {
     // Get all employees
     if (path === '/api/getemp' && httpMethod === 'GET') {
       const { employee } = await auth(headers); // Authenticate user
-      authorize(employee, ['HR', 'admin', 'Manager', 'Employee']); // Authorize roles
+      authorize(employee, ['HR', 'admin']); // Authorize roles
 
       const employees = await employeeModel.find({});
       return {
@@ -67,10 +67,10 @@ exports.handler = async (event) => {
       return await leaveController.submitLeaveApplication(leaveData, employee);
     }
 
-    // Get employee evaluation data
+
     if (path === '/api/employee-evaluation' && httpMethod === 'POST') {
       const { employee } = await auth(headers); // Authenticate user
-      authorize(employee, ['HR', 'Employee']); // Authorize roles
+      authorize(employee, ['HR', 'Employee', 'admin']); // Authorize roles
 
       const evaluationData = JSON.parse(body); // Parse the evaluation data from the request body
       return await employeeEvaluationController.createEmployeeEvaluation(evaluationData, employee); // Directly return the controller response
@@ -79,6 +79,7 @@ exports.handler = async (event) => {
     // Get employee statistics
     if (path === '/api/emp/stats' && httpMethod === 'GET') {
       const { employee } = await auth(headers); // Authenticate user
+      authorize(employee, ['HR', 'admin']);
       const stats = {
         totalRegularEmployees: await employee.countDocuments({ stat: 'Regular' }),
         totalMaleEmployees: await employee.countDocuments({ stat: 'Regular', gender: 'Male' }),
@@ -93,7 +94,7 @@ exports.handler = async (event) => {
     // Register a new employee
     if (path === '/api/regemp' && httpMethod === 'POST') {
       const { employee } = await auth(headers); // Authenticate user
-      authorize(employee, ['HR', 'admin']);
+      authorize(employee, ['HR', 'admin']); // Authorize roles
 
       const parsedBody = JSON.parse(body);
       const newEmployee = new employeeModel({
@@ -101,27 +102,47 @@ exports.handler = async (event) => {
         addedBy: { name: employee.name, role: employee.role },
       });
 
-      const lastEmpCount = await counters.findOneAndUpdate(
-        { counterField: 'empCounter' },
-        { $inc: { counter: 1 } },
-        { new: true, upsert: true }
-      );
+      try {
+        // Generate unique employee ID and password
+        const lastEmpCount = await counters.findOneAndUpdate(
+          { counterField: 'empCounter' },
+          { $inc: { counter: 1 } },
+          { new: true, upsert: true }
+        );
 
-      newEmployee.eID = 'AT-' + String(lastEmpCount.counter).padStart(2, '0');
-      newEmployee.stat = 'Regular';
-      const password = Array.from({ length: 8 }, () =>
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!'.charAt(
-          Math.floor(Math.random() * 62)
-        )
-      ).join('');
-      newEmployee.password = password;
+        newEmployee.eID = 'AT-' + String(lastEmpCount.counter).padStart(2, '0');
+        newEmployee.stat = 'Regular';
+        const password = Array.from({ length: 8 }, () =>
+          'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!'.charAt(
+            Math.floor(Math.random() * 62)
+          )
+        ).join('');
+        newEmployee.password = password;
 
-      await newEmployee.save();
-      return {
-        statusCode: 201,
-        body: JSON.stringify({ message: 'Employee registered', newEmployee }),
-      };
+        await newEmployee.save();
+
+        // Send credentials via email
+        const { officialEmail, personalEmail } = newEmployee;
+        const empName = parsedBody.name;
+
+        await sendEmployeeCredentials(personalEmail, officialEmail, password, empName);
+
+        return {
+          statusCode: 201,
+          body: JSON.stringify({ message: 'Employee registered successfully', newEmployee }),
+        };
+      } catch (e) {
+        console.error('Error while registering employee:', e);
+        return {
+          statusCode: 400,
+          body: JSON.stringify({
+            error: 'Failed to register employee',
+            details: e.message,
+          }),
+        };
+      }
     }
+
 
     // Employee Login
     if (path === '/api/emp/login' && httpMethod === 'POST') {
@@ -257,7 +278,7 @@ exports.handler = async (event) => {
     // Notifications for Manager
     if (path === '/api/notifications/manager' && httpMethod === 'GET') {
       const { employee } = await auth(headers); // Authenticate user
-      authorize(employee, ['Manager']); // Authorize role
+      authorize(employee, ['Manager', 'HR', 'admin']); // Authorize role
 
       return await getAllNotificationsForManager(employee); // Directly return the result
     }
@@ -265,7 +286,7 @@ exports.handler = async (event) => {
     // Handle Notifications
     if (path === '/api/notifications/handle' && httpMethod === 'PATCH') {
       const { employee } = await auth(headers); // Authenticate user
-      authorize(employee, ['Manager']); // Authorize role
+      authorize(employee, ['Manager', 'HR', 'admin']); // Authorize role
 
       const notificationData = JSON.parse(body);
       return await handleLeaveNotification(notificationData, employee); // Directly return the result
