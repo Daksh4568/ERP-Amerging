@@ -73,14 +73,13 @@ const LeaveApproval = () => {
       );
 
       if (response.status === 200) {
-        showDialog(`Leave ${status.toLowerCase()} successfully!`, () => navigate("/dashboard"));
         // Update the status in the UI
         setLeaveDetails((prev) => ({
           ...prev,
           status: "Processed", // Update the status in UI
           managerComment,
         }));
-        navigate("/dashboard"); // Redirect to notifications page
+        showDialog(`Leave ${status.toLowerCase()} successfully!`, () => navigate("/dashboard"));
       } else {
         showDialog("Failed to update leave status.");
       }

@@ -16,7 +16,6 @@ import {
 } from "antd";
 
 function JoiningForm() {
-
   const { DialogComponent, showDialog } = useDialog();
 
   const navigate = useNavigate();
@@ -97,14 +96,13 @@ function JoiningForm() {
     setIsSameAddress(e.target.checked);
     if (e.target.checked) {
       setCurrentAddress(permanent);
-    }
-    else{
+    } else {
       setCurrentAddress({
-        street: '',
-        city: '',
-        state: '',
-        postalCode: '',
-        country: '',
+        street: "",
+        city: "",
+        state: "",
+        postalCode: "",
+        country: "",
       });
     }
   };
@@ -153,7 +151,6 @@ function JoiningForm() {
       if (response.status === 201) {
         console.log("New Employee Registered");
         showDialog("New employee Registered", () => navigate("/dashboard"));
-
       }
     } catch (error) {
       console.error("Error registering new employee:", error);
@@ -163,8 +160,6 @@ function JoiningForm() {
         showDialog("An error occurred. Please try again later.");
       }
     }
-
-   
   };
 
   return (
@@ -172,13 +167,13 @@ function JoiningForm() {
       onSubmit={handleSubmit}
       className="text-black grid grid-cols-4 gap-x-20 gap-y-2"
     >
-      <DialogComponent/>
+      <DialogComponent />
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="eID"
         >
-          Employee ID 
+          Employee ID
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -222,7 +217,6 @@ function JoiningForm() {
           name="department"
           value={values.department}
           onChange={handleChanges}
-          
         >
           <option value="">--Select--</option>
           <option value="Design">Design</option>
@@ -248,7 +242,6 @@ function JoiningForm() {
           name="designation"
           value={values.designation}
           onChange={handleChanges}
-          
         />
       </div>
 
@@ -628,15 +621,22 @@ function JoiningForm() {
         >
           Blood Group <span className="text-red-600">*</span>
         </label>
-        <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
-          type="text"
-          // placeholder="Enter employee Name"
+        <select
+          className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
           name="bloodGroup"
           value={values.bloodGroup}
           onChange={handleChanges}
-          required
-        />
+        >
+          <option value="">--Select--</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
       </div>
 
       <div className="col-span-2">

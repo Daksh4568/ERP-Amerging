@@ -118,7 +118,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="employeeName"
         >
-          Employee Name <span className="text-red-600">*</span>
+          Employee Name 
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -136,7 +136,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="dateOfReview"
         >
-          Date of Review <span className="text-red-600">*</span>
+          Date of Review 
         </label>
         <input
           className="w-full bg-gray-200 block p-2 text-sm rounded-md border"
@@ -153,7 +153,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="designation"
         >
-          Designation <span className="text-red-600">*</span>
+          Designation 
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -170,7 +170,7 @@ const SelfEvaluationForm = () => {
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="department"
         >
-          Department <span className="text-red-600">*</span>
+          Department 
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
