@@ -88,7 +88,7 @@ function Login() {
             id="officialEmail"
             value={officialEmail}
             onChange={(e) => setOfficialEmail(e.target.value)}
-            className="w-full mt-1 p-2 border text-white border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full mt-1 p-2 border text-white border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-400 focus:outline-none bg-black"
             required
           />
         </div>
@@ -101,7 +101,7 @@ function Login() {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full mt-1 p-2 border text-white border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full mt-1 p-2 border text-white border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-400 focus:outline-none bg-black"
             required
           />
         </div>

@@ -79,8 +79,8 @@ const Header = ({ collapsed, toggleSidebar }) => {
       </Space> */}
 
       <div className="flex items-center justify-center gap-4 ">
-        <Button variant="ghost" onClick={() => setIsDialogOpen(true)}>
-          <BellIcon className="text-white" />
+        <Button className="bg-black hover:bg-black" variant="ghost" onClick={() => setIsDialogOpen(true)}>
+          <BellIcon className=" text-white" />
         </Button>
 
         <Notification
@@ -88,7 +88,7 @@ const Header = ({ collapsed, toggleSidebar }) => {
           onClose={() => setIsDialogOpen(false)}
         />
 
-        <Button onClick={handleLogout}>
+        <Button className="bg-black" onClick={handleLogout}>
           <span>
             <LogOutIcon />
           </span>{" "}

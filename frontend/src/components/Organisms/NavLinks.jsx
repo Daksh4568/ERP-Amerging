@@ -23,6 +23,11 @@ const NavLinks = () => {
             {collapsed ?  <MenuIcon /> : <MenuIcon />}
           </MenuItem>
 
+          {/* Admin access */}
+          <SubMenu className='bg-[#2E3B55]' label="Admin Module">
+            <MenuItem className='bg-[#2E3B55] hover:bg-[#4A90E2] hover:text-black' component={<Link to="/admin/employee-data" />}>Employee Data</MenuItem>
+          </SubMenu>
+
           {/* HR Module */}
           <SubMenu className='' label="HR Module">
             <MenuItem className='bg-[#2E3B55] hover:bg-[#4A90E2] hover:text-black' component={<Link to="/dashboard/joining-form" />}>Joining Form</MenuItem>
