@@ -146,15 +146,25 @@ exports.handler = async (event) => {
 
     // Employee Login
     if (path === '/api/emp/login' && httpMethod === 'POST') {
-      const parsedBody = JSON.parse(body);
-      const emp = await employeeModel.findByCredentials(parsedBody.officialEmail, parsedBody.password);
-      const token = await emp.generateAuthToken();
+      try {
+        const parsedBody = JSON.parse(body);
+        const emp = await employeeModel.findByCredentials(parsedBody.officialEmail, parsedBody.password);
+        const token = await emp.generatAeuthToken();
 
-      console.log(`${emp.role} ${emp.name} has now logged into the system`);
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ emp, token }),
-      };
+        console.log(`${emp.role} ${emp.name} has now logged into the system`);
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ emp, token }),
+        };
+      }
+
+      catch (error) {
+        //console.error('Invalid Credentials', error.message);
+        return {
+          statusCode: 401,
+          body: JSON.stringify({ error: error.message }),
+        };
+      }
     }
 
     // Employee Logout
@@ -224,7 +234,7 @@ exports.handler = async (event) => {
 
       try {
         const updates = JSON.parse(body);
-        const allowedUpdates = ['name', 'password', 'address', 'address.city'];
+        const allowedUpdates = ['personalMail', 'password', 'address', 'address.city'];
         const isValidOperation = Object.keys(updates).every((update) =>
           allowedUpdates.includes(update)
         );
