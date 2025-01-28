@@ -3,53 +3,10 @@ import axios from "axios";
 import useDialog from "../Atoms/UseDialog";
 import ReactStars from "react-rating-stars-component";
 import { useNavigate } from "react-router-dom";
-// import {
-//   Form,
-//   Input,
-//   Button,
-//   Select,
-//   DatePicker,
-//   Typography,
-//   Checkbox,
-//   Table,
-//   InputNumber,
-//   List,
-//   Row,
-//   Col,
-//   Rate,
-// } from "antd";
-
-// const { Title } = Typography;
-// const { TextArea } = Input;
 
 function ExitForm() {
-  // const rateManagerQuestions = [
-  //     "Follow policies & procedures",
-  //     "Treats employees in a fair and equal way",
-  //     "Provides recognition for a job well done",
-  //     "Resolves complaints and problems",
-  //     "Gives needed information",
-  //     "Keeps employees busy",
-  //     "Knows his/her job well",
-  //     "Welcomes suggestions",
-  //     "Maintains discipline",
-  // ]
-  // const managerRatingOptions = ["Never", "Sometimes", "Usually", "Always"];
-
-  // const [form] = Form.useForm();
-
-  // const rateDepartmentQuestions = [
-  //     "Cooperation/teamwork in the department",
-  //     "Cooperation with other departments",
-  //     "Department training and OTJ training",
-  //     "Communications",
-  //     "Working Conditions",
-  //     "Work Schedule",
-  // ]
-  // const departmentRatingOptions = ["Excellent", "Good", "Fair", "Poor"]
 
   const { DialogComponent, showDialog } = useDialog();
-
   const Navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -119,8 +76,8 @@ function ExitForm() {
         const fetchedData = {
           employeeId: storedData.eID,
           employeeName: storedData.name,
-          department: "Embedded",
-          designation: "SDE",
+          department: storedData.department,
+          designation: storedData.designation,
         };
 
         // Merging fetched data with formData
@@ -220,7 +177,6 @@ function ExitForm() {
 
       if (response.status === 201) {
         // console.log("Exit form successfully submitted");
-        // alert("Exit form successfully submitted");
         showDialog("Exit form successfully submitted", () => Navigate("/dashboard"));
       }
     } catch (error) {
