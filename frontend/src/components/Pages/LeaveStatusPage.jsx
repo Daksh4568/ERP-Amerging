@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import useFormatDate from "../Atoms/FormatDate";
 
 const LeaveStatusPage = () => {
   const [leaves, setLeaves] = useState([]);
@@ -84,7 +85,7 @@ const LeaveStatusPage = () => {
 
   return (
     <div className="max-w-full mx-auto p-6 bg-white shadow-md rounded-md">
-
+      {/* <FormatDate /> */}
       {employeeData && (
         <div className="mb-10 grid">
           <p className="text-lg"><strong>Name:</strong> {employeeData.name}</p>
@@ -140,6 +141,7 @@ const LeaveStatusPage = () => {
           <thead>
             <tr>
               <th className="border border-gray-200 px-4 py-2">Leave Type</th>
+              <th className="border border-gray-200 px-4 py-2">Date of Apply</th>
               <th className="border border-gray-200 px-4 py-2">Start Date</th>
               <th className="border border-gray-200 px-4 py-2">End Date</th>
               <th className="border border-gray-200 px-4 py-2">No. Of Days</th>
@@ -155,10 +157,13 @@ const LeaveStatusPage = () => {
                   {leave.typeOfLeave}
                 </td>
                 <td className="border border-gray-200 px-4 py-2">
-                  {new Date(leave.startDate).toLocaleDateString()}
+                  {useFormatDate(leave.createdAt)}
                 </td>
                 <td className="border border-gray-200 px-4 py-2">
-                  {new Date(leave.endDate).toLocaleDateString()}
+                  {useFormatDate(leave.startDate)}
+                </td>
+                <td className="border border-gray-200 px-4 py-2">
+                  {useFormatDate(leave.endDate)}
                 </td>
                 <td className="border border-gray-200 px-4 py-2">
                   {leave.numberOfDays}

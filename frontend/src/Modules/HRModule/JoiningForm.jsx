@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useDialog from "@/components/Atoms/UseDialog";
@@ -69,6 +69,18 @@ function JoiningForm() {
   });
 
   const [documents, setDocuments] = useState([]);
+
+  useEffect(() => {
+    const empData = JSON.parse(localStorage.getItem("empData") || "{}");
+
+    // Role-based authorization
+    if (empData.role !== "HR") {
+      showDialog("You are not authorized to access this page.", () =>
+        navigate("/dashboard")
+      );
+      return;
+    }
+  }, []);
 
   const handleDocumentChange = (e) => {
     const files = Array.from(e.target.files);

@@ -149,7 +149,7 @@ const LeaveForm = () => {
           additionalNotes: "",
           declaration: false,
         });
-        showDialog("Form submitted successfully!", () => navigate("/dashboard"));
+        showDialog("Leave submitted successfully!", () => navigate("/dashboard"));
       } else {
         showDialog(`Unexpected response status: ${response.status}`);
       }

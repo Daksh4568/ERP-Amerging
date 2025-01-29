@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import useDialog from "../Atoms/UseDialog";
 
 function Login() {
   const [officialEmail, setOfficialEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { DialogComponent, showDialog } = useDialog();
   const navigate = useNavigate()
 
   // useEffect(() => {
@@ -45,18 +47,16 @@ function Login() {
         localStorage.setItem("authToken", token);
         // employee data in local storage
         localStorage.setItem("empData", JSON.stringify(emp));
-
-
         navigate("/dashboard");
       }
     } catch (error) {
       // handling invalid credentials
-      if (error.response && error.response.status === 400) {
-        alert("Invalid username or password");
+      if (error.response && error.response.status === 401) {
+        showDialog("Invalid username or password");
         // console.log("Invalid username or password");
       } else {
         console.error("Error submitting form data:", error);
-        alert("An error occurred. Please try again later.");
+        showDialog("An error occurred. Please try again later.");
       }
 
       // clear input fields
@@ -67,6 +67,7 @@ function Login() {
 
   return (
     <div className=" w-dvw flex flex-wrap  justify-center items-center h-dvh bg-gradient-to-r from-blue-500 to-red-500 p-4">
+      <DialogComponent/>
       <form
         className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md mx-w-auto flex flex-col flex-wrap"
         onSubmit={handleSubmit}

@@ -124,7 +124,7 @@ const EmployeeList = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
+    <div className="max-w-full mx-auto p-4 sm:p-6 lg:p-8">
       <DialogComponent />
       <h1 className="text-xl sm:text-2xl font-bold mb-4 text-center">
         Employee List

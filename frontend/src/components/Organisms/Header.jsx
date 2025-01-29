@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Space, Input } from "antd";
 import { BellIcon, LogOutIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import Notification from "../Pages/Notification";
-import axios from 'axios';    
+import axios from "axios";
 import useDialog from "../Atoms/UseDialog";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const Header = ({ collapsed, toggleSidebar }) => {
   const navigate = useNavigate();
   const { Search } = Input;
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   const { DialogComponent, showDialog } = useDialog();
+  const [initials, setInitials] = useState("AT");
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("empData"));
+    if(userData?.name){
+      const nameParts = userData.name.trim().split(" ");
+      const calculatedInitials = nameParts.map((part) => part[0].toUpperCase()).join("").substring(0, 2);
+      setInitials(calculatedInitials);
+    }
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -25,22 +35,15 @@ const Header = ({ collapsed, toggleSidebar }) => {
 
       const response = await fetch(
         // "http://localhost:3000/api/emp/logout", {
-        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/emp/logout", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      // const response = await axios.post(
-      //   "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/emp/logout",  
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${token}`, 
-      //       "Content-Type": "application/json",
-      //     }
-      //   });
+        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/emp/logout",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
         localStorage.clear();
@@ -58,9 +61,13 @@ const Header = ({ collapsed, toggleSidebar }) => {
     navigate("/dashboard");
   };
 
+  const handleUserProfile = () => {
+    navigate("/user-profile")
+  }
+
   return (
-    <header className="w-screen flex items-center justify-between p-4 bg-[#2E3B55] shadow-md">
-      <DialogComponent/>
+    <header className="w-screen flex items-center justify-between p-4 bg-[#2E3B55] shadow-md ">
+      <DialogComponent />
       <div className="logo-container flex items-center justify-center">
         <img
           src="https://www.cphi-online.com/LOGO_Size-comp302721.png"
@@ -79,7 +86,11 @@ const Header = ({ collapsed, toggleSidebar }) => {
       </Space> */}
 
       <div className="flex items-center justify-center gap-4 ">
-        <Button className="bg-black hover:bg-black" variant="ghost" onClick={() => setIsDialogOpen(true)}>
+        <Button
+          className="bg-black hover:bg-black"
+          variant="ghost"
+          onClick={() => setIsDialogOpen(true)}
+        >
           <BellIcon className=" text-white" />
         </Button>
 
@@ -94,6 +105,12 @@ const Header = ({ collapsed, toggleSidebar }) => {
           </span>{" "}
           Logout
         </Button>
+
+        <Avatar className="cursor-pointer" onClick={handleUserProfile}>
+          <AvatarImage/>
+          <AvatarFallback className="select-none">{initials}</AvatarFallback>
+        </Avatar>
+        
       </div>
     </header>
   );
