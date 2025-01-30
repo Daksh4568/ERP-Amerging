@@ -32,7 +32,7 @@ const UserProfile = () => {
       try {
         const storedData = JSON.parse(localStorage.getItem("empData"));
         const fetchedData = {
-          eID: storedData.eID,
+          // eID: storedData.eID,
           password: storedData.eID,
           personalEmail: storedData.personalEmail,
           contactNumber: storedData.personalContactNumber,
@@ -71,9 +71,11 @@ const UserProfile = () => {
 
     try {
       const token = localStorage.getItem("authToken");
+      console.log(formData);
       const response = await axios.patch("https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/emp/${formData.eID}", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
+
 
       if (response.status === 200) {
         alert("Profile updated successfully.");
@@ -88,7 +90,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-md">
+    <div className="max-w-full mx-auto p-6 bg-white shadow-md rounded-md">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold">User Profile</h2>
         <button
