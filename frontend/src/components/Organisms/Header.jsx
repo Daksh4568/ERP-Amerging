@@ -16,9 +16,11 @@ const Header = ({ collapsed, toggleSidebar }) => {
   const [initials, setInitials] = useState("AT");
 
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("empData"));
-    if(userData?.name){
-      const nameParts = userData.name.trim().split(" ");
+    // const userData = JSON.parse(localStorage.getItem("empData"));
+    const storedUser = localStorage.getItem("user");
+    const user = storedUser ? JSON.parse(storedUser) : {};
+    if(user?.name){
+      const nameParts = user.name.trim().split(" ");
       const calculatedInitials = nameParts.map((part) => part[0].toUpperCase()).join("").substring(0, 2);
       setInitials(calculatedInitials);
     }

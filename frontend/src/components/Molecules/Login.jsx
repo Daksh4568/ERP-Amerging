@@ -41,7 +41,7 @@ function Login() {
         // console.log(token);
         
         const { emp } = response.data;
-        // console.log(emp);        
+        console.log(emp);        
         
         // storing tokens in local storage
         localStorage.setItem("authToken", token);
