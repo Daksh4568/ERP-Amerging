@@ -1,6 +1,7 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useDialog from "@/components/Atoms/UseDialog";
 import { PlusOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -15,6 +16,7 @@ import {
 } from "antd";
 
 function JoiningForm() {
+  const { DialogComponent, showDialog } = useDialog();
 
   const navigate = useNavigate();
 
@@ -68,6 +70,18 @@ function JoiningForm() {
 
   const [documents, setDocuments] = useState([]);
 
+  useEffect(() => {
+    const empData = JSON.parse(localStorage.getItem("empData") || "{}");
+
+    // Role-based authorization
+    if (empData.role !== "HR") {
+      showDialog("You are not authorized to access this page.", () =>
+        navigate("/dashboard")
+      );
+      return;
+    }
+  }, []);
+
   const handleDocumentChange = (e) => {
     const files = Array.from(e.target.files);
 
@@ -94,14 +108,13 @@ function JoiningForm() {
     setIsSameAddress(e.target.checked);
     if (e.target.checked) {
       setCurrentAddress(permanent);
-    }
-    else{
+    } else {
       setCurrentAddress({
-        street: '',
-        city: '',
-        state: '',
-        postalCode: '',
-        country: '',
+        street: "",
+        city: "",
+        state: "",
+        postalCode: "",
+        country: "",
       });
     }
   };
@@ -131,12 +144,13 @@ function JoiningForm() {
     try {
       const token = localStorage.getItem("authToken");
       if (!token) {
-        alert("No token available, please log in again.");
+        showDialog("No token available, please log in again.");
         return;
       }
 
       const response = await axios.post(
-        "http://localhost:3000/api/regemp",
+        // "http://localhost:3000/api/regemp",
+        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/regemp",
         finalData,
         {
           headers: {
@@ -148,26 +162,16 @@ function JoiningForm() {
 
       if (response.status === 201) {
         console.log("New Employee Registered");
-        alert("New employee Registered");
-        navigate("/dashboard");
-
+        showDialog("New employee Registered", () => navigate("/dashboard"));
       }
     } catch (error) {
       console.error("Error registering new employee:", error);
       if (error.response && error.response.status === 401) {
-        alert("Unauthorized: Please check your login or token.");
+        showDialog("Unauthorized: Please check your login or token.");
       } else {
-        alert("An error occurred. Please try again later.");
+        showDialog("An error occurred. Please try again later.");
       }
     }
-
-    // setFormSubmissionData([...formSubmissionData, values]);
-
-    // const formData = JSON.stringify(values);  /* converting object values to JSON*/
-
-    // console.log(formSubmissionData);
-
-    // 
   };
 
   return (
@@ -175,12 +179,13 @@ function JoiningForm() {
       onSubmit={handleSubmit}
       className="text-black grid grid-cols-4 gap-x-20 gap-y-2"
     >
+      <DialogComponent />
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="eID"
         >
-          Employee ID 
+          Employee ID
         </label>
         <input
           className="w-full bg-white block p-2 text-sm rounded-md border"
@@ -224,7 +229,6 @@ function JoiningForm() {
           name="department"
           value={values.department}
           onChange={handleChanges}
-          
         >
           <option value="">--Select--</option>
           <option value="Design">Design</option>
@@ -250,7 +254,6 @@ function JoiningForm() {
           name="designation"
           value={values.designation}
           onChange={handleChanges}
-          
         />
       </div>
 
@@ -387,7 +390,7 @@ function JoiningForm() {
         />
       </div>
 
-      <div className="col-span-2">
+      {/* <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "
           htmlFor="password"
@@ -402,7 +405,7 @@ function JoiningForm() {
           value={values.password}
           onChange={handleChanges}
         />
-      </div>
+      </div> */}
 
       <div className="bg-gray-200 mt-5 w-full p-4 rounded col-span-4 gap-x-8">
         {/* Permanent Address */}
@@ -630,15 +633,22 @@ function JoiningForm() {
         >
           Blood Group <span className="text-red-600">*</span>
         </label>
-        <input
-          className="w-full bg-white block p-2 text-sm rounded-md border"
-          type="text"
-          // placeholder="Enter employee Name"
+        <select
+          className="w-full bg-white block p-2 mb-2 text-sm rounded-md border"
           name="bloodGroup"
           value={values.bloodGroup}
           onChange={handleChanges}
-          required
-        />
+        >
+          <option value="">--Select--</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
       </div>
 
       <div className="col-span-2">

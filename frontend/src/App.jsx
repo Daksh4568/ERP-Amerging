@@ -14,6 +14,8 @@ import LeaveForm from "./components/Molecules/LeaveForm";
 import Notification from "./components/Pages/Notification";
 import LeaveApproval from "./components/Molecules/LeaveApproval";
 import LeaveStatusPage from "./components/Pages/LeaveStatusPage";
+import EmployeeList from "./components/Pages/EmployeeData";
+import UserProfile from "./components/Pages/UserProfile";
 
 function MainLayout() {
   return (
@@ -94,6 +96,26 @@ function App() {
               element: <LeaveApproval />,
             },
           ],
+        },
+        {
+          path: "/",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/admin/employee-data",
+              element: <EmployeeList/>,
+            }
+          ]
+        },
+        {
+          path: "/",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/user-profile",
+              element: <UserProfile />,
+            }
+          ]
         },
       ],
     },

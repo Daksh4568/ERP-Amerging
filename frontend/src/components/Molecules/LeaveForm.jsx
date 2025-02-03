@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useDialog from "../Atoms/UseDialog";
 
 const LeaveForm = () => {
+
+  const { DialogComponent, showDialog } = useDialog();
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     eID: "",
@@ -69,7 +73,7 @@ const LeaveForm = () => {
       startDate.toString() === "Invalid Date" ||
       endDate.toString() === "Invalid Date"
     ) {
-      alert("Please enter valid date");
+      showDialog("Please enter valid date");
       return 0;
     }
 
@@ -96,7 +100,7 @@ const LeaveForm = () => {
     e.preventDefault();
 
     if (!formData.declaration) {
-      alert("Please acknowledge the declaration before submitting.");
+      showDialog("Please acknowledge the declaration before submitting.");
       return;
     }
 
@@ -105,12 +109,13 @@ const LeaveForm = () => {
       const token = localStorage.getItem("authToken");
 
       if (!token) {
-        alert("No token found. Please log in again.");
+        showDialog("No token found. Please log in again.");
         return;
       }
 
       const response = await axios.post(
-        "http://localhost:3000/api/apply-leave",
+        // "http://localhost:3000/api/apply-leave",
+        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/apply-leave",
         formData,
         {
           headers: {
@@ -144,17 +149,16 @@ const LeaveForm = () => {
           additionalNotes: "",
           declaration: false,
         });
-        navigate("/dashboard");
-        alert("Form submitted successfully!");
+        showDialog("Leave submitted successfully!", () => navigate("/dashboard"));
       } else {
-        alert(`Unexpected response status: ${response.status}`);
+        showDialog(`Unexpected response status: ${response.status}`);
       }
     } catch (error) {
       console.error("Error submitting form:", error);
       if (error.response?.status === 500) {
-        alert("Internal Server Error: Please try again later.");
+        showDialog("Internal Server Error: Please try again later.");
       } else {
-        alert("An unexpected error occurred. Please try again.");
+        showDialog("An unexpected error occurred. Please try again.");
       }
     } finally {
       setIsSubmitting(false);
@@ -163,6 +167,7 @@ const LeaveForm = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-md">
+      <DialogComponent/>
       <h2 className="text-2xl font-semibold mb-4 text-center">
         Leave Application Form
       </h2>

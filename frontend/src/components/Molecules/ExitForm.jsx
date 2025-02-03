@@ -1,50 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import useDialog from "../Atoms/UseDialog";
 import ReactStars from "react-rating-stars-component";
-// import {
-//   Form,
-//   Input,
-//   Button,
-//   Select,
-//   DatePicker,
-//   Typography,
-//   Checkbox,
-//   Table,
-//   InputNumber,
-//   List,
-//   Row,
-//   Col,
-//   Rate,
-// } from "antd";
-
-// const { Title } = Typography;
-// const { TextArea } = Input;
+import { useNavigate } from "react-router-dom";
 
 function ExitForm() {
-  // const rateManagerQuestions = [
-  //     "Follow policies & procedures",
-  //     "Treats employees in a fair and equal way",
-  //     "Provides recognition for a job well done",
-  //     "Resolves complaints and problems",
-  //     "Gives needed information",
-  //     "Keeps employees busy",
-  //     "Knows his/her job well",
-  //     "Welcomes suggestions",
-  //     "Maintains discipline",
-  // ]
-  // const managerRatingOptions = ["Never", "Sometimes", "Usually", "Always"];
 
-  // const [form] = Form.useForm();
-
-  // const rateDepartmentQuestions = [
-  //     "Cooperation/teamwork in the department",
-  //     "Cooperation with other departments",
-  //     "Department training and OTJ training",
-  //     "Communications",
-  //     "Working Conditions",
-  //     "Work Schedule",
-  // ]
-  // const departmentRatingOptions = ["Excellent", "Good", "Fair", "Poor"]
+  const { DialogComponent, showDialog } = useDialog();
+  const Navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     employeeName: "",
@@ -113,8 +76,8 @@ function ExitForm() {
         const fetchedData = {
           employeeId: storedData.eID,
           employeeName: storedData.name,
-          department: "Embedded",
-          designation: "SDE",
+          department: storedData.department,
+          designation: storedData.designation,
         };
 
         // Merging fetched data with formData
@@ -195,13 +158,14 @@ function ExitForm() {
       const token = localStorage.getItem("authToken");
 
       if (!token) {
-        alert("No token available, please log in again.");
+        showDialog("No token available, please log in again.");
         return;
       }
       // console.log(JSON.stringify(formData));
 
       const response = await axios.post(
-        "http://localhost:3000/api/exit-form",
+        // "http://localhost:3000/api/exit-form",
+        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/exit-form",
         formData,
         {
           headers: {
@@ -213,14 +177,13 @@ function ExitForm() {
 
       if (response.status === 201) {
         // console.log("Exit form successfully submitted");
-        alert("Exit form successfully submitted");
-        // navigate("/dashboard");
+        showDialog("Exit form successfully submitted", () => Navigate("/dashboard"));
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        alert("Unauthorized: Please check your login or token.");
+        showDialog("Unauthorized: Please check your login or token.");
       } else {
-        alert("Error submitting Exit form.", error.response.data);
+        showDialog("Error submitting Exit form.", error.response.data);
       }
     }
 
@@ -233,6 +196,7 @@ function ExitForm() {
       onSubmit={handleSubmit}
       className="text-black grid grid-cols-4 gap-x-20 gap-y-2"
     >
+      <DialogComponent />
       <div className="col-span-2">
         <label
           className="text-base block w-full mt-2 mb-1 text-left "

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import useDialog from "../Atoms/UseDialog";
 
 function Login() {
   const [officialEmail, setOfficialEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { DialogComponent, showDialog } = useDialog();
   const navigate = useNavigate()
 
   // useEffect(() => {
@@ -24,7 +26,8 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/emp/login",
+        // "http://localhost:3000/api/emp/login",     //local api url
+        "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/emp/login", // cloud api url
         loginData,
         {
           headers: {
@@ -44,18 +47,16 @@ function Login() {
         localStorage.setItem("authToken", token);
         // employee data in local storage
         localStorage.setItem("empData", JSON.stringify(emp));
-
-
         navigate("/dashboard");
       }
     } catch (error) {
       // handling invalid credentials
-      if (error.response && error.response.status === 400) {
-        alert("Invalid username or password");
+      if (error.response && error.response.status === 401) {
+        showDialog("Invalid username or password");
         // console.log("Invalid username or password");
       } else {
         console.error("Error submitting form data:", error);
-        alert("An error occurred. Please try again later.");
+        showDialog("An error occurred. Please try again later.");
       }
 
       // clear input fields
@@ -66,6 +67,7 @@ function Login() {
 
   return (
     <div className=" w-dvw flex flex-wrap  justify-center items-center h-dvh bg-gradient-to-r from-blue-500 to-red-500 p-4">
+      <DialogComponent/>
       <form
         className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md mx-w-auto flex flex-col flex-wrap"
         onSubmit={handleSubmit}
@@ -87,7 +89,7 @@ function Login() {
             id="officialEmail"
             value={officialEmail}
             onChange={(e) => setOfficialEmail(e.target.value)}
-            className="w-full mt-1 p-2 border text-white border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full mt-1 p-2 border text-white border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-400 focus:outline-none bg-black"
             required
           />
         </div>
@@ -100,7 +102,7 @@ function Login() {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full mt-1 p-2 border text-white border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full mt-1 p-2 border text-white border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-400 focus:outline-none bg-black"
             required
           />
         </div>

@@ -149,7 +149,7 @@ exports.handler = async (event) => {
       try {
         const parsedBody = JSON.parse(body);
         const emp = await employeeModel.findByCredentials(parsedBody.officialEmail, parsedBody.password);
-        const token = await emp.generatAeuthToken();
+        const token = await emp.generateAuthToken();
 
         console.log(`${emp.role} ${emp.name} has now logged into the system`);
         return {
@@ -220,9 +220,9 @@ exports.handler = async (event) => {
     }
 
     // Update Employee Details
-    if (path && path.startsWith('/api/emp/') && httpMethod === 'PATCH') {
+    if (path && path.match(/^\/api\/emp\/[^/]+$/) && httpMethod === 'PATCH') {
       const segments = path.split('/');
-      const eID = segments.length > 3 ? segments[3] : null; // Safely extract eID from the path
+      const eID = segments.length > 3 ? segments[3] : null; // Extract eID safely
 
       // Validate eID
       if (!eID) {
@@ -232,9 +232,14 @@ exports.handler = async (event) => {
         };
       }
 
+
       try {
+        // Authenticate user
+        const { employee } = await auth(headers);
+        authorize(employee, ['HR', 'admin', 'Manager', 'Employee']); // Ensure only authorized roles can update
         const updates = JSON.parse(body);
-        const allowedUpdates = ['personalMail', 'password', 'address', 'address.city'];
+        const allowedUpdates = ['personalEmail', 'password', 'personalContactNumber'];
+
         const isValidOperation = Object.keys(updates).every((update) =>
           allowedUpdates.includes(update)
         );
@@ -255,10 +260,22 @@ exports.handler = async (event) => {
           };
         }
 
-        // Apply updates
-        Object.keys(updates).forEach((update) => {
-          emp[update] = updates[update];
-        });
+        // Apply updates 
+        for (const key in updates) {
+          if (key.includes('.')) {
+
+            emp.set(key, updates[key]);
+          } else {
+            emp[key] = updates[key];
+          }
+        }
+        if (!emp.department) {
+          return {
+            statusCode: 400,
+            body: JSON.stringify({ error: 'Department is required and cannot be removed' }),
+          };
+        }
+
         await emp.save();
 
         return {
@@ -284,6 +301,7 @@ exports.handler = async (event) => {
         body: JSON.stringify({ error: 'Path is undefined or invalid' }),
       };
     }
+
 
     // Notifications for Manager
     if (path === '/api/notifications/manager' && httpMethod === 'GET') {

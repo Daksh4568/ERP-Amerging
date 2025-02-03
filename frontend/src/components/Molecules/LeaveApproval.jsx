@@ -4,6 +4,7 @@ import axios from "axios";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
+import useDialog from "../Atoms/UseDialog";
 
 const LeaveApproval = () => {
   const { notificationId } = useParams(); // Extract notificationId from the route
@@ -13,13 +14,20 @@ const LeaveApproval = () => {
   const [actionLoading, setActionLoading] = useState(false); // State for action loading
   const navigate = useNavigate();
 
+  const { DialogComponent, showDialog } = useDialog();
+
   useEffect(() => {
     const fetchLeaveDetails = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get("http://localhost:3000/api/notifications/manager", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        // const response = await axios.get("http://localhost:3000/api/notifications/manager", {
+        const response = await axios.get(
+          "https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/notifications/manager",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+            "Content-Type": "application/json",
+          }
+        );
 
         // Find the notification by notificationId
         const notification = response.data.find(
@@ -35,10 +43,10 @@ const LeaveApproval = () => {
             endDate: notification.endDate,
           });
         } else {
-          alert("Notification not found.");
+          showDialog("Notification not found.");
         }
       } catch (error) {
-        alert("An error occurred while fetching leave details.");
+        showDialog("An error occurred while fetching leave details.");
       } finally {
         setLoading(false);
       }
@@ -54,25 +62,29 @@ const LeaveApproval = () => {
 
       // Send the status update request to the backend
       const response = await axios.patch(
-        `http://localhost:3000/api/notifications/handle`,
+        // `http://localhost:3000/api/notifications/handle`,
+        `https://risabllrw6.execute-api.ap-south-1.amazonaws.com/api/notifications/handle`,
         { notificationId, status, managerComment },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { 
+          Authorization: `Bearer ${token}` ,
+          "Content-Type": "application/json",
+        } 
+      }
       );
 
       if (response.status === 200) {
-        alert(`Leave ${status.toLowerCase()} successfully!`);
         // Update the status in the UI
         setLeaveDetails((prev) => ({
           ...prev,
           status: "Processed", // Update the status in UI
           managerComment,
         }));
-        navigate("/dashboard"); // Redirect to notifications page
+        showDialog(`Leave ${status.toLowerCase()} successfully!`, () => navigate("/dashboard"));
       } else {
-        alert("Failed to update leave status.");
+        showDialog("Failed to update leave status.");
       }
     } catch (error) {
-      alert("An error occurred while updating leave status.");
+      showDialog("An error occurred while updating leave status.");
     } finally {
       setActionLoading(false); // Stop processing
     }
@@ -90,6 +102,7 @@ const LeaveApproval = () => {
 
   return (
     <div className="p-6">
+      <DialogComponent/>
       <Card className="max-w-3xl mx-auto">
         <CardHeader>
           <h1 className="text-2xl font-bold">Leave Approval</h1>
@@ -99,7 +112,8 @@ const LeaveApproval = () => {
             <strong>Employee Name:</strong> {leaveDetails.employeeName}
           </p>
           <p>
-            <strong>Leave Dates:</strong> {new Date(leaveDetails.startDate).toDateString()} to{" "}
+            <strong>Leave Dates:</strong>{" "}
+            {new Date(leaveDetails.startDate).toDateString()} to{" "}
             {new Date(leaveDetails.endDate).toDateString()}
           </p>
           <p>
@@ -113,7 +127,7 @@ const LeaveApproval = () => {
             value={managerComment}
             onChange={(e) => setManagerComment(e.target.value)}
             className="resize-none mt-2"
-            disabled={actionLoading || isProcessed} 
+            disabled={actionLoading || isProcessed}
           />
           {actionLoading && (
             <p className="text-center text-blue-500 mt-2">Loading...</p>
@@ -124,14 +138,14 @@ const LeaveApproval = () => {
             className="bg-green-500"
             variant="success"
             onClick={() => handleAction("Approved")}
-            disabled={actionLoading || isProcessed} 
+            disabled={actionLoading || isProcessed}
           >
             Approve
           </Button>
           <Button
             variant="destructive"
             onClick={() => handleAction("Rejected")}
-            disabled={actionLoading || isProcessed} 
+            disabled={actionLoading || isProcessed}
           >
             Reject
           </Button>
