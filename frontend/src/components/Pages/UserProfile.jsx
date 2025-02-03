@@ -93,7 +93,10 @@ const UserProfile = () => {
             name: "password",
             type: "password",
           },
-          { label: "Personal Email", name: "personalEmail", type: "email" },
+          { label: "Personal Email", 
+            name: "personalEmail", 
+            type: "email" 
+          },
           {
             label: "Contact Number",
             name: "personalContactNumber",
@@ -112,13 +115,12 @@ const UserProfile = () => {
                 disabled={!isEditing[name]}
               />
               {isEditing[name] && name === "password" && (
-                <button
-                  type="button"
+                <span
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-1 flex items-center p-4 border-none"
+                  className="absolute inset-y-0 right-1 flex items-center p-4 border-none cursor-pointer"
                 >
                   {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
-                </button>
+                </span>
               )}
             </div>
             {isEditing[name] ? (
