@@ -143,7 +143,7 @@ const employeeSchema = new mongoose.Schema(
     },
     department: {
       type: String,
-      enum: ['Design', 'Instrumentation', 'Sales', 'IT', 'HR', 'R&D'],
+      enum: ['Design', 'Instrumentation', 'Sales', 'IT', 'HR', 'R&D', 'Accounts'],
       required: true,
     },
     designation: {

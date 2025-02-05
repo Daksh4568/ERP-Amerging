@@ -9,6 +9,7 @@ const { handleLeaveNotification, getAllNotificationsForManager } = require('../E
 const counters = require('../HR Module/models/counterMaster'); // Counter schema for generating IDs
 const connectToDatabase = require('../HR Module/db/db'); // MongoDB connection handler
 const sendEmployeeCredentials = require('../HR Module/Controllers/sendMail'); // Email notification controller
+const ExpenseMaster = require("../HR Module/models/expenseFormModel")
 exports.handler = async (event) => {
   try {
     // MongoDB connection
@@ -328,6 +329,92 @@ exports.handler = async (event) => {
       const exitFormData = JSON.parse(body); // Parse the exit form data from the request body
       return await exitEmployeeController.createExitForm(exitFormData, employee); // Directly return the controller response
     }
+    const segments = path.split("/");
+    const refNo = segments.length > 3 ? segments[3] : null;
+    const parsedBody = body ? JSON.parse(body) : {};
+
+    // HR Submits Expense
+    if (path === "/api/expense" && httpMethod === "POST") {
+      const { employee } = await auth(headers);
+      authorize(employee, ["HR"]);
+
+      const expense = new ExpenseMaster({ ...parsedBody, approvalStatus: "Pending" });
+      await expense.save();
+      return { statusCode: 201, body: JSON.stringify({ message: "Expense form submitted successfully", data: expense }) };
+    }
+
+    // Admin Approves or Rejects Expense
+    if (path.match(/^\/api\/expense\/[^/]+\/approve$/) && httpMethod === "PATCH" && refNo) {
+      const { employee } = await auth(headers);
+      authorize(employee, ["admin"]);
+
+      const expense = await ExpenseMaster.findOne({ refNo });
+      if (!expense) {
+        return { statusCode: 404, body: JSON.stringify({ message: "Expense not found" }) };
+      }
+
+      if (expense.approvalStatus !== "Pending") {
+        return { statusCode: 403, body: JSON.stringify({ message: "Admin cannot modify an already processed expense" }) };
+      }
+
+      const { approvalStatus, adminRemark } = parsedBody;
+      if (!["Approved", "Rejected"].includes(approvalStatus)) {
+        return { statusCode: 400, body: JSON.stringify({ message: "Invalid approval status" }) };
+      }
+
+      expense.approvalStatus = approvalStatus;
+      expense.adminRemark = adminRemark;
+      await expense.save();
+      return { statusCode: 200, body: JSON.stringify({ message: "Expense status updated", data: expense }) };
+    }
+
+    // Accounts Department Adds Financial Details for All Expenses in the Form
+    if (path.match(/^\/api\/expense\/[^/]+\/accounts$/) && httpMethod === "PATCH" && refNo) {
+      const { employee } = await auth(headers);
+      authorize(employee, ["accounts"]);
+
+      const expense = await ExpenseMaster.findOne({ refNo });
+      if (!expense) {
+        return { statusCode: 404, body: JSON.stringify({ message: "Expense not found" }) };
+      }
+
+      if (expense.approvalStatus !== "Approved") {
+        return { statusCode: 403, body: JSON.stringify({ message: "Expense must be approved before adding accounts details" }) };
+      }
+
+      if (expense.expenses.some(item => item.accountsDepartment)) {
+        return { statusCode: 403, body: JSON.stringify({ message: "Accounts details already added, cannot modify." }) };
+      }
+
+      const { accountsDetails } = parsedBody;
+
+      expense.expenses.forEach((item, index) => {
+        if (accountsDetails[index]) {
+          item.accountsDepartment = accountsDetails[index];
+        }
+      });
+
+      await expense.save();
+      return { statusCode: 200, body: JSON.stringify({ message: "Accounting details added for all expenses", data: expense }) };
+    }
+
+    // Fetch All Expenses (Admin Access)
+    if (path === "/api/expenses" && httpMethod === "GET") {
+      const { employee } = await auth(headers);
+      authorize(employee, ["admin"]);
+      const expenses = await ExpenseMaster.find();
+      return { statusCode: 200, body: JSON.stringify({ data: expenses }) };
+    }
+
+    // Fetch Approved Expenses for Accounts
+    if (path === "/api/expenses/approved" && httpMethod === "GET") {
+      const { employee } = await auth(headers);
+      authorize(employee, ["accounts"]);
+      const expenses = await ExpenseMaster.find({ approvalStatus: "Approved" });
+      return { statusCode: 200, body: JSON.stringify({ data: expenses }) };
+    }
+
+    return { statusCode: 404, body: JSON.stringify({ error: "Route not found" }) };
 
 
     // Default response for unmatched routes
@@ -335,6 +422,7 @@ exports.handler = async (event) => {
       statusCode: 404,
       body: JSON.stringify({ error: 'Route not found' }),
     };
+
   } catch (error) {
     console.error('Error processing request:', error);
     return {

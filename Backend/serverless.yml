@@ -2,7 +2,6 @@
 org: developer4568
 service: enterprise-resource-planning # Name of your service/project
 
-
 provider:
   name: aws
   runtime: nodejs20.x
@@ -128,6 +127,41 @@ functions:
       - httpApi:
           path: /api/exit-form
           method: POST
+
+  expenseSubmit:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/expense
+          method: POST
+
+  expenseApprove:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/expense/{refNo}/approve
+          method: PATCH
+
+  expenseAccountsUpdate:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/expense/{refNo}/accounts
+          method: PATCH
+
+  getAllExpenses:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/expenses
+          method: GET
+
+  getApprovedExpenses:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/expenses/approved
+          method: GET
 
 plugins:
   - serverless-offline
