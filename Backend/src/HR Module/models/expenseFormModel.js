@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const AutoIncrement = require("mongoose-sequence")(mongoose);
-
+//expense form model
 const expenseItemSchema = new mongoose.Schema({
     date: { type: Date, required: true },
     expenseType: {
