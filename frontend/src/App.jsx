@@ -17,6 +17,7 @@ import LeaveStatusPage from "./components/Pages/LeaveStatusPage";
 import EmployeeList from "./components/Pages/EmployeeData";
 import UserProfile from "./components/Pages/UserProfile";
 import { EmpProvider } from "./components/Atoms/EmpContext";
+import DailyExpenseForm from "./components/Molecules/DailyExpenseForm";
 
 function MainLayout() {
   return (
@@ -115,6 +116,16 @@ function App() {
             {
               path: "/user-profile",
               element: <UserProfile />,
+            }
+          ]
+        },
+        {
+          path: "/",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/hr/daily-expenses",
+              element: <DailyExpenseForm/>,
             }
           ]
         },

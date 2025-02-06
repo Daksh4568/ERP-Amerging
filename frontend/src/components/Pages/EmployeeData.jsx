@@ -151,6 +151,7 @@ const EmployeeList = () => {
               <SelectItem value="IT">IT</SelectItem>
               <SelectItem value="HR">HR</SelectItem>
               <SelectItem value="R&D">R&D</SelectItem>
+              <SelectItem value="Accounts">Accounts</SelectItem>
             </SelectContent>
           </Select>
         </div>

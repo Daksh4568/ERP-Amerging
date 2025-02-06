@@ -8,6 +8,7 @@ import {
   XIcon,
   Loader2,
 } from "lucide-react";
+import useDialog from "../Atoms/UseDialog";
 
 const UserProfile = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ const UserProfile = () => {
     personalEmail: "",
     personalContactNumber: "",
   });
-
+  const { DialogComponent, showDialog } = useDialog();
   const [isEditing, setIsEditing] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -71,13 +72,25 @@ const UserProfile = () => {
         const { data } = response;
         const emp = data.data;
         localStorage.setItem("empData", JSON.stringify(emp));
-        alert("Field updated successfully.");
+        showDialog("Field updated successfully.");
         location.reload();
         setIsEditing((prev) => ({ ...prev, [field]: false }));
       }
     } catch (error) {
       console.error("Error updating field:", error);
-      alert("Failed to update field.");
+      if(error.response){
+        if(error.response.status === 400){
+          showDialog("Bad Request, Please check the input data.");
+        }
+        else if (error.response.status === 500) {
+          showDialog("Server error. Please try again later.")
+        }
+        else {
+          showDialog("Failed to update field.")
+        }
+      } else{
+        showDialog("Network error. Please check your connection");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -85,6 +98,7 @@ const UserProfile = () => {
 
   return (
     <div className="max-w-full mx-auto p-6 bg-white shadow-md rounded-md">
+      <DialogComponent/>
       <h2 className="text-2xl font-semibold mb-4">User Profile</h2>
       <form className="space-y-4">
         {[

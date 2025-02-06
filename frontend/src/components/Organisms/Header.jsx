@@ -17,7 +17,7 @@ const Header = ({ collapsed, toggleSidebar }) => {
 
   useEffect(() => {
     // const userData = JSON.parse(localStorage.getItem("empData"));
-    const storedUser = localStorage.getItem("user");
+    const storedUser = localStorage.getItem("empData");
     const user = storedUser ? JSON.parse(storedUser) : {};
     if(user?.name){
       const nameParts = user.name.trim().split(" ");
