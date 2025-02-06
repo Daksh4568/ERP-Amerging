@@ -16,6 +16,8 @@ import LeaveApproval from "./components/Molecules/LeaveApproval";
 import LeaveStatusPage from "./components/Pages/LeaveStatusPage";
 import EmployeeList from "./components/Pages/EmployeeData";
 import UserProfile from "./components/Pages/UserProfile";
+import { EmpProvider } from "./components/Atoms/EmpContext";
+import DailyExpenseForm from "./components/Molecules/DailyExpenseForm";
 
 function MainLayout() {
   return (
@@ -117,11 +119,23 @@ function App() {
             }
           ]
         },
+        {
+          path: "/",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/hr/daily-expenses",
+              element: <DailyExpenseForm/>,
+            }
+          ]
+        },
       ],
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return  <RouterProvider router={router} />;
+  // (  <EmpProvider>
+  // </EmpProvider> )
 }
 
 export default App;

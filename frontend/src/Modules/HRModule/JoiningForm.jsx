@@ -237,6 +237,7 @@ function JoiningForm() {
           <option value="R&D">R&D</option>
           <option value="IT">IT</option>
           <option value="Sales">Sales</option>
+          <option value="Accounts">Accounts</option>
         </select>
       </div>
 

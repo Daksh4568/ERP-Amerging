@@ -340,7 +340,7 @@ exports.handler = async (event) => {
 
       const expense = new ExpenseMaster({ ...parsedBody, approvalStatus: "Pending" });
       await expense.save();
-      return { statusCode: 201, body: JSON.stringify({ message: "Expense form submitted successfully", data: expense }) };
+      return { statusCode: 200, body: JSON.stringify({ message: "Expense form submitted successfully", data: expense }) };
     }
 
     // Admin Approves or Rejects Expense

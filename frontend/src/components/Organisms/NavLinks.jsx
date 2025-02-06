@@ -26,6 +26,7 @@ const NavLinks = () => {
           {/* Admin access */}
           <SubMenu className='bg-[#2E3B55]' label="Admin Module">
             <MenuItem className='bg-[#2E3B55] hover:bg-[#4A90E2] hover:text-black' component={<Link to="/admin/employee-data" />}>Employee Data</MenuItem>
+            <MenuItem className='bg-[#2E3B55] hover:bg-[#4A90E2] hover:text-black' component={<Link to="/hr/daily-expenses" />}>Daily Expenses</MenuItem>
           </SubMenu>
 
           {/* HR Module */}

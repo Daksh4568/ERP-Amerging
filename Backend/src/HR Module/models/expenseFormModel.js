@@ -7,10 +7,10 @@ const expenseItemSchema = new mongoose.Schema({
         type: String,
         enum: [
             "cash",
-            "Courier and postage",
+            "courier and postage",
             "housekeeping expense",
             "local transportation",
-            "Misc office expense",
+            "misc office expense",
             "mobile tarrif expense",
             "pantry",
             "refreshment",

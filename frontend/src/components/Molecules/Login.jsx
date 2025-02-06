@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import useDialog from "../Atoms/UseDialog";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 function Login() {
   const [officialEmail, setOfficialEmail] = useState("");
   const [password, setPassword] = useState("");
   const { DialogComponent, showDialog } = useDialog();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   // useEffect(() => {
   //   const isTokenValid = localStorage.getItem("authToken");
@@ -39,10 +41,10 @@ function Login() {
       if (response.status === 200) {
         const { token } = response.data;
         // console.log(token);
-        
+
         const { emp } = response.data;
-        // console.log(emp);        
-        
+        // console.log(emp);
+
         // storing tokens in local storage
         localStorage.setItem("authToken", token);
         // employee data in local storage
@@ -67,7 +69,7 @@ function Login() {
 
   return (
     <div className=" w-dvw flex flex-wrap  justify-center items-center h-dvh bg-gradient-to-r from-blue-500 to-red-500 p-4">
-      <DialogComponent/>
+      <DialogComponent />
       <form
         className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md mx-w-auto flex flex-col flex-wrap"
         onSubmit={handleSubmit}
@@ -97,14 +99,22 @@ function Login() {
           <label htmlFor="password" className="block text-gray-700">
             Password
           </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full mt-1 p-2 border text-white border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-400 focus:outline-none bg-black"
-            required
-          />
+          <div className="relative w-full">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full mt-1 p-2 border text-white border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-400 focus:outline-none bg-black"
+              required
+            />
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer text-white"
+            >
+              {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
+            </span>
+          </div>
         </div>
 
         <button
