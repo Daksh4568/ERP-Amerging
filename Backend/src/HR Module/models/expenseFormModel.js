@@ -27,11 +27,6 @@ const expenseItemSchema = new mongoose.Schema({
     incurredBy: { type: String, required: true },
     supportingDocument: { type: String },
 
-    accountsDetailStatus: {
-        type: String,
-        enum: ["Added", "Not Added"],
-        default: "Not Added",
-    },
     // These fields will be filled when the form will go to Accounts Department for approval
     accountsDepartment: {
         voucherNo: {
@@ -43,6 +38,11 @@ const expenseItemSchema = new mongoose.Schema({
         },
         remarks: {
             type: String,
+        },
+        accountsDetailStatus: {
+            type: String,
+            enum: ["Added", "Not Added"],
+            default: "Not Added",
         }
 
     }
@@ -57,11 +57,6 @@ const expenseMasterSchema = new mongoose.Schema(
         department: { type: String, required: true },
         //array of expenses
         expenses: [expenseItemSchema],
-        tallyStatus: {
-            type: String,
-            enum: ["Completed", "Not Completed"],
-            default: "Not Completed",
-        },
         totalExpense: { type: Number, default: 0 },
         balance: { type: Number, default: 0 },
         recipientID: {
