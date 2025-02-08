@@ -371,7 +371,13 @@ exports.handler = async (event) => {
     // Accounts Department Adds Financial Details for All Expenses in the Form
     if (path.match(/^\/api\/expense\/[^/]+\/accounts$/) && httpMethod === "PATCH" && refNo) {
       const { employee } = await auth(headers);
-      authorize(employee, ["Manager"]);
+
+      if (employee.department !== 'Accounts') {
+        return {
+          statusCode: 403,
+          body: JSON.stringify({ message: "Access Denied . Only Accounts department employee can perform this action" })
+        }
+      }
 
       const expense = await ExpenseMaster.findOne({ refNo });
       if (!expense) {
@@ -409,7 +415,13 @@ exports.handler = async (event) => {
     // Fetch Approved Expenses for Accounts
     if (path === "/api/expenses/approved" && httpMethod === "GET") {
       const { employee } = await auth(headers);
-      authorize(employee, ["accounts"]);
+
+      if (employee.department !== 'Accounts') {
+        return {
+          statusCode: 403,
+          body: JSON.stringify({ message: "Only accounts department can access this" })
+        };
+      }
       const expenses = await ExpenseMaster.find({ approvalStatus: "Approved" });
       return { statusCode: 200, body: JSON.stringify({ data: expenses }) };
     }
