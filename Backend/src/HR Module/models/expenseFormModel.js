@@ -37,6 +37,10 @@ const expenseItemSchema = new mongoose.Schema({
         },
         remarks: {
             type: String,
+        },
+        accountsDetailStatus: {
+            type: String,
+            enum: ["Added", "Not Added"],
         }
 
     }
@@ -53,7 +57,7 @@ const expenseMasterSchema = new mongoose.Schema(
         expenses: [expenseItemSchema],
         tallyStatus: {
             type: String,
-            enum: ["Checked", "Unchecked"]
+            enum: ["Completed", "Not Completed"]
         },
         totalExpense: { type: Number, default: 0 },
         balance: { type: Number, default: 0 },
