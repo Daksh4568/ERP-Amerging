@@ -30,6 +30,7 @@ const expenseItemSchema = new mongoose.Schema({
     accountsDetailStatus: {
         type: String,
         enum: ["Added", "Not Added"],
+        default: "Not Added",
     },
     // These fields will be filled when the form will go to Accounts Department for approval
     accountsDepartment: {
@@ -58,7 +59,8 @@ const expenseMasterSchema = new mongoose.Schema(
         expenses: [expenseItemSchema],
         tallyStatus: {
             type: String,
-            enum: ["Completed", "Not Completed"]
+            enum: ["Completed", "Not Completed"],
+            default: "Not Completed",
         },
         totalExpense: { type: Number, default: 0 },
         balance: { type: Number, default: 0 },
