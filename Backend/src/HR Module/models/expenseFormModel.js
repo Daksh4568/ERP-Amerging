@@ -31,7 +31,7 @@ const expenseItemSchema = new mongoose.Schema({
         voucherNo: {
             type: String,
         },
-        expensetype: {
+        accExpenseType: {
             type: String,
             enum: ["Direct Expense", "Indirect Expense"]
         },
@@ -51,6 +51,10 @@ const expenseMasterSchema = new mongoose.Schema(
         department: { type: String, required: true },
         //array of expenses
         expenses: [expenseItemSchema],
+        tallyStatus: {
+            type: String,
+            enum: ["Checked", "Unchecked"]
+        },
         totalExpense: { type: Number, default: 0 },
         balance: { type: Number, default: 0 },
         recipientID: {

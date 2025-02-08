@@ -371,7 +371,7 @@ exports.handler = async (event) => {
     // Accounts Department Adds Financial Details for All Expenses in the Form
     if (path.match(/^\/api\/expense\/[^/]+\/accounts$/) && httpMethod === "PATCH" && refNo) {
       const { employee } = await auth(headers);
-      authorize(employee, ["accounts"]);
+      authorize(employee, ["Manager"]);
 
       const expense = await ExpenseMaster.findOne({ refNo });
       if (!expense) {
@@ -382,9 +382,9 @@ exports.handler = async (event) => {
         return { statusCode: 403, body: JSON.stringify({ message: "Expense must be approved before adding accounts details" }) };
       }
 
-      if (expense.expenses.some(item => item.accountsDepartment)) {
-        return { statusCode: 403, body: JSON.stringify({ message: "Accounts details already added, cannot modify." }) };
-      }
+      // if (expense.expenses.some(item => item.accountsDepartment)) {
+      //   return { statusCode: 403, body: JSON.stringify({ message: "Accounts details already added, cannot modify." }) };
+      // }
 
       const { accountsDetails } = parsedBody;
 
@@ -413,8 +413,6 @@ exports.handler = async (event) => {
       const expenses = await ExpenseMaster.find({ approvalStatus: "Approved" });
       return { statusCode: 200, body: JSON.stringify({ data: expenses }) };
     }
-
-    return { statusCode: 404, body: JSON.stringify({ error: "Route not found" }) };
 
 
     // Default response for unmatched routes
