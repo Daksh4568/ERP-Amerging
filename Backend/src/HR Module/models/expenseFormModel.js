@@ -26,6 +26,11 @@ const expenseItemSchema = new mongoose.Schema({
     amount: { type: Number, required: true, min: 0 },
     incurredBy: { type: String, required: true },
     supportingDocument: { type: String },
+
+    accountsDetailStatus: {
+        type: String,
+        enum: ["Added", "Not Added"],
+    },
     // These fields will be filled when the form will go to Accounts Department for approval
     accountsDepartment: {
         voucherNo: {
@@ -37,10 +42,6 @@ const expenseItemSchema = new mongoose.Schema({
         },
         remarks: {
             type: String,
-        },
-        accountsDetailStatus: {
-            type: String,
-            enum: ["Added", "Not Added"],
         }
 
     }
