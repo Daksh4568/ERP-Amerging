@@ -1,3 +1,4 @@
+// Schema for the expense model 
 const mongoose = require("mongoose");
 const AutoIncrement = require("mongoose-sequence")(mongoose);
 //expense form model
