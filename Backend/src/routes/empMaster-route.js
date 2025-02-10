@@ -1,3 +1,4 @@
+//routes file for all the api
 const jwt = require('jsonwebtoken'); // Import JSON Web Token library
 const employeeModel = require('../HR Module/models/empMaster-model'); // Employee model
 const { auth, authorize } = require('../HR Module/middleware/auth'); // Authentication middleware
