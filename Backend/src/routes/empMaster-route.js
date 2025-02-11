@@ -14,6 +14,7 @@ const ExpenseMaster = require("../HR Module/models/expenseFormModel")
 exports.handler = async (event) => {
   try {
     // MongoDB connection
+    // Added the routes for expense form
     await connectToDatabase();
 
     console.log("Server started");
