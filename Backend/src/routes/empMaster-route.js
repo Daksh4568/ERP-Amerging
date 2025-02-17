@@ -102,7 +102,7 @@ exports.handler = async (event) => {
       const parsedBody = JSON.parse(body);
       const newEmployee = new employeeModel({
         ...parsedBody,
-        addedBy: { name: employee.name, role: employee.role },
+        //addedBy: { name: employee.name, role: employee.role },
       });
 
       try {
@@ -304,7 +304,114 @@ exports.handler = async (event) => {
         body: JSON.stringify({ error: 'Path is undefined or invalid' }),
       };
     }
+    // Validate GET request for fetching employee details
+    if (path && path.match(/^\/api\/get-emp\/[^/]+$/) && httpMethod === 'GET') {
+      const segments = path.split('/');
+      const eID = segments.length > 3 ? segments[3] : null;
 
+      if (!eID) {
+        return {
+          statusCode: 400,
+          body: JSON.stringify({ error: 'Employee ID (eID) is missing or invalid' }),
+        };
+      }
+
+      try {
+        // Authenticate user
+        const { employee } = await auth(headers);
+        authorize(employee, ['HR', 'admin']); // Authorized roles
+
+        // Find the employee by eID
+        const emp = await employeeModel.findOne({ eID });
+        if (!emp) {
+          return {
+            statusCode: 404,
+            body: JSON.stringify({ error: 'Employee not found' }),
+          };
+        }
+
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ message: 'Employee found', data: emp }),
+        };
+      } catch (error) {
+        console.error('Error fetching employee:', error);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({
+            error: 'Internal Server Error',
+            details: error.message,
+          }),
+        };
+      }
+    }
+
+    //update the employee details HR
+    if (path && path.match(/^\/api\/update-emp\/[^/]+$/) && httpMethod === 'PATCH') {
+      const segments = path.split('/');
+      const eID = segments.length > 3 ? segments[3] : null;
+
+      if (!eID) {
+        return {
+          statusCode: 400,
+          body: JSON.stringify({ error: 'Employee ID (eID) is missing or invalid' }),
+        };
+      }
+
+      try {
+        // Authenticate user
+        const { employee } = await auth(headers);
+        authorize(employee, ['HR']); // Only HR can update employee details
+
+        const updates = JSON.parse(body);
+        const allowedUpdates = [
+          'name', 'DOB', 'gender', 'maritalStatus', 'personalContactNumber',
+          'officialEmail', 'bloodGroup', 'address', 'employmentType',
+          'department', 'designation', 'stat', 'nominee', 'documents', 'role'
+        ];
+
+        const isValidOperation = Object.keys(updates).every((update) =>
+          allowedUpdates.includes(update)
+        );
+
+        if (!isValidOperation) {
+          return {
+            statusCode: 400,
+            body: JSON.stringify({ error: 'Invalid updates' }),
+          };
+        }
+
+        // Find the employee by eID
+        const emp = await employeeModel.findOne({ eID });
+        if (!emp) {
+          return {
+            statusCode: 404,
+            body: JSON.stringify({ error: 'Employee not found' }),
+          };
+        }
+
+        // Apply updates
+        Object.keys(updates).forEach((update) => emp.set(update, updates[update]));
+        await emp.save();
+
+        return {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: 'Employee updated successfully',
+            data: emp,
+          }),
+        };
+      } catch (error) {
+        console.error('Error updating employee:', error);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({
+            error: 'Internal Server Error',
+            details: error.message,
+          }),
+        };
+      }
+    }
 
     // Notifications for Manager
     if (path === '/api/notifications/manager' && httpMethod === 'GET') {
@@ -427,6 +534,8 @@ exports.handler = async (event) => {
       const expenses = await ExpenseMaster.find({ approvalStatus: "Approved" });
       return { statusCode: 200, body: JSON.stringify({ data: expenses }) };
     }
+
+
 
 
     // Default response for unmatched routes
