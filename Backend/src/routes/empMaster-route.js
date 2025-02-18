@@ -365,9 +365,10 @@ exports.handler = async (event) => {
 
         const updates = JSON.parse(body);
         const allowedUpdates = [
-          'name', 'DOB', 'gender', 'maritalStatus', 'personalContactNumber',
+          'name', 'DOB', 'personalEmail', 'maritalStatus', 'personalContactNumber',
           'officialEmail', 'bloodGroup', 'address', 'employmentType',
-          'department', 'designation', 'stat', 'nominee', 'documents', 'role'
+          'department', 'designation', 'stat', 'nominee', 'documents', 'role', 'gender',
+          'passportNumber', 'empPan', 'empAadhar', 'alternateContactNumber'
         ];
 
         const isValidOperation = Object.keys(updates).every((update) =>
