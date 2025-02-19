@@ -21,7 +21,7 @@ exports.handler = async (event) => {
     const { headers, body, queryStringParameters } = event;
     const path = event.rawPath || event.path;
     const httpMethod = event.requestContext?.http?.method || event.httpMethod;
-
+    // Main route folder   
     //  console.log('Incoming Event:', JSON.stringify(event, null, 2));
     if (!path || !httpMethod) {
       console.log('Incoming Request:', { path, httpMethod });
@@ -536,7 +536,50 @@ exports.handler = async (event) => {
       return { statusCode: 200, body: JSON.stringify({ data: expenses }) };
     }
 
+    // delete an employee 
+    if (path && path.match(/^\/api\/delete-emp\/[^/]+$/) && httpMethod === 'DELETE') {
+      const segments = path.split('/');
+      const eID = segments.length > 3 ? segments[3] : null;
 
+      if (!eID) {
+        return {
+          statusCode: 400,
+          body: JSON.stringify({ error: 'Employee ID (eID) os missing or invalid' }),
+        };
+      }
+
+      try {
+        // authenticate user
+
+        const { employee } = await auth(headers);
+
+        authorize(employee, ['HR', 'admin']); // only hr will be allowed to delete the employee
+
+        const emp = await employeeModel.findOneAndDelete({ eID });
+
+        if (!emp) {
+          return {
+            statusCode: 404,
+            body: JSON.stringify({ error: 'Employee not found' }),
+          }
+        }
+
+        return {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: 'Employee deleted successfully'
+          }),
+        };
+
+      } catch (e) {
+        console.error('Error deleting the employee :', error)
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: 'Internal server error', details: error.message }),
+        };
+      }
+
+    }
 
 
     // Default response for unmatched routes

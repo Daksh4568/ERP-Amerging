@@ -1,6 +1,6 @@
 {
   "C:\\Users\\daksh\\OneDrive\\Desktop\\AmergingERP1\\AmergingERP\\Backend\\serverless.yml": {
-    "versionFramework": "4.6.2",
+    "versionFramework": "4.6.3",
     "servicePath": "C:\\Users\\daksh\\OneDrive\\Desktop\\AmergingERP1\\AmergingERP\\Backend\\serverless.yml",
     "serviceConfigFileName": "serverless.yml",
     "service": {
@@ -139,6 +139,18 @@
                 "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-expenseAccountsUpdate"
               }
             },
+            "UpdateEmployeeDetailsLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-updateEmployeeDetails"
+              }
+            },
+            "GetEmployeeEidLogGroup": {
+              "Type": "AWS::Logs::LogGroup",
+              "Properties": {
+                "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-getEmployeeEid"
+              }
+            },
             "GetAllExpensesLogGroup": {
               "Type": "AWS::Logs::LogGroup",
               "Properties": {
@@ -234,7 +246,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -265,7 +277,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -296,7 +308,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -327,7 +339,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -358,7 +370,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -389,7 +401,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -420,7 +432,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -451,7 +463,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -482,7 +494,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -514,7 +526,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -545,7 +557,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -576,7 +588,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -607,7 +619,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -638,7 +650,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -669,7 +681,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -700,7 +712,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -726,12 +738,74 @@
                 "ExpenseAccountsUpdateLogGroup"
               ]
             },
+            "UpdateEmployeeDetailsLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
+                },
+                "Handler": "src/routes/empMaster-route.handler",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "enterprise-resource-planning-dev-updateEmployeeDetails",
+                "MemorySize": 1024,
+                "Timeout": 30,
+                "Environment": {
+                  "Variables": {
+                    "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+                    "JWT_SECRET": "<REDACTED>",
+                    "EMAIL_USER": "daksh4568thakur@gmail.com",
+                    "EMAIL_PASSWORD": "<REDACTED>"
+                  }
+                },
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "UpdateEmployeeDetailsLogGroup"
+              ]
+            },
+            "GetEmployeeEidLambdaFunction": {
+              "Type": "AWS::Lambda::Function",
+              "Properties": {
+                "Code": {
+                  "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
+                },
+                "Handler": "src/routes/empMaster-route.handler",
+                "Runtime": "nodejs20.x",
+                "FunctionName": "enterprise-resource-planning-dev-getEmployeeEid",
+                "MemorySize": 1024,
+                "Timeout": 30,
+                "Environment": {
+                  "Variables": {
+                    "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+                    "JWT_SECRET": "<REDACTED>",
+                    "EMAIL_USER": "daksh4568thakur@gmail.com",
+                    "EMAIL_PASSWORD": "<REDACTED>"
+                  }
+                },
+                "Role": {
+                  "Fn::GetAtt": [
+                    "IamRoleLambdaExecution",
+                    "Arn"
+                  ]
+                }
+              },
+              "DependsOn": [
+                "GetEmployeeEidLogGroup"
+              ]
+            },
             "GetAllExpensesLambdaFunction": {
               "Type": "AWS::Lambda::Function",
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -762,7 +836,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                  "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                  "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
                 },
                 "Handler": "src/routes/empMaster-route.handler",
                 "Runtime": "nodejs20.x",
@@ -788,185 +862,205 @@
                 "GetApprovedExpensesLogGroup"
               ]
             },
-            "HomeLambdaVersionTEcCbNpF3IAab1jRv62PxSrygyRXRzerwK5F1Ft92w": {
+            "HomeLambdaVersionLtZGrpzC8IfaJqU8jVCPzEVPyW7NlhcE8g5uYw1HTo": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "HomeLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "GetAllEmployeesLambdaVersionu8Td0jp76HZb5bBg7MKbGuhciEarel0ZTh6WW5TZBvA": {
+            "GetAllEmployeesLambdaVersionq8aoYPp9DWScJIj8YDyr3qwUv8WpdjMd0J240okJcw": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetAllEmployeesLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "GetLeaveDataLambdaVersiont2qOyESwbRDTCQxcIZAf6OdGURG5uhzJfPuRVzqRDU": {
+            "GetLeaveDataLambdaVersionxE4FeuLp5PzDTtx03lHKrAai6QshVabKl8Kn1VJE90": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetLeaveDataLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "ApplyLeaveLambdaVersionW5AfaFIJvy9PCOU4ghCcVJPxPMJw1I5kIRhjwkPMc": {
+            "ApplyLeaveLambdaVersionVd7iLGw9G4B2JREY0gV5CmYf4yCh9CcTPGlmDvs9qA": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ApplyLeaveLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "EmployeeEvaluationLambdaVersionwedOWC0TTGFNx0nku4iVrK86nfjWJvSCxGwiWesjSQ": {
+            "EmployeeEvaluationLambdaVersionAMKpYAjSmqgLGkPcPSqU9rRd1w2p1VLn3mXREwFY8yY": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "EmployeeEvaluationLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "EmployeeStatisticsLambdaVersionKaZLu21jPxdWLmiujKbXtBlH1TRb8g0hmQcNH35rTs": {
+            "EmployeeStatisticsLambdaVersionxuf3mZwsJPCHy39tyGfIwuvyWZ2WvKeawSkeDI3Y7I": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "EmployeeStatisticsLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "RegisterEmployeeLambdaVersionwN4cJKMcyjwH128pArJPZjK7KguFPqOUGPUdbmdME": {
+            "RegisterEmployeeLambdaVersionLhnyHviFaq93r1C6sQ0ofRqvONCJaJo1rXZY0a1kCuc": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "RegisterEmployeeLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "EmployeeLoginLambdaVersionU7yUsMkIZlF0OpLutsqafXTfGN6wFzAFKDoXSc": {
+            "EmployeeLoginLambdaVersionLnuimMiVYiLhBQ0V9b6XfthtrzrxrZ3Bc30kAR8wbo": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "EmployeeLoginLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "EmployeeLogoutLambdaVersionSoDukLHeaAp4HKRlrkedgRceUha6UiscNQIyOwL4": {
+            "EmployeeLogoutLambdaVersions5hXlYpKrxIxx83C5sea6laOOUhNX98FXcwsrcU": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "EmployeeLogoutLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "TokenVerifyLambdaVersionzBTXDaLgXgtNojwoe6d5z1fsQQ4m7eJ4Hr1m5mt8Fw": "<REDACTED>",
-            "UpdateEmployeeLambdaVersionmus73SMWYXb2wsg3cgZQDN7IVSgd2Bs9ynshGcfAnEM": {
+            "TokenVerifyLambdaVersionfu93pqDUUOetCDZJyO2LPpqimoH6EepyzS9joDa8Ew0": "<REDACTED>",
+            "UpdateEmployeeLambdaVersionN5PziN2zlfo3kMb24qYxWL6v1B2jOUkMeHxwStMBI0": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "UpdateEmployeeLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "ManagerNotificationsLambdaVersionLuIZY0mlyyHRINwevIBdKFdonksU4FlDbTLBF6NtfI0": {
+            "ManagerNotificationsLambdaVersiong9lRylBv7GpCD0MykmGmmsUjrGH1YBfeKxHhaOnCaA": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ManagerNotificationsLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "HandleNotificationsLambdaVersionpjq97q2TP03MpdUFfL7cqXQL7KcwlXqRwgoKBtusnk": {
+            "HandleNotificationsLambdaVersiontN4mLrB5uNlAg1yfNrehlpc5FqBlfrc7Jy68zrlS44": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "HandleNotificationsLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "EmployeeExitFormLambdaVersionFvGDaGzm6zoldHcvsfWKeobTpoDPo32sk22leGQ9MWw": {
+            "EmployeeExitFormLambdaVersionc6hhHOUSekztIoe1PAcKOSX4nMRVAL7KvKtGqRzEY": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "EmployeeExitFormLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "ExpenseSubmitLambdaVersion1lV76QeFrbZZgJsanM1k47eOJnhwYxBhC0QV8g87Yg": {
+            "ExpenseSubmitLambdaVersionwdFa9KFRmDrPVEG03O43My3nsLb4KXTeL3l2ApK8": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ExpenseSubmitLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "ExpenseApproveLambdaVersionFachSEKCJzy67Yd5blvupkhryiJl1p1PJNUTVtEw": {
+            "ExpenseApproveLambdaVersionCeISJywGDKaflfUklFKGffHZ0wXbQGYODeKN81aSr8": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ExpenseApproveLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "ExpenseAccountsUpdateLambdaVersionliiBO8Glxc0px2JWslrPALRmGwXVClAKDByoiD8kEc": {
+            "ExpenseAccountsUpdateLambdaVersionHQ4TCQAFQPmMN01o8j6v27ZsoeCk5t28gbGJJbCk": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ExpenseAccountsUpdateLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "GetAllExpensesLambdaVersionEmmKPUjU9WYgmXTTrOEdEC1mDtTNP1NRDy9AvLmO8IU": {
+            "UpdateEmployeeDetailsLambdaVersionpw0Zs7GIXhArhh2XvYfqrZtDdECIsRowgJk3E6VXVk": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "UpdateEmployeeDetailsLambdaFunction"
+                },
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
+              }
+            },
+            "GetEmployeeEidLambdaVersion0bJ4Ee2OrUFj46CQc1qp4gQMkb7lCJSq7Oo3rvPM": {
+              "Type": "AWS::Lambda::Version",
+              "DeletionPolicy": "Retain",
+              "Properties": {
+                "FunctionName": {
+                  "Ref": "GetEmployeeEidLambdaFunction"
+                },
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
+              }
+            },
+            "GetAllExpensesLambdaVersionLayL2jHBd1x8FCet2juWa0K5iylwXWFSyTYpK2YrUM": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetAllExpensesLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
-            "GetApprovedExpensesLambdaVersionu0L8jWL5LhDZjCMQvXQ9hqtI3i2s2D91tVxCWZ74E": {
+            "GetApprovedExpensesLambdaVersionlppNPm9sYdkkB9Tzk0eNJprHvktxQp0qfVHVfKb4DA": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "GetApprovedExpensesLambdaFunction"
                 },
-                "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+                "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
               }
             },
             "HttpApi": {
@@ -2210,6 +2304,156 @@
               },
               "DependsOn": "HttpApiIntegrationExpenseAccountsUpdate"
             },
+            "UpdateEmployeeDetailsLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "UpdateEmployeeDetailsLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationUpdateEmployeeDetails": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "UpdateEmployeeDetailsLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRoutePatchApiUpdateDashempEidVar": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "PATCH /api/update-emp/{eID}",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationUpdateEmployeeDetails"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationUpdateEmployeeDetails"
+            },
+            "GetEmployeeEidLambdaPermissionHttpApi": {
+              "Type": "AWS::Lambda::Permission",
+              "Properties": {
+                "FunctionName": {
+                  "Fn::GetAtt": [
+                    "GetEmployeeEidLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":execute-api:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":",
+                      {
+                        "Ref": "HttpApi"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              }
+            },
+            "HttpApiIntegrationGetEmployeeEid": {
+              "Type": "AWS::ApiGatewayV2::Integration",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "IntegrationType": "AWS_PROXY",
+                "IntegrationUri": {
+                  "Fn::GetAtt": [
+                    "GetEmployeeEidLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "PayloadFormatVersion": "2.0",
+                "TimeoutInMillis": 30000
+              }
+            },
+            "HttpApiRouteGetApiGetDashempEidVar": {
+              "Type": "AWS::ApiGatewayV2::Route",
+              "Properties": {
+                "ApiId": {
+                  "Ref": "HttpApi"
+                },
+                "RouteKey": "GET /api/get-emp/{eID}",
+                "Target": {
+                  "Fn::Join": [
+                    "/",
+                    [
+                      "integrations",
+                      {
+                        "Ref": "HttpApiIntegrationGetEmployeeEid"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "DependsOn": "HttpApiIntegrationGetEmployeeEid"
+            },
             "GetAllExpensesLambdaPermissionHttpApi": {
               "Type": "AWS::Lambda::Permission",
               "Properties": {
@@ -2390,7 +2634,7 @@
             "HomeLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "HomeLambdaVersionTEcCbNpF3IAab1jRv62PxSrygyRXRzerwK5F1Ft92w"
+                "Ref": "HomeLambdaVersionLtZGrpzC8IfaJqU8jVCPzEVPyW7NlhcE8g5uYw1HTo"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-HomeLambdaFunctionQualifiedArn"
@@ -2399,7 +2643,7 @@
             "GetAllEmployeesLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetAllEmployeesLambdaVersionu8Td0jp76HZb5bBg7MKbGuhciEarel0ZTh6WW5TZBvA"
+                "Ref": "GetAllEmployeesLambdaVersionq8aoYPp9DWScJIj8YDyr3qwUv8WpdjMd0J240okJcw"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-GetAllEmployeesLambdaFunctionQualifiedArn"
@@ -2408,7 +2652,7 @@
             "GetLeaveDataLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetLeaveDataLambdaVersiont2qOyESwbRDTCQxcIZAf6OdGURG5uhzJfPuRVzqRDU"
+                "Ref": "GetLeaveDataLambdaVersionxE4FeuLp5PzDTtx03lHKrAai6QshVabKl8Kn1VJE90"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-GetLeaveDataLambdaFunctionQualifiedArn"
@@ -2417,7 +2661,7 @@
             "ApplyLeaveLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ApplyLeaveLambdaVersionW5AfaFIJvy9PCOU4ghCcVJPxPMJw1I5kIRhjwkPMc"
+                "Ref": "ApplyLeaveLambdaVersionVd7iLGw9G4B2JREY0gV5CmYf4yCh9CcTPGlmDvs9qA"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-ApplyLeaveLambdaFunctionQualifiedArn"
@@ -2426,7 +2670,7 @@
             "EmployeeEvaluationLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "EmployeeEvaluationLambdaVersionwedOWC0TTGFNx0nku4iVrK86nfjWJvSCxGwiWesjSQ"
+                "Ref": "EmployeeEvaluationLambdaVersionAMKpYAjSmqgLGkPcPSqU9rRd1w2p1VLn3mXREwFY8yY"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-EmployeeEvaluationLambdaFunctionQualifiedArn"
@@ -2435,7 +2679,7 @@
             "EmployeeStatisticsLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "EmployeeStatisticsLambdaVersionKaZLu21jPxdWLmiujKbXtBlH1TRb8g0hmQcNH35rTs"
+                "Ref": "EmployeeStatisticsLambdaVersionxuf3mZwsJPCHy39tyGfIwuvyWZ2WvKeawSkeDI3Y7I"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-EmployeeStatisticsLambdaFunctionQualifiedArn"
@@ -2444,7 +2688,7 @@
             "RegisterEmployeeLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "RegisterEmployeeLambdaVersionwN4cJKMcyjwH128pArJPZjK7KguFPqOUGPUdbmdME"
+                "Ref": "RegisterEmployeeLambdaVersionLhnyHviFaq93r1C6sQ0ofRqvONCJaJo1rXZY0a1kCuc"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-RegisterEmployeeLambdaFunctionQualifiedArn"
@@ -2453,7 +2697,7 @@
             "EmployeeLoginLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "EmployeeLoginLambdaVersionU7yUsMkIZlF0OpLutsqafXTfGN6wFzAFKDoXSc"
+                "Ref": "EmployeeLoginLambdaVersionLnuimMiVYiLhBQ0V9b6XfthtrzrxrZ3Bc30kAR8wbo"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-EmployeeLoginLambdaFunctionQualifiedArn"
@@ -2462,7 +2706,7 @@
             "EmployeeLogoutLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "EmployeeLogoutLambdaVersionSoDukLHeaAp4HKRlrkedgRceUha6UiscNQIyOwL4"
+                "Ref": "EmployeeLogoutLambdaVersions5hXlYpKrxIxx83C5sea6laOOUhNX98FXcwsrcU"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-EmployeeLogoutLambdaFunctionQualifiedArn"
@@ -2472,7 +2716,7 @@
             "UpdateEmployeeLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "UpdateEmployeeLambdaVersionmus73SMWYXb2wsg3cgZQDN7IVSgd2Bs9ynshGcfAnEM"
+                "Ref": "UpdateEmployeeLambdaVersionN5PziN2zlfo3kMb24qYxWL6v1B2jOUkMeHxwStMBI0"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-UpdateEmployeeLambdaFunctionQualifiedArn"
@@ -2481,7 +2725,7 @@
             "ManagerNotificationsLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ManagerNotificationsLambdaVersionLuIZY0mlyyHRINwevIBdKFdonksU4FlDbTLBF6NtfI0"
+                "Ref": "ManagerNotificationsLambdaVersiong9lRylBv7GpCD0MykmGmmsUjrGH1YBfeKxHhaOnCaA"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-ManagerNotificationsLambdaFunctionQualifiedArn"
@@ -2490,7 +2734,7 @@
             "HandleNotificationsLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "HandleNotificationsLambdaVersionpjq97q2TP03MpdUFfL7cqXQL7KcwlXqRwgoKBtusnk"
+                "Ref": "HandleNotificationsLambdaVersiontN4mLrB5uNlAg1yfNrehlpc5FqBlfrc7Jy68zrlS44"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-HandleNotificationsLambdaFunctionQualifiedArn"
@@ -2499,7 +2743,7 @@
             "EmployeeExitFormLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "EmployeeExitFormLambdaVersionFvGDaGzm6zoldHcvsfWKeobTpoDPo32sk22leGQ9MWw"
+                "Ref": "EmployeeExitFormLambdaVersionc6hhHOUSekztIoe1PAcKOSX4nMRVAL7KvKtGqRzEY"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-EmployeeExitFormLambdaFunctionQualifiedArn"
@@ -2508,7 +2752,7 @@
             "ExpenseSubmitLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ExpenseSubmitLambdaVersion1lV76QeFrbZZgJsanM1k47eOJnhwYxBhC0QV8g87Yg"
+                "Ref": "ExpenseSubmitLambdaVersionwdFa9KFRmDrPVEG03O43My3nsLb4KXTeL3l2ApK8"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-ExpenseSubmitLambdaFunctionQualifiedArn"
@@ -2517,7 +2761,7 @@
             "ExpenseApproveLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ExpenseApproveLambdaVersionFachSEKCJzy67Yd5blvupkhryiJl1p1PJNUTVtEw"
+                "Ref": "ExpenseApproveLambdaVersionCeISJywGDKaflfUklFKGffHZ0wXbQGYODeKN81aSr8"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-ExpenseApproveLambdaFunctionQualifiedArn"
@@ -2526,16 +2770,34 @@
             "ExpenseAccountsUpdateLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ExpenseAccountsUpdateLambdaVersionliiBO8Glxc0px2JWslrPALRmGwXVClAKDByoiD8kEc"
+                "Ref": "ExpenseAccountsUpdateLambdaVersionHQ4TCQAFQPmMN01o8j6v27ZsoeCk5t28gbGJJbCk"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-ExpenseAccountsUpdateLambdaFunctionQualifiedArn"
               }
             },
+            "UpdateEmployeeDetailsLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "UpdateEmployeeDetailsLambdaVersionpw0Zs7GIXhArhh2XvYfqrZtDdECIsRowgJk3E6VXVk"
+              },
+              "Export": {
+                "Name": "sls-enterprise-resource-planning-dev-UpdateEmployeeDetailsLambdaFunctionQualifiedArn"
+              }
+            },
+            "GetEmployeeEidLambdaFunctionQualifiedArn": {
+              "Description": "Current Lambda function version",
+              "Value": {
+                "Ref": "GetEmployeeEidLambdaVersion0bJ4Ee2OrUFj46CQc1qp4gQMkb7lCJSq7Oo3rvPM"
+              },
+              "Export": {
+                "Name": "sls-enterprise-resource-planning-dev-GetEmployeeEidLambdaFunctionQualifiedArn"
+              }
+            },
             "GetAllExpensesLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetAllExpensesLambdaVersionEmmKPUjU9WYgmXTTrOEdEC1mDtTNP1NRDy9AvLmO8IU"
+                "Ref": "GetAllExpensesLambdaVersionLayL2jHBd1x8FCet2juWa0K5iylwXWFSyTYpK2YrUM"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-GetAllExpensesLambdaFunctionQualifiedArn"
@@ -2544,7 +2806,7 @@
             "GetApprovedExpensesLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "GetApprovedExpensesLambdaVersionu0L8jWL5LhDZjCMQvXQ9hqtI3i2s2D91tVxCWZ74E"
+                "Ref": "GetApprovedExpensesLambdaVersionlppNPm9sYdkkB9Tzk0eNJprHvktxQp0qfVHVfKb4DA"
               },
               "Export": {
                 "Name": "sls-enterprise-resource-planning-dev-GetApprovedExpensesLambdaFunctionQualifiedArn"
@@ -2607,7 +2869,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "HomeLambdaVersionTEcCbNpF3IAab1jRv62PxSrygyRXRzerwK5F1Ft92w"
+          "versionLogicalId": "HomeLambdaVersionLtZGrpzC8IfaJqU8jVCPzEVPyW7NlhcE8g5uYw1HTo"
         },
         "getAllEmployees": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2627,7 +2889,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetAllEmployeesLambdaVersionu8Td0jp76HZb5bBg7MKbGuhciEarel0ZTh6WW5TZBvA"
+          "versionLogicalId": "GetAllEmployeesLambdaVersionq8aoYPp9DWScJIj8YDyr3qwUv8WpdjMd0J240okJcw"
         },
         "getLeaveData": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2647,7 +2909,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetLeaveDataLambdaVersiont2qOyESwbRDTCQxcIZAf6OdGURG5uhzJfPuRVzqRDU"
+          "versionLogicalId": "GetLeaveDataLambdaVersionxE4FeuLp5PzDTtx03lHKrAai6QshVabKl8Kn1VJE90"
         },
         "applyLeave": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2667,7 +2929,7 @@
           "memory": 1024,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "ApplyLeaveLambdaVersionW5AfaFIJvy9PCOU4ghCcVJPxPMJw1I5kIRhjwkPMc"
+          "versionLogicalId": "ApplyLeaveLambdaVersionVd7iLGw9G4B2JREY0gV5CmYf4yCh9CcTPGlmDvs9qA"
         },
         "employeeEvaluation": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2687,7 +2949,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "EmployeeEvaluationLambdaVersionwedOWC0TTGFNx0nku4iVrK86nfjWJvSCxGwiWesjSQ"
+          "versionLogicalId": "EmployeeEvaluationLambdaVersionAMKpYAjSmqgLGkPcPSqU9rRd1w2p1VLn3mXREwFY8yY"
         },
         "employeeStatistics": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2707,7 +2969,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "EmployeeStatisticsLambdaVersionKaZLu21jPxdWLmiujKbXtBlH1TRb8g0hmQcNH35rTs"
+          "versionLogicalId": "EmployeeStatisticsLambdaVersionxuf3mZwsJPCHy39tyGfIwuvyWZ2WvKeawSkeDI3Y7I"
         },
         "registerEmployee": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2727,7 +2989,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "RegisterEmployeeLambdaVersionwN4cJKMcyjwH128pArJPZjK7KguFPqOUGPUdbmdME"
+          "versionLogicalId": "RegisterEmployeeLambdaVersionLhnyHviFaq93r1C6sQ0ofRqvONCJaJo1rXZY0a1kCuc"
         },
         "employeeLogin": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2747,7 +3009,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "EmployeeLoginLambdaVersionU7yUsMkIZlF0OpLutsqafXTfGN6wFzAFKDoXSc"
+          "versionLogicalId": "EmployeeLoginLambdaVersionLnuimMiVYiLhBQ0V9b6XfthtrzrxrZ3Bc30kAR8wbo"
         },
         "employeeLogout": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2767,7 +3029,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "EmployeeLogoutLambdaVersionSoDukLHeaAp4HKRlrkedgRceUha6UiscNQIyOwL4"
+          "versionLogicalId": "EmployeeLogoutLambdaVersions5hXlYpKrxIxx83C5sea6laOOUhNX98FXcwsrcU"
         },
         "tokenVerify": "<REDACTED>",
         "updateEmployee": {
@@ -2788,7 +3050,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "UpdateEmployeeLambdaVersionmus73SMWYXb2wsg3cgZQDN7IVSgd2Bs9ynshGcfAnEM"
+          "versionLogicalId": "UpdateEmployeeLambdaVersionN5PziN2zlfo3kMb24qYxWL6v1B2jOUkMeHxwStMBI0"
         },
         "managerNotifications": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2808,7 +3070,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "ManagerNotificationsLambdaVersionLuIZY0mlyyHRINwevIBdKFdonksU4FlDbTLBF6NtfI0"
+          "versionLogicalId": "ManagerNotificationsLambdaVersiong9lRylBv7GpCD0MykmGmmsUjrGH1YBfeKxHhaOnCaA"
         },
         "handleNotifications": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2828,7 +3090,7 @@
           "memory": 1024,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "HandleNotificationsLambdaVersionpjq97q2TP03MpdUFfL7cqXQL7KcwlXqRwgoKBtusnk"
+          "versionLogicalId": "HandleNotificationsLambdaVersiontN4mLrB5uNlAg1yfNrehlpc5FqBlfrc7Jy68zrlS44"
         },
         "employeeExitForm": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2848,7 +3110,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "EmployeeExitFormLambdaVersionFvGDaGzm6zoldHcvsfWKeobTpoDPo32sk22leGQ9MWw"
+          "versionLogicalId": "EmployeeExitFormLambdaVersionc6hhHOUSekztIoe1PAcKOSX4nMRVAL7KvKtGqRzEY"
         },
         "expenseSubmit": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2868,7 +3130,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "ExpenseSubmitLambdaVersion1lV76QeFrbZZgJsanM1k47eOJnhwYxBhC0QV8g87Yg"
+          "versionLogicalId": "ExpenseSubmitLambdaVersionwdFa9KFRmDrPVEG03O43My3nsLb4KXTeL3l2ApK8"
         },
         "expenseApprove": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2888,7 +3150,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "ExpenseApproveLambdaVersionFachSEKCJzy67Yd5blvupkhryiJl1p1PJNUTVtEw"
+          "versionLogicalId": "ExpenseApproveLambdaVersionCeISJywGDKaflfUklFKGffHZ0wXbQGYODeKN81aSr8"
         },
         "expenseAccountsUpdate": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2908,7 +3170,47 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "ExpenseAccountsUpdateLambdaVersionliiBO8Glxc0px2JWslrPALRmGwXVClAKDByoiD8kEc"
+          "versionLogicalId": "ExpenseAccountsUpdateLambdaVersionHQ4TCQAFQPmMN01o8j6v27ZsoeCk5t28gbGJJbCk"
+        },
+        "updateEmployeeDetails": {
+          "handler": "src/routes/empMaster-route.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/update-emp/{eID}",
+                "method": "PATCH"
+              },
+              "resolvedMethod": "PATCH",
+              "resolvedPath": "/api/update-emp/{eID}"
+            }
+          ],
+          "name": "enterprise-resource-planning-dev-updateEmployeeDetails",
+          "package": {},
+          "memory": 1024,
+          "timeout": 30,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "UpdateEmployeeDetailsLambdaVersionpw0Zs7GIXhArhh2XvYfqrZtDdECIsRowgJk3E6VXVk"
+        },
+        "getEmployeeEid": {
+          "handler": "src/routes/empMaster-route.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/get-emp/{eID}",
+                "method": "GET"
+              },
+              "resolvedMethod": "GET",
+              "resolvedPath": "/api/get-emp/{eID}"
+            }
+          ],
+          "name": "enterprise-resource-planning-dev-getEmployeeEid",
+          "package": {},
+          "memory": 1024,
+          "timeout": 30,
+          "runtime": "nodejs20.x",
+          "vpc": {},
+          "versionLogicalId": "GetEmployeeEidLambdaVersion0bJ4Ee2OrUFj46CQc1qp4gQMkb7lCJSq7Oo3rvPM"
         },
         "getAllExpenses": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2928,7 +3230,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetAllExpensesLambdaVersionEmmKPUjU9WYgmXTTrOEdEC1mDtTNP1NRDy9AvLmO8IU"
+          "versionLogicalId": "GetAllExpensesLambdaVersionLayL2jHBd1x8FCet2juWa0K5iylwXWFSyTYpK2YrUM"
         },
         "getApprovedExpenses": {
           "handler": "src/routes/empMaster-route.handler",
@@ -2948,7 +3250,7 @@
           "timeout": 30,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "GetApprovedExpensesLambdaVersionu0L8jWL5LhDZjCMQvXQ9hqtI3i2s2D91tVxCWZ74E"
+          "versionLogicalId": "GetApprovedExpensesLambdaVersionlppNPm9sYdkkB9Tzk0eNJprHvktxQp0qfVHVfKb4DA"
         }
       },
       "plugins": [
@@ -3117,6 +3419,18 @@
               "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-expenseAccountsUpdate"
             }
           },
+          "UpdateEmployeeDetailsLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-updateEmployeeDetails"
+            }
+          },
+          "GetEmployeeEidLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-getEmployeeEid"
+            }
+          },
           "GetAllExpensesLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
@@ -3212,7 +3526,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3243,7 +3557,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3274,7 +3588,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3305,7 +3619,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3336,7 +3650,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3367,7 +3681,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3398,7 +3712,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3429,7 +3743,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3460,7 +3774,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3492,7 +3806,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3523,7 +3837,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3554,7 +3868,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3585,7 +3899,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3616,7 +3930,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3647,7 +3961,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3678,7 +3992,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3704,12 +4018,74 @@
               "ExpenseAccountsUpdateLogGroup"
             ]
           },
+          "UpdateEmployeeDetailsLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
+              },
+              "Handler": "src/routes/empMaster-route.handler",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "enterprise-resource-planning-dev-updateEmployeeDetails",
+              "MemorySize": 1024,
+              "Timeout": 30,
+              "Environment": {
+                "Variables": {
+                  "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+                  "JWT_SECRET": "<REDACTED>",
+                  "EMAIL_USER": "daksh4568thakur@gmail.com",
+                  "EMAIL_PASSWORD": "<REDACTED>"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "UpdateEmployeeDetailsLogGroup"
+            ]
+          },
+          "GetEmployeeEidLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
+              },
+              "Handler": "src/routes/empMaster-route.handler",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "enterprise-resource-planning-dev-getEmployeeEid",
+              "MemorySize": 1024,
+              "Timeout": 30,
+              "Environment": {
+                "Variables": {
+                  "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+                  "JWT_SECRET": "<REDACTED>",
+                  "EMAIL_USER": "daksh4568thakur@gmail.com",
+                  "EMAIL_PASSWORD": "<REDACTED>"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetEmployeeEidLogGroup"
+            ]
+          },
           "GetAllExpensesLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3740,7 +4116,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-                "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+                "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
               },
               "Handler": "src/routes/empMaster-route.handler",
               "Runtime": "nodejs20.x",
@@ -3766,185 +4142,205 @@
               "GetApprovedExpensesLogGroup"
             ]
           },
-          "HomeLambdaVersionTEcCbNpF3IAab1jRv62PxSrygyRXRzerwK5F1Ft92w": {
+          "HomeLambdaVersionLtZGrpzC8IfaJqU8jVCPzEVPyW7NlhcE8g5uYw1HTo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HomeLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "GetAllEmployeesLambdaVersionu8Td0jp76HZb5bBg7MKbGuhciEarel0ZTh6WW5TZBvA": {
+          "GetAllEmployeesLambdaVersionq8aoYPp9DWScJIj8YDyr3qwUv8WpdjMd0J240okJcw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetAllEmployeesLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "GetLeaveDataLambdaVersiont2qOyESwbRDTCQxcIZAf6OdGURG5uhzJfPuRVzqRDU": {
+          "GetLeaveDataLambdaVersionxE4FeuLp5PzDTtx03lHKrAai6QshVabKl8Kn1VJE90": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetLeaveDataLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "ApplyLeaveLambdaVersionW5AfaFIJvy9PCOU4ghCcVJPxPMJw1I5kIRhjwkPMc": {
+          "ApplyLeaveLambdaVersionVd7iLGw9G4B2JREY0gV5CmYf4yCh9CcTPGlmDvs9qA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApplyLeaveLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "EmployeeEvaluationLambdaVersionwedOWC0TTGFNx0nku4iVrK86nfjWJvSCxGwiWesjSQ": {
+          "EmployeeEvaluationLambdaVersionAMKpYAjSmqgLGkPcPSqU9rRd1w2p1VLn3mXREwFY8yY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "EmployeeEvaluationLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "EmployeeStatisticsLambdaVersionKaZLu21jPxdWLmiujKbXtBlH1TRb8g0hmQcNH35rTs": {
+          "EmployeeStatisticsLambdaVersionxuf3mZwsJPCHy39tyGfIwuvyWZ2WvKeawSkeDI3Y7I": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "EmployeeStatisticsLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "RegisterEmployeeLambdaVersionwN4cJKMcyjwH128pArJPZjK7KguFPqOUGPUdbmdME": {
+          "RegisterEmployeeLambdaVersionLhnyHviFaq93r1C6sQ0ofRqvONCJaJo1rXZY0a1kCuc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "RegisterEmployeeLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "EmployeeLoginLambdaVersionU7yUsMkIZlF0OpLutsqafXTfGN6wFzAFKDoXSc": {
+          "EmployeeLoginLambdaVersionLnuimMiVYiLhBQ0V9b6XfthtrzrxrZ3Bc30kAR8wbo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "EmployeeLoginLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "EmployeeLogoutLambdaVersionSoDukLHeaAp4HKRlrkedgRceUha6UiscNQIyOwL4": {
+          "EmployeeLogoutLambdaVersions5hXlYpKrxIxx83C5sea6laOOUhNX98FXcwsrcU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "EmployeeLogoutLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "TokenVerifyLambdaVersionzBTXDaLgXgtNojwoe6d5z1fsQQ4m7eJ4Hr1m5mt8Fw": "<REDACTED>",
-          "UpdateEmployeeLambdaVersionmus73SMWYXb2wsg3cgZQDN7IVSgd2Bs9ynshGcfAnEM": {
+          "TokenVerifyLambdaVersionfu93pqDUUOetCDZJyO2LPpqimoH6EepyzS9joDa8Ew0": "<REDACTED>",
+          "UpdateEmployeeLambdaVersionN5PziN2zlfo3kMb24qYxWL6v1B2jOUkMeHxwStMBI0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateEmployeeLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "ManagerNotificationsLambdaVersionLuIZY0mlyyHRINwevIBdKFdonksU4FlDbTLBF6NtfI0": {
+          "ManagerNotificationsLambdaVersiong9lRylBv7GpCD0MykmGmmsUjrGH1YBfeKxHhaOnCaA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ManagerNotificationsLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "HandleNotificationsLambdaVersionpjq97q2TP03MpdUFfL7cqXQL7KcwlXqRwgoKBtusnk": {
+          "HandleNotificationsLambdaVersiontN4mLrB5uNlAg1yfNrehlpc5FqBlfrc7Jy68zrlS44": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HandleNotificationsLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "EmployeeExitFormLambdaVersionFvGDaGzm6zoldHcvsfWKeobTpoDPo32sk22leGQ9MWw": {
+          "EmployeeExitFormLambdaVersionc6hhHOUSekztIoe1PAcKOSX4nMRVAL7KvKtGqRzEY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "EmployeeExitFormLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "ExpenseSubmitLambdaVersion1lV76QeFrbZZgJsanM1k47eOJnhwYxBhC0QV8g87Yg": {
+          "ExpenseSubmitLambdaVersionwdFa9KFRmDrPVEG03O43My3nsLb4KXTeL3l2ApK8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ExpenseSubmitLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "ExpenseApproveLambdaVersionFachSEKCJzy67Yd5blvupkhryiJl1p1PJNUTVtEw": {
+          "ExpenseApproveLambdaVersionCeISJywGDKaflfUklFKGffHZ0wXbQGYODeKN81aSr8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ExpenseApproveLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "ExpenseAccountsUpdateLambdaVersionliiBO8Glxc0px2JWslrPALRmGwXVClAKDByoiD8kEc": {
+          "ExpenseAccountsUpdateLambdaVersionHQ4TCQAFQPmMN01o8j6v27ZsoeCk5t28gbGJJbCk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ExpenseAccountsUpdateLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "GetAllExpensesLambdaVersionEmmKPUjU9WYgmXTTrOEdEC1mDtTNP1NRDy9AvLmO8IU": {
+          "UpdateEmployeeDetailsLambdaVersionpw0Zs7GIXhArhh2XvYfqrZtDdECIsRowgJk3E6VXVk": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdateEmployeeDetailsLambdaFunction"
+              },
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
+            }
+          },
+          "GetEmployeeEidLambdaVersion0bJ4Ee2OrUFj46CQc1qp4gQMkb7lCJSq7Oo3rvPM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetEmployeeEidLambdaFunction"
+              },
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
+            }
+          },
+          "GetAllExpensesLambdaVersionLayL2jHBd1x8FCet2juWa0K5iylwXWFSyTYpK2YrUM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetAllExpensesLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
-          "GetApprovedExpensesLambdaVersionu0L8jWL5LhDZjCMQvXQ9hqtI3i2s2D91tVxCWZ74E": {
+          "GetApprovedExpensesLambdaVersionlppNPm9sYdkkB9Tzk0eNJprHvktxQp0qfVHVfKb4DA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetApprovedExpensesLambdaFunction"
               },
-              "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+              "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
             }
           },
           "HttpApi": {
@@ -5188,6 +5584,156 @@
             },
             "DependsOn": "HttpApiIntegrationExpenseAccountsUpdate"
           },
+          "UpdateEmployeeDetailsLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "UpdateEmployeeDetailsLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationUpdateEmployeeDetails": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "Fn::GetAtt": [
+                  "UpdateEmployeeDetailsLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePatchApiUpdateDashempEidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PATCH /api/update-emp/{eID}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationUpdateEmployeeDetails"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationUpdateEmployeeDetails"
+          },
+          "GetEmployeeEidLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetEmployeeEidLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetEmployeeEid": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "Fn::GetAtt": [
+                  "GetEmployeeEidLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiGetDashempEidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/get-emp/{eID}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetEmployeeEid"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetEmployeeEid"
+          },
           "GetAllExpensesLambdaPermissionHttpApi": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
@@ -5368,7 +5914,7 @@
           "HomeLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HomeLambdaVersionTEcCbNpF3IAab1jRv62PxSrygyRXRzerwK5F1Ft92w"
+              "Ref": "HomeLambdaVersionLtZGrpzC8IfaJqU8jVCPzEVPyW7NlhcE8g5uYw1HTo"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-HomeLambdaFunctionQualifiedArn"
@@ -5377,7 +5923,7 @@
           "GetAllEmployeesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetAllEmployeesLambdaVersionu8Td0jp76HZb5bBg7MKbGuhciEarel0ZTh6WW5TZBvA"
+              "Ref": "GetAllEmployeesLambdaVersionq8aoYPp9DWScJIj8YDyr3qwUv8WpdjMd0J240okJcw"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-GetAllEmployeesLambdaFunctionQualifiedArn"
@@ -5386,7 +5932,7 @@
           "GetLeaveDataLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetLeaveDataLambdaVersiont2qOyESwbRDTCQxcIZAf6OdGURG5uhzJfPuRVzqRDU"
+              "Ref": "GetLeaveDataLambdaVersionxE4FeuLp5PzDTtx03lHKrAai6QshVabKl8Kn1VJE90"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-GetLeaveDataLambdaFunctionQualifiedArn"
@@ -5395,7 +5941,7 @@
           "ApplyLeaveLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApplyLeaveLambdaVersionW5AfaFIJvy9PCOU4ghCcVJPxPMJw1I5kIRhjwkPMc"
+              "Ref": "ApplyLeaveLambdaVersionVd7iLGw9G4B2JREY0gV5CmYf4yCh9CcTPGlmDvs9qA"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-ApplyLeaveLambdaFunctionQualifiedArn"
@@ -5404,7 +5950,7 @@
           "EmployeeEvaluationLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "EmployeeEvaluationLambdaVersionwedOWC0TTGFNx0nku4iVrK86nfjWJvSCxGwiWesjSQ"
+              "Ref": "EmployeeEvaluationLambdaVersionAMKpYAjSmqgLGkPcPSqU9rRd1w2p1VLn3mXREwFY8yY"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-EmployeeEvaluationLambdaFunctionQualifiedArn"
@@ -5413,7 +5959,7 @@
           "EmployeeStatisticsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "EmployeeStatisticsLambdaVersionKaZLu21jPxdWLmiujKbXtBlH1TRb8g0hmQcNH35rTs"
+              "Ref": "EmployeeStatisticsLambdaVersionxuf3mZwsJPCHy39tyGfIwuvyWZ2WvKeawSkeDI3Y7I"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-EmployeeStatisticsLambdaFunctionQualifiedArn"
@@ -5422,7 +5968,7 @@
           "RegisterEmployeeLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "RegisterEmployeeLambdaVersionwN4cJKMcyjwH128pArJPZjK7KguFPqOUGPUdbmdME"
+              "Ref": "RegisterEmployeeLambdaVersionLhnyHviFaq93r1C6sQ0ofRqvONCJaJo1rXZY0a1kCuc"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-RegisterEmployeeLambdaFunctionQualifiedArn"
@@ -5431,7 +5977,7 @@
           "EmployeeLoginLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "EmployeeLoginLambdaVersionU7yUsMkIZlF0OpLutsqafXTfGN6wFzAFKDoXSc"
+              "Ref": "EmployeeLoginLambdaVersionLnuimMiVYiLhBQ0V9b6XfthtrzrxrZ3Bc30kAR8wbo"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-EmployeeLoginLambdaFunctionQualifiedArn"
@@ -5440,7 +5986,7 @@
           "EmployeeLogoutLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "EmployeeLogoutLambdaVersionSoDukLHeaAp4HKRlrkedgRceUha6UiscNQIyOwL4"
+              "Ref": "EmployeeLogoutLambdaVersions5hXlYpKrxIxx83C5sea6laOOUhNX98FXcwsrcU"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-EmployeeLogoutLambdaFunctionQualifiedArn"
@@ -5450,7 +5996,7 @@
           "UpdateEmployeeLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateEmployeeLambdaVersionmus73SMWYXb2wsg3cgZQDN7IVSgd2Bs9ynshGcfAnEM"
+              "Ref": "UpdateEmployeeLambdaVersionN5PziN2zlfo3kMb24qYxWL6v1B2jOUkMeHxwStMBI0"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-UpdateEmployeeLambdaFunctionQualifiedArn"
@@ -5459,7 +6005,7 @@
           "ManagerNotificationsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ManagerNotificationsLambdaVersionLuIZY0mlyyHRINwevIBdKFdonksU4FlDbTLBF6NtfI0"
+              "Ref": "ManagerNotificationsLambdaVersiong9lRylBv7GpCD0MykmGmmsUjrGH1YBfeKxHhaOnCaA"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-ManagerNotificationsLambdaFunctionQualifiedArn"
@@ -5468,7 +6014,7 @@
           "HandleNotificationsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HandleNotificationsLambdaVersionpjq97q2TP03MpdUFfL7cqXQL7KcwlXqRwgoKBtusnk"
+              "Ref": "HandleNotificationsLambdaVersiontN4mLrB5uNlAg1yfNrehlpc5FqBlfrc7Jy68zrlS44"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-HandleNotificationsLambdaFunctionQualifiedArn"
@@ -5477,7 +6023,7 @@
           "EmployeeExitFormLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "EmployeeExitFormLambdaVersionFvGDaGzm6zoldHcvsfWKeobTpoDPo32sk22leGQ9MWw"
+              "Ref": "EmployeeExitFormLambdaVersionc6hhHOUSekztIoe1PAcKOSX4nMRVAL7KvKtGqRzEY"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-EmployeeExitFormLambdaFunctionQualifiedArn"
@@ -5486,7 +6032,7 @@
           "ExpenseSubmitLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ExpenseSubmitLambdaVersion1lV76QeFrbZZgJsanM1k47eOJnhwYxBhC0QV8g87Yg"
+              "Ref": "ExpenseSubmitLambdaVersionwdFa9KFRmDrPVEG03O43My3nsLb4KXTeL3l2ApK8"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-ExpenseSubmitLambdaFunctionQualifiedArn"
@@ -5495,7 +6041,7 @@
           "ExpenseApproveLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ExpenseApproveLambdaVersionFachSEKCJzy67Yd5blvupkhryiJl1p1PJNUTVtEw"
+              "Ref": "ExpenseApproveLambdaVersionCeISJywGDKaflfUklFKGffHZ0wXbQGYODeKN81aSr8"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-ExpenseApproveLambdaFunctionQualifiedArn"
@@ -5504,16 +6050,34 @@
           "ExpenseAccountsUpdateLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ExpenseAccountsUpdateLambdaVersionliiBO8Glxc0px2JWslrPALRmGwXVClAKDByoiD8kEc"
+              "Ref": "ExpenseAccountsUpdateLambdaVersionHQ4TCQAFQPmMN01o8j6v27ZsoeCk5t28gbGJJbCk"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-ExpenseAccountsUpdateLambdaFunctionQualifiedArn"
             }
           },
+          "UpdateEmployeeDetailsLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdateEmployeeDetailsLambdaVersionpw0Zs7GIXhArhh2XvYfqrZtDdECIsRowgJk3E6VXVk"
+            },
+            "Export": {
+              "Name": "sls-enterprise-resource-planning-dev-UpdateEmployeeDetailsLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetEmployeeEidLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetEmployeeEidLambdaVersion0bJ4Ee2OrUFj46CQc1qp4gQMkb7lCJSq7Oo3rvPM"
+            },
+            "Export": {
+              "Name": "sls-enterprise-resource-planning-dev-GetEmployeeEidLambdaFunctionQualifiedArn"
+            }
+          },
           "GetAllExpensesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetAllExpensesLambdaVersionEmmKPUjU9WYgmXTTrOEdEC1mDtTNP1NRDy9AvLmO8IU"
+              "Ref": "GetAllExpensesLambdaVersionLayL2jHBd1x8FCet2juWa0K5iylwXWFSyTYpK2YrUM"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-GetAllExpensesLambdaFunctionQualifiedArn"
@@ -5522,7 +6086,7 @@
           "GetApprovedExpensesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetApprovedExpensesLambdaVersionu0L8jWL5LhDZjCMQvXQ9hqtI3i2s2D91tVxCWZ74E"
+              "Ref": "GetApprovedExpensesLambdaVersionlppNPm9sYdkkB9Tzk0eNJprHvktxQp0qfVHVfKb4DA"
             },
             "Export": {
               "Name": "sls-enterprise-resource-planning-dev-GetApprovedExpensesLambdaFunctionQualifiedArn"
@@ -5575,7 +6139,7 @@
       "serviceProvider": null,
       "instanceParameters": null
     },
-    "serviceRawFile": "# \"org\" ensures this Service is used with the correct Serverless Framework Access Key.\r\norg: developer4568\r\nservice: enterprise-resource-planning # Name of your service/project\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs20.x\r\n  region: ap-south-1\r\n  timeout: 30\r\n  httpApi:\r\n    cors:\r\n      allowedOrigins:\r\n        - \"*\"\r\n      allowedHeaders:\r\n        - Content-Type\r\n        - Authorization\r\n      allowedMethods:\r\n        - GET\r\n        - POST\r\n        - PUT\r\n        - DELETE\r\n        - PATCH\r\n      maxAge: 86400 # Cache preflight response for 24 hours\r\n  environment:\r\n    MONGO_URI: mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/\r\n    JWT_SECRET: amergingtech5757\r\n    EMAIL_USER: daksh4568thakur@gmail.com\r\n    EMAIL_PASSWORD: jygu sxbi fvnf sczm\r\n\r\nfunctions:\r\n  home:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /\r\n          method: GET\r\n\r\n  getAllEmployees:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/getemp\r\n          method: GET\r\n\r\n  getLeaveData:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/leave-data\r\n          method: GET\r\n\r\n  applyLeave:\r\n    handler: src/routes/empMaster-route.handler\r\n    timeout: 30\r\n    events:\r\n      - httpApi:\r\n          path: /api/apply-leave\r\n          method: POST\r\n\r\n  employeeEvaluation:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/employee-evaluation\r\n          method: POST\r\n\r\n  employeeStatistics:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/emp/stats\r\n          method: GET\r\n\r\n  registerEmployee:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/regemp\r\n          method: POST\r\n\r\n  employeeLogin:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/emp/login\r\n          method: POST\r\n\r\n  employeeLogout:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/emp/logout\r\n          method: POST\r\n\r\n  tokenVerify:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/token/verify\r\n          method: POST\r\n\r\n  updateEmployee:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/emp/{eID}\r\n          method: PATCH\r\n\r\n  managerNotifications:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/notifications/manager\r\n          method: GET\r\n\r\n  handleNotifications:\r\n    handler: src/routes/empMaster-route.handler\r\n    timeout: 30\r\n    events:\r\n      - httpApi:\r\n          path: /api/notifications/handle\r\n          method: PATCH\r\n\r\n  employeeExitForm:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/exit-form\r\n          method: POST\r\n\r\n  expenseSubmit:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/expense\r\n          method: POST\r\n\r\n  expenseApprove:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/expense/{refNo}/approve\r\n          method: PATCH\r\n\r\n  expenseAccountsUpdate:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/expense/{refNo}/accounts\r\n          method: PATCH\r\n\r\n  getAllExpenses:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/expenses\r\n          method: GET\r\n\r\n  getApprovedExpenses:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/expenses/approved\r\n          method: GET\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nresources:\r\n  Resources:\r\n    NotificationsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: Notifications\r\n        AttributeDefinitions:\r\n          - AttributeName: notificationId\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: notificationId\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\ncustom:\r\n  serverless-offline:\r\n    httpPort: 3000\r\n",
+    "serviceRawFile": "# \"org\" ensures this Service is used with the correct Serverless Framework Access Key.\r\norg: developer4568\r\nservice: enterprise-resource-planning # Name of your service/project\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs20.x\r\n  region: ap-south-1\r\n  timeout: 30\r\n  httpApi:\r\n    cors:\r\n      allowedOrigins:\r\n        - \"*\"\r\n      allowedHeaders:\r\n        - Content-Type\r\n        - Authorization\r\n      allowedMethods:\r\n        - GET\r\n        - POST\r\n        - PUT\r\n        - DELETE\r\n        - PATCH\r\n      maxAge: 86400 # Cache preflight response for 24 hours\r\n  environment:\r\n    # MONGO_URI: mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/\r\n    MONGO_URI: mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/\r\n    JWT_SECRET: amergingtech5757\r\n    EMAIL_USER: daksh4568thakur@gmail.com\r\n    EMAIL_PASSWORD: jygu sxbi fvnf sczm\r\n\r\nfunctions:\r\n  home:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /\r\n          method: GET\r\n\r\n  getAllEmployees:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/getemp\r\n          method: GET\r\n\r\n  getLeaveData:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/leave-data\r\n          method: GET\r\n\r\n  applyLeave:\r\n    handler: src/routes/empMaster-route.handler\r\n    timeout: 30\r\n    events:\r\n      - httpApi:\r\n          path: /api/apply-leave\r\n          method: POST\r\n\r\n  employeeEvaluation:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/employee-evaluation\r\n          method: POST\r\n\r\n  employeeStatistics:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/emp/stats\r\n          method: GET\r\n\r\n  registerEmployee:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/regemp\r\n          method: POST\r\n\r\n  employeeLogin:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/emp/login\r\n          method: POST\r\n\r\n  employeeLogout:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/emp/logout\r\n          method: POST\r\n\r\n  tokenVerify:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/token/verify\r\n          method: POST\r\n\r\n  updateEmployee:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/emp/{eID}\r\n          method: PATCH\r\n\r\n  managerNotifications:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/notifications/manager\r\n          method: GET\r\n\r\n  handleNotifications:\r\n    handler: src/routes/empMaster-route.handler\r\n    timeout: 30\r\n    events:\r\n      - httpApi:\r\n          path: /api/notifications/handle\r\n          method: PATCH\r\n\r\n  employeeExitForm:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/exit-form\r\n          method: POST\r\n\r\n  expenseSubmit:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/expense\r\n          method: POST\r\n\r\n  expenseApprove:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/expense/{refNo}/approve\r\n          method: PATCH\r\n\r\n  expenseAccountsUpdate:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/expense/{refNo}/accounts\r\n          method: PATCH\r\n\r\n  updateEmployeeDetails:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/update-emp/{eID}\r\n          method: PATCH\r\n  getEmployeeEid:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/get-emp/{eID}\r\n          method: GET\r\n\r\n  getAllExpenses:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/expenses\r\n          method: GET\r\n\r\n  getApprovedExpenses:\r\n    handler: src/routes/empMaster-route.handler\r\n    events:\r\n      - httpApi:\r\n          path: /api/expenses/approved\r\n          method: GET\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nresources:\r\n  Resources:\r\n    NotificationsTable:\r\n      Type: AWS::DynamoDB::Table\r\n      Properties:\r\n        TableName: Notifications\r\n        AttributeDefinitions:\r\n          - AttributeName: notificationId\r\n            AttributeType: S\r\n        KeySchema:\r\n          - AttributeName: notificationId\r\n            KeyType: HASH\r\n        BillingMode: PAY_PER_REQUEST\r\n\r\ncustom:\r\n  serverless-offline:\r\n    httpPort: 3000\r\n",
     "command": [
       "deploy"
     ],
@@ -5586,56 +6150,56 @@
     "userName": "developer4568",
     "serviceProviderAwsAccountId": "430118818238",
     "serviceProviderAwsCfStackName": "enterprise-resource-planning-dev",
-    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:ap-south-1:430118818238:stack/enterprise-resource-planning-dev/1b592e20-da21-11ef-a84d-0a355666f9c7",
-    "serviceProviderAwsCfStackCreated": "2025-01-24T07:02:00.636Z",
-    "serviceProviderAwsCfStackUpdated": "2025-02-12T10:49:31.046Z",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:ap-south-1:430118818238:stack/enterprise-resource-planning-dev/b9bb0340-edd6-11ef-a4f3-06ce201e4af5",
+    "serviceProviderAwsCfStackCreated": "2025-02-18T08:59:56.751Z",
+    "serviceProviderAwsCfStackUpdated": "2025-02-18T09:17:10.340Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "EmployeeLogoutLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-employeeLogout:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-employeeLogout:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-EmployeeLogoutLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "EmployeeStatisticsLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-employeeStatistics:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-employeeStatistics:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-EmployeeStatisticsLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "ExpenseApproveLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-expenseApprove:2",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-expenseApprove:7",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-ExpenseApproveLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "EmployeeEvaluationLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-employeeEvaluation:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-employeeEvaluation:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-EmployeeEvaluationLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "HomeLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-home:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-home:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-HomeLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "ExpenseAccountsUpdateLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-expenseAccountsUpdate:2",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-expenseAccountsUpdate:7",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-ExpenseAccountsUpdateLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "HttpApiId",
-        "OutputValue": "risabllrw6",
+        "OutputValue": "kookgkrkvg",
         "Description": "Id of the HTTP API",
         "ExportName": "sls-enterprise-resource-planning-dev-HttpApiId"
       },
       {
         "OutputKey": "UpdateEmployeeLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-updateEmployee:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-updateEmployee:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-UpdateEmployeeLambdaFunctionQualifiedArn"
       },
@@ -5646,79 +6210,91 @@
       },
       {
         "OutputKey": "HttpApiUrl",
-        "OutputValue": "https://risabllrw6.execute-api.ap-south-1.amazonaws.com",
+        "OutputValue": "https://kookgkrkvg.execute-api.ap-south-1.amazonaws.com",
         "Description": "URL of the HTTP API",
         "ExportName": "sls-enterprise-resource-planning-dev-HttpApiUrl"
       },
       {
-        "OutputKey": "GetAllEmployeesLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-getAllEmployees:7",
-        "Description": "Current Lambda function version",
-        "ExportName": "sls-enterprise-resource-planning-dev-GetAllEmployeesLambdaFunctionQualifiedArn"
-      },
-      {
         "OutputKey": "RegisterEmployeeLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-registerEmployee:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-registerEmployee:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-RegisterEmployeeLambdaFunctionQualifiedArn"
       },
       {
+        "OutputKey": "GetAllEmployeesLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-getAllEmployees:12",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-enterprise-resource-planning-dev-GetAllEmployeesLambdaFunctionQualifiedArn"
+      },
+      {
         "OutputKey": "GetApprovedExpensesLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-getApprovedExpenses:2",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-getApprovedExpenses:7",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-GetApprovedExpensesLambdaFunctionQualifiedArn"
       },
       {
+        "OutputKey": "UpdateEmployeeDetailsLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-updateEmployeeDetails:4",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-enterprise-resource-planning-dev-UpdateEmployeeDetailsLambdaFunctionQualifiedArn"
+      },
+      {
         "OutputKey": "ExpenseSubmitLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-expenseSubmit:2",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-expenseSubmit:7",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-ExpenseSubmitLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "EmployeeExitFormLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-employeeExitForm:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-employeeExitForm:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-EmployeeExitFormLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "TokenVerifyLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-tokenVerify:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-tokenVerify:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-TokenVerifyLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "ManagerNotificationsLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-managerNotifications:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-managerNotifications:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-ManagerNotificationsLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "HandleNotificationsLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-handleNotifications:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-handleNotifications:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-HandleNotificationsLambdaFunctionQualifiedArn"
       },
       {
+        "OutputKey": "GetEmployeeEidLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-getEmployeeEid:2",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-enterprise-resource-planning-dev-GetEmployeeEidLambdaFunctionQualifiedArn"
+      },
+      {
         "OutputKey": "GetLeaveDataLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-getLeaveData:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-getLeaveData:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-GetLeaveDataLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "ApplyLeaveLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-applyLeave:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-applyLeave:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-ApplyLeaveLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "EmployeeLoginLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-employeeLogin:7",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-employeeLogin:12",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-EmployeeLoginLambdaFunctionQualifiedArn"
       },
       {
         "OutputKey": "GetAllExpensesLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-getAllExpenses:2",
+        "OutputValue": "arn:aws:lambda:ap-south-1:430118818238:function:enterprise-resource-planning-dev-getAllExpenses:7",
         "Description": "Current Lambda function version",
         "ExportName": "sls-enterprise-resource-planning-dev-GetAllExpensesLambdaFunctionQualifiedArn"
       }
@@ -5824,6 +6400,18 @@
             "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-expenseAccountsUpdate"
           }
         },
+        "UpdateEmployeeDetailsLogGroup": {
+          "Type": "AWS::Logs::LogGroup",
+          "Properties": {
+            "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-updateEmployeeDetails"
+          }
+        },
+        "GetEmployeeEidLogGroup": {
+          "Type": "AWS::Logs::LogGroup",
+          "Properties": {
+            "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-getEmployeeEid"
+          }
+        },
         "GetAllExpensesLogGroup": {
           "Type": "AWS::Logs::LogGroup",
           "Properties": {
@@ -5919,7 +6507,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -5950,7 +6538,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -5981,7 +6569,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6012,7 +6600,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6043,7 +6631,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6074,7 +6662,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6105,7 +6693,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6136,7 +6724,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6167,7 +6755,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6199,7 +6787,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6230,7 +6818,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6261,7 +6849,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6292,7 +6880,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6323,7 +6911,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6354,7 +6942,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6385,7 +6973,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6411,12 +6999,74 @@
             "ExpenseAccountsUpdateLogGroup"
           ]
         },
+        "UpdateEmployeeDetailsLambdaFunction": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "Code": {
+              "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
+            },
+            "Handler": "src/routes/empMaster-route.handler",
+            "Runtime": "nodejs20.x",
+            "FunctionName": "enterprise-resource-planning-dev-updateEmployeeDetails",
+            "MemorySize": 1024,
+            "Timeout": 30,
+            "Environment": {
+              "Variables": {
+                "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+                "JWT_SECRET": "<REDACTED>",
+                "EMAIL_USER": "daksh4568thakur@gmail.com",
+                "EMAIL_PASSWORD": "<REDACTED>"
+              }
+            },
+            "Role": {
+              "Fn::GetAtt": [
+                "IamRoleLambdaExecution",
+                "Arn"
+              ]
+            }
+          },
+          "DependsOn": [
+            "UpdateEmployeeDetailsLogGroup"
+          ]
+        },
+        "GetEmployeeEidLambdaFunction": {
+          "Type": "AWS::Lambda::Function",
+          "Properties": {
+            "Code": {
+              "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
+            },
+            "Handler": "src/routes/empMaster-route.handler",
+            "Runtime": "nodejs20.x",
+            "FunctionName": "enterprise-resource-planning-dev-getEmployeeEid",
+            "MemorySize": 1024,
+            "Timeout": 30,
+            "Environment": {
+              "Variables": {
+                "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+                "JWT_SECRET": "<REDACTED>",
+                "EMAIL_USER": "daksh4568thakur@gmail.com",
+                "EMAIL_PASSWORD": "<REDACTED>"
+              }
+            },
+            "Role": {
+              "Fn::GetAtt": [
+                "IamRoleLambdaExecution",
+                "Arn"
+              ]
+            }
+          },
+          "DependsOn": [
+            "GetEmployeeEidLogGroup"
+          ]
+        },
         "GetAllExpensesLambdaFunction": {
           "Type": "AWS::Lambda::Function",
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6447,7 +7097,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-              "S3Key": "serverless/enterprise-resource-planning/dev/1739506775914-2025-02-14T04:19:35.914Z/enterprise-resource-planning.zip"
+              "S3Key": "serverless/enterprise-resource-planning/dev/1739870614780-2025-02-18T09:23:34.780Z/enterprise-resource-planning.zip"
             },
             "Handler": "src/routes/empMaster-route.handler",
             "Runtime": "nodejs20.x",
@@ -6473,185 +7123,205 @@
             "GetApprovedExpensesLogGroup"
           ]
         },
-        "HomeLambdaVersionTEcCbNpF3IAab1jRv62PxSrygyRXRzerwK5F1Ft92w": {
+        "HomeLambdaVersionLtZGrpzC8IfaJqU8jVCPzEVPyW7NlhcE8g5uYw1HTo": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "HomeLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "GetAllEmployeesLambdaVersionu8Td0jp76HZb5bBg7MKbGuhciEarel0ZTh6WW5TZBvA": {
+        "GetAllEmployeesLambdaVersionq8aoYPp9DWScJIj8YDyr3qwUv8WpdjMd0J240okJcw": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "GetAllEmployeesLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "GetLeaveDataLambdaVersiont2qOyESwbRDTCQxcIZAf6OdGURG5uhzJfPuRVzqRDU": {
+        "GetLeaveDataLambdaVersionxE4FeuLp5PzDTtx03lHKrAai6QshVabKl8Kn1VJE90": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "GetLeaveDataLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "ApplyLeaveLambdaVersionW5AfaFIJvy9PCOU4ghCcVJPxPMJw1I5kIRhjwkPMc": {
+        "ApplyLeaveLambdaVersionVd7iLGw9G4B2JREY0gV5CmYf4yCh9CcTPGlmDvs9qA": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "ApplyLeaveLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "EmployeeEvaluationLambdaVersionwedOWC0TTGFNx0nku4iVrK86nfjWJvSCxGwiWesjSQ": {
+        "EmployeeEvaluationLambdaVersionAMKpYAjSmqgLGkPcPSqU9rRd1w2p1VLn3mXREwFY8yY": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "EmployeeEvaluationLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "EmployeeStatisticsLambdaVersionKaZLu21jPxdWLmiujKbXtBlH1TRb8g0hmQcNH35rTs": {
+        "EmployeeStatisticsLambdaVersionxuf3mZwsJPCHy39tyGfIwuvyWZ2WvKeawSkeDI3Y7I": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "EmployeeStatisticsLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "RegisterEmployeeLambdaVersionwN4cJKMcyjwH128pArJPZjK7KguFPqOUGPUdbmdME": {
+        "RegisterEmployeeLambdaVersionLhnyHviFaq93r1C6sQ0ofRqvONCJaJo1rXZY0a1kCuc": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "RegisterEmployeeLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "EmployeeLoginLambdaVersionU7yUsMkIZlF0OpLutsqafXTfGN6wFzAFKDoXSc": {
+        "EmployeeLoginLambdaVersionLnuimMiVYiLhBQ0V9b6XfthtrzrxrZ3Bc30kAR8wbo": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "EmployeeLoginLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "EmployeeLogoutLambdaVersionSoDukLHeaAp4HKRlrkedgRceUha6UiscNQIyOwL4": {
+        "EmployeeLogoutLambdaVersions5hXlYpKrxIxx83C5sea6laOOUhNX98FXcwsrcU": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "EmployeeLogoutLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "TokenVerifyLambdaVersionzBTXDaLgXgtNojwoe6d5z1fsQQ4m7eJ4Hr1m5mt8Fw": "<REDACTED>",
-        "UpdateEmployeeLambdaVersionmus73SMWYXb2wsg3cgZQDN7IVSgd2Bs9ynshGcfAnEM": {
+        "TokenVerifyLambdaVersionfu93pqDUUOetCDZJyO2LPpqimoH6EepyzS9joDa8Ew0": "<REDACTED>",
+        "UpdateEmployeeLambdaVersionN5PziN2zlfo3kMb24qYxWL6v1B2jOUkMeHxwStMBI0": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "UpdateEmployeeLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "ManagerNotificationsLambdaVersionLuIZY0mlyyHRINwevIBdKFdonksU4FlDbTLBF6NtfI0": {
+        "ManagerNotificationsLambdaVersiong9lRylBv7GpCD0MykmGmmsUjrGH1YBfeKxHhaOnCaA": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "ManagerNotificationsLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "HandleNotificationsLambdaVersionpjq97q2TP03MpdUFfL7cqXQL7KcwlXqRwgoKBtusnk": {
+        "HandleNotificationsLambdaVersiontN4mLrB5uNlAg1yfNrehlpc5FqBlfrc7Jy68zrlS44": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "HandleNotificationsLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "EmployeeExitFormLambdaVersionFvGDaGzm6zoldHcvsfWKeobTpoDPo32sk22leGQ9MWw": {
+        "EmployeeExitFormLambdaVersionc6hhHOUSekztIoe1PAcKOSX4nMRVAL7KvKtGqRzEY": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "EmployeeExitFormLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "ExpenseSubmitLambdaVersion1lV76QeFrbZZgJsanM1k47eOJnhwYxBhC0QV8g87Yg": {
+        "ExpenseSubmitLambdaVersionwdFa9KFRmDrPVEG03O43My3nsLb4KXTeL3l2ApK8": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "ExpenseSubmitLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "ExpenseApproveLambdaVersionFachSEKCJzy67Yd5blvupkhryiJl1p1PJNUTVtEw": {
+        "ExpenseApproveLambdaVersionCeISJywGDKaflfUklFKGffHZ0wXbQGYODeKN81aSr8": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "ExpenseApproveLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "ExpenseAccountsUpdateLambdaVersionliiBO8Glxc0px2JWslrPALRmGwXVClAKDByoiD8kEc": {
+        "ExpenseAccountsUpdateLambdaVersionHQ4TCQAFQPmMN01o8j6v27ZsoeCk5t28gbGJJbCk": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "ExpenseAccountsUpdateLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "GetAllExpensesLambdaVersionEmmKPUjU9WYgmXTTrOEdEC1mDtTNP1NRDy9AvLmO8IU": {
+        "UpdateEmployeeDetailsLambdaVersionpw0Zs7GIXhArhh2XvYfqrZtDdECIsRowgJk3E6VXVk": {
+          "Type": "AWS::Lambda::Version",
+          "DeletionPolicy": "Retain",
+          "Properties": {
+            "FunctionName": {
+              "Ref": "UpdateEmployeeDetailsLambdaFunction"
+            },
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
+          }
+        },
+        "GetEmployeeEidLambdaVersion0bJ4Ee2OrUFj46CQc1qp4gQMkb7lCJSq7Oo3rvPM": {
+          "Type": "AWS::Lambda::Version",
+          "DeletionPolicy": "Retain",
+          "Properties": {
+            "FunctionName": {
+              "Ref": "GetEmployeeEidLambdaFunction"
+            },
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
+          }
+        },
+        "GetAllExpensesLambdaVersionLayL2jHBd1x8FCet2juWa0K5iylwXWFSyTYpK2YrUM": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "GetAllExpensesLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
-        "GetApprovedExpensesLambdaVersionu0L8jWL5LhDZjCMQvXQ9hqtI3i2s2D91tVxCWZ74E": {
+        "GetApprovedExpensesLambdaVersionlppNPm9sYdkkB9Tzk0eNJprHvktxQp0qfVHVfKb4DA": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "GetApprovedExpensesLambdaFunction"
             },
-            "CodeSha256": "tYDvPggD69Py2PE4ovt2KlHdRq8y+OgK6AB4eLhfuh8="
+            "CodeSha256": "jGDgFbBbAI/v+9T03OuPZwCXFpn+uISBVvWkjt6H3Vw="
           }
         },
         "HttpApi": {
@@ -7894,6 +8564,156 @@
           },
           "DependsOn": "HttpApiIntegrationExpenseAccountsUpdate"
         },
+        "UpdateEmployeeDetailsLambdaPermissionHttpApi": {
+          "Type": "AWS::Lambda::Permission",
+          "Properties": {
+            "FunctionName": {
+              "Fn::GetAtt": [
+                "UpdateEmployeeDetailsLambdaFunction",
+                "Arn"
+              ]
+            },
+            "Action": "lambda:InvokeFunction",
+            "Principal": "apigateway.amazonaws.com",
+            "SourceArn": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:",
+                  {
+                    "Ref": "AWS::Partition"
+                  },
+                  ":execute-api:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":",
+                  {
+                    "Ref": "HttpApi"
+                  },
+                  "/*"
+                ]
+              ]
+            }
+          }
+        },
+        "HttpApiIntegrationUpdateEmployeeDetails": {
+          "Type": "AWS::ApiGatewayV2::Integration",
+          "Properties": {
+            "ApiId": {
+              "Ref": "HttpApi"
+            },
+            "IntegrationType": "AWS_PROXY",
+            "IntegrationUri": {
+              "Fn::GetAtt": [
+                "UpdateEmployeeDetailsLambdaFunction",
+                "Arn"
+              ]
+            },
+            "PayloadFormatVersion": "2.0",
+            "TimeoutInMillis": 30000
+          }
+        },
+        "HttpApiRoutePatchApiUpdateDashempEidVar": {
+          "Type": "AWS::ApiGatewayV2::Route",
+          "Properties": {
+            "ApiId": {
+              "Ref": "HttpApi"
+            },
+            "RouteKey": "PATCH /api/update-emp/{eID}",
+            "Target": {
+              "Fn::Join": [
+                "/",
+                [
+                  "integrations",
+                  {
+                    "Ref": "HttpApiIntegrationUpdateEmployeeDetails"
+                  }
+                ]
+              ]
+            }
+          },
+          "DependsOn": "HttpApiIntegrationUpdateEmployeeDetails"
+        },
+        "GetEmployeeEidLambdaPermissionHttpApi": {
+          "Type": "AWS::Lambda::Permission",
+          "Properties": {
+            "FunctionName": {
+              "Fn::GetAtt": [
+                "GetEmployeeEidLambdaFunction",
+                "Arn"
+              ]
+            },
+            "Action": "lambda:InvokeFunction",
+            "Principal": "apigateway.amazonaws.com",
+            "SourceArn": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:",
+                  {
+                    "Ref": "AWS::Partition"
+                  },
+                  ":execute-api:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":",
+                  {
+                    "Ref": "HttpApi"
+                  },
+                  "/*"
+                ]
+              ]
+            }
+          }
+        },
+        "HttpApiIntegrationGetEmployeeEid": {
+          "Type": "AWS::ApiGatewayV2::Integration",
+          "Properties": {
+            "ApiId": {
+              "Ref": "HttpApi"
+            },
+            "IntegrationType": "AWS_PROXY",
+            "IntegrationUri": {
+              "Fn::GetAtt": [
+                "GetEmployeeEidLambdaFunction",
+                "Arn"
+              ]
+            },
+            "PayloadFormatVersion": "2.0",
+            "TimeoutInMillis": 30000
+          }
+        },
+        "HttpApiRouteGetApiGetDashempEidVar": {
+          "Type": "AWS::ApiGatewayV2::Route",
+          "Properties": {
+            "ApiId": {
+              "Ref": "HttpApi"
+            },
+            "RouteKey": "GET /api/get-emp/{eID}",
+            "Target": {
+              "Fn::Join": [
+                "/",
+                [
+                  "integrations",
+                  {
+                    "Ref": "HttpApiIntegrationGetEmployeeEid"
+                  }
+                ]
+              ]
+            }
+          },
+          "DependsOn": "HttpApiIntegrationGetEmployeeEid"
+        },
         "GetAllExpensesLambdaPermissionHttpApi": {
           "Type": "AWS::Lambda::Permission",
           "Properties": {
@@ -8074,7 +8894,7 @@
         "HomeLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "HomeLambdaVersionTEcCbNpF3IAab1jRv62PxSrygyRXRzerwK5F1Ft92w"
+            "Ref": "HomeLambdaVersionLtZGrpzC8IfaJqU8jVCPzEVPyW7NlhcE8g5uYw1HTo"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-HomeLambdaFunctionQualifiedArn"
@@ -8083,7 +8903,7 @@
         "GetAllEmployeesLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "GetAllEmployeesLambdaVersionu8Td0jp76HZb5bBg7MKbGuhciEarel0ZTh6WW5TZBvA"
+            "Ref": "GetAllEmployeesLambdaVersionq8aoYPp9DWScJIj8YDyr3qwUv8WpdjMd0J240okJcw"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-GetAllEmployeesLambdaFunctionQualifiedArn"
@@ -8092,7 +8912,7 @@
         "GetLeaveDataLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "GetLeaveDataLambdaVersiont2qOyESwbRDTCQxcIZAf6OdGURG5uhzJfPuRVzqRDU"
+            "Ref": "GetLeaveDataLambdaVersionxE4FeuLp5PzDTtx03lHKrAai6QshVabKl8Kn1VJE90"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-GetLeaveDataLambdaFunctionQualifiedArn"
@@ -8101,7 +8921,7 @@
         "ApplyLeaveLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "ApplyLeaveLambdaVersionW5AfaFIJvy9PCOU4ghCcVJPxPMJw1I5kIRhjwkPMc"
+            "Ref": "ApplyLeaveLambdaVersionVd7iLGw9G4B2JREY0gV5CmYf4yCh9CcTPGlmDvs9qA"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-ApplyLeaveLambdaFunctionQualifiedArn"
@@ -8110,7 +8930,7 @@
         "EmployeeEvaluationLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "EmployeeEvaluationLambdaVersionwedOWC0TTGFNx0nku4iVrK86nfjWJvSCxGwiWesjSQ"
+            "Ref": "EmployeeEvaluationLambdaVersionAMKpYAjSmqgLGkPcPSqU9rRd1w2p1VLn3mXREwFY8yY"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-EmployeeEvaluationLambdaFunctionQualifiedArn"
@@ -8119,7 +8939,7 @@
         "EmployeeStatisticsLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "EmployeeStatisticsLambdaVersionKaZLu21jPxdWLmiujKbXtBlH1TRb8g0hmQcNH35rTs"
+            "Ref": "EmployeeStatisticsLambdaVersionxuf3mZwsJPCHy39tyGfIwuvyWZ2WvKeawSkeDI3Y7I"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-EmployeeStatisticsLambdaFunctionQualifiedArn"
@@ -8128,7 +8948,7 @@
         "RegisterEmployeeLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "RegisterEmployeeLambdaVersionwN4cJKMcyjwH128pArJPZjK7KguFPqOUGPUdbmdME"
+            "Ref": "RegisterEmployeeLambdaVersionLhnyHviFaq93r1C6sQ0ofRqvONCJaJo1rXZY0a1kCuc"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-RegisterEmployeeLambdaFunctionQualifiedArn"
@@ -8137,7 +8957,7 @@
         "EmployeeLoginLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "EmployeeLoginLambdaVersionU7yUsMkIZlF0OpLutsqafXTfGN6wFzAFKDoXSc"
+            "Ref": "EmployeeLoginLambdaVersionLnuimMiVYiLhBQ0V9b6XfthtrzrxrZ3Bc30kAR8wbo"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-EmployeeLoginLambdaFunctionQualifiedArn"
@@ -8146,7 +8966,7 @@
         "EmployeeLogoutLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "EmployeeLogoutLambdaVersionSoDukLHeaAp4HKRlrkedgRceUha6UiscNQIyOwL4"
+            "Ref": "EmployeeLogoutLambdaVersions5hXlYpKrxIxx83C5sea6laOOUhNX98FXcwsrcU"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-EmployeeLogoutLambdaFunctionQualifiedArn"
@@ -8156,7 +8976,7 @@
         "UpdateEmployeeLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "UpdateEmployeeLambdaVersionmus73SMWYXb2wsg3cgZQDN7IVSgd2Bs9ynshGcfAnEM"
+            "Ref": "UpdateEmployeeLambdaVersionN5PziN2zlfo3kMb24qYxWL6v1B2jOUkMeHxwStMBI0"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-UpdateEmployeeLambdaFunctionQualifiedArn"
@@ -8165,7 +8985,7 @@
         "ManagerNotificationsLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "ManagerNotificationsLambdaVersionLuIZY0mlyyHRINwevIBdKFdonksU4FlDbTLBF6NtfI0"
+            "Ref": "ManagerNotificationsLambdaVersiong9lRylBv7GpCD0MykmGmmsUjrGH1YBfeKxHhaOnCaA"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-ManagerNotificationsLambdaFunctionQualifiedArn"
@@ -8174,7 +8994,7 @@
         "HandleNotificationsLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "HandleNotificationsLambdaVersionpjq97q2TP03MpdUFfL7cqXQL7KcwlXqRwgoKBtusnk"
+            "Ref": "HandleNotificationsLambdaVersiontN4mLrB5uNlAg1yfNrehlpc5FqBlfrc7Jy68zrlS44"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-HandleNotificationsLambdaFunctionQualifiedArn"
@@ -8183,7 +9003,7 @@
         "EmployeeExitFormLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "EmployeeExitFormLambdaVersionFvGDaGzm6zoldHcvsfWKeobTpoDPo32sk22leGQ9MWw"
+            "Ref": "EmployeeExitFormLambdaVersionc6hhHOUSekztIoe1PAcKOSX4nMRVAL7KvKtGqRzEY"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-EmployeeExitFormLambdaFunctionQualifiedArn"
@@ -8192,7 +9012,7 @@
         "ExpenseSubmitLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "ExpenseSubmitLambdaVersion1lV76QeFrbZZgJsanM1k47eOJnhwYxBhC0QV8g87Yg"
+            "Ref": "ExpenseSubmitLambdaVersionwdFa9KFRmDrPVEG03O43My3nsLb4KXTeL3l2ApK8"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-ExpenseSubmitLambdaFunctionQualifiedArn"
@@ -8201,7 +9021,7 @@
         "ExpenseApproveLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "ExpenseApproveLambdaVersionFachSEKCJzy67Yd5blvupkhryiJl1p1PJNUTVtEw"
+            "Ref": "ExpenseApproveLambdaVersionCeISJywGDKaflfUklFKGffHZ0wXbQGYODeKN81aSr8"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-ExpenseApproveLambdaFunctionQualifiedArn"
@@ -8210,16 +9030,34 @@
         "ExpenseAccountsUpdateLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "ExpenseAccountsUpdateLambdaVersionliiBO8Glxc0px2JWslrPALRmGwXVClAKDByoiD8kEc"
+            "Ref": "ExpenseAccountsUpdateLambdaVersionHQ4TCQAFQPmMN01o8j6v27ZsoeCk5t28gbGJJbCk"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-ExpenseAccountsUpdateLambdaFunctionQualifiedArn"
           }
         },
+        "UpdateEmployeeDetailsLambdaFunctionQualifiedArn": {
+          "Description": "Current Lambda function version",
+          "Value": {
+            "Ref": "UpdateEmployeeDetailsLambdaVersionpw0Zs7GIXhArhh2XvYfqrZtDdECIsRowgJk3E6VXVk"
+          },
+          "Export": {
+            "Name": "sls-enterprise-resource-planning-dev-UpdateEmployeeDetailsLambdaFunctionQualifiedArn"
+          }
+        },
+        "GetEmployeeEidLambdaFunctionQualifiedArn": {
+          "Description": "Current Lambda function version",
+          "Value": {
+            "Ref": "GetEmployeeEidLambdaVersion0bJ4Ee2OrUFj46CQc1qp4gQMkb7lCJSq7Oo3rvPM"
+          },
+          "Export": {
+            "Name": "sls-enterprise-resource-planning-dev-GetEmployeeEidLambdaFunctionQualifiedArn"
+          }
+        },
         "GetAllExpensesLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "GetAllExpensesLambdaVersionEmmKPUjU9WYgmXTTrOEdEC1mDtTNP1NRDy9AvLmO8IU"
+            "Ref": "GetAllExpensesLambdaVersionLayL2jHBd1x8FCet2juWa0K5iylwXWFSyTYpK2YrUM"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-GetAllExpensesLambdaFunctionQualifiedArn"
@@ -8228,7 +9066,7 @@
         "GetApprovedExpensesLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "GetApprovedExpensesLambdaVersionu0L8jWL5LhDZjCMQvXQ9hqtI3i2s2D91tVxCWZ74E"
+            "Ref": "GetApprovedExpensesLambdaVersionlppNPm9sYdkkB9Tzk0eNJprHvktxQp0qfVHVfKb4DA"
           },
           "Export": {
             "Name": "sls-enterprise-resource-planning-dev-GetApprovedExpensesLambdaFunctionQualifiedArn"

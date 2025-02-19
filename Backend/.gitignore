@@ -1,15 +1,15 @@
-# Node Modules
-node_modules/
-npm-debug.log
-yarn-error.log
+# # Node Modules
+# node_modules/
+# npm-debug.log
+# yarn-error.log
 
-# Environment variables
-.env
-.env.local
-.env.development
-.env.production
-.env.test
+# # Environment variables
+# .env
+# .env.local
+# .env.development
+# .env.production
+# .env.test
 
 
-# Git files
-.gitignore
+# # Git files
+# .gitignore

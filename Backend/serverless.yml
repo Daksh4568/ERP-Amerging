@@ -22,6 +22,7 @@ provider:
         - PATCH
       maxAge: 86400 # Cache preflight response for 24 hours
   environment:
+    # MONGO_URI: mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/
     MONGO_URI: mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/
     JWT_SECRET: amergingtech5757
     EMAIL_USER: daksh4568thakur@gmail.com
@@ -153,13 +154,13 @@ functions:
     handler: src/routes/empMaster-route.handler
     events:
       - httpApi:
-          path: api/update-emp/{eID}
+          path: /api/update-emp/{eID}
           method: PATCH
-  get-EmployeeEid:
+  getEmployeeEid:
     handler: src/routes/empMaster-route.handler
     events:
       - httpApi:
-          path: api/get-emp/{eID}
+          path: /api/get-emp/{eID}
           method: GET
 
   getAllExpenses:
@@ -176,6 +177,12 @@ functions:
           path: /api/expenses/approved
           method: GET
 
+  deleteEmployee:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/delete-emp/{eID}
+          method: DELETE
 plugins:
   - serverless-offline
 
