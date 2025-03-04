@@ -36,6 +36,13 @@ functions:
           path: /
           method: GET
 
+  projectForm:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/project-form
+          method: POST
+
   getAllEmployees:
     handler: src/routes/empMaster-route.handler
     events:

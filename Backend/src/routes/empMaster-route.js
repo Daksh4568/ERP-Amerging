@@ -11,6 +11,7 @@ const counters = require('../HR Module/models/counterMaster'); // Counter schema
 const connectToDatabase = require('../HR Module/db/db'); // MongoDB connection handler
 const sendEmployeeCredentials = require('../HR Module/Controllers/sendMail'); // Email notification controller
 const ExpenseMaster = require("../HR Module/models/expenseFormModel")
+const projectFormController = require('../PM(Project Management)/controller/projectInitialiseController')
 exports.handler = async (event) => {
   try {
     // MongoDB connection
@@ -439,6 +440,12 @@ exports.handler = async (event) => {
       const exitFormData = JSON.parse(body); // Parse the exit form data from the request body
       return await exitEmployeeController.createExitForm(exitFormData, employee); // Directly return the controller response
     }
+    if (path === '/api/project-form' && httpMethod === 'Post') {
+      const { employee } = await auth(headers); // authenticate the user
+      authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']); // authorize the user
+      const projectFormData = JSON.parse(body);
+      return await projectFormController.createProjectForm(projectFormData, employee)
+    }
     const segments = path.split("/");
     const refNo = segments.length > 3 ? segments[3] : null;
     const parsedBody = body ? JSON.parse(body) : {};
@@ -517,7 +524,7 @@ exports.handler = async (event) => {
     // Fetch All Expenses (Admin Access)
     if (path === "/api/expenses" && httpMethod === "GET") {
       const { employee } = await auth(headers);
-      authorize(employee, ["admin"]);
+      authorize(employee, ["admin", "HR"]);
       const expenses = await ExpenseMaster.find();
       return { statusCode: 200, body: JSON.stringify({ data: expenses }) };
     }
