@@ -183,6 +183,12 @@ functions:
       - httpApi:
           path: /api/expenses/approved
           method: GET
+  getExpensebyID:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/get-expense/{expenseId}
+          method: GET
 
   deleteEmployee:
     handler: src/routes/empMaster-route.handler

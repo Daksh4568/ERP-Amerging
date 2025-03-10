@@ -542,6 +542,27 @@ exports.handler = async (event) => {
       const expenses = await ExpenseMaster.find({ approvalStatus: "Approved" });
       return { statusCode: 200, body: JSON.stringify({ data: expenses }) };
     }
+    // GET Expense by id 
+    if (path.match(/^\/api\/get-expense\/[^/]+$/) && httpMethod === "GET") {
+      const expenseId = path.split("/").pop();// extracting the expense id from the ur;
+      const { employee } = await auth(headers);
+
+      authorize(employee, ["HR"]) // onlly hr can update the expense
+
+      const expense = await ExpenseMaster.findById(expenseId);
+
+      if (!expense) {
+        return {
+          statusCode: 404,
+          body: JSON.stringify({ error: "Expense not found" }),
+        };
+
+      }
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ data: expense })
+      };
+    }
 
     // delete an employee 
     if (path && path.match(/^\/api\/delete-emp\/[^/]+$/) && httpMethod === 'DELETE') {
