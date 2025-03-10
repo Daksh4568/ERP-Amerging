@@ -190,6 +190,13 @@ functions:
           path: /api/get-expense/{expenseId}
           method: GET
 
+  updateExpenseID:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/update-expense/{expenseId}
+          method: PATCH
+
   deleteEmployee:
     handler: src/routes/empMaster-route.handler
     events:

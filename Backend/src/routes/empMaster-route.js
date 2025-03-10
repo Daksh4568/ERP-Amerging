@@ -563,6 +563,51 @@ exports.handler = async (event) => {
         body: JSON.stringify({ data: expense })
       };
     }
+    if (path.match(/^\/api\/update-expense\/[^/]+$/) && httpMethod === "PATCH") {
+      try {
+
+        const expenseId = path.split("/").pop()
+
+        const updates = JSON.parse(body);
+
+        const { employee } = await auth(headers);
+        authorize(employee, ["HR"]); // only HR can update the expense
+
+        let expense = await ExpenseMaster.findById(expenseId);
+        if (!expense) {
+          return {
+            statusCode: 404,
+            body: JSON.stringify({ error: "Expense not found" }),
+          };
+        }
+
+        // Prevent modification of refNo but set approvalStatus to "PENDING"
+        updates.refNo = expense.refNo; // Ensure refNo remains unchanged
+        updates.approvalStatus = "Pending"; // Automatically set to pending
+
+        // Update the expense
+        expense = await ExpenseMaster.findByIdAndUpdate(
+          expenseId,
+          updates,
+          { new: true, runValidators: true } // Ensure updated document is returned & validation runs
+        );
+
+
+        return {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: "Expense updated successfully", data: expense
+          }),
+        };
+
+      } catch (e) {
+        console.error("Error processing PATCH request:", e);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: "Internal Server Error", details: e.message }),
+        };
+      }
+    }
 
     // delete an employee 
     if (path && path.match(/^\/api\/delete-emp\/[^/]+$/) && httpMethod === 'DELETE') {
