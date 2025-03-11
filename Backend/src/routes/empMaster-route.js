@@ -12,6 +12,8 @@ const connectToDatabase = require('../HR Module/db/db'); // MongoDB connection h
 const sendEmployeeCredentials = require('../HR Module/Controllers/sendMail'); // Email notification controller
 const ExpenseMaster = require("../HR Module/models/expenseFormModel")
 const projectFormController = require('../PM(Project Management)/controller/projectInitialiseController')
+const MasterData = require("../HR Module/models/dropdownMaster");
+const { getMasterData, updateMasterData } = require("../HR Module/Controllers/dropdownController");
 exports.handler = async (event) => {
   try {
     // MongoDB connection
@@ -562,6 +564,19 @@ exports.handler = async (event) => {
         statusCode: 200,
         body: JSON.stringify({ data: expense })
       };
+    }
+    // Get all master data
+    if (path === '/api/get-master-data' && httpMethod === 'GET') {
+      return await getMasterData();
+    }
+
+    // Update master data fields
+    if (path === '/api/update-master-data' && httpMethod === 'PATCH') {
+      const { employee } = await auth(headers);
+
+      authorize(employee, ["HR"])
+      const requestBody = JSON.parse(body);
+      return await updateMasterData(requestBody);
     }
     if (path.match(/^\/api\/update-expense\/[^/]+$/) && httpMethod === "PATCH") {
       try {

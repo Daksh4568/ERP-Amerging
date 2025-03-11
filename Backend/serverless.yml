@@ -78,6 +78,19 @@ functions:
       - httpApi:
           path: /api/emp/stats
           method: GET
+  getMasterData:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/get-master-data
+          method: GET
+
+  updateMasterData:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/update-master-data
+          method: PATCH
 
   registerEmployee:
     handler: src/routes/empMaster-route.handler
