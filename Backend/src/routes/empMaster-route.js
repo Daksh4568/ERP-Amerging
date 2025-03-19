@@ -442,7 +442,7 @@ exports.handler = async (event) => {
       const exitFormData = JSON.parse(body); // Parse the exit form data from the request body
       return await exitEmployeeController.createExitForm(exitFormData, employee); // Directly return the controller response
     }
-    if (path === '/api/project-form' && httpMethod === 'Post') {
+    if (path === '/api/project-form' && httpMethod === 'POST') {
       const { employee } = await auth(headers); // authenticate the user
       authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']); // authorize the user
       const projectFormData = JSON.parse(body);
