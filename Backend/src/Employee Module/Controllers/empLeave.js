@@ -29,21 +29,6 @@ const submitLeaveApplication = async (leaveData, user) => {
         const savedLeave = await leaveApplication.save();
         console.log('Leave data saved:', savedLeave);
 
-        // // Create a notification for the supervisor
-        // const notification = new Notification({
-        //     recipientEmpId: leaveApplication.supervisor.name,
-        //     recipientEmail: leaveApplication.supervisor.officialEmail,
-        //     type: 'LeaveApproval',
-        //     title: 'Leave Approval Request',
-        //     message: `${leaveApplication.name} applied for leave.`,
-        //     startDate: leaveApplication.startDate,
-        //     endDate: leaveApplication.endDate,
-        //     reasonForLeave: leaveApplication.reasonForLeave,
-        //     data: { leaveId: savedLeave._id },
-        // });
-
-        // await notification.save();
-        // console.log('Notification data saved:', notification);
 
         // Send approval email to the supervisor
         await sendApprovalMail(
