@@ -19,7 +19,17 @@ const SubFormSchema = new mongoose.Schema({
     },
     product_information: {
         type: String,
-    }
+    },
+    documents: [
+        {
+            documentName: {
+                type: String,
+            },
+            documentImage: {
+                type: String,
+            },
+        },
+    ]
 });
 
 const FormSchema = new mongoose.Schema({
