@@ -133,7 +133,6 @@ const employeeSchema = new mongoose.Schema(
     role: {
       type: String,
       required: true,
-      enum: ['admin', 'HR', 'Employee', 'Manager'],
       default: 'Employee',
     },
     stat: {
@@ -143,7 +142,6 @@ const employeeSchema = new mongoose.Schema(
     },
     department: {
       type: String,
-      enum: ['Design', 'Instrumentation', 'Sales', 'IT', 'HR', 'Embedded', 'Accounts', 'Process', 'Purchase', 'Production', 'Quality', 'Store', 'Projects'],
       required: true,
     },
     designation: {
