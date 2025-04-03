@@ -17,7 +17,7 @@ const SubFormSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    product_information: {
+    productCode: {
         type: String,
     },
     documents: [
@@ -27,6 +27,12 @@ const SubFormSchema = new mongoose.Schema({
             },
             documentImage: {
                 type: String,
+                validate: {
+                    validator: function (value) {
+                        return value.endsWith(".pdf"); // Ensures only PDF files are allowed
+                    },
+                    message: "Only PDF files are allowed in documents!",
+                },
             },
         },
     ]
@@ -36,6 +42,25 @@ const FormSchema = new mongoose.Schema({
     clientName: {
         type: String,
         required: true
+    },
+    city: {
+        type: String,
+    },
+    country: {
+        type: String
+    },
+    quotationRefNumber: {
+        type: String,
+        required: true
+    },
+    ursDocument: {
+        type: String,
+        validate: {
+            validator: function (value) {
+                return value.endsWith(".pdf"); // Ensures only PDF files are allowed
+            },
+            message: "Only PDF files are allowed for URS Document!",
+        },
     },
     projectName: {
         type: String,
@@ -51,7 +76,6 @@ const FormSchema = new mongoose.Schema({
     },
     endDate: {
         type: Date,
-
     },
     subForms: {
         type: [SubFormSchema],
