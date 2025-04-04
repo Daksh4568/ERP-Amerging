@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+
+// this is internal sales order form
 const SubFormSchema = new mongoose.Schema({
     srNo: {
         type: Number,
