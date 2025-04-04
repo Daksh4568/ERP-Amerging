@@ -77,6 +77,13 @@ const FormSchema = new mongoose.Schema({
     endDate: {
         type: Date,
     },
+    kickoffMeeting: {
+        type: [String]
+    },
+    kickoffMessage: {
+        type: String,   // Dynamic message from the sales employee
+    },
+
     subForms: {
         type: [SubFormSchema],
         default: []

@@ -120,6 +120,13 @@ functions:
           path: /api/token/verify
           method: POST
 
+  leadform:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/lead-form
+          method: POST
+
   updateEmployee:
     handler: src/routes/empMaster-route.handler
     events:

@@ -1,5 +1,6 @@
 const ProjectInitialise = require('../models/projectInitialseModel');
 const connectToDatabase = require('../../HR Module/db/db');
+const sendKickoffEmail = require('../controller/sendMailutility')
 
 exports.createProjectForm = async (projectFormData, user) => {
 
@@ -15,6 +16,18 @@ exports.createProjectForm = async (projectFormData, user) => {
         });
 
         const savedData = await projectForm.save();
+
+        // Send dynamic emails to all selected employees
+        if (savedData.kickoffMeeting?.length) {
+            for (const email of savedData.kickoffMeeting) {
+                await sendKickoffEmail({
+                    recipientEmail: email,
+                    message: savedData.kickoffMessage,
+                    projectName: savedData.projectName,
+                    salesPersonName: user.name
+                });
+            }
+        }
 
         return {
             statusCode: 200,

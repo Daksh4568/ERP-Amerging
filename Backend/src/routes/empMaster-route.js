@@ -14,6 +14,7 @@ const ExpenseMaster = require("../HR Module/models/expenseFormModel")
 const projectFormController = require('../PM(Project Management)/controller/projectInitialiseController')
 const MasterData = require("../HR Module/models/dropdownMaster");
 const { getMasterData, updateMasterData } = require("../HR Module/Controllers/dropdownController");
+const leadFormController = require("../PM(Project Management)/controller/clientRegcontroller")
 exports.handler = async (event) => {
   try {
     // MongoDB connection
@@ -447,6 +448,12 @@ exports.handler = async (event) => {
       authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']); // authorize the user
       const projectFormData = JSON.parse(body);
       return await projectFormController.createProjectForm(projectFormData, employee)
+    }
+    if (path == '/api/lead-form' && httpMethod === 'POST') {
+      const { employee } = await auth(headers);
+      authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']);
+      const leadFormData = JSON.parse(body);
+      return await leadFormController.createLeadForm(leadFormData, employee);
     }
     const segments = path.split("/");
     const refNo = segments.length > 3 ? segments[3] : null;
