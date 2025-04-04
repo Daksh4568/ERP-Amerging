@@ -37,7 +37,7 @@ exports.createProjectForm = async (projectFormData, user) => {
             }),
         };
 
-    } catch (e) {
+    } catch (error) {
         console.error('Error saving the data', error);
 
         return {
