@@ -38,7 +38,6 @@ const LeadSchema = new mongoose.Schema(
         leadStatus: {
             type: String,
             enum: ["Attempted to Contact", "Contacted", "Quotation pending", "Quotation created", "Contact in Future", "Quotation Send", "Junk Lead", "Not Contacted", "Pre Qualified", "Not Qualified"], // Modify as per system logic
-            default: "New",
             required: true
         },
         leadSource: {
