@@ -12,7 +12,6 @@ const LeadSchema = new mongoose.Schema(
         },
         lastName: {
             type: String,
-            required: true, // Required as seen in the form
         },
         email: {
             type: String,
