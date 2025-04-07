@@ -27,6 +27,7 @@ provider:
     JWT_SECRET: amergingtech5757
     EMAIL_USER: daksh4568thakur@gmail.com
     EMAIL_PASSWORD: jygu sxbi fvnf sczm
+    ENCRYPTION_KEY: 9f1c3a2e4b9a7d5e1c3a6f4b7e9c2a1d8b6e3c7a1d9f2e4b5c8a3d1e7f9c0b2a
 
 functions:
   home:
@@ -70,6 +71,12 @@ functions:
     events:
       - httpApi:
           path: /api/employee-evaluation
+          method: POST
+  empMailCredentials:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/credentials
           method: POST
 
   employeeStatistics:

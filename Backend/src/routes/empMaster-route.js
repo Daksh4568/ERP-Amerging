@@ -15,6 +15,7 @@ const projectFormController = require('../PM(Project Management)/controller/proj
 const MasterData = require("../HR Module/models/dropdownMaster");
 const { getMasterData, updateMasterData } = require("../HR Module/Controllers/dropdownController");
 const leadFormController = require("../PM(Project Management)/controller/clientRegcontroller")
+const empMailPassController = require("../Notification/Contoller/empMailCredentials")
 exports.handler = async (event) => {
   try {
     // MongoDB connection
@@ -433,6 +434,14 @@ exports.handler = async (event) => {
 
       const notificationData = JSON.parse(body);
       return await handleLeaveNotification(notificationData, employee); // Directly return the result
+    }
+    // empMailCredentials 
+
+    if (path === '/api/credentials' && httpMethod === 'POST') {
+      const { employee } = await auth(headers); // Authenticate user
+      authorize(employee, ['admin']);
+      const empMailCredentialsData = JSON.parse(body);
+      return await empMailPassController.saveEmpCredentials(empMailCredentialsData, employee); // Directly return the result
     }
 
     // Handle Employee Exit Form
