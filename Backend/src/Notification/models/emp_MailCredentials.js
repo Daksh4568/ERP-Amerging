@@ -13,17 +13,17 @@ const empCredentialSchema = new mongoose.Schema({
     iv: { type: String, required: true } // store the IV for decryption
 });
 
-// Encrypt before saving
-empCredentialSchema.pre('save', function (next) {
-    if (this.isModified('officialMailpassword')) {
-        const cipher = crypto.createCipheriv(algorithm, key, iv);
-        let encrypted = cipher.update(this.officialMailpassword, 'utf-8', 'hex');
-        encrypted += cipher.final('hex');
+// // Encrypt before saving
+// empCredentialSchema.pre('save', function (next) {
+//     if (this.isModified('officialMailpassword')) {
+//         const cipher = crypto.createCipheriv(algorithm, key, iv);
+//         let encrypted = cipher.update(this.officialMailpassword, 'utf-8', 'hex');
+//         encrypted += cipher.final('hex');
 
-        this.officialMailpassword = encrypted;
-        this.iv = iv.toString('hex');
-    }
-    next();
-});
+//         this.officialMailpassword = encrypted;
+//         this.iv = iv.toString('hex');
+//     }
+//     next();
+// });
 
 module.exports = mongoose.model('EmpCredentials', empCredentialSchema);
