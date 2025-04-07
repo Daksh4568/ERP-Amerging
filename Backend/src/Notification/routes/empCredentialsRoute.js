@@ -41,7 +41,7 @@ exports.handler = async (event) => {
                     eID: cred.eID,
                     empName: cred.empName,
                     officialMail: cred.officialMail,
-                    decryptedPassword: decrypted,
+                    officialMailpassword: decrypted,
                 };
             });
 
