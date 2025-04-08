@@ -10,7 +10,7 @@ const empMailFormatSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    emailCateogory: {
+    emailCategory: {
         type: String,
         required: true
     },

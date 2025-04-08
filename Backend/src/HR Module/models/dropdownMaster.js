@@ -41,7 +41,7 @@ const masterDataSchema = new mongoose.Schema({
         type: [String],
         default: ["admin", "HR", "Employee", "Manager"],
     },
-    mailCateogory: {
+    mailCategory: {
         type: [String],
         default: [
             "Accounts to Bank",
