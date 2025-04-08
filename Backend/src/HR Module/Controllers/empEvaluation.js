@@ -18,9 +18,9 @@ exports.createEmployeeEvaluation = async (evaluationData, user) => {
 
         const savedData = await evaluation.save();
 
-        console.log(
-            `Employee evaluation form successfully submitted by ${user.name} (${user.role}).`
-        );
+        // console.log(
+        //     `Employee evaluation form successfully submitted by ${user.name} (${user.role}).`
+        // );
 
         return {
             statusCode: 201,

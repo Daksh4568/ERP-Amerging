@@ -41,6 +41,12 @@ const masterDataSchema = new mongoose.Schema({
         type: [String],
         default: ["admin", "HR", "Employee", "Manager"],
     },
+    mailCateogory: {
+        type: [String],
+        default: [
+            "Accounts to Bank",
+        ]
+    }
 }, { timestamps: true });
 
 const MasterData = mongoose.model("MasterData", masterDataSchema);

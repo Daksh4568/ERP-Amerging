@@ -4,6 +4,7 @@ const connectToDatabase = require('../../HR Module/db/db'); // MongoDB connectio
 const crypto = require("crypto")
 const algorithm = 'aes-256-cbc';
 const key = Buffer.from(process.env.ENCRYPTION_KEY, 'hex');
+const emailFormatController = require('../Contoller/empMailFormatController')
 
 exports.handler = async (event) => {
     try {
@@ -21,6 +22,14 @@ exports.handler = async (event) => {
                 body: JSON.stringify({ error: 'Path or HTTP method is undefined . Please Check' }),
             };
         }
+        if (path === '/api/email_format' && httpMethod === 'POST') {
+            const { employee } = await auth(headers);
+            authorize(employee, ['Employee', 'Manager', 'admin', 'HR'])
+
+            const emailData = JSON.parse(body);
+            return await emailFormatController.createEmailFormat(emailData, employee)
+        }
+
 
         if (path === '/api/emp_credentials' && httpMethod === 'GET') {
             const { employee } = await auth(headers); // Authenticate user

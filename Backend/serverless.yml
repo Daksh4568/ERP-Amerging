@@ -64,6 +64,12 @@ functions:
           path: /api/leave-data
           method: GET
 
+  emailFormat:
+    handler: src/Notification/routes/empCredentialsRoute.handler
+    events:
+      - httpApi:
+          path: /api/email_format
+          method: POST
   applyLeave:
     handler: src/routes/empMaster-route.handler
     timeout: 30
