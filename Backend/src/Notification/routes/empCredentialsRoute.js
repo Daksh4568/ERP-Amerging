@@ -7,6 +7,7 @@ const key = Buffer.from(process.env.ENCRYPTION_KEY, 'hex');
 const emailFormatController = require('../Contoller/empMailFormatController')
 const sendOtpHandler = require('../../Utilities/controller/forgotPassword')
 const verifyOtpHandler = require('../../Utilities/controller/verifyOtp')
+const resetPasswordHandler = require('../../Utilities/controller/updatePassword')
 exports.handler = async (event) => {
     try {
 
@@ -37,7 +38,9 @@ exports.handler = async (event) => {
         if (path === '/api/auth/verify-otp' && httpMethod === 'POST') {
             return await verifyOtpHandler.handler(event);
         }
-
+        if (path === '/api/auth/reset-password' && httpMethod === 'PATCH') {
+            return await resetPasswordHandler.handler(event);
+        }
 
         if (path === '/api/emp_credentials' && httpMethod === 'GET') {
             const { employee } = await auth(headers); // Authenticate user

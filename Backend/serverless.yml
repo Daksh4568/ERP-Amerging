@@ -71,6 +71,13 @@ functions:
           path: /api/auth/verify-otp
           method: POST
 
+  forgotPasswordHandler:
+    handler: src/Notification/routes/empCredentialsRoute.handler
+    events:
+      - httpApi:
+          path: /api/auth/reset-password
+          method: PATCH
+
   getLeaveData:
     handler: src/routes/empMaster-route.handler
     events:
