@@ -5,7 +5,8 @@ const crypto = require("crypto")
 const algorithm = 'aes-256-cbc';
 const key = Buffer.from(process.env.ENCRYPTION_KEY, 'hex');
 const emailFormatController = require('../Contoller/empMailFormatController')
-
+const sendOtpHandler = require('../../Utilities/controller/forgotPassword')
+const verifyOtpHandler = require('../../Utilities/controller/verifyOtp')
 exports.handler = async (event) => {
     try {
 
@@ -28,6 +29,13 @@ exports.handler = async (event) => {
 
             const emailData = JSON.parse(body);
             return await emailFormatController.createEmailFormat(emailData, employee)
+        }
+        if (path === '/api/auth/send-otp' && httpMethod === 'POST') {
+            return await sendOtpHandler.handler(event);
+        }
+
+        if (path === '/api/auth/verify-otp' && httpMethod === 'POST') {
+            return await verifyOtpHandler.handler(event);
         }
 
 

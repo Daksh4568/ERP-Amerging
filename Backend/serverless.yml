@@ -57,6 +57,20 @@ functions:
           path: /api/emp_credentials
           method: GET
 
+  sendOtpHandler:
+    handler: src/Notification/routes/empCredentialsRoute.handler
+    events:
+      - httpApi:
+          path: /api/auth/send-otp
+          method: POST
+
+  verifyOtpHandler:
+    handler: src/Notification/routes/empCredentialsRoute.handler
+    events:
+      - httpApi:
+          path: /api/auth/verify-otp
+          method: POST
+
   getLeaveData:
     handler: src/routes/empMaster-route.handler
     events:
