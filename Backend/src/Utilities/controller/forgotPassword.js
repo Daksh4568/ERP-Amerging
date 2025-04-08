@@ -49,7 +49,7 @@ exports.handler = async (event) => {
         from: process.env.EMAIL_USER,
         to: personalEmail,
         subject: 'Your OTP for Password Reset',
-        text: `Your OTP is ${otp}. It is valid for 10 minutes.`,
+        text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
     });
 
     return {
