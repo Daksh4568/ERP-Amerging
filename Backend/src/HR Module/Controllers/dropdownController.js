@@ -57,6 +57,12 @@ const updateMasterData = async (requestBody) => {
             ];
         }
 
+        if (requestBody.mailCateogory && Array.isArray(requestBody.mailCateogory)) {
+            masterData.mailCateogory = [
+                ...new Set([...masterData.mailCateogory, ...requestBody.mailCateogory]),
+            ];
+        }
+
         await masterData.save();
 
         return {
