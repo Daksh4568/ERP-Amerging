@@ -590,7 +590,7 @@ exports.handler = async (event) => {
     if (path === '/api/update-master-data' && httpMethod === 'PATCH') {
       const { employee } = await auth(headers);
 
-      authorize(employee, ["HR"])
+      authorize(employee, ["HR", "admin"])
       const requestBody = JSON.parse(body);
       return await updateMasterData(requestBody);
     }
