@@ -147,6 +147,46 @@ const employeeSchema = new mongoose.Schema(
     designation: {
       type: String,
     },
+    empBankDetails: {
+      bankName: String,
+      bankAccountNumber: String,
+      branchCode: String,
+      nameAsPerBank: String,
+      IFSC: String,
+    },
+    pfEligible: {
+      type: Boolean,
+      default: false,
+    },
+    pfNumber: {
+      type: String,
+      validate: {
+        validator: function (v) {
+          return /^[A-Z]{2}\/[A-Z]{3}\/\d{7}\/\d{3}\/\d{7}$/.test(v);
+        },
+        message: props => `${props.value} is not a valid PF Number format!`
+      }
+    },
+    pfExistingMember: {
+      type: Boolean,
+      default: false,
+    },
+    uan: {
+      type: String,
+      validate: {
+        validator: function (v) {
+          return /^[a-zA-Z0-9]{8,20}$/.test(v);  // or /^\d{12}$/ for strictly numeric
+        },
+        message: props => `${props.value} is not a valid UAN format!`
+      }
+    },
+    esiEligible: {
+      type: Boolean,
+      default: false,
+    },
+    esiNumber: {
+      type: String,
+    },
     moduleAccess: {
       type: Number,
     },
