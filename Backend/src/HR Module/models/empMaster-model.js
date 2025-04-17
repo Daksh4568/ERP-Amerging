@@ -160,12 +160,12 @@ const employeeSchema = new mongoose.Schema(
     },
     pfNumber: {
       type: String,
-      validate: {
-        validator: function (v) {
-          return /^[A-Z]{2}\/[A-Z]{3}\/\d{7}\/\d{3}\/\d{7}$/.test(v);
-        },
-        message: props => `${props.value} is not a valid PF Number format!`
-      }
+      // validate: {
+      //   validator: function (v) {
+      //     return /^[A-Z]{2}\/[A-Z]{3}\/\d{7}\/\d{3}\/\d{7}$/.test(v);
+      //   },
+      //   message: props => `${props.value} is not a valid PF Number format!`
+      // }
     },
     pfExistingMember: {
       type: Boolean,
