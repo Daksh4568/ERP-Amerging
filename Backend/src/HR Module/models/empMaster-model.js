@@ -173,12 +173,12 @@ const employeeSchema = new mongoose.Schema(
     },
     uan: {
       type: String,
-      validate: {
-        validator: function (v) {
-          return /^[a-zA-Z0-9]{8,20}$/.test(v);  // or /^\d{12}$/ for strictly numeric
-        },
-        message: props => `${props.value} is not a valid UAN format!`
-      }
+      // validate: {
+      //   validator: function (v) {
+      //     return /^[a-zA-Z0-9]{8,20}$/.test(v);  // or /^\d{12}$/ for strictly numeric
+      //   },
+      //   message: props => `${props.value} is not a valid UAN format!`
+      // }
     },
     esiEligible: {
       type: Boolean,
