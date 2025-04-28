@@ -15,7 +15,7 @@ const leaveApplicationSchema = new mongoose.Schema({
     personalEmail: { type: String, required: true, match: /.+\@.+\..+/ },
     typeOfLeave: {
         type: String,
-        enum: ['Sick Leave', 'Casual Leave', 'Earned Leave', 'Half Day Leave', 'Short Leave', 'Others'],
+        enum: ['Sick Leave', 'Casual Leave', 'Earned Leave', 'Half Day Leave', 'Missed Punch', 'Short Leave', 'Others'],
         required: true,
     },
     specifyIfOthers: { type: String, required: function () { return this.typeOfLeave === 'Others'; } },
