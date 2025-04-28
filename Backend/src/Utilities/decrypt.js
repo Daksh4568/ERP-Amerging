@@ -15,5 +15,4 @@ const decrypt = (encryptedText) => {
     const decrypted = Buffer.concat([decipher.update(Buffer.from(encrypted, 'hex')), decipher.final()]);
     return decrypted.toString();
 };
-
 module.exports = { encrypt, decrypt };

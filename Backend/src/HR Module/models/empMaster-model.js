@@ -22,12 +22,12 @@ const employeeSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ['Male', 'Female', 'Other'],
+      enum: ['Male', 'Female', 'Transgender'],
       required: true,
     },
     maritalStatus: {
       type: String,
-      enum: ['Single', 'Married', 'Other'],
+      enum: ['Single', 'Married', 'Divorced'],
       required: true,
     },
 
@@ -94,6 +94,10 @@ const employeeSchema = new mongoose.Schema(
       enum: ['Full-time', 'Part-time', 'Contract', 'Consultant'],
       required: true,
     },
+    unitName: {
+      type: String,
+      enum: ["Plotno176", "Plotno12", "Banur"]
+    },
     nominee: {
       name: {
         type: String,
@@ -137,7 +141,7 @@ const employeeSchema = new mongoose.Schema(
     },
     stat: {
       type: String,
-      enum: ['Regular', 'Relieved', 'Resigned'],
+      enum: ['Regular', 'Relieved', 'Resigned', "Part-time", "terminated", "on-notice"],
       required: true,
     },
     department: {

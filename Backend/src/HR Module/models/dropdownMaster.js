@@ -46,6 +46,12 @@ const masterDataSchema = new mongoose.Schema({
         default: [
             "Accounts to Bank",
         ]
+    },
+    designationRoles: {
+        type: [String],
+        default: [
+            "Associate",
+        ]
     }
 }, { timestamps: true });
 

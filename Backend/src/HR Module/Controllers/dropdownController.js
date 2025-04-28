@@ -63,6 +63,12 @@ const updateMasterData = async (requestBody) => {
             ];
         }
 
+        if (requestBody.designationRoles && Array.isArray(requestBody.designationRoles)) {
+            masterData.designationRoles = [
+                ...new Set([...masterData.designationRoles, ...requestBody.designationRoles]),
+            ];
+        }
+
         await masterData.save();
 
         return {
