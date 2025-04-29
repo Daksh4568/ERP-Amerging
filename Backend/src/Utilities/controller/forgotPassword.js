@@ -5,9 +5,9 @@ const connectToDatabase = require('../../HR Module/db/db');
 
 exports.handler = async (event) => {
     await connectToDatabase();
-    const { personalEmail } = JSON.parse(event.body);
+    const { officialEmail } = JSON.parse(event.body);
 
-    if (!personalEmail) {
+    if (!officialEmail) {
         return {
             statusCode: 400,
             body: JSON.stringify({ message: 'Email is required' }),
@@ -15,7 +15,7 @@ exports.handler = async (event) => {
     }
 
     // ✅ Check if the email exists in EmployeeMaster
-    const employee = await Employee.findOne({ personalEmail: personalEmail });
+    const employee = await Employee.findOne({ officialEmail: officialEmail });
 
     if (!employee) {
         return {
@@ -29,7 +29,7 @@ exports.handler = async (event) => {
 
     // ✅ Replace or insert OTP tied to the email
     await OtpModel.findOneAndUpdate(
-        { personalEmail },
+        { officialEmail },
         { otp, expiresAt },
         { upsert: true, new: true }
     );
@@ -47,7 +47,7 @@ exports.handler = async (event) => {
 
     await transporter.sendMail({
         from: process.env.EMAIL_USER,
-        to: personalEmail,
+        to: officialEmail,
         subject: 'Your OTP for Password Reset',
         text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
     });

@@ -4,17 +4,17 @@ const connectToDatabase = require('../../HR Module/db/db');
 exports.handler = async (event) => {
     await connectToDatabase();
     console.log('Executing resetPasswordHandler...');
-    const { personalEmail, newPassword } = JSON.parse(event.body);
+    const { officialEmail, newPassword } = JSON.parse(event.body);
 
-    if (!personalEmail || !newPassword) {
+    if (!officialEmail || !newPassword) {
         return {
             statusCode: 400,
             body: JSON.stringify({ message: 'Email and new password are required.' }),
         };
     }
 
-    // Make sure the field name matches your schema (you used `personalEmail`)
-    const employee = await Employee.findOne({ personalEmail });
+    // Make sure the field name matches your schema (you used `officialEmail`)
+    const employee = await Employee.findOne({ officialEmail });
 
 
     if (!employee) {
