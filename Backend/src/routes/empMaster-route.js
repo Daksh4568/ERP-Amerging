@@ -351,7 +351,7 @@ exports.handler = async (event) => {
       }
     }
 
-    //update the employee details HR
+    //update employee details HR
     if (path && path.match(/^\/api\/update-emp\/[^/]+$/) && httpMethod === 'PATCH') {
       const segments = path.split('/');
       const eID = segments.length > 3 ? segments[3] : null;
@@ -373,7 +373,7 @@ exports.handler = async (event) => {
           'name', 'DOB', 'personalEmail', 'maritalStatus', 'personalContactNumber',
           'officialEmail', 'bloodGroup', 'address', 'employmentType',
           'department', 'designation', 'stat', 'nominee', 'documents', 'role', 'gender',
-          'passportNumber', 'empPan', 'empAadhar', 'alternateContactNumber', 'empBankDetails', 'pfEligible', 'pfExistingMember', 'uan', 'esiEligible', 'esiNumber', 'pfNumber'
+          'passportNumber', 'empPan', 'empAadhar', 'alternateContactNumber', 'empBankDetails', 'pfEligible', 'pfExistingMember', 'uan', 'esiEligible', 'esiNumber', 'pfNumber', 'unitName'
         ];
 
         const isValidOperation = Object.keys(updates).every((update) =>
