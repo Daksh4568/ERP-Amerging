@@ -78,6 +78,20 @@ functions:
           path: /api/auth/reset-password
           method: PATCH
 
+  tourExpenseForm:
+    handler: src/Notification/routes/empCredentialsRoute.handler
+    events:
+      - httpApi:
+          path: /api/tourExpense
+          method: POST
+
+  getTourExpense:
+    handler: src/Notification/routes/empCredentialsRoute.handler
+    events:
+      - httpApi:
+          path: /api/tourExpensedata
+          method: GET
+
   getLeaveData:
     handler: src/routes/empMaster-route.handler
     events:
@@ -166,7 +180,7 @@ functions:
       - httpApi:
           path: /api/lead-form
           method: POST
-          
+
   getClientDetails:
     handler: src/routes/empMaster-route.handler
     events:

@@ -65,17 +65,6 @@ exports.handler = async (event) => {
                     officialMailpassword: decrypted,
                 };
             });
-
-            // HR Submits Expense
-    if (path === "/api/tourExpense" && httpMethod === "POST") {
-        const { employee } = await auth(headers);
-        authorize(employee, ["Employee" , "Manager", "admin"]);
-  
-        const tourexpense = new TourExpense({ ...parsedBody, approvalStatus: "Pending" });
-        await tourexpense.save();
-        return { statusCode: 200, body: JSON.stringify({ message: "Tour Expense form submitted successfully", data: expense }) };
-      }
-
             return {
                 statusCode: 200,
                 body: JSON.stringify(decryptedCredentials),
@@ -83,6 +72,88 @@ exports.handler = async (event) => {
             };
         }
 
+        //     // Accounts Department Adds Financial Details for All Expenses in the Form
+        //     if (path.match(/^\/api\/expense\/[^/]+\/accounts$/) && httpMethod === "PATCH" && refNo) {
+        //       const { employee } = await auth(headers);
+
+        //       if (employee.department !== 'Accounts') {
+        //         return {
+        //           statusCode: 403,
+        //           body: JSON.stringify({ message: "Access Denied . Only Accounts department employee can perform this action" })
+        //         }
+        //       }
+
+        //       const expense = await ExpenseMaster.findOne({ refNo });
+        //       if (!expense) {
+        //         return { statusCode: 404, body: JSON.stringify({ message: "Expense not found" }) };
+        //       }
+
+        //       if (expense.approvalStatus !== "Approved") {
+        //         return { statusCode: 403, body: JSON.stringify({ message: "Expense must be approved before adding accounts details" }) };
+        //       }
+
+        //       // if (expense.expenses.some(item => item.accountsDepartment)) {
+        //       //   return { statusCode: 403, body: JSON.stringify({ message: "Accounts details already added, cannot modify." }) };
+        //       // }
+
+        //       const { accountsDetails } = parsedBody;
+
+        //       expense.expenses.forEach((item, index) => {
+        //         if (accountsDetails[index]) {
+        //           item.accountsDepartment = accountsDetails[index];
+        //         }
+        //       });
+
+        //       await expense.save();
+        //       return { statusCode: 200, body: JSON.stringify({ message: "Accounting details added for all expenses", data: expense }) };
+        //     }
+        const segments = path.split("/");
+        const expenseRefNo = segments.length > 3 ? segments[3] : null;
+        const parsedBody = body ? JSON.parse(body) : {};
+
+
+        // Employee Submits Expense
+        if (path === "/api/tourExpense" && httpMethod === "POST") {
+            const { employee } = await auth(headers);
+            authorize(employee, ["Employee", "Manager", "admin"]);
+
+            const tourexpense = new TourExpense({ ...parsedBody, approvalStatus: "Pending" });
+            await tourexpense.save();
+            return { statusCode: 200, body: JSON.stringify({ message: "Tour Expense form submitted successfully", data: tourexpense }) };
+        }
+        if (path === "/api/tourExpensedata" && httpMethod === "GET") {
+            const { employee } = await auth(headers);
+            authorize(employee, ["Employee", "Manager", "admin", "HR"]);
+            const tourexpense = await TourExpense.find({});
+            if (!tourexpense) {
+                return { statusCode: 404, body: JSON.stringify({ message: "Tour Expense not found" }) };
+            }
+            return { statusCode: 200, body: JSON.stringify({ message: "Tour Expense data fetched successfully", data: tourexpense }) };
+        }
+        // HR Approves or Rejects TourExpense
+        if (path.match(/^\/api\/tourExpense\/[^/]+\/approve$/) && httpMethod === "PATCH" && expenseRefNo) {
+            const { employee } = await auth(headers);
+            authorize(employee, ["HR"]);
+
+            const tourexpense = await TourExpense.findOne({ expenseRefNo });
+            if (!tourexpense) {
+                return { statusCode: 404, body: JSON.stringify({ message: "Tour Expense not found" }) };
+            }
+
+            if (tourexpense.approvalStatus !== "Pending") {
+                return { statusCode: 403, body: JSON.stringify({ message: "HR cannot modify an already processed expense" }) };
+            }
+
+            const { approvalStatus, hrRemark } = parsedBody;
+            if (!["Approved", "Rejected"].includes(approvalStatus)) {
+                return { statusCode: 400, body: JSON.stringify({ message: "Invalid approval status" }) };
+            }
+
+            tourexpense.approvalStatus = approvalStatus;
+            tourexpense.hrRemark = hrRemark;
+            await tourexpense.save();
+            return { statusCode: 200, body: JSON.stringify({ message: "Tour Expense status updated", data: tourexpense }) };
+        }
         // If no route matches
         return {
             statusCode: 404,

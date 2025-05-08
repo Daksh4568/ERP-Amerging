@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-
 const AutoIncrement = require("mongoose-sequence")(mongoose);
-
 const tourExpenseItemSchema = new mongoose.Schema({
+    expenseRefNo: { type: Number, unique: true },
+
     eID: {
         type: String,
         unique: true,
@@ -40,9 +40,15 @@ const tourExpenseItemSchema = new mongoose.Schema({
         enum: ["Pending", "Approved", "Rejected"],
         default: "Pending",
     },
+    hrRemark: {
+        type: String
+    },
     addedBy: { name: { type: String, required: true }, role: { type: String, required: true } },
     createdAt: {
         type: Date,
         default: Date.now
     }
 })
+tourExpenseItemSchema.plugin(AutoIncrement, { inc_field: "expenseRefNo", start_seq: 1 });
+
+module.exports = mongoose.model("TourExpense", tourExpenseItemSchema);
