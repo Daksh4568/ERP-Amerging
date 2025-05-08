@@ -166,6 +166,13 @@ functions:
       - httpApi:
           path: /api/lead-form
           method: POST
+          
+  getClientDetails:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/client-data
+          method: GET
 
   updateEmployee:
     handler: src/routes/empMaster-route.handler

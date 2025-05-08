@@ -8,6 +8,7 @@ const emailFormatController = require('../Contoller/empMailFormatController')
 const sendOtpHandler = require('../../Utilities/controller/forgotPassword')
 const verifyOtpHandler = require('../../Utilities/controller/verifyOtp')
 const resetPasswordHandler = require('../../Utilities/controller/updatePassword')
+const TourExpense = require("../../Employee Module/models/empTourExpense")
 exports.handler = async (event) => {
     try {
 
@@ -64,6 +65,16 @@ exports.handler = async (event) => {
                     officialMailpassword: decrypted,
                 };
             });
+
+            // HR Submits Expense
+    if (path === "/api/tourExpense" && httpMethod === "POST") {
+        const { employee } = await auth(headers);
+        authorize(employee, ["Employee" , "Manager", "admin"]);
+  
+        const tourexpense = new TourExpense({ ...parsedBody, approvalStatus: "Pending" });
+        await tourexpense.save();
+        return { statusCode: 200, body: JSON.stringify({ message: "Tour Expense form submitted successfully", data: expense }) };
+      }
 
             return {
                 statusCode: 200,

@@ -16,6 +16,7 @@ const MasterData = require("../HR Module/models/dropdownMaster");
 const { getMasterData, updateMasterData } = require("../HR Module/Controllers/dropdownController");
 const leadFormController = require("../PM(Project Management)/controller/clientRegcontroller")
 const empMailPassController = require("../Notification/Contoller/empMailCredentials")
+const clientRegistrationModel = require("../PM(Project Management)/models/clientRegistrationModel");
 exports.handler = async (event) => {
   try {
     // MongoDB connection
@@ -65,6 +66,7 @@ exports.handler = async (event) => {
         body: JSON.stringify(leaveData),
       };
     }
+   
 
     // Apply for leave
     if (path === '/api/apply-leave' && httpMethod === 'POST') {
@@ -458,11 +460,23 @@ exports.handler = async (event) => {
       const projectFormData = JSON.parse(body);
       return await projectFormController.createProjectForm(projectFormData, employee)
     }
+
+    // Add a client 
     if (path == '/api/lead-form' && httpMethod === 'POST') {
       const { employee } = await auth(headers);
       authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']);
       const leadFormData = JSON.parse(body);
       return await leadFormController.createLeadForm(leadFormData, employee);
+    }
+     // Get Client Data
+     if (path === '/api/client-data' && httpMethod === 'GET') {
+      const { employee } = await auth(headers); // Authenticate user
+      authorize(employee, ["admin", "HR" , "Manager", "Employee", "Sales"]); // Authorize roles
+      const clientData = await clientRegistrationModel.find({});
+      return {
+        statusCode: 200,
+        body: JSON.stringify(clientData),
+      };
     }
     const segments = path.split("/");
     const refNo = segments.length > 3 ? segments[3] : null;
