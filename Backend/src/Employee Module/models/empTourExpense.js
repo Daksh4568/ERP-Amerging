@@ -43,7 +43,7 @@ const tourExpenseItemSchema = new mongoose.Schema({
     hrRemark: {
         type: String
     },
-    addedBy: { name: { type: String, required: true }, role: { type: String, required: true } },
+    addedBy: { name: { type: String, required: true }, role: { type: String } },
     createdAt: {
         type: Date,
         default: Date.now
