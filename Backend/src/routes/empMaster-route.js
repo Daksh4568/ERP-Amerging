@@ -7,7 +7,7 @@ const exitEmployeeController = require('../HR Module/Controllers/EmpExit'); // E
 const leaveController = require('../Employee Module/Controllers/empLeave'); // Leave management controller
 const LeaveApplication = require('../Employee Module/models/empLeaveModel'); // Leave application model
 const { handleLeaveNotification, getAllNotificationsForManager } = require('../Employee Module/Controllers/handleleave');
-const counters = require('../HR Module/models/counterMaster'); // Counter schema for generating IDs
+//const counters = require('../HR Module/models/counterMaster'); // Counter schema for generating IDs
 const connectToDatabase = require('../HR Module/db/db'); // MongoDB connection handler
 const sendEmployeeCredentials = require('../HR Module/Controllers/sendMail'); // Email notification controller
 const ExpenseMaster = require("../HR Module/models/expenseFormModel")
@@ -66,7 +66,7 @@ exports.handler = async (event) => {
         body: JSON.stringify(leaveData),
       };
     }
-   
+
 
     // Apply for leave
     if (path === '/api/apply-leave' && httpMethod === 'POST') {
@@ -109,18 +109,18 @@ exports.handler = async (event) => {
       const parsedBody = JSON.parse(body);
       const newEmployee = new employeeModel({
         ...parsedBody,
-        //addedBy: { name: employee.name, role: employee.role },
+        addedBy: { name: employee.name, role: employee.role },
       });
 
       try {
         // Generate unique employee ID and password
-        const lastEmpCount = await counters.findOneAndUpdate(
-          { counterField: 'empCounter' },
-          { $inc: { counter: 1 } },
-          { new: true, upsert: true }
-        );
+        // const lastEmpCount = await counters.findOneAndUpdate(
+        //   { counterField: 'empCounter' },
+        //   { $inc: { counter: 1 } },
+        //   { new: true, upsert: true }
+        // );
 
-        newEmployee.eID = 'AT-' + String(lastEmpCount.counter).padStart(2, '0');
+        // newEmployee.eID = 'AT-' + String(lastEmpCount.counter).padStart(2, '0');
         newEmployee.stat = 'Regular';
         const password = Array.from({ length: 8 }, () =>
           'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$!'.charAt(
@@ -169,7 +169,7 @@ exports.handler = async (event) => {
       }
 
       catch (error) {
-        //console.error('Invalid Credentials', error.message);
+        console.error('Invalid Credentials', error.message);
         return {
           statusCode: 401,
           body: JSON.stringify({ error: error.message }),
@@ -326,7 +326,7 @@ exports.handler = async (event) => {
       try {
         // Authenticate user
         const { employee } = await auth(headers);
-        authorize(employee, ['HR', 'admin']); // Authorized roles
+        authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']); // Authorized roles
 
         // Find the employee by eID
         const emp = await employeeModel.findOne({ eID });
@@ -468,10 +468,10 @@ exports.handler = async (event) => {
       const leadFormData = JSON.parse(body);
       return await leadFormController.createLeadForm(leadFormData, employee);
     }
-     // Get Client Data
-     if (path === '/api/client-data' && httpMethod === 'GET') {
+    // Get Client Data
+    if (path === '/api/client-data' && httpMethod === 'GET') {
       const { employee } = await auth(headers); // Authenticate user
-      authorize(employee, ["admin", "HR" , "Manager", "Employee", "Sales"]); // Authorize roles
+      authorize(employee, ["admin", "HR", "Manager", "Employee", "Sales"]); // Authorize roles
       const clientData = await clientRegistrationModel.find({});
       return {
         statusCode: 200,
