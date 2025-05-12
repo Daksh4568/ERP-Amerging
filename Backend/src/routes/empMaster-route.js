@@ -48,7 +48,7 @@ exports.handler = async (event) => {
     // Get all employees
     if (path === '/api/getemp' && httpMethod === 'GET') {
       const { employee } = await auth(headers); // Authenticate user
-      authorize(employee, ['HR', 'admin']); // Authorize roles
+      authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']); // Authorize roles
 
       const employees = await employeeModel.find({});
       return {
