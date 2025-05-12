@@ -72,41 +72,6 @@ exports.handler = async (event) => {
             };
         }
 
-        //     // Accounts Department Adds Financial Details for All Expenses in the Form
-        //     if (path.match(/^\/api\/expense\/[^/]+\/accounts$/) && httpMethod === "PATCH" && refNo) {
-        //       const { employee } = await auth(headers);
-
-        //       if (employee.department !== 'Accounts') {
-        //         return {
-        //           statusCode: 403,
-        //           body: JSON.stringify({ message: "Access Denied . Only Accounts department employee can perform this action" })
-        //         }
-        //       }
-
-        //       const expense = await ExpenseMaster.findOne({ refNo });
-        //       if (!expense) {
-        //         return { statusCode: 404, body: JSON.stringify({ message: "Expense not found" }) };
-        //       }
-
-        //       if (expense.approvalStatus !== "Approved") {
-        //         return { statusCode: 403, body: JSON.stringify({ message: "Expense must be approved before adding accounts details" }) };
-        //       }
-
-        //       // if (expense.expenses.some(item => item.accountsDepartment)) {
-        //       //   return { statusCode: 403, body: JSON.stringify({ message: "Accounts details already added, cannot modify." }) };
-        //       // }
-
-        //       const { accountsDetails } = parsedBody;
-
-        //       expense.expenses.forEach((item, index) => {
-        //         if (accountsDetails[index]) {
-        //           item.accountsDepartment = accountsDetails[index];
-        //         }
-        //       });
-
-        //       await expense.save();
-        //       return { statusCode: 200, body: JSON.stringify({ message: "Accounting details added for all expenses", data: expense }) };
-        //     }
         const segments = path.split("/");
         const expenseRefNo = segments.length > 3 ? segments[3] : null;
         const parsedBody = body ? JSON.parse(body) : {};
@@ -153,6 +118,38 @@ exports.handler = async (event) => {
             tourexpense.hrRemark = hrRemark;
             await tourexpense.save();
             return { statusCode: 200, body: JSON.stringify({ message: "Tour Expense status updated", data: tourexpense }) };
+        }
+
+        // Accounts Department Adds Financial Details for All Expenses in the Form
+        if (path.match(/^\/api\/tourExpense\/[^/]+\/accounts$/) && httpMethod === "PATCH" && expenseRefNo) {
+            const { employee } = await auth(headers);
+
+            if (employee.department !== 'Accounts') {
+                return {
+                    statusCode: 403,
+                    body: JSON.stringify({ message: "Access Denied . Only Accounts department employee can perform this action" })
+                }
+            }
+
+            const tourexpense = await TourExpense.findOne({ expenseRefNo });
+            if (!tourexpense) {
+                return { statusCode: 404, body: JSON.stringify({ message: "Expense not found" }) };
+            }
+
+            if (tourexpense.approvalStatus !== "Approved") {
+                return { statusCode: 403, body: JSON.stringify({ message: "Expense must be approved before adding accounts details" }) };
+            }
+
+            // if (expense.expenses.some(item => item.accountsDepartment)) {
+            //   return { statusCode: 403, body: JSON.stringify({ message: "Accounts details already added, cannot modify." }) };
+            // }
+
+            const { accountsDetails } = parsedBody;
+
+            tourexpense.accountsDetails = accountsDetails;
+
+            await tourexpense.save();
+            return { statusCode: 200, body: JSON.stringify({ message: "Accounting details added for all TourExpense", data: tourexpense }) };
         }
         // If no route matches
         return {
