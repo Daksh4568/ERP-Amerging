@@ -68,9 +68,12 @@ const updateMasterData = async (requestBody) => {
                 ...new Set([...masterData.designationRoles, ...requestBody.designationRoles]),
             ];
         }
-
+        if (requestBody.tourExpenseType && Array.isArray(requestBody.tourExpenseType)) {
+            masterData.tourExpenseType = [
+                ...new Set([...masterData.tourExpenseType, ...requestBody.tourExpenseType]),
+            ];
+        }
         await masterData.save();
-
         return {
             statusCode: 200,
             body: JSON.stringify({

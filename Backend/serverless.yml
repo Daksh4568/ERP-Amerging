@@ -99,6 +99,13 @@ functions:
           path: /api/tourExpense/{expenseRefNo}/approve
           method: PATCH
 
+    updateTourExpenseAccounts:
+    handler: src/Notification/routes/empCredentialsRoute.handler
+    events:
+      - httpApi:
+          path: /api/tourExpense/{expenseRefNo}/accounts
+          method: PATCH
+
   getLeaveData:
     handler: src/routes/empMaster-route.handler
     events:
