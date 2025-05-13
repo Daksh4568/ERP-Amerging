@@ -44,6 +44,30 @@
         "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-forgotPasswordHandler"
       }
     },
+    "TourExpenseFormLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-tourExpenseForm"
+      }
+    },
+    "GetTourExpenseLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-getTourExpense"
+      }
+    },
+    "UpdateTourExpenseLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-updateTourExpense"
+      }
+    },
+    "UpdateTourExpenseAccountsLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-updateTourExpenseAccounts"
+      }
+    },
     "GetLeaveDataLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
@@ -120,6 +144,12 @@
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
         "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-leadform"
+      }
+    },
+    "GetClientDetailsLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/enterprise-resource-planning-dev-getClientDetails"
       }
     },
     "UpdateEmployeeLogGroup": {
@@ -289,7 +319,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -298,7 +328,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -321,7 +351,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -330,7 +360,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -353,7 +383,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -362,7 +392,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -385,7 +415,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/Notification/routes/empCredentialsRoute.handler",
         "Runtime": "nodejs20.x",
@@ -394,7 +424,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -417,7 +447,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/Notification/routes/empCredentialsRoute.handler",
         "Runtime": "nodejs20.x",
@@ -426,7 +456,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -449,7 +479,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/Notification/routes/empCredentialsRoute.handler",
         "Runtime": "nodejs20.x",
@@ -458,7 +488,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -481,7 +511,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/Notification/routes/empCredentialsRoute.handler",
         "Runtime": "nodejs20.x",
@@ -490,7 +520,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -508,12 +538,140 @@
         "ForgotPasswordHandlerLogGroup"
       ]
     },
+    "TourExpenseFormLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
+        },
+        "Handler": "src/Notification/routes/empCredentialsRoute.handler",
+        "Runtime": "nodejs20.x",
+        "FunctionName": "enterprise-resource-planning-dev-tourExpenseForm",
+        "MemorySize": 1024,
+        "Timeout": 30,
+        "Environment": {
+          "Variables": {
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
+            "JWT_SECRET": "amergingtech5757",
+            "EMAIL_USER": "internal@amergingtech.com",
+            "EMAIL_PASSWORD": "braz dbta pjhm davx",
+            "ENCRYPTION_KEY": "9f1c3a2e4b9a7d5e1c3a6f4b7e9c2a1d8b6e3c7a1d9f2e4b5c8a3d1e7f9c0b2a"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "TourExpenseFormLogGroup"
+      ]
+    },
+    "GetTourExpenseLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
+        },
+        "Handler": "src/Notification/routes/empCredentialsRoute.handler",
+        "Runtime": "nodejs20.x",
+        "FunctionName": "enterprise-resource-planning-dev-getTourExpense",
+        "MemorySize": 1024,
+        "Timeout": 30,
+        "Environment": {
+          "Variables": {
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
+            "JWT_SECRET": "amergingtech5757",
+            "EMAIL_USER": "internal@amergingtech.com",
+            "EMAIL_PASSWORD": "braz dbta pjhm davx",
+            "ENCRYPTION_KEY": "9f1c3a2e4b9a7d5e1c3a6f4b7e9c2a1d8b6e3c7a1d9f2e4b5c8a3d1e7f9c0b2a"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetTourExpenseLogGroup"
+      ]
+    },
+    "UpdateTourExpenseLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
+        },
+        "Handler": "src/Notification/routes/empCredentialsRoute.handler",
+        "Runtime": "nodejs20.x",
+        "FunctionName": "enterprise-resource-planning-dev-updateTourExpense",
+        "MemorySize": 1024,
+        "Timeout": 30,
+        "Environment": {
+          "Variables": {
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
+            "JWT_SECRET": "amergingtech5757",
+            "EMAIL_USER": "internal@amergingtech.com",
+            "EMAIL_PASSWORD": "braz dbta pjhm davx",
+            "ENCRYPTION_KEY": "9f1c3a2e4b9a7d5e1c3a6f4b7e9c2a1d8b6e3c7a1d9f2e4b5c8a3d1e7f9c0b2a"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "UpdateTourExpenseLogGroup"
+      ]
+    },
+    "UpdateTourExpenseAccountsLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
+        },
+        "Handler": "src/Notification/routes/empCredentialsRoute.handler",
+        "Runtime": "nodejs20.x",
+        "FunctionName": "enterprise-resource-planning-dev-updateTourExpenseAccounts",
+        "MemorySize": 1024,
+        "Timeout": 30,
+        "Environment": {
+          "Variables": {
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
+            "JWT_SECRET": "amergingtech5757",
+            "EMAIL_USER": "internal@amergingtech.com",
+            "EMAIL_PASSWORD": "braz dbta pjhm davx",
+            "ENCRYPTION_KEY": "9f1c3a2e4b9a7d5e1c3a6f4b7e9c2a1d8b6e3c7a1d9f2e4b5c8a3d1e7f9c0b2a"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "UpdateTourExpenseAccountsLogGroup"
+      ]
+    },
     "GetLeaveDataLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -522,7 +680,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -545,7 +703,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/Notification/routes/empCredentialsRoute.handler",
         "Runtime": "nodejs20.x",
@@ -554,7 +712,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -577,7 +735,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -586,7 +744,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -609,7 +767,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -618,7 +776,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -641,7 +799,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -650,7 +808,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -673,7 +831,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -682,7 +840,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -705,7 +863,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -714,7 +872,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -737,7 +895,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -746,7 +904,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -769,7 +927,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -778,7 +936,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -801,7 +959,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -810,7 +968,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -833,7 +991,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -842,7 +1000,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -865,7 +1023,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -874,7 +1032,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -897,7 +1055,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -906,7 +1064,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -924,12 +1082,44 @@
         "LeadformLogGroup"
       ]
     },
+    "GetClientDetailsLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
+        },
+        "Handler": "src/routes/empMaster-route.handler",
+        "Runtime": "nodejs20.x",
+        "FunctionName": "enterprise-resource-planning-dev-getClientDetails",
+        "MemorySize": 1024,
+        "Timeout": 30,
+        "Environment": {
+          "Variables": {
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
+            "JWT_SECRET": "amergingtech5757",
+            "EMAIL_USER": "internal@amergingtech.com",
+            "EMAIL_PASSWORD": "braz dbta pjhm davx",
+            "ENCRYPTION_KEY": "9f1c3a2e4b9a7d5e1c3a6f4b7e9c2a1d8b6e3c7a1d9f2e4b5c8a3d1e7f9c0b2a"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "GetClientDetailsLogGroup"
+      ]
+    },
     "UpdateEmployeeLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -938,7 +1128,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -961,7 +1151,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -970,7 +1160,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -993,7 +1183,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1002,7 +1192,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1025,7 +1215,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1034,7 +1224,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1057,7 +1247,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1066,7 +1256,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1089,7 +1279,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1098,7 +1288,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1121,7 +1311,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1130,7 +1320,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1153,7 +1343,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1162,7 +1352,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1185,7 +1375,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1194,7 +1384,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1217,7 +1407,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1226,7 +1416,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1249,7 +1439,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1258,7 +1448,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1281,7 +1471,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1290,7 +1480,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1313,7 +1503,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1322,7 +1512,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1345,7 +1535,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-ap-south-1-2823f66f-0369",
-          "S3Key": "serverless/enterprise-resource-planning/dev/1746080355859-2025-05-01T06:19:15.859Z/enterprise-resource-planning.zip"
+          "S3Key": "serverless/enterprise-resource-planning/dev/1747126206647-2025-05-13T08:50:06.647Z/enterprise-resource-planning.zip"
         },
         "Handler": "src/routes/empMaster-route.handler",
         "Runtime": "nodejs20.x",
@@ -1354,7 +1544,7 @@
         "Timeout": 30,
         "Environment": {
           "Variables": {
-            "MONGO_URI": "mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/",
+            "MONGO_URI": "mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/",
             "JWT_SECRET": "amergingtech5757",
             "EMAIL_USER": "internal@amergingtech.com",
             "EMAIL_PASSWORD": "braz dbta pjhm davx",
@@ -1372,344 +1562,394 @@
         "DeleteEmployeeLogGroup"
       ]
     },
-    "HomeLambdaVersionN5RfLQDQ9dvB77czffjRRYmwXf85OHC6fDfOUwOtTY": {
+    "HomeLambdaVersionhxKdgiNH5vrkWGFUd24Mipy8ic8mmqs3uOwvSsAFAkU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HomeLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "ProjectFormLambdaVersionHjYyl7pT2AivCUmkkhcN9uv1zlStHeuZIzoLCdSmW0": {
+    "ProjectFormLambdaVersion7AYzFZicbOba3l8OH1t23MEPJM1USyaNstnD9u0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ProjectFormLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "GetAllEmployeesLambdaVersionMue7YudHRnF0LpUnSWbAIKNP1MdCVnwbhjPa53KBIY": {
+    "GetAllEmployeesLambdaVersionqCIqaeYbnjYC9hwILMztNpncndSnkWBXM3atnn0tVjM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAllEmployeesLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "GetAllEmpCredentialsLambdaVersionBz9eGEKi2ZwM1z8oS8HIOlOOjjACnCIKLwJT4GIIqc": {
+    "GetAllEmpCredentialsLambdaVersionZsA91wYBcv2DC7XueujFCspTicxpc0ko5OG1klyfgI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAllEmpCredentialsLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "SendOtpHandlerLambdaVersiondprsjfDyDzEgJPiIb6rTZjcPqXAADOo4kWZ7pyOPq4": {
+    "SendOtpHandlerLambdaVersionmKYBHB8c7RmfNukMfKwNvr9zOkdK0HOtJJbMfBSlxs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SendOtpHandlerLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "VerifyOtpHandlerLambdaVersionsM8eop2jx8uf2xeEpThVplS4oZBkSYXMJ4wlLAvWfkg": {
+    "VerifyOtpHandlerLambdaVersionwKwrdDynJWveZChxJ18wnCHpQ3woPQehrHjpMTQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "VerifyOtpHandlerLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "ForgotPasswordHandlerLambdaVersionxYb8tySrR2fjw5nUjXNPGFjYOcnnUFospAib90NC8": {
+    "ForgotPasswordHandlerLambdaVersionqIU5J7eWVoW9BmwQafP4jN3Sh9u8Kw2m39U8Xkbec": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ForgotPasswordHandlerLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "GetLeaveDataLambdaVersionraY9taYCpOWNgeGzpsfIDgudSjTP1PftqrJC9DUlCs": {
+    "TourExpenseFormLambdaVersioncEmt11xdvTE5fr004z8P8C8Vg0oTwNJb7MyxwHXTak": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "TourExpenseFormLambdaFunction"
+        },
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
+      }
+    },
+    "GetTourExpenseLambdaVersion7Soj7wgpEYj2wfWTqRsSODMceVzQgbb7xYEyiAgi6M": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetTourExpenseLambdaFunction"
+        },
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
+      }
+    },
+    "UpdateTourExpenseLambdaVersionuDwLlel6QImYwtzERP2xHs42mxo6x8EThDbPWaT0": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UpdateTourExpenseLambdaFunction"
+        },
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
+      }
+    },
+    "UpdateTourExpenseAccountsLambdaVersionzAlGa9NADqa12DZA8pe77xMyGMKfrByP7cNlwiLvE": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UpdateTourExpenseAccountsLambdaFunction"
+        },
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
+      }
+    },
+    "GetLeaveDataLambdaVersionUtBm1JvTFk7VrLeGQGRW6vhWRqoeETa08xsbjTedak": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetLeaveDataLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "EmailFormatLambdaVersion3vBFc5Y4EpNj7UUWNmgrOIFPjiBXfkr3Pldanh1TE": {
+    "EmailFormatLambdaVersionIOw6Cs3cGyD3JlSOrawxvnf25WFC3vPTzMWr75t4Q": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "EmailFormatLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "ApplyLeaveLambdaVersionzNAIFIIHct207Nlyv8cbs7V5gUBtJRpDN6WicQ0OWI": {
+    "ApplyLeaveLambdaVersionYsavxO0EtdjRnQNOZS3Iz1SNoOk5yqhBKucLOL0KfA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApplyLeaveLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "EmployeeEvaluationLambdaVersionoHNA9lJw9Zew6o9vDyIRfhBRa3073tS3i6xdFpXr3cQ": {
+    "EmployeeEvaluationLambdaVersiongegp3hngeKtYstjB62FLTHJ5eZrl4Z52SQXSQ9E": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "EmployeeEvaluationLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "EmpMailCredentialsLambdaVersionXeV1qyyrCZZp21pMNeblnLVHj9yh1wGtCRstgYgdl8": {
+    "EmpMailCredentialsLambdaVersion1HCKfw4mIhUavVa4ZH3GDZGHgFr2JgxGktykbxoEE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "EmpMailCredentialsLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "EmployeeStatisticsLambdaVersionBYRCfqe5o9zftLD890iIRm3LuE6378ev3YDG7xvc": {
+    "EmployeeStatisticsLambdaVersionI5lxwh7EhH1dqKDQMd34fT5f2TXhKXUdO0xM5Sz43Q": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "EmployeeStatisticsLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "GetMasterDataLambdaVersiongtcI2LGcJJBgEQma1HOdrG25PwDCMurGVJP2WcNDgtI": {
+    "GetMasterDataLambdaVersionO1xi7pgVIgnkmqVUPsiAzBhvVB2SXyFTaOi7xEQBI8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetMasterDataLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "UpdateMasterDataLambdaVersion3sTmfzrao4uzi9EPipaLShAuntiP9CLf4P1Sqfo5yk": {
+    "UpdateMasterDataLambdaVersionC3x8Lmzabp71usKzfbi4o8aNeMjIxIgUH97Trnhtnjs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateMasterDataLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "RegisterEmployeeLambdaVersionQWmBR88Px0kajYgRnD92TEpXNFleGOgkHRXO7sNw": {
+    "RegisterEmployeeLambdaVersionz7inLvSUhvXB2zXlbnSWUbwsttTe83fnL4MsNNOmg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "RegisterEmployeeLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "EmployeeLoginLambdaVersionDXYnfHeX6GVCJfIsxXCtLpEVhfX6uHiKbLbskpRg": {
+    "EmployeeLoginLambdaVersionYBFKSr2q3kEdL9pI3Px4jKqJEMvYYNaPmmkCAHPTF4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "EmployeeLoginLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "EmployeeLogoutLambdaVersionmUe9pZtQHhJP40ZlsyqozCHobdGCCntYHh0RfRCFk": {
+    "EmployeeLogoutLambdaVersionVXpNQFakil32e4mX4LOHhg06FJDLF0urgqFN1CGZIo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "EmployeeLogoutLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "TokenVerifyLambdaVersionKxj0wvd6231wPZ8apPU5hoAzdXdrnSJWIEUrjilleg": {
+    "TokenVerifyLambdaVersionJmptdjBvByRyiGs3BWyYuCx1KYcQMMpMvDjKnOIR8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "TokenVerifyLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "LeadformLambdaVersionUukElh2US9vDPB1o5hRooRHykCRSuEY7DdFQ5f8": {
+    "LeadformLambdaVersion7VaiTTO8o9qlHIOk6q84zCEuncEOcxJdpVXDCoyk1M": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "LeadformLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "UpdateEmployeeLambdaVersion8I7QhGXW0yxvpeBUARDXWQKpfE9OLZWB947rsyTAnk": {
+    "GetClientDetailsLambdaVersionQz8y3WTQIhYGyHFOUfWWcDwzrLBHX6gU1iP9rZ1T80": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "GetClientDetailsLambdaFunction"
+        },
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
+      }
+    },
+    "UpdateEmployeeLambdaVersionDLxvyAvJMuIYdWKgWPjIITPacgBtw0KQ1N3xEfNyrc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateEmployeeLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "ManagerNotificationsLambdaVersionIQ3ZLXDSk643kC6szolmi3U3c8XVJ9s6vL4ZnO80o": {
+    "ManagerNotificationsLambdaVersionKI0eGatpQZ5099npwmPEnPkjoIeMEXOwZZ3ecYdV5lo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ManagerNotificationsLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "HandleNotificationsLambdaVersionHecucqkFbDdXvULfiOi6mLtfAfzrEWHtxis9trQKw": {
+    "HandleNotificationsLambdaVersionq0PffnZ3CN9GnjHI6PlLvBVAD3fvSghCIRly9SR27U": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HandleNotificationsLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "EmployeeExitFormLambdaVersionAeiD7J8JPCcjTQimwO2RVr1McyVAayKGDHnK0rpA": {
+    "EmployeeExitFormLambdaVersion6Wm9qdmJRPmF4Z8fIK1hd17ysmgP0OoeoePS7w6O4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "EmployeeExitFormLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "ExpenseSubmitLambdaVersion7IYXh3zel246I6YBzIMBjRsFDZYlDnHnXwZuhfm9jf8": {
+    "ExpenseSubmitLambdaVersionaTNmXgcyqtnuEtUfQMKGg6jgdW4Jb1FsSLRdkyL9JUA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ExpenseSubmitLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "ExpenseApproveLambdaVersionH1kk3cLDDPDmiZ7j9Zi366Ex15O3s2XLqnKPBNcNh8": {
+    "ExpenseApproveLambdaVersiongcoLex6a5lp86FfzjZMf9pQiCioodhuu1Bqyzn24RkU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ExpenseApproveLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "ExpenseAccountsUpdateLambdaVersiony36YlpHdSm7aJ9fzxo8O1Bvj4kUyx2z9dwze1aZ7TkM": {
+    "ExpenseAccountsUpdateLambdaVersionPwuqOmS37aU2tNUB8FoKbt8Nva6V8A9U0Tbp0fYg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ExpenseAccountsUpdateLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "UpdateEmployeeDetailsLambdaVersionQgZTgCZfV4V7oG2rAGYBiMvcQvw8atdzdrxdUyFueBY": {
+    "UpdateEmployeeDetailsLambdaVersionuk35iska6KkzYy4DGURYUq94wcSTwt9Q5DD9heznk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateEmployeeDetailsLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "GetEmployeeEidLambdaVersionVQzDgvnLuH0sq7BlkQwPYyR60ESNJtj6tYeSrzC5JSk": {
+    "GetEmployeeEidLambdaVersion5egRAxuBH0rQtR39ABoeYbHIg0AT25HzzhMbr91FwY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetEmployeeEidLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "GetAllExpensesLambdaVersionbpIXjdRp0Ne86P1SbTNX114I1tttr3rTkmBNXQ4j0": {
+    "GetAllExpensesLambdaVersionFgPbUqedzUDnFvh5T4ennDpK2hXZcTTiPOIFqLQgIbU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetAllExpensesLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "GetApprovedExpensesLambdaVersionOPt8bLECmV06wxk5apk1cnY8bWO69584n439b5cJlA": {
+    "GetApprovedExpensesLambdaVersiontSfgwj2yKYP1Ih61e2hvQiXxlW9AKiEUbSQa3AUb4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetApprovedExpensesLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "GetExpensebyIDLambdaVersionm0p1bmW11e98RikaY29ohm9GST2dTaCgnKvOCdQKyo": {
+    "GetExpensebyIDLambdaVersion4Qaq5rC2MXOqT5YZBBdYFvhhkmkmMHY0Dkf9Cve0tg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetExpensebyIDLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "UpdateExpenseIDLambdaVersionjzJQVyAqzu2KcDOA0TnV8zeh04ulnJv8L1uCuHu9VU": {
+    "UpdateExpenseIDLambdaVersionKCx4Hqo3BLds5aXrmhZQ4D7kFBnHBYzim4Na2s0E": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateExpenseIDLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
-    "DeleteEmployeeLambdaVersionjy38LO7ne2jQWzDbpyheDfsTFghzfLefAzzJCzf8": {
+    "DeleteEmployeeLambdaVersionwg3NPC5V9rho29LPlKxiqfRfNFhsrcdUnZhs8aEU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteEmployeeLambdaFunction"
         },
-        "CodeSha256": "EXZhpemL78c6R31wJ+zahrJBDafG5aMY5ZeP7dSUaIg="
+        "CodeSha256": "UelQ0xKWQBrtuADcbXpOB09O/p+I3pRzm8FcBNOdZDw="
       }
     },
     "HttpApi": {
@@ -2273,6 +2513,306 @@
         }
       },
       "DependsOn": "HttpApiIntegrationForgotPasswordHandler"
+    },
+    "TourExpenseFormLambdaPermissionHttpApi": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "TourExpenseFormLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "HttpApi"
+              },
+              "/*"
+            ]
+          ]
+        }
+      }
+    },
+    "HttpApiIntegrationTourExpenseForm": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "TourExpenseFormLambdaFunction",
+            "Arn"
+          ]
+        },
+        "PayloadFormatVersion": "2.0",
+        "TimeoutInMillis": 30000
+      }
+    },
+    "HttpApiRoutePostApiTourexpense": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "RouteKey": "POST /api/tourExpense",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "HttpApiIntegrationTourExpenseForm"
+              }
+            ]
+          ]
+        }
+      },
+      "DependsOn": "HttpApiIntegrationTourExpenseForm"
+    },
+    "GetTourExpenseLambdaPermissionHttpApi": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetTourExpenseLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "HttpApi"
+              },
+              "/*"
+            ]
+          ]
+        }
+      }
+    },
+    "HttpApiIntegrationGetTourExpense": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "GetTourExpenseLambdaFunction",
+            "Arn"
+          ]
+        },
+        "PayloadFormatVersion": "2.0",
+        "TimeoutInMillis": 30000
+      }
+    },
+    "HttpApiRouteGetApiTourexpensedata": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "RouteKey": "GET /api/tourExpensedata",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "HttpApiIntegrationGetTourExpense"
+              }
+            ]
+          ]
+        }
+      },
+      "DependsOn": "HttpApiIntegrationGetTourExpense"
+    },
+    "UpdateTourExpenseLambdaPermissionHttpApi": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "UpdateTourExpenseLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "HttpApi"
+              },
+              "/*"
+            ]
+          ]
+        }
+      }
+    },
+    "HttpApiIntegrationUpdateTourExpense": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "UpdateTourExpenseLambdaFunction",
+            "Arn"
+          ]
+        },
+        "PayloadFormatVersion": "2.0",
+        "TimeoutInMillis": 30000
+      }
+    },
+    "HttpApiRoutePatchApiTourexpenseExpenserefnoVarApprove": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "RouteKey": "PATCH /api/tourExpense/{expenseRefNo}/approve",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "HttpApiIntegrationUpdateTourExpense"
+              }
+            ]
+          ]
+        }
+      },
+      "DependsOn": "HttpApiIntegrationUpdateTourExpense"
+    },
+    "UpdateTourExpenseAccountsLambdaPermissionHttpApi": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "UpdateTourExpenseAccountsLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "HttpApi"
+              },
+              "/*"
+            ]
+          ]
+        }
+      }
+    },
+    "HttpApiIntegrationUpdateTourExpenseAccounts": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "UpdateTourExpenseAccountsLambdaFunction",
+            "Arn"
+          ]
+        },
+        "PayloadFormatVersion": "2.0",
+        "TimeoutInMillis": 30000
+      }
+    },
+    "HttpApiRoutePatchApiTourexpenseExpenserefnoVarAccounts": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "RouteKey": "PATCH /api/tourExpense/{expenseRefNo}/accounts",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "HttpApiIntegrationUpdateTourExpenseAccounts"
+              }
+            ]
+          ]
+        }
+      },
+      "DependsOn": "HttpApiIntegrationUpdateTourExpenseAccounts"
     },
     "GetLeaveDataLambdaPermissionHttpApi": {
       "Type": "AWS::Lambda::Permission",
@@ -3248,6 +3788,81 @@
         }
       },
       "DependsOn": "HttpApiIntegrationLeadform"
+    },
+    "GetClientDetailsLambdaPermissionHttpApi": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "GetClientDetailsLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "HttpApi"
+              },
+              "/*"
+            ]
+          ]
+        }
+      }
+    },
+    "HttpApiIntegrationGetClientDetails": {
+      "Type": "AWS::ApiGatewayV2::Integration",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "IntegrationType": "AWS_PROXY",
+        "IntegrationUri": {
+          "Fn::GetAtt": [
+            "GetClientDetailsLambdaFunction",
+            "Arn"
+          ]
+        },
+        "PayloadFormatVersion": "2.0",
+        "TimeoutInMillis": 30000
+      }
+    },
+    "HttpApiRouteGetApiClientDashdata": {
+      "Type": "AWS::ApiGatewayV2::Route",
+      "Properties": {
+        "ApiId": {
+          "Ref": "HttpApi"
+        },
+        "RouteKey": "GET /api/client-data",
+        "Target": {
+          "Fn::Join": [
+            "/",
+            [
+              "integrations",
+              {
+                "Ref": "HttpApiIntegrationGetClientDetails"
+              }
+            ]
+          ]
+        }
+      },
+      "DependsOn": "HttpApiIntegrationGetClientDetails"
     },
     "UpdateEmployeeLambdaPermissionHttpApi": {
       "Type": "AWS::Lambda::Permission",
@@ -4329,7 +4944,7 @@
     "HomeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HomeLambdaVersionN5RfLQDQ9dvB77czffjRRYmwXf85OHC6fDfOUwOtTY"
+        "Ref": "HomeLambdaVersionhxKdgiNH5vrkWGFUd24Mipy8ic8mmqs3uOwvSsAFAkU"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-HomeLambdaFunctionQualifiedArn"
@@ -4338,7 +4953,7 @@
     "ProjectFormLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ProjectFormLambdaVersionHjYyl7pT2AivCUmkkhcN9uv1zlStHeuZIzoLCdSmW0"
+        "Ref": "ProjectFormLambdaVersion7AYzFZicbOba3l8OH1t23MEPJM1USyaNstnD9u0"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-ProjectFormLambdaFunctionQualifiedArn"
@@ -4347,7 +4962,7 @@
     "GetAllEmployeesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAllEmployeesLambdaVersionMue7YudHRnF0LpUnSWbAIKNP1MdCVnwbhjPa53KBIY"
+        "Ref": "GetAllEmployeesLambdaVersionqCIqaeYbnjYC9hwILMztNpncndSnkWBXM3atnn0tVjM"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-GetAllEmployeesLambdaFunctionQualifiedArn"
@@ -4356,7 +4971,7 @@
     "GetAllEmpCredentialsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAllEmpCredentialsLambdaVersionBz9eGEKi2ZwM1z8oS8HIOlOOjjACnCIKLwJT4GIIqc"
+        "Ref": "GetAllEmpCredentialsLambdaVersionZsA91wYBcv2DC7XueujFCspTicxpc0ko5OG1klyfgI"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-GetAllEmpCredentialsLambdaFunctionQualifiedArn"
@@ -4365,7 +4980,7 @@
     "SendOtpHandlerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SendOtpHandlerLambdaVersiondprsjfDyDzEgJPiIb6rTZjcPqXAADOo4kWZ7pyOPq4"
+        "Ref": "SendOtpHandlerLambdaVersionmKYBHB8c7RmfNukMfKwNvr9zOkdK0HOtJJbMfBSlxs"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-SendOtpHandlerLambdaFunctionQualifiedArn"
@@ -4374,7 +4989,7 @@
     "VerifyOtpHandlerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "VerifyOtpHandlerLambdaVersionsM8eop2jx8uf2xeEpThVplS4oZBkSYXMJ4wlLAvWfkg"
+        "Ref": "VerifyOtpHandlerLambdaVersionwKwrdDynJWveZChxJ18wnCHpQ3woPQehrHjpMTQ"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-VerifyOtpHandlerLambdaFunctionQualifiedArn"
@@ -4383,16 +4998,52 @@
     "ForgotPasswordHandlerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ForgotPasswordHandlerLambdaVersionxYb8tySrR2fjw5nUjXNPGFjYOcnnUFospAib90NC8"
+        "Ref": "ForgotPasswordHandlerLambdaVersionqIU5J7eWVoW9BmwQafP4jN3Sh9u8Kw2m39U8Xkbec"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-ForgotPasswordHandlerLambdaFunctionQualifiedArn"
       }
     },
+    "TourExpenseFormLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "TourExpenseFormLambdaVersioncEmt11xdvTE5fr004z8P8C8Vg0oTwNJb7MyxwHXTak"
+      },
+      "Export": {
+        "Name": "sls-enterprise-resource-planning-dev-TourExpenseFormLambdaFunctionQualifiedArn"
+      }
+    },
+    "GetTourExpenseLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetTourExpenseLambdaVersion7Soj7wgpEYj2wfWTqRsSODMceVzQgbb7xYEyiAgi6M"
+      },
+      "Export": {
+        "Name": "sls-enterprise-resource-planning-dev-GetTourExpenseLambdaFunctionQualifiedArn"
+      }
+    },
+    "UpdateTourExpenseLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "UpdateTourExpenseLambdaVersionuDwLlel6QImYwtzERP2xHs42mxo6x8EThDbPWaT0"
+      },
+      "Export": {
+        "Name": "sls-enterprise-resource-planning-dev-UpdateTourExpenseLambdaFunctionQualifiedArn"
+      }
+    },
+    "UpdateTourExpenseAccountsLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "UpdateTourExpenseAccountsLambdaVersionzAlGa9NADqa12DZA8pe77xMyGMKfrByP7cNlwiLvE"
+      },
+      "Export": {
+        "Name": "sls-enterprise-resource-planning-dev-UpdateTourExpenseAccountsLambdaFunctionQualifiedArn"
+      }
+    },
     "GetLeaveDataLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetLeaveDataLambdaVersionraY9taYCpOWNgeGzpsfIDgudSjTP1PftqrJC9DUlCs"
+        "Ref": "GetLeaveDataLambdaVersionUtBm1JvTFk7VrLeGQGRW6vhWRqoeETa08xsbjTedak"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-GetLeaveDataLambdaFunctionQualifiedArn"
@@ -4401,7 +5052,7 @@
     "EmailFormatLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "EmailFormatLambdaVersion3vBFc5Y4EpNj7UUWNmgrOIFPjiBXfkr3Pldanh1TE"
+        "Ref": "EmailFormatLambdaVersionIOw6Cs3cGyD3JlSOrawxvnf25WFC3vPTzMWr75t4Q"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-EmailFormatLambdaFunctionQualifiedArn"
@@ -4410,7 +5061,7 @@
     "ApplyLeaveLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApplyLeaveLambdaVersionzNAIFIIHct207Nlyv8cbs7V5gUBtJRpDN6WicQ0OWI"
+        "Ref": "ApplyLeaveLambdaVersionYsavxO0EtdjRnQNOZS3Iz1SNoOk5yqhBKucLOL0KfA"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-ApplyLeaveLambdaFunctionQualifiedArn"
@@ -4419,7 +5070,7 @@
     "EmployeeEvaluationLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "EmployeeEvaluationLambdaVersionoHNA9lJw9Zew6o9vDyIRfhBRa3073tS3i6xdFpXr3cQ"
+        "Ref": "EmployeeEvaluationLambdaVersiongegp3hngeKtYstjB62FLTHJ5eZrl4Z52SQXSQ9E"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-EmployeeEvaluationLambdaFunctionQualifiedArn"
@@ -4428,7 +5079,7 @@
     "EmpMailCredentialsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "EmpMailCredentialsLambdaVersionXeV1qyyrCZZp21pMNeblnLVHj9yh1wGtCRstgYgdl8"
+        "Ref": "EmpMailCredentialsLambdaVersion1HCKfw4mIhUavVa4ZH3GDZGHgFr2JgxGktykbxoEE"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-EmpMailCredentialsLambdaFunctionQualifiedArn"
@@ -4437,7 +5088,7 @@
     "EmployeeStatisticsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "EmployeeStatisticsLambdaVersionBYRCfqe5o9zftLD890iIRm3LuE6378ev3YDG7xvc"
+        "Ref": "EmployeeStatisticsLambdaVersionI5lxwh7EhH1dqKDQMd34fT5f2TXhKXUdO0xM5Sz43Q"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-EmployeeStatisticsLambdaFunctionQualifiedArn"
@@ -4446,7 +5097,7 @@
     "GetMasterDataLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetMasterDataLambdaVersiongtcI2LGcJJBgEQma1HOdrG25PwDCMurGVJP2WcNDgtI"
+        "Ref": "GetMasterDataLambdaVersionO1xi7pgVIgnkmqVUPsiAzBhvVB2SXyFTaOi7xEQBI8"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-GetMasterDataLambdaFunctionQualifiedArn"
@@ -4455,7 +5106,7 @@
     "UpdateMasterDataLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateMasterDataLambdaVersion3sTmfzrao4uzi9EPipaLShAuntiP9CLf4P1Sqfo5yk"
+        "Ref": "UpdateMasterDataLambdaVersionC3x8Lmzabp71usKzfbi4o8aNeMjIxIgUH97Trnhtnjs"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-UpdateMasterDataLambdaFunctionQualifiedArn"
@@ -4464,7 +5115,7 @@
     "RegisterEmployeeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "RegisterEmployeeLambdaVersionQWmBR88Px0kajYgRnD92TEpXNFleGOgkHRXO7sNw"
+        "Ref": "RegisterEmployeeLambdaVersionz7inLvSUhvXB2zXlbnSWUbwsttTe83fnL4MsNNOmg"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-RegisterEmployeeLambdaFunctionQualifiedArn"
@@ -4473,7 +5124,7 @@
     "EmployeeLoginLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "EmployeeLoginLambdaVersionDXYnfHeX6GVCJfIsxXCtLpEVhfX6uHiKbLbskpRg"
+        "Ref": "EmployeeLoginLambdaVersionYBFKSr2q3kEdL9pI3Px4jKqJEMvYYNaPmmkCAHPTF4"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-EmployeeLoginLambdaFunctionQualifiedArn"
@@ -4482,7 +5133,7 @@
     "EmployeeLogoutLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "EmployeeLogoutLambdaVersionmUe9pZtQHhJP40ZlsyqozCHobdGCCntYHh0RfRCFk"
+        "Ref": "EmployeeLogoutLambdaVersionVXpNQFakil32e4mX4LOHhg06FJDLF0urgqFN1CGZIo"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-EmployeeLogoutLambdaFunctionQualifiedArn"
@@ -4491,7 +5142,7 @@
     "TokenVerifyLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "TokenVerifyLambdaVersionKxj0wvd6231wPZ8apPU5hoAzdXdrnSJWIEUrjilleg"
+        "Ref": "TokenVerifyLambdaVersionJmptdjBvByRyiGs3BWyYuCx1KYcQMMpMvDjKnOIR8"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-TokenVerifyLambdaFunctionQualifiedArn"
@@ -4500,16 +5151,25 @@
     "LeadformLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "LeadformLambdaVersionUukElh2US9vDPB1o5hRooRHykCRSuEY7DdFQ5f8"
+        "Ref": "LeadformLambdaVersion7VaiTTO8o9qlHIOk6q84zCEuncEOcxJdpVXDCoyk1M"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-LeadformLambdaFunctionQualifiedArn"
       }
     },
+    "GetClientDetailsLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "GetClientDetailsLambdaVersionQz8y3WTQIhYGyHFOUfWWcDwzrLBHX6gU1iP9rZ1T80"
+      },
+      "Export": {
+        "Name": "sls-enterprise-resource-planning-dev-GetClientDetailsLambdaFunctionQualifiedArn"
+      }
+    },
     "UpdateEmployeeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateEmployeeLambdaVersion8I7QhGXW0yxvpeBUARDXWQKpfE9OLZWB947rsyTAnk"
+        "Ref": "UpdateEmployeeLambdaVersionDLxvyAvJMuIYdWKgWPjIITPacgBtw0KQ1N3xEfNyrc"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-UpdateEmployeeLambdaFunctionQualifiedArn"
@@ -4518,7 +5178,7 @@
     "ManagerNotificationsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ManagerNotificationsLambdaVersionIQ3ZLXDSk643kC6szolmi3U3c8XVJ9s6vL4ZnO80o"
+        "Ref": "ManagerNotificationsLambdaVersionKI0eGatpQZ5099npwmPEnPkjoIeMEXOwZZ3ecYdV5lo"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-ManagerNotificationsLambdaFunctionQualifiedArn"
@@ -4527,7 +5187,7 @@
     "HandleNotificationsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HandleNotificationsLambdaVersionHecucqkFbDdXvULfiOi6mLtfAfzrEWHtxis9trQKw"
+        "Ref": "HandleNotificationsLambdaVersionq0PffnZ3CN9GnjHI6PlLvBVAD3fvSghCIRly9SR27U"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-HandleNotificationsLambdaFunctionQualifiedArn"
@@ -4536,7 +5196,7 @@
     "EmployeeExitFormLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "EmployeeExitFormLambdaVersionAeiD7J8JPCcjTQimwO2RVr1McyVAayKGDHnK0rpA"
+        "Ref": "EmployeeExitFormLambdaVersion6Wm9qdmJRPmF4Z8fIK1hd17ysmgP0OoeoePS7w6O4"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-EmployeeExitFormLambdaFunctionQualifiedArn"
@@ -4545,7 +5205,7 @@
     "ExpenseSubmitLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ExpenseSubmitLambdaVersion7IYXh3zel246I6YBzIMBjRsFDZYlDnHnXwZuhfm9jf8"
+        "Ref": "ExpenseSubmitLambdaVersionaTNmXgcyqtnuEtUfQMKGg6jgdW4Jb1FsSLRdkyL9JUA"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-ExpenseSubmitLambdaFunctionQualifiedArn"
@@ -4554,7 +5214,7 @@
     "ExpenseApproveLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ExpenseApproveLambdaVersionH1kk3cLDDPDmiZ7j9Zi366Ex15O3s2XLqnKPBNcNh8"
+        "Ref": "ExpenseApproveLambdaVersiongcoLex6a5lp86FfzjZMf9pQiCioodhuu1Bqyzn24RkU"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-ExpenseApproveLambdaFunctionQualifiedArn"
@@ -4563,7 +5223,7 @@
     "ExpenseAccountsUpdateLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ExpenseAccountsUpdateLambdaVersiony36YlpHdSm7aJ9fzxo8O1Bvj4kUyx2z9dwze1aZ7TkM"
+        "Ref": "ExpenseAccountsUpdateLambdaVersionPwuqOmS37aU2tNUB8FoKbt8Nva6V8A9U0Tbp0fYg"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-ExpenseAccountsUpdateLambdaFunctionQualifiedArn"
@@ -4572,7 +5232,7 @@
     "UpdateEmployeeDetailsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateEmployeeDetailsLambdaVersionQgZTgCZfV4V7oG2rAGYBiMvcQvw8atdzdrxdUyFueBY"
+        "Ref": "UpdateEmployeeDetailsLambdaVersionuk35iska6KkzYy4DGURYUq94wcSTwt9Q5DD9heznk"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-UpdateEmployeeDetailsLambdaFunctionQualifiedArn"
@@ -4581,7 +5241,7 @@
     "GetEmployeeEidLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetEmployeeEidLambdaVersionVQzDgvnLuH0sq7BlkQwPYyR60ESNJtj6tYeSrzC5JSk"
+        "Ref": "GetEmployeeEidLambdaVersion5egRAxuBH0rQtR39ABoeYbHIg0AT25HzzhMbr91FwY"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-GetEmployeeEidLambdaFunctionQualifiedArn"
@@ -4590,7 +5250,7 @@
     "GetAllExpensesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetAllExpensesLambdaVersionbpIXjdRp0Ne86P1SbTNX114I1tttr3rTkmBNXQ4j0"
+        "Ref": "GetAllExpensesLambdaVersionFgPbUqedzUDnFvh5T4ennDpK2hXZcTTiPOIFqLQgIbU"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-GetAllExpensesLambdaFunctionQualifiedArn"
@@ -4599,7 +5259,7 @@
     "GetApprovedExpensesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetApprovedExpensesLambdaVersionOPt8bLECmV06wxk5apk1cnY8bWO69584n439b5cJlA"
+        "Ref": "GetApprovedExpensesLambdaVersiontSfgwj2yKYP1Ih61e2hvQiXxlW9AKiEUbSQa3AUb4"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-GetApprovedExpensesLambdaFunctionQualifiedArn"
@@ -4608,7 +5268,7 @@
     "GetExpensebyIDLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetExpensebyIDLambdaVersionm0p1bmW11e98RikaY29ohm9GST2dTaCgnKvOCdQKyo"
+        "Ref": "GetExpensebyIDLambdaVersion4Qaq5rC2MXOqT5YZBBdYFvhhkmkmMHY0Dkf9Cve0tg"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-GetExpensebyIDLambdaFunctionQualifiedArn"
@@ -4617,7 +5277,7 @@
     "UpdateExpenseIDLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateExpenseIDLambdaVersionjzJQVyAqzu2KcDOA0TnV8zeh04ulnJv8L1uCuHu9VU"
+        "Ref": "UpdateExpenseIDLambdaVersionKCx4Hqo3BLds5aXrmhZQ4D7kFBnHBYzim4Na2s0E"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-UpdateExpenseIDLambdaFunctionQualifiedArn"
@@ -4626,7 +5286,7 @@
     "DeleteEmployeeLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteEmployeeLambdaVersionjy38LO7ne2jQWzDbpyheDfsTFghzfLefAzzJCzf8"
+        "Ref": "DeleteEmployeeLambdaVersionwg3NPC5V9rho29LPlKxiqfRfNFhsrcdUnZhs8aEU"
       },
       "Export": {
         "Name": "sls-enterprise-resource-planning-dev-DeleteEmployeeLambdaFunctionQualifiedArn"

@@ -375,7 +375,7 @@ exports.handler = async (event) => {
           'name', 'DOB', 'personalEmail', 'maritalStatus', 'personalContactNumber',
           'officialEmail', 'bloodGroup', 'address', 'employmentType',
           'department', 'designation', 'stat', 'nominee', 'documents', 'role', 'gender',
-          'passportNumber', 'empPan', 'empAadhar', 'alternateContactNumber', 'empBankDetails', 'pfEligible', 'pfExistingMember', 'uan', 'esiEligible', 'esiNumber', 'pfNumber', 'unitName'
+          'passportNumber', 'empPan', 'empAadhar', 'alternateContactNumber', 'empBankDetails', 'pfEligible', 'pfExistingMember', 'uan', 'esiEligible', 'esiNumber', 'pfNumber', 'unitName', 'eID'
         ];
 
         const isValidOperation = Object.keys(updates).every((update) =>
