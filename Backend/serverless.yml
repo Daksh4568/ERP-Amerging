@@ -99,7 +99,7 @@ functions:
           path: /api/tourExpense/{expenseRefNo}/approve
           method: PATCH
 
-    updateTourExpenseAccounts:
+  updateTourExpenseAccounts:
     handler: src/Notification/routes/empCredentialsRoute.handler
     events:
       - httpApi:
