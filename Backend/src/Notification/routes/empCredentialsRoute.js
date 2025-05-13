@@ -144,9 +144,14 @@ exports.handler = async (event) => {
             //   return { statusCode: 403, body: JSON.stringify({ message: "Accounts details already added, cannot modify." }) };
             // }
 
-            const { accountsDetails } = parsedBody;
+            const { voucherNo, accExpenseType, remarks, accountsDetailStatus } = parsedBody;
 
-            tourexpense.accountsDetails = accountsDetails;
+            tourexpense.voucherNo = voucherNo;
+            tourexpense.accExpenseType = accExpenseType;
+            tourexpense.remarks = remarks;
+            tourexpense.accountsDetailStatus = accountsDetailStatus;
+
+
 
             await tourexpense.save();
             return { statusCode: 200, body: JSON.stringify({ message: "Accounting details added for all TourExpense", data: tourexpense }) };

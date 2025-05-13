@@ -43,24 +43,23 @@ const tourExpenseItemSchema = new mongoose.Schema({
     hrRemark: {
         type: String
     },
-    accountsDepartment: {
-        voucherNo: {
-            type: String,
-        },
-        accExpenseType: {
-            type: String,
-            enum: ["Direct Expense", "Indirect Expense"]
-        },
-        remarks: {
-            type: String,
-        },
-        accountsDetailStatus: {
-            type: String,
-            enum: ["Added", "Not Added"],
-            default: "Not Added",
-        }
 
+    voucherNo: {
+        type: String,
     },
+    accExpenseType: {
+        type: String,
+        enum: ["Direct Expense", "Indirect Expense"]
+    },
+    remarks: {
+        type: String,
+    },
+    accountsDetailStatus: {
+        type: String,
+        enum: ["Added", "Not Added"],
+        default: "Not Added",
+    },
+
     addedBy: { name: { type: String, required: true }, role: { type: String, required: true } },
     createdAt: {
         type: Date,

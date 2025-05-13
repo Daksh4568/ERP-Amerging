@@ -47,13 +47,21 @@ const masterDataSchema = new mongoose.Schema({
             "Accounts to Bank",
         ]
     },
+    tourExpenseType: {
+        type: [String],
+        default: [
+            "Domestic",
+        ],
+    },
     designationRoles: {
         type: [String],
         default: [
             "Associate",
         ]
-    }
-}, { timestamps: true });
+    },
+
+},
+    { timestamps: true });
 
 const MasterData = mongoose.model("MasterData", masterDataSchema);
 
