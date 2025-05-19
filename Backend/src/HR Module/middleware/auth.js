@@ -25,6 +25,7 @@ const auth = async (headers) => {
         //console.log('Employee Found:', employee);
 
         if (!employee) {
+            console.error("Employee not found with ID:", decoded.eID);
             throw new Error('Authentication Error. Employee not found.');
         }
 
