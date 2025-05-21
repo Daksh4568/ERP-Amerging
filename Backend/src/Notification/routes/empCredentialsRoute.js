@@ -9,6 +9,9 @@ const sendOtpHandler = require('../../Utilities/controller/forgotPassword')
 const verifyOtpHandler = require('../../Utilities/controller/verifyOtp')
 const resetPasswordHandler = require('../../Utilities/controller/updatePassword')
 const TourExpense = require("../../Employee Module/models/empTourExpense")
+const { decrypt } = require('../../Utilities/decrypt');
+const sendEmployeeCredentials = require('../../HR Module/Controllers/sendMail'); // adjust path if needed
+const employeeModel = require('../../HR Module/models/empMaster-model'); // adjust path
 exports.handler = async (event) => {
     try {
 
@@ -156,6 +159,72 @@ exports.handler = async (event) => {
             await tourexpense.save();
             return { statusCode: 200, body: JSON.stringify({ message: "Accounting details added for all TourExpense", data: tourexpense }) };
         }
+
+
+        if (path && path.match(/^\/api\/reinvite\/[^/]+$/) && httpMethod === 'POST') {
+            const segments = path.split('/');
+            const eID = segments.length > 3 ? segments[3] : null; // Extract eID safely
+
+            // Validate eID
+            if (!eID) {
+                return {
+                    statusCode: 400,
+                    body: JSON.stringify({ error: 'Employee ID (eID) is missing or invalid' }),
+                };
+            }
+            const { employee } = await auth(headers);
+            authorize(employee, ['HR', 'admin']);
+
+            // Extract eID from the URL
+            try {
+                const emp = await employeeModel.findOne({ eID }).select('+password');;
+
+                if (!emp) {
+                    return {
+                        statusCode: 404,
+                        body: JSON.stringify({ error: 'Employee not found' }),
+                    };
+                }
+
+                const empName = emp.name;
+                const personalEmail = emp.personalEmail;
+                const officialEmail = emp.officialEmail;
+                console.log('Official password', emp.password);
+
+
+                // if (!personalEmail || !officialEmail || !emp.password) {
+                //     return {
+                //         statusCode: 400,
+                //         body: JSON.stringify({ error: 'Missing required employee fields (personalEmail / officialEmail / password)' }),
+                //     };
+                // }
+
+                // Decrypt password
+                if (!emp.password) {
+                    return {
+                        statusCode: 400,
+                        body: JSON.stringify({ error: 'Missing encrypted password for employee' }),
+                    };
+                }
+
+                const decryptedPassword = decrypt(emp.password);
+
+                // Send email
+                await sendEmployeeCredentials(personalEmail, officialEmail, decryptedPassword, empName);
+
+                return {
+                    statusCode: 200,
+                    body: JSON.stringify({ message: 'Invite email resent successfully' }),
+                };
+            } catch (error) {
+                console.error('Error resending invite:', error);
+                return {
+                    statusCode: 500,
+                    body: JSON.stringify({ error: 'Failed to resend invite', details: error.message }),
+                };
+            }
+        }
+
         // If no route matches
         return {
             statusCode: 404,

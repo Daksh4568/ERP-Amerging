@@ -17,6 +17,7 @@ const { getMasterData, updateMasterData } = require("../HR Module/Controllers/dr
 const leadFormController = require("../PM(Project Management)/controller/clientRegcontroller")
 const empMailPassController = require("../Notification/Contoller/empMailCredentials")
 const clientRegistrationModel = require("../PM(Project Management)/models/clientRegistrationModel");
+const { encrypt } = require('../Utilities/decrypt');
 exports.handler = async (event) => {
   try {
     // MongoDB connection
@@ -148,7 +149,7 @@ exports.handler = async (event) => {
             Math.floor(Math.random() * 62)
           )
         ).join('');
-        newEmployee.password = password;
+        newEmployee.password = encrypt(password);
 
         await newEmployee.save();
 

@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc';
-const secretKey = process.env.ENCRYPTION_SECRET;
+const secretKey = process.env.ENCRYPTION_KEY; // Must be 32 bytes (256 bits)
 const iv = crypto.randomBytes(16);
 
 // to decrypt the password

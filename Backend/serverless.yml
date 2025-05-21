@@ -22,8 +22,8 @@ provider:
         - PATCH
       maxAge: 86400 # Cache preflight response for 24 hours
   environment:
-    #MONGO_URI: mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/
-    MONGO_URI: mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/
+    MONGO_URI: mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/
+    #MONGO_URI: mongodb+srv://Keshav:keshav123@erplivecluster.cxoju.mongodb.net/
     JWT_SECRET: amergingtech5757
     EMAIL_USER: internal@amergingtech.com
     EMAIL_PASSWORD: braz dbta pjhm davx
@@ -209,6 +209,13 @@ functions:
       - httpApi:
           path: /api/emp/{eID}
           method: PATCH
+
+  sendReinviteLink:
+    handler: src/Notification/routes/empCredentialsRoute.handler
+    events:
+      - httpApi:
+          path: /api/reinvite/{eID}
+          method: POST
 
   managerNotifications:
     handler: src/routes/empMaster-route.handler

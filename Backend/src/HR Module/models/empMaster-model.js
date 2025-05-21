@@ -3,6 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const util = require('util');
+const { decrypt } = require('../../Utilities/decrypt'); // adjust path as needed
 
 // Define the employee schema
 const employeeSchema = new mongoose.Schema(
@@ -246,36 +247,93 @@ employeeSchema.methods.toJSON = function () {
 };
 
 // Find employee by credentials
+// employeeSchema.statics.findByCredentials = async (officialEmail, password) => {
+//   //+password is added explicitly because we have select-false in the mongoose schema and have to add it 
+//   const emp = await Employee.findOne({ officialEmail }).select('+password');
+//   if (!emp) {
+//     throw new Error('Unable to login . Employee Not found');
+//   }
+//   if (!emp.password) {
+//     throw new Error('Unable to login: Password is not set');
+//   }
+
+
+//   const compare = util.promisify(bcrypt.compare);
+//   const isMatch = await compare(password, emp.password);
+
+//   if (!isMatch) {
+//     throw new Error('Unable to login the employee');
+//   }
+//   return emp;
+// };
+// employeeSchema.statics.findByCredentials = async (officialEmail, inputPassword) => {
+//   const emp = await Employee.findOne({ officialEmail }).select('+password');
+//   if (!emp) {
+//     throw new Error('Unable to login. Employee not found');
+//   }
+
+//   if (!emp.password) {
+//     throw new Error('Unable to login: Password is not set');
+//   }
+
+//   let decryptedPassword;
+//   try {
+//     decryptedPassword = decrypt(emp.password); // Attempt to decrypt the password
+//   } catch (err) {
+//     console.error("Decryption error:", err);
+//     throw new Error('Unable to login: Password decryption failed');
+//   }
+
+//   if (decryptedPassword !== inputPassword) {
+//     throw new Error('Unable to login: Incorrect password');
+//   }
+
+//   return emp;
+// };
 employeeSchema.statics.findByCredentials = async (officialEmail, password) => {
-  //+password is added explicitly because we have select-false in the mongoose schema and have to add it 
   const emp = await Employee.findOne({ officialEmail }).select('+password');
   if (!emp) {
-    throw new Error('Unable to login . Employee Not found');
+    throw new Error('Unable to login: Employee not found');
   }
+
   if (!emp.password) {
     throw new Error('Unable to login: Password is not set');
   }
 
+  let isMatch = false;
 
-  const compare = util.promisify(bcrypt.compare);
-  const isMatch = await compare(password, emp.password);
+  // Try to decrypt (new method)
+  try {
+    const decryptedPassword = decrypt(emp.password);
+    isMatch = decryptedPassword === password;
+  } catch (err) {
+    // Decryption failed — maybe it’s an old bcrypt-hashed password
+    try {
+      const compare = util.promisify(bcrypt.compare);
+      isMatch = await compare(password, emp.password);
+    } catch (err2) {
+      // bcrypt.compare also failed
+      throw new Error('Unable to login: Password check failed');
+    }
+  }
 
   if (!isMatch) {
-    throw new Error('Unable to login the employee');
+    throw new Error('Unable to login: Incorrect password');
   }
+
   return emp;
 };
 
 //Hash the plain text password before saving
-employeeSchema.pre('save', async function (next) {
-  const emp = this;
-  if (emp.isModified('password')) {
-    //console.log("Hashing password:", emp.password);
-    const hash = util.promisify(bcrypt.hash);
-    emp.password = await hash(emp.password, 8);
-  }
-  next(); // Call next to proceed
-});
+// employeeSchema.pre('save', async function (next) {
+//   const emp = this;
+//   if (emp.isModified('password')) {
+//     //console.log("Hashing password:", emp.password);
+//     const hash = util.promisify(bcrypt.hash);
+//     emp.password = await hash(emp.password, 8);
+//   }
+//   next(); // Call next to proceed
+// });
 
 // Create and export the model
 const Employee = mongoose.model('employeeMaster', employeeSchema);
