@@ -46,17 +46,38 @@ exports.handler = async (event) => {
       };
     }
     // Get all employees
-    if (path === '/api/getemp' && httpMethod === 'GET') {
-      const { employee } = await auth(headers); // Authenticate user
-      authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']); // Authorize roles
+    // if (path === '/api/getemp' && httpMethod === 'GET') {
+    //   const { employee } = await auth(headers); // Authenticate user
+    //   authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']); // Authorize roles
 
-      const employees = await employeeModel.find({});
+    //   const employees = await employeeModel.find({});
+    //   return {
+    //     statusCode: 200,
+    //     body: JSON.stringify(employees),
+    //   };
+    // }
+    if (path === '/api/getemp' && httpMethod === 'GET') {
+      const { employee } = await auth(headers);
+      authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']);
+
+      const employees = await employeeModel.find({}).lean(); // lean() for raw JS objects
+
+      // Remove documentImage from each document for every employee
+      const sanitizedEmployees = employees.map(emp => {
+        if (Array.isArray(emp.documents)) {
+          emp.documents = emp.documents.map(doc => {
+            const { documentImage, ...rest } = doc;
+            return rest;
+          });
+        }
+        return emp;
+      });
+
       return {
         statusCode: 200,
-        body: JSON.stringify(employees),
+        body: JSON.stringify(sanitizedEmployees),
       };
     }
-
     // Get leave data
     if (path === '/api/leave-data' && httpMethod === 'GET') {
       const { employee } = await auth(headers); // Authenticate user
