@@ -270,7 +270,7 @@ exports.handler = async (event) => {
         const { employee } = await auth(headers);
         authorize(employee, ['HR', 'admin', 'Manager', 'Employee']); // Ensure only authorized roles can update
         const updates = JSON.parse(body);
-        const allowedUpdates = ['personalEmail', 'password', 'personalContactNumber'];
+        const allowedUpdates = ['personalEmail', 'password', 'personalContactNumber', 'profilePic'];
 
         const isValidOperation = Object.keys(updates).every((update) =>
           allowedUpdates.includes(update)

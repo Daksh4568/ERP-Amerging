@@ -326,3 +326,305 @@ resources:
 custom:
   serverless-offline:
     httpPort: 3000
+# org: developer4568
+# service: enterprise-resource-planning
+
+# provider:
+#   name: aws
+#   runtime: nodejs20.x
+#   region: ap-south-1
+#   timeout: 30
+#   httpApi:
+#     cors:
+#       allowedOrigins:
+#         - "*"
+#       allowedHeaders:
+#         - Content-Type
+#         - Authorization
+#       allowedMethods:
+#         - GET
+#         - POST
+#         - PUT
+#         - DELETE
+#         - PATCH
+#       maxAge: 86400
+#   environment:
+#     MONGO_URI: mongodb+srv://dakshthakurdev:REiZX78kSdjZkF7H@erpcluster.9yztv.mongodb.net/
+#     JWT_SECRET: amergingtech5757
+#     EMAIL_USER: internal@amergingtech.com
+#     EMAIL_PASSWORD: braz dbta pjhm davx
+#     ENCRYPTION_KEY: 9f1c3a2e4b9a7d5e1c3a6f4b7e9c2a1d8b6e3c7a1d9f2e4b5c8a3d1e7f9c0b2a
+
+# functions:
+#   # HR Module
+#   hr-apply-leave:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /hr/apply-leave
+#           method: POST
+
+#   hr-leave-data:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /hr/leave-data
+#           method: GET
+
+#   hr-employee-evaluation:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /hr/employee-evaluation
+#           method: POST
+
+#   hr-exit-form:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /hr/exit-form
+#           method: POST
+
+#   # CRM Module
+#   crm-lead-form:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /crm/lead-form
+#           method: POST
+
+#   crm-client-data:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /crm/client-data
+#           method: GET
+
+#   # Employee Module
+#   employee-register:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /employee/register
+#           method: POST
+
+#   employee-login:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /employee/login
+#           method: POST
+
+#   employee-logout:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /employee/logout
+#           method: POST
+
+#   employee-token-verify:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /employee/token/verify
+#           method: POST
+
+#   employee-update:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /employee/{eID}
+#           method: PATCH
+
+#   employee-delete:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /employee/{eID}
+#           method: DELETE
+
+#   employee-details:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /employee/details/{eID}
+#           method: GET
+
+#   employee-stats:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /employee/stats
+#           method: GET
+
+#   employee-update-details:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /employee/update-details/{eID}
+#           method: PATCH
+
+#   # Master Data Module
+#   master-get:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /master/get
+#           method: GET
+
+#   master-update:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /master/update
+#           method: PATCH
+
+#   # Notification Module
+#   notification-send-otp:
+#     handler: src/Notification/routes/empCredentialsRoute.handler
+#     events:
+#       - httpApi:
+#           path: /notification/send-otp
+#           method: POST
+
+#   notification-verify-otp:
+#     handler: src/Notification/routes/empCredentialsRoute.handler
+#     events:
+#       - httpApi:
+#           path: /notification/verify-otp
+#           method: POST
+
+#   notification-reset-password:
+#     handler: src/Notification/routes/empCredentialsRoute.handler
+#     events:
+#       - httpApi:
+#           path: /notification/reset-password
+#           method: PATCH
+
+#   notification-email-format:
+#     handler: src/Notification/routes/empCredentialsRoute.handler
+#     events:
+#       - httpApi:
+#           path: /notification/email-format
+#           method: POST
+
+#   notification-reinvite:
+#     handler: src/Notification/routes/empCredentialsRoute.handler
+#     events:
+#       - httpApi:
+#           path: /notification/reinvite/{eID}
+#           method: POST
+
+#   notification-manager:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /notification/manager
+#           method: GET
+
+#   notification-handle:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /notification/handle
+#           method: PATCH
+
+#   # Expense Module
+#   expense-submit:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /expense/submit
+#           method: POST
+
+#   expense-approve:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /expense/{refNo}/approve
+#           method: PATCH
+
+#   expense-accounts-update:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /expense/{refNo}/accounts
+#           method: PATCH
+
+#   expense-get-all:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /expense/all
+#           method: GET
+
+#   expense-get-approved:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /expense/approved
+#           method: GET
+
+#   expense-get-id:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /expense/{expenseId}
+#           method: GET
+
+#   expense-update-id:
+#     handler: src/routes/empMaster-route.handler
+#     events:
+#       - httpApi:
+#           path: /expense/{expenseId}
+#           method: PATCH
+
+#   # Tour Expense Module
+#   tour-expense-submit:
+#     handler: src/Notification/routes/empCredentialsRoute.handler
+#     events:
+#       - httpApi:
+#           path: /tour-expense/submit
+#           method: POST
+
+#   tour-expense-data:
+#     handler: src/Notification/routes/empCredentialsRoute.handler
+#     events:
+#       - httpApi:
+#           path: /tour-expense/data
+#           method: GET
+
+#   tour-expense-approve:
+#     handler: src/Notification/routes/empCredentialsRoute.handler
+#     events:
+#       - httpApi:
+#           path: /tour-expense/{expenseRefNo}/approve
+#           method: PATCH
+
+#   tour-expense-accounts:
+#     handler: src/Notification/routes/empCredentialsRoute.handler
+#     events:
+#       - httpApi:
+#           path: /tour-expense/{expenseRefNo}/accounts
+#           method: PATCH
+
+# plugins:
+#   - serverless-offline
+
+# resources:
+#   Resources:
+#     NotificationsTable:
+#       Type: AWS::DynamoDB::Table
+#       Properties:
+#         TableName: Notifications
+#         AttributeDefinitions:
+#           - AttributeName: notificationId
+#             AttributeType: S
+#         KeySchema:
+#           - AttributeName: notificationId
+#             KeyType: HASH
+#         BillingMode: PAY_PER_REQUEST
+
+# custom:
+#   serverless-offline:
+#     httpPort: 3000

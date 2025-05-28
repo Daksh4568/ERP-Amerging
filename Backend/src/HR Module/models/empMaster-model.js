@@ -192,6 +192,10 @@ const employeeSchema = new mongoose.Schema(
     esiNumber: {
       type: String,
     },
+    profilePic: {
+      type: String,
+      default: 'default-profile-pic.png', // Default profile picture
+    },
     moduleAccess: {
       type: Number,
     },
