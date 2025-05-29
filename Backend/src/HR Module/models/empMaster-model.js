@@ -202,6 +202,33 @@ const employeeSchema = new mongoose.Schema(
     docLinks: {
       type: String,
     },
+    reportingManager: {
+      type: String,
+    },
+    reportingManagerEmail: {
+      type: String,
+      validate: {
+        validator: (v) => validator.isEmail(v),
+        message: (props) => `${props.value} is not a valid email!`,
+      }
+    },
+    leaveBalance: {
+      earnedLeave: {
+        type: Number,
+        default: 0,
+        min: 0
+      },
+      sickLeave: {
+        type: Number,
+        default: 0,
+        min: 0
+      },
+      casualLeave: {
+        type: Number,
+        default: 0,
+        min: 0
+      }
+    },
     tokens: [
       {
         token: {

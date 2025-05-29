@@ -397,7 +397,9 @@ exports.handler = async (event) => {
           'name', 'DOB', 'personalEmail', 'maritalStatus', 'personalContactNumber',
           'officialEmail', 'bloodGroup', 'address', 'employmentType',
           'department', 'designation', 'stat', 'nominee', 'documents', 'role', 'gender',
-          'passportNumber', 'empPan', 'empAadhar', 'alternateContactNumber', 'empBankDetails', 'pfEligible', 'pfExistingMember', 'uan', 'esiEligible', 'esiNumber', 'pfNumber', 'unitName', 'eID'
+          'passportNumber', 'empPan', 'empAadhar', 'alternateContactNumber', 'empBankDetails', 'pfEligible', 'pfExistingMember', 'uan', 'esiEligible', 'esiNumber', 'pfNumber', 'unitName', 'eID',
+          'reportingManager', 'reportingManagerEmail', 'leaveBalance'
+
         ];
 
         const isValidOperation = Object.keys(updates).every((update) =>
@@ -446,7 +448,7 @@ exports.handler = async (event) => {
     // Notifications for Manager
     if (path === '/api/notifications/manager' && httpMethod === 'GET') {
       const { employee } = await auth(headers); // Authenticate user
-      authorize(employee, ['Manager', 'HR', 'admin']); // Authorize role
+      authorize(employee, ['Manager', 'HR', 'admin', 'Employee']); // Authorize role
 
       return await getAllNotificationsForManager(employee); // Directly return the result
     }
@@ -454,7 +456,7 @@ exports.handler = async (event) => {
     // Handle Notifications
     if (path === '/api/notifications/handle' && httpMethod === 'PATCH') {
       const { employee } = await auth(headers); // Authenticate user
-      authorize(employee, ['Manager', 'HR', 'admin']); // Authorize role
+      authorize(employee, ['Manager', 'HR', 'admin', 'Employee']); // Authorize role
 
       const notificationData = JSON.parse(body);
       return await handleLeaveNotification(notificationData, employee); // Directly return the result
