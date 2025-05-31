@@ -174,11 +174,17 @@ const submitLeaveApplication = async (leaveData, user) => {
             employee.leaveBalance[category] -= 0.5;
             await employee.save(); // Save updated leave balance immediately
         }
+        const leaveTypeMap = {
+            'Sick Leave': 'sickLeave',
+            'Casual Leave': 'casualLeave',
+            'Earned Leave': 'earnedLeave',
+        };
 
+        const validTypes = Object.keys(leaveTypeMap);
         // Validate leave balance for other types
-        const validTypes = ['Earned Leave', 'Sick Leave', 'Casual Leave'];
         if (validTypes.includes(leaveType)) {
-            const balance = employee.leaveBalance[leaveType] || 0;
+            const mappedKey = leaveTypeMap[leaveType];
+            const balance = employee.leaveBalance[mappedKey] || 0;
             if (dayDiff > balance) {
                 return {
                     statusCode: 400,
