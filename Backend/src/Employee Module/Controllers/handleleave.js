@@ -274,12 +274,15 @@ const handleLeaveNotification = async (notificationData, user) => {
             `Leave Request ${status}`,
             `Your leave request from ${leaveApplication.startDate.toDateString()} to ${leaveApplication.endDate.toDateString()} has been ${status.toLowerCase()}.`
         );
+        const employee = await Employee.findOne({ eID: leaveApplication.eID });
 
         return {
             statusCode: 200,
             body: JSON.stringify({
                 message: `Leave request ${status.toLowerCase()} successfully.`,
                 leaveApplication,
+                leaveBalance: status === 'Approved' ? employee.leaveBalance : null
+
             }),
         };
     } catch (error) {
