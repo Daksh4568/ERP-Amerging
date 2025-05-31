@@ -1,22 +1,14 @@
+
 // const LeaveApplication = require('../models/empLeaveModel');
 // const Notification = require('../models/notificationSchema');
-// const nodemailer = require('nodemailer');
-// const connectToDatabase = require('../../HR Module/db/db'); // Ensure MongoDB connection
+// const Employee = require('../../HR Module/models/empMaster-model');
+// const connectToDatabase = require('../../HR Module/db/db');
+// const sendMail = require('../Controllers/sendmail');
 
-// // Submit Leave Application
 // const submitLeaveApplication = async (leaveData, user) => {
 //     try {
-//         // Ensure database connection
 //         await connectToDatabase();
 
-//         // Create a new leave application
-//         const leaveApplication = new LeaveApplication({
-//             ...leaveData,
-//             addedBy: {
-//                 name: user.name,
-//                 role: user.role,
-//             },
-//         });
 //         const employee = await Employee.findOne({ eID: user.eID });
 //         if (!employee) {
 //             return {
@@ -32,27 +24,51 @@
 //             };
 //         }
 
-//         if (!leaveApplication.declaration) {
+//         if (!leaveData.declaration) {
 //             return {
 //                 statusCode: 400,
 //                 body: JSON.stringify({ message: 'You must agree to the declaration before submitting the form.' }),
 //             };
 //         }
 
-//         // Save the leave application
+//         const leaveApplication = new LeaveApplication({
+//             ...leaveData,
+//             eID: user.eID,
+//             addedBy: {
+//                 name: user.name,
+//                 role: user.role,
+//             },
+//         });
+
 //         const savedLeave = await leaveApplication.save();
-//         console.log('Leave data saved:', savedLeave);
 
+//         // Notification creation
+//         const manager = await Employee.findOne({ officialEmail: leaveData.supervisor.officialEmail });
+//         if (manager) {
+//             const notification = new Notification({
+//                 recipientEmpId: manager.eID,
+//                 recipientEmail: manager.officialEmail,
+//                 type: 'LeaveApproval',
+//                 title: `Leave Request from ${leaveData.name}`,
+//                 reasonForLeave: leaveData.reasonForLeave,
+//                 startDate: leaveData.startDate,
+//                 endDate: leaveData.endDate,
+//                 message: `${leaveData.name} has applied for leave from ${new Date(leaveData.startDate).toDateString()} to ${new Date(leaveData.endDate).toDateString()}.`,
+//                 data: {
+//                     leaveId: savedLeave._id,
+//                 },
+//                 isRead: false,
+//             });
 
-//         // Send approval email to the supervisor
-//         await sendApprovalMail(
-//             leaveApplication.supervisor.officialEmail,
-//             leaveApplication.name,
-//             leaveApplication.typeOfLeave,
-//             leaveApplication.startDate,
-//             leaveApplication.endDate,
-//             leaveApplication.reasonForLeave
-//         );
+//             await notification.save();
+
+//             // Email notification
+//             await sendMail(
+//                 manager.officialEmail,
+//                 `Leave Request from ${leaveData.name}`,
+//                 `${leaveData.name} has applied for ${leaveData.typeOfLeave} from ${new Date(leaveData.startDate).toDateString()} to ${new Date(leaveData.endDate).toDateString()}.\n\nReason: ${leaveData.reasonForLeave}`
+//             );
+//         }
 
 //         return {
 //             statusCode: 201,
@@ -61,6 +77,7 @@
 //                 data: savedLeave,
 //             }),
 //         };
+
 //     } catch (error) {
 //         console.error('Error submitting leave application:', error);
 //         return {
@@ -71,28 +88,6 @@
 //             }),
 //         };
 //     }
-// };
-
-// // Send Approval Mail
-// const sendApprovalMail = async (supervisorEmail, employeeName, leaveType, startDate, endDate, reason) => {
-//     const transporter = nodemailer.createTransport({
-//         host: 'smtp.gmail.com',
-//         port: 587,
-//         secure: false,
-//         auth: {
-//             user: process.env.EMAIL_USER,
-//             pass: process.env.EMAIL_PASSWORD,
-//         },
-//     });
-
-//     const mailOptions = {
-//         from: process.env.EMAIL_USER,
-//         to: supervisorEmail,
-//         subject: `Leave Approval Request: ${employeeName}`,
-//         text: `Employee ${employeeName} applied for leave.\n\nDetails:\n- Leave Type: ${leaveType}\n- Start Date: ${startDate}\n- End Date: ${endDate}\n- Reason: ${reason}\n\nPlease review.`,
-//     };
-
-//     await transporter.sendMail(mailOptions);
 // };
 
 // module.exports = {
@@ -130,6 +125,70 @@ const submitLeaveApplication = async (leaveData, user) => {
             };
         }
 
+        const leaveType = leaveData.typeOfLeave;
+        const startDate = new Date(leaveData.startDate);
+        const endDate = new Date(leaveData.endDate);
+
+        // Helper: calculate number of leave days (inclusive)
+        const dayDiff = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+
+        // Get current month range
+        const currentMonthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+        const currentMonthEnd = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
+
+        // Validation for Missed Punch and Short Leave (max 2 per month)
+        if (['Missed Punch', 'Short Leave'].includes(leaveData.typeOfLeave)) {
+            // Use the start date selected by the employee
+            const leaveStartDate = new Date(leaveData.startDate);
+            const startOfMonth = new Date(leaveStartDate.getFullYear(), leaveStartDate.getMonth(), 1);
+            const startOfNextMonth = new Date(leaveStartDate.getFullYear(), leaveStartDate.getMonth() + 1, 1);
+
+            // Count only approved leaves of this type in the selected month
+            const approvedCount = await LeaveApplication.countDocuments({
+                eID: user.eID,
+                typeOfLeave: leaveData.typeOfLeave,
+                status: 'Approved',
+                startDate: { $gte: startOfMonth, $lt: startOfNextMonth }
+            });
+
+            if (approvedCount >= 2) {
+                return {
+                    statusCode: 400,
+                    body: JSON.stringify({
+                        message: `${leaveData.typeOfLeave} LIMIT EXCEEDED`,
+                    }),
+                };
+            }
+        }
+
+
+        // Validation for Half Day Leave
+        if (leaveType === 'Half Day Leave') {
+            const category = 'Casual Leave'; // or assign dynamically if needed
+            if (employee.leaveBalance[category] < 0.5) {
+                return {
+                    statusCode: 400,
+                    body: JSON.stringify({ message: `${category} LIMIT EXCEEDED` }),
+                };
+            }
+            employee.leaveBalance[category] -= 0.5;
+            await employee.save(); // Save updated leave balance immediately
+        }
+
+        // Validate leave balance for other types
+        const validTypes = ['Earned Leave', 'Sick Leave', 'Casual Leave'];
+        if (validTypes.includes(leaveType)) {
+            const balance = employee.leaveBalance[leaveType] || 0;
+            if (dayDiff > balance) {
+                return {
+                    statusCode: 400,
+                    body: JSON.stringify({
+                        message: `Insufficient ${leaveType} balance. You have ${balance} day(s) left, but requested ${dayDiff}.`,
+                    }),
+                };
+            }
+        }
+
         const leaveApplication = new LeaveApplication({
             ...leaveData,
             eID: user.eID,
@@ -141,7 +200,7 @@ const submitLeaveApplication = async (leaveData, user) => {
 
         const savedLeave = await leaveApplication.save();
 
-        // Notification creation
+        // Notify manager
         const manager = await Employee.findOne({ officialEmail: leaveData.supervisor.officialEmail });
         if (manager) {
             const notification = new Notification({
@@ -152,20 +211,17 @@ const submitLeaveApplication = async (leaveData, user) => {
                 reasonForLeave: leaveData.reasonForLeave,
                 startDate: leaveData.startDate,
                 endDate: leaveData.endDate,
-                message: `${leaveData.name} has applied for leave from ${new Date(leaveData.startDate).toDateString()} to ${new Date(leaveData.endDate).toDateString()}.`,
-                data: {
-                    leaveId: savedLeave._id,
-                },
+                message: `${leaveData.name} has applied for leave from ${startDate.toDateString()} to ${endDate.toDateString()}.`,
+                data: { leaveId: savedLeave._id },
                 isRead: false,
             });
 
             await notification.save();
 
-            // Email notification
             await sendMail(
                 manager.officialEmail,
                 `Leave Request from ${leaveData.name}`,
-                `${leaveData.name} has applied for ${leaveData.typeOfLeave} from ${new Date(leaveData.startDate).toDateString()} to ${new Date(leaveData.endDate).toDateString()}.\n\nReason: ${leaveData.reasonForLeave}`
+                `${leaveData.name} has applied for ${leaveType} from ${startDate.toDateString()} to ${endDate.toDateString()}.\n\nReason: ${leaveData.reasonForLeave}`
             );
         }
 
