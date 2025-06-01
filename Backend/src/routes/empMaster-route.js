@@ -46,7 +46,7 @@ exports.handler = async (event) => {
         body: JSON.stringify({ message: 'Welcome to the Backend Server of the ERP !' }),
       };
     }
-    // Get all employees
+    //Get all employees
     // if (path === '/api/getemp' && httpMethod === 'GET') {
     //   const { employee } = await auth(headers); // Authenticate user
     //   authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']); // Authorize roles
@@ -57,29 +57,58 @@ exports.handler = async (event) => {
     //     body: JSON.stringify(employees),
     //   };
     // }
+    // if (path === '/api/getemp' && httpMethod === 'GET') {
+    //   const { employee } = await auth(headers);
+    //   authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']);
+
+    //   const employees = await employeeModel.find({}) // lean() for raw JS objects
+
+    //   // Remove documentImage from each document for every employee
+    //   // const sanitizedEmployees = employees.map(emp => {
+    //   //   if (Array.isArray(emp.documents)) {
+    //   //     emp.documents = emp.documents.map(doc => {
+    //   //       const { documentImage, ...rest } = doc;
+    //   //       return rest;
+    //   //     });
+    //   //   }
+    //   //   return emp;
+    //   // });
+
+    //   return {
+    //     statusCode: 200,
+    //     body: JSON.stringify(employees), // Return the sanitized employee data
+    //   };
+    // }
+    // Get leave data
     if (path === '/api/getemp' && httpMethod === 'GET') {
-      const { employee } = await auth(headers);
-      authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']);
+      const { employee } = await auth(headers); // Authenticate user
+      // authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']); // Authorize roles
 
-      const employees = await employeeModel.find({}) // lean() for raw JS objects
+      const queryParams = event.queryStringParameters;
+      const empId = queryParams?.empId;
 
-      // Remove documentImage from each document for every employee
-      // const sanitizedEmployees = employees.map(emp => {
-      //   if (Array.isArray(emp.documents)) {
-      //     emp.documents = emp.documents.map(doc => {
-      //       const { documentImage, ...rest } = doc;
-      //       return rest;
-      //     });
-      //   }
-      //   return emp;
-      // });
+      let result;
+
+      if (empId) {
+        // Fetch only the employee with given empId
+        result = await employeeModel.findOne({ eID: empId });
+
+        if (!result) {
+          return {
+            statusCode: 404,
+            body: JSON.stringify({ message: `Employee with ID ${empId} not found.` }),
+          };
+        }
+      } else {
+        // If no empId is passed, fetch all employees
+        result = await employeeModel.find({});
+      }
 
       return {
         statusCode: 200,
-        body: JSON.stringify(employees), // Return the sanitized employee data
+        body: JSON.stringify(result),
       };
     }
-    // Get leave data
     if (path === '/api/leave-data' && httpMethod === 'GET') {
       const { employee } = await auth(headers); // Authenticate user
       const leaveData = await LeaveApplication.find({});
