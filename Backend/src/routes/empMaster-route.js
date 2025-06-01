@@ -61,22 +61,22 @@ exports.handler = async (event) => {
       const { employee } = await auth(headers);
       authorize(employee, ['HR', 'admin', 'Manager', 'Employee', 'Sales']);
 
-      const employees = await employeeModel.find({}).lean(); // lean() for raw JS objects
+      const employees = await employeeModel.find({}) // lean() for raw JS objects
 
       // Remove documentImage from each document for every employee
-      const sanitizedEmployees = employees.map(emp => {
-        if (Array.isArray(emp.documents)) {
-          emp.documents = emp.documents.map(doc => {
-            const { documentImage, ...rest } = doc;
-            return rest;
-          });
-        }
-        return emp;
-      });
+      // const sanitizedEmployees = employees.map(emp => {
+      //   if (Array.isArray(emp.documents)) {
+      //     emp.documents = emp.documents.map(doc => {
+      //       const { documentImage, ...rest } = doc;
+      //       return rest;
+      //     });
+      //   }
+      //   return emp;
+      // });
 
       return {
         statusCode: 200,
-        body: JSON.stringify(sanitizedEmployees),
+        body: JSON.stringify(employees), // Return the sanitized employee data
       };
     }
     // Get leave data
