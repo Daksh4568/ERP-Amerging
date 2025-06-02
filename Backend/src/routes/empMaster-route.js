@@ -18,6 +18,7 @@ const leadFormController = require("../PM(Project Management)/controller/clientR
 const empMailPassController = require("../Notification/Contoller/empMailCredentials")
 const clientRegistrationModel = require("../PM(Project Management)/models/clientRegistrationModel");
 const { encrypt } = require('../Utilities/decrypt');
+const loginLogModel = require('../HR Module/models/empLoginLogSchmea'); // Login log model
 exports.handler = async (event) => {
   try {
     // MongoDB connection
@@ -209,13 +210,26 @@ exports.handler = async (event) => {
     if (path === '/api/emp/login' && httpMethod === 'POST') {
       try {
         const parsedBody = JSON.parse(body);
+        const ipFromClient = parsedBody.ip;
         const emp = await employeeModel.findByCredentials(parsedBody.officialEmail, parsedBody.password);
         const token = await emp.generateAuthToken();
+        const ip = ipFromClient || headers['x-forwarded-for']?.split(',')[0] || headers['x-real-ip'] || 'Unknown IP';
 
+        //const empLoginData = await loginLogModel.findOne({ empID: emp.eID }).sort({ date: -1 });
+        // get ip from headers 
+        const ipFromHeaders = headers['x-forwarded-for']?.split(',')[0] || event.requestContext?.identity?.sourceIp || 'Unknown IP';
+        const userAgent = headers['user-agent'] || 'Unknown User Agent';
         console.log(`${emp.role} ${emp.name} has now logged into the system`);
+        console.log(`Device Info: ${userAgent}`);
+        const empLoginData = await loginLogModel.create({
+          empID: emp.eID,
+          ip: ipFromClient || ipFromHeaders,
+          userAgent,
+          date: new Date(),
+        });
         return {
           statusCode: 200,
-          body: JSON.stringify({ emp, token }),
+          body: JSON.stringify({ emp, token, empLoginData }),
         };
       }
 
