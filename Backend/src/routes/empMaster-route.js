@@ -65,15 +65,15 @@ exports.handler = async (event) => {
     //   const employees = await employeeModel.find({}) // lean() for raw JS objects
 
     //   // Remove documentImage from each document for every employee
-    //   // const sanitizedEmployees = employees.map(emp => {
-    //   //   if (Array.isArray(emp.documents)) {
-    //   //     emp.documents = emp.documents.map(doc => {
-    //   //       const { documentImage, ...rest } = doc;
-    //   //       return rest;
-    //   //     });
-    //   //   }
-    //   //   return emp;
-    //   // });
+    // const sanitizedEmployees = employees.map(emp => {
+    //   if (Array.isArray(emp.documents)) {
+    //     emp.documents = emp.documents.map(doc => {
+    //       const { documentImage, ...rest } = doc;
+    //       return rest;
+    //     });
+    //   }
+    //   return emp;
+    // });
 
     //   return {
     //     statusCode: 200,
@@ -90,9 +90,10 @@ exports.handler = async (event) => {
 
       let result;
 
+
       if (empId) {
         // Fetch only the employee with given empId
-        result = await employeeModel.findOne({ eID: empId });
+        result = await employeeModel.findOne({ eID: empId }).select('-documents'); // Exclude documentImage field
 
         if (!result) {
           return {
@@ -102,7 +103,7 @@ exports.handler = async (event) => {
         }
       } else {
         // If no empId is passed, fetch all employees
-        result = await employeeModel.find({});
+        result = await employeeModel.find({}).select('-documents');;
       }
 
       return {
