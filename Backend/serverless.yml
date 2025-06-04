@@ -103,7 +103,14 @@ functions:
     handler: src/routes/empMaster-route.handler
     events:
       - httpApi:
-          path: /api/leave-data
+          path: /api/leave-data/{eID}
+          method: GET
+
+  getAllLeaveData:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/leaves
           method: GET
 
   emailFormat:

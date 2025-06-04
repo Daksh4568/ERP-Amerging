@@ -60,13 +60,39 @@ exports.handler = async (event) => {
     // Get leave data
     if (path === '/api/leave-data' && httpMethod === 'GET') {
       const { employee } = await auth(headers); // Authenticate user
+      authorize(employee, ['HR', 'admin', 'Manager', 'Employee']); // Authorize roles
       const leaveData = await LeaveApplication.find({});
       return {
         statusCode: 200,
         body: JSON.stringify(leaveData),
       };
     }
-   
+   if (path === '/api/leaves' && httpMethod === 'GET') {
+  const { employee } = await auth(headers);
+  authorize(employee, ['HR', 'admin', 'Manager', 'Employee']);
+
+  // Parse pagination params
+  const page = parseInt(queryStringParameters?.page) || 1;
+  const limit = parseInt(queryStringParameters?.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  const leaveData = await LeaveApplication.find({})
+    .skip(skip)
+    .limit(limit);
+
+  const total = await LeaveApplication.countDocuments({});
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      data: leaveData,
+      page,
+      limit,
+      total,
+      totalPages: Math.ceil(total / limit),
+    }),
+  };
+}
 
     // Apply for leave
     if (path === '/api/apply-leave' && httpMethod === 'POST') {
@@ -311,6 +337,25 @@ exports.handler = async (event) => {
         body: JSON.stringify({ error: 'Path is undefined or invalid' }),
       };
     }
+    if (path && path.match(/^\/api\/leave-data\/[^/]+$/) && httpMethod === 'GET') {
+      
+  const { employee } = await auth(headers);
+  authorize(employee, ['HR', 'admin', 'Manager', 'Employee']);
+  const segments = path.split('/');
+  const eID = segments.length > 3 ? segments[3] : null; // Extract eID safely
+
+  const leave = await LeaveApplication.findById(eID);
+  if (!leave) {
+    return {
+      statusCode: 404,
+      body: JSON.stringify({ error: 'Leave record not found' }),
+    };
+  }
+  return {
+    statusCode: 200,
+    body: JSON.stringify(leave),
+  };
+}
     // Validate GET request for fetching employee details
     if (path && path.match(/^\/api\/get-emp\/[^/]+$/) && httpMethod === 'GET') {
       const segments = path.split('/');
