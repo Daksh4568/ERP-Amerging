@@ -85,7 +85,16 @@ exports.handler = async (event) => {
             const { employee } = await auth(headers);
             authorize(employee, ["Employee", "Manager", "admin"]);
 
-            const tourexpense = new TourExpense({ ...parsedBody, approvalStatus: "Pending", addedBy: { name: employee.name, role: employee.role } });
+
+            //const tourexpense = new TourExpense({ ...parsedBody, approvalStatus: "Pending", addedBy: { name: employee.name, role: employee.role } });
+
+            const tourexpense = new TourExpense({
+                ...parsedBody, approvalStatus: "Pending",
+                addedBy: {
+                    name: employee.name,
+                    role: employee.role
+                }
+            });
             await tourexpense.save();
             return { statusCode: 200, body: JSON.stringify({ message: "Tour Expense form submitted successfully", data: tourexpense }) };
         }
