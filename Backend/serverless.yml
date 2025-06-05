@@ -113,6 +113,13 @@ functions:
           path: /api/leave-data/{eID}
           method: GET
 
+  getLeavesData:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/leave-data
+          method: GET
+
   getAllLeaveData:
     handler: src/routes/empMaster-route.handler
     events:
