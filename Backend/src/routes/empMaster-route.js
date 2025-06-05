@@ -111,6 +111,7 @@ exports.handler = async (event) => {
         body: JSON.stringify(result),
       };
     }
+    //    // Get leave data for all employees
     if (path === '/api/leave-data' && httpMethod === 'GET') {
       const { employee } = await auth(headers); // Authenticate user
       authorize(employee, ['HR', 'admin', 'Manager', 'Employee']); // Authorize roles
