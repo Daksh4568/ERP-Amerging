@@ -411,7 +411,7 @@ exports.handler = async (event) => {
       const segments = path.split('/');
       const eID = segments.length > 3 ? segments[3] : null; // Extract eID safely
 
-      const leave = await LeaveApplication.findOne({ eID });;
+      const leave = await LeaveApplication.find({ eID });;
       if (!leave) {
         return {
           statusCode: 404,
