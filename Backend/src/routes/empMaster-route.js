@@ -19,6 +19,8 @@ const empMailPassController = require("../Notification/Contoller/empMailCredenti
 const clientRegistrationModel = require("../PM(Project Management)/models/clientRegistrationModel");
 const { encrypt } = require('../Utilities/decrypt');
 const loginLogModel = require('../HR Module/models/empLoginLogSchmea'); // Login log model
+const adminAccountsExpenseModel = require('../HR Module/models/empExpenseAllocation'); // Admin accounts expense model
+const EmpPreviousBalance = require('../HR Module/models/empPreviousBalance'); // Employee previous balance model
 exports.handler = async (event) => {
   try {
     // MongoDB connection
@@ -602,9 +604,87 @@ exports.handler = async (event) => {
       const { employee } = await auth(headers);
       authorize(employee, ["HR"]);
 
-      const expense = new ExpenseMaster({ ...parsedBody, approvalStatus: "Pending" });
+      const expense = new ExpenseMaster({
+        ...parsedBody, addedBy: { name: employee.name, role: employee.role },
+        approvalStatus: "Pending"
+      });
       await expense.save();
       return { statusCode: 200, body: JSON.stringify({ message: "Expense form submitted successfully", data: expense }) };
+    }
+    if (path === "/api/expenseAllocation" && httpMethod === "POST") {
+      try {
+        const { employee } = await auth(headers);
+        authorize(employee, ["admin", "HR", "Accounts"]);
+
+        const expenseAllocationData = JSON.parse(body);
+
+        const expenseAllocation = new adminAccountsExpenseModel({
+          ...expenseAllocationData,
+          addedBy: { name: employee.name, role: employee.role },
+        });
+
+        await expenseAllocation.save();
+        const existingBalance = await EmpPreviousBalance.findOne({});
+
+        if (existingBalance) {
+          existingBalance.previousBalance += expenseAllocation.amount;
+          await existingBalance.save();
+        } else {
+          await EmpPreviousBalance.create({ previousBalance: expenseAllocation.amount });
+        }
+        return {
+          statusCode: 201,
+          body: JSON.stringify({
+            message: "Amount allocated and balance updated successfully",
+            expenseAllocation,
+          }),
+        };
+      } catch (error) {
+        console.error("Error submitting expense allocation:", error);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: "Internal Server Error" }),
+        };
+      }
+    }
+    // if (path === "/api/getexpenseAllocation" && httpMethod === "GET") {
+    //   try {
+    //     const { employee } = await auth(headers);
+    //     authorize(employee, ["admin", "HR", "Accounts"]);
+
+    //     const queryParams = event.queryStringParameters || {};
+    //     const filter = {};
+
+    //     if (queryParams.eID) {
+    //       filter.eID = queryParams.eID;
+    //     }
+
+    //     const records = await adminAccountsExpenseModel.find(filter).sort({ createdAt: -1 });
+
+    //     return {
+    //       statusCode: 200,
+    //       body: JSON.stringify(records),
+    //     };
+    //   } catch (error) {
+    //     console.error("Error fetching expense records:", error);
+    //     return {
+    //       statusCode: 500,
+    //       body: JSON.stringify({ error: "Internal Server Error" }),
+    //     };
+    //   }
+    // }
+
+    if (path === "/api/balance" && httpMethod === "GET") {
+      const { employee } = await auth(headers);
+      authorize(employee, ["admin", "HR", "Accounts"]);
+      const balance = await EmpPreviousBalance.findOne();
+
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          previousBalance: balance?.previousBalance || 0,
+        }),
+      };
     }
 
     // Admin Approves or Rejects Expense

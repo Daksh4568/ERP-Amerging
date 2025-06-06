@@ -37,6 +37,7 @@ const expenseItemSchema = new mongoose.Schema({
 
 const expenseMasterSchema = new mongoose.Schema(
     {
+        eID: { type: String },
         refNo: { type: Number, unique: true },
         date: { type: Date, required: true },
         previousBalance: { type: Number, default: 0 },
