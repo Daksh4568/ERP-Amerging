@@ -614,7 +614,7 @@ exports.handler = async (event) => {
     if (path === "/api/expenseAllocation" && httpMethod === "POST") {
       try {
         const { employee } = await auth(headers);
-        authorize(employee, ["admin", "HR", "Accounts"]);
+        authorize(employee, ["admin", "HR", "Accounts", 'Employee']);
 
         const expenseAllocationData = JSON.parse(body);
 
