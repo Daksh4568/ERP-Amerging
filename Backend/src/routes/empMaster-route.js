@@ -688,30 +688,92 @@ exports.handler = async (event) => {
     }
 
     // Admin Approves or Rejects Expense
+    // if (path.match(/^\/api\/expense\/[^/]+\/approve$/) && httpMethod === "PATCH" && refNo) {
+    //   const { employee } = await auth(headers);
+    //   authorize(employee, ["admin"]);
+
+    //   const expense = await ExpenseMaster.findOne({ refNo });
+    //   if (!expense) {
+    //     return { statusCode: 404, body: JSON.stringify({ message: "Expense not found" }) };
+    //   }
+
+    //   if (expense.approvalStatus !== "Pending") {
+    //     return { statusCode: 403, body: JSON.stringify({ message: "Admin cannot modify an already processed expense" }) };
+    //   }
+
+    //   const { approvalStatus, adminRemark } = parsedBody;
+    //   if (!["Approved", "Rejected"].includes(approvalStatus)) {
+    //     return { statusCode: 400, body: JSON.stringify({ message: "Invalid approval status" }) };
+    //   }
+
+    //   expense.approvalStatus = approvalStatus;
+    //   expense.adminRemark = adminRemark;
+    //   await expense.save();
+    //   return { statusCode: 200, body: JSON.stringify({ message: "Expense status updated", data: expense }) };
+    // }
+
     if (path.match(/^\/api\/expense\/[^/]+\/approve$/) && httpMethod === "PATCH" && refNo) {
-      const { employee } = await auth(headers);
-      authorize(employee, ["admin"]);
+      try {
+        const { employee } = await auth(headers);
+        authorize(employee, ["admin"]);
 
-      const expense = await ExpenseMaster.findOne({ refNo });
-      if (!expense) {
-        return { statusCode: 404, body: JSON.stringify({ message: "Expense not found" }) };
+        const expense = await ExpenseMaster.findOne({ refNo });
+        if (!expense) {
+          return {
+            statusCode: 404,
+            body: JSON.stringify({ message: "Expense not found" })
+          };
+        }
+
+        if (expense.approvalStatus !== "Pending") {
+          return {
+            statusCode: 403,
+            body: JSON.stringify({ message: "Admin cannot modify an already processed expense" })
+          };
+        }
+
+        const { approvalStatus, adminRemark } = parsedBody;
+        if (!["Approved", "Rejected"].includes(approvalStatus)) {
+          return {
+            statusCode: 400,
+            body: JSON.stringify({ message: "Invalid approval status" })
+          };
+        }
+
+        expense.approvalStatus = approvalStatus;
+        expense.adminRemark = adminRemark;
+
+        // Save updated expense first
+        await expense.save();
+
+        // ✅ Update global previousBalance if Approved
+        if (approvalStatus === "Approved" && typeof expense.balance === "number") {
+          const existingBalance = await EmpPreviousBalance.findOne();
+
+          if (existingBalance) {
+            existingBalance.previousBalance = expense.balance;
+            await existingBalance.save();
+          } else {
+            await EmpPreviousBalance.create({ previousBalance: expense.balance });
+          }
+        }
+
+        return {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: "Expense status updated",
+            data: expense
+          })
+        };
+
+      } catch (error) {
+        console.error("Error updating expense status:", error);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: "Internal Server Error" })
+        };
       }
-
-      if (expense.approvalStatus !== "Pending") {
-        return { statusCode: 403, body: JSON.stringify({ message: "Admin cannot modify an already processed expense" }) };
-      }
-
-      const { approvalStatus, adminRemark } = parsedBody;
-      if (!["Approved", "Rejected"].includes(approvalStatus)) {
-        return { statusCode: 400, body: JSON.stringify({ message: "Invalid approval status" }) };
-      }
-
-      expense.approvalStatus = approvalStatus;
-      expense.adminRemark = adminRemark;
-      await expense.save();
-      return { statusCode: 200, body: JSON.stringify({ message: "Expense status updated", data: expense }) };
     }
-
     // Accounts Department Adds Financial Details for All Expenses in the Form
     if (path.match(/^\/api\/expense\/[^/]+\/accounts$/) && httpMethod === "PATCH" && refNo) {
       const { employee } = await auth(headers);
