@@ -19,7 +19,7 @@ const leaveApplicationSchema = new mongoose.Schema({
     },
     leaveParameters: {
         type: String,
-        enum: ['Pre-dated (advance)', 'Post-dated (afterward)'],
+        enum: ['Pre dated', 'Post dated'],
         // required: function () {
         //     return this.typeOfLeave !== 'Missed Punch' && this.typeOfLeave !== 'Short Leave';
         // },
