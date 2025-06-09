@@ -17,6 +17,13 @@ const leaveApplicationSchema = new mongoose.Schema({
         enum: ['Sick Leave', 'Casual Leave', 'Earned Leave', 'Half Day Leave', 'Missed Punch', 'Short Leave', 'Others'],
         required: true,
     },
+    leaveParameters: {
+        type: String,
+        enum: ['Pre-dated (advance)', 'Post-dated (afterward)'],
+        // required: function () {
+        //     return this.typeOfLeave !== 'Missed Punch' && this.typeOfLeave !== 'Short Leave';
+        // },
+    },
     halfDayType: {
         type: String,
     },
