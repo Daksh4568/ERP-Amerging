@@ -91,6 +91,12 @@ functions:
       - httpApi:
           path: /api/tourExpensedata
           method: GET
+  fetchAttendance:
+    handler: src/Notification/routes/empCredentialsRoute.handler
+    events:
+      - httpApi:
+          path: /api/attendance
+          method: GET
 
   updateTourExpense:
     handler: src/Notification/routes/empCredentialsRoute.handler

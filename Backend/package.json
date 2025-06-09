@@ -24,6 +24,7 @@
     "mongoose": "^8.4.5",
     "mongoose-sequence": "^6.0.1",
     "morgan": "^1.10.0",
+    "mssql": "^11.0.1",
     "nodemailer": "^6.9.16",
     "uuid": "^11.0.3",
     "validator": "^13.12.0"

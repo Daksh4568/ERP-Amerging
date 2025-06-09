@@ -3,6 +3,7 @@ const { auth, authorize } = require('../../HR Module/middleware/auth'); // Authe
 const connectToDatabase = require('../../HR Module/db/db'); // MongoDB connection handler
 const crypto = require("crypto")
 const algorithm = 'aes-256-cbc';
+const sql = require('mssql');
 const key = Buffer.from(process.env.ENCRYPTION_KEY, 'hex');
 const emailFormatController = require('../Contoller/empMailFormatController')
 const sendOtpHandler = require('../../Utilities/controller/forgotPassword')
@@ -14,7 +15,7 @@ const sendEmployeeCredentials = require('../../HR Module/Controllers/sendMail');
 const employeeModel = require('../../HR Module/models/empMaster-model'); // adjust path
 exports.handler = async (event) => {
     try {
-
+        // routes
         await connectToDatabase();
 
         const { headers, body, queryStringParameters } = event;
@@ -78,6 +79,44 @@ exports.handler = async (event) => {
         const segments = path.split("/");
         const expenseRefNo = segments.length > 3 ? segments[3] : null;
         const parsedBody = body ? JSON.parse(body) : {};
+
+
+
+
+        const config = {
+            user: 'sa',
+            password: '@pplec1t',
+            server: '192.168.1.4',
+            database: 'etimetracklite1',
+            port: 1433,
+            options: {
+                trustServerCertificate: true, // For self-signed certs (local)
+            }
+        };
+        // Fetch Attendance Data
+        if (path === '/api/attendance' && httpMethod === 'GET') {
+            try {
+                // Connect to SQL Server
+                await sql.connect(config);
+
+                // Query the attendance table (change table name if needed)
+                const result = await sql.query(`SELECT * FROM AttendanceLog`);
+
+                // Return the attendance data
+                return {
+                    statusCode: 200,
+                    body: JSON.stringify({ data: result.recordset }),
+                };
+            } catch (error) {
+                console.error('Error fetching attendance:', error);
+                return {
+                    statusCode: 500,
+                    body: JSON.stringify({ error: 'Internal Server Error' }),
+                };
+            } finally {
+                sql.close(); // Ensure connection is closed
+            }
+        }
 
 
         // Employee Submits Expense
