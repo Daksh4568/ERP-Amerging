@@ -102,13 +102,13 @@ exports.handler = async (event) => {
 
                 // Query the attendance table (change table name if needed)
                 const result = await sql.query(`SELECT * FROM DeviceLogs_6_2025`);
+                console.log('Attendance data fetched successfully:', result.recordset);
 
                 // Return the attendance data
                 return {
                     statusCode: 200,
                     body: JSON.stringify({ data: result.recordset }),
                 };
-                console.log('Attendance data fetched successfully', result.recordset);
             } catch (error) {
                 console.error('Error fetching attendance:', error);
                 return {
