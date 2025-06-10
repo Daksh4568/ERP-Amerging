@@ -90,6 +90,7 @@ exports.handler = async (event) => {
             database: 'etimetracklite1',
             port: 1433,
             options: {
+                encrypt: FinalizationRegistry, // Use encryption for data transfer
                 trustServerCertificate: true, // For self-signed certs (local)
             }
         };
@@ -100,17 +101,19 @@ exports.handler = async (event) => {
                 await sql.connect(config);
 
                 // Query the attendance table (change table name if needed)
-                const result = await sql.query(`SELECT * FROM AttendanceLog`);
+                const result = await sql.query(`SELECT * FROM DeviceLogs_6_2025`);
 
                 // Return the attendance data
                 return {
                     statusCode: 200,
                     body: JSON.stringify({ data: result.recordset }),
                 };
+                console.log('Attendance data fetched successfully', result.recordset);
             } catch (error) {
                 console.error('Error fetching attendance:', error);
                 return {
                     statusCode: 500,
+
                     body: JSON.stringify({ error: 'Internal Server Error' }),
                 };
             } finally {

@@ -13,3 +13,5 @@ yarn-error.log
 
 # Git files
 .gitignore
+
+serverless.yml
