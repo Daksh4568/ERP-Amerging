@@ -13,6 +13,8 @@ const TourExpense = require("../../Employee Module/models/empTourExpense")
 const { decrypt } = require('../../Utilities/decrypt');
 const sendEmployeeCredentials = require('../../HR Module/Controllers/sendMail'); // adjust path if needed
 const employeeModel = require('../../HR Module/models/empMaster-model'); // adjust path
+const EmpAttendance = require("../../AttendanceLogs/Models/empAttendanceLogs"); // adjust path if needed
+const moment = require('moment');
 exports.handler = async (event) => {
     try {
         // routes
@@ -90,38 +92,105 @@ exports.handler = async (event) => {
             database: 'etimetracklite1',
             port: 1433,
             options: {
-                encrypt: FinalizationRegistry, // Use encryption for data transfer
+                encrypt: false, // Use encryption for data transfer
                 trustServerCertificate: true, // For self-signed certs (local)
             }
         };
         // Fetch Attendance Data
+        // if (path === '/api/attendance' && httpMethod === 'GET') {
+        //     try {
+        //         // Connect to SQL Server
+        //         await sql.connect(config);
+
+        //         // Query the attendance table (change table name if needed)
+        //         const result = await sql.query(`SELECT * FROM DeviceLogs_6_2025`);
+        //         console.log('Attendance data fetched successfully:', result.recordset);
+
+        //         // Return the attendance data
+        //         return {
+        //             statusCode: 200,
+        //             body: JSON.stringify({ data: result.recordset }),
+        //         };
+        //     } catch (error) {
+        //         console.error('Error fetching attendance:', error);
+        //         return {
+        //             statusCode: 500,
+
+        //             body: JSON.stringify({ error: 'Internal Server Error' }),
+        //         };
+        //     } finally {
+        //         sql.close(); // Ensure connection is closed
+        //     }
+        // }
+
         if (path === '/api/attendance' && httpMethod === 'GET') {
             try {
-                // Connect to SQL Server
                 await sql.connect(config);
 
-                // Query the attendance table (change table name if needed)
                 const result = await sql.query(`SELECT * FROM DeviceLogs_6_2025`);
-                console.log('Attendance data fetched successfully:', result.recordset);
+                const records = result.recordset;
 
-                // Return the attendance data
+                const attendanceMap = {}; // { eID_date: { inTime, outTime } }
+
+                for (const entry of records) {
+                    const { empCode, logDate, logTime } = entry;
+
+                    if (!empCode || !logDate || !logTime) continue;
+
+                    const date = moment(logDate).format("YYYY-MM-DD");
+                    const time = moment(logTime, 'HH:mm:ss');
+
+                    const key = `${empCode}_${date}`;
+                    const hour = time.hour();
+                    const minute = time.minute();
+
+                    // Filter valid inTime and outTime
+                    if (!attendanceMap[key]) {
+                        attendanceMap[key] = { eID: empCode, date, inTime: null, outTime: null };
+                    }
+
+                    const entryTime = time.format("HH:mm:ss");
+
+                    if (hour < 11 || (hour === 11 && minute <= 30)) {
+                        // Check if inTime is earlier
+                        if (!attendanceMap[key].inTime || entryTime < attendanceMap[key].inTime) {
+                            attendanceMap[key].inTime = entryTime;
+                        }
+                    } else if (hour > 15 || (hour === 15 && minute >= 30)) {
+                        // Check if outTime is later
+                        if (!attendanceMap[key].outTime || entryTime > attendanceMap[key].outTime) {
+                            attendanceMap[key].outTime = entryTime;
+                        }
+                    }
+                }
+
+                // Save all entries (bulk upsert)
+                const bulkOps = Object.values(attendanceMap).map(record => ({
+                    updateOne: {
+                        filter: { eID: record.eID, date: record.date },
+                        update: { $set: { inTime: record.inTime, outTime: record.outTime } },
+                        upsert: true
+                    }
+                }));
+
+                if (bulkOps.length > 0) {
+                    await EmpAttendance.bulkWrite(bulkOps);
+                }
+
                 return {
                     statusCode: 200,
-                    body: JSON.stringify({ data: result.recordset }),
+                    body: JSON.stringify({ message: "Attendance synced successfully", count: bulkOps.length }),
                 };
             } catch (error) {
-                console.error('Error fetching attendance:', error);
+                console.error('Error syncing attendance:', error);
                 return {
                     statusCode: 500,
-
-                    body: JSON.stringify({ error: 'Internal Server Error' }),
+                    body: JSON.stringify({ error: 'Internal Server Error', details: error.message }),
                 };
             } finally {
-                sql.close(); // Ensure connection is closed
+                sql.close();
             }
         }
-
-
         // Employee Submits Expense
         if (path === "/api/tourExpense" && httpMethod === "POST") {
             const { employee } = await auth(headers);
