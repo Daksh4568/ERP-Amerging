@@ -13,8 +13,8 @@ const TourExpense = require("../../Employee Module/models/empTourExpense")
 const { decrypt } = require('../../Utilities/decrypt');
 const sendEmployeeCredentials = require('../../HR Module/Controllers/sendMail'); // adjust path if needed
 const employeeModel = require('../../HR Module/models/empMaster-model'); // adjust path
-const EmpAttendance = require("../../AttendanceLogs/Models/empAttendanceLogs"); // adjust path if needed
-const moment = require('moment');
+const Attendance = require("../../AttendanceLogs/Models/empAttendanceLogs"); // adjust path if needed
+//const moment = require('moment');
 exports.handler = async (event) => {
     try {
         // routes
@@ -135,7 +135,9 @@ exports.handler = async (event) => {
 
                 for (const log of logs) {
                     const eID = log.UserId;
-                    const logDateTime = new Date(log.LogDate);
+                    const logDateTimeUTC = new Date(log.LogDate);
+                    const logDateTime = new Date(logDateTimeUTC.getTime() + (5.5 * 60 * 60 * 1000)); // Convert to IST
+
                     const logDate = logDateTime.toISOString().split('T')[0]; // YYYY-MM-DD
                     const logTime = logDateTime.toTimeString().split(' ')[0]; // HH:mm:ss
 
@@ -149,19 +151,18 @@ exports.handler = async (event) => {
 
                     const attendance = attendanceMap.get(key);
 
-                    // inTime: before or at 11:30 AM
+                    // inTime: before or at 11:30 AM IST
                     if ((hour < 11) || (hour === 11 && minute <= 30)) {
                         if (!attendance.inTime || logDateTime < new Date(`${logDate}T${attendance.inTime}`)) {
                             attendance.inTime = logTime;
                         }
                     }
 
-                    // outTime: after or at 3:30 PM
-                    if ((hour > 15) || (hour === 15 && minute >= 30)) {
+                    // outTime: after or at 5:00 PM IST
+                    if ((hour > 17) || (hour === 17 && minute >= 0)) {
                         if (!attendance.outTime || logDateTime > new Date(`${logDate}T${attendance.outTime}`)) {
                             attendance.outTime = logTime;
                         }
-
                     }
                 }
 
