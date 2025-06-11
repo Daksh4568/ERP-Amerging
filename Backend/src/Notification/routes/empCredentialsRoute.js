@@ -136,12 +136,16 @@ exports.handler = async (event) => {
                 for (const log of logs) {
                     const eID = log.UserId;
 
-                    // Convert log time from UTC to IST
+                    // Convert UTC to IST
                     const logDateTimeUTC = new Date(log.LogDate);
-                    const logDateTime = new Date(logDateTimeUTC.getTime() + (5.5 * 60 * 60 * 1000)); // UTC + 5:30
+                    const logDateTime = new Date(logDateTimeUTC.getTime() + (5.5 * 60 * 60 * 1000)); // +5:30 for IST
 
                     const logDate = logDateTime.toISOString().split('T')[0]; // YYYY-MM-DD
-                    const logTime = logDateTime.toLocaleTimeString('en-GB', { hour12: false }); // HH:mm:ss
+                    const logTime = logDateTime.toLocaleTimeString('en-GB', {
+                        hour12: false,
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }); // HH:mm
 
                     const key = `${eID}_${logDate}`;
                     const hour = logDateTime.getHours();
@@ -153,14 +157,12 @@ exports.handler = async (event) => {
 
                     const attendance = attendanceMap.get(key);
 
-                    // inTime: before or at 11:30 AM IST
                     if ((hour < 11) || (hour === 11 && minute <= 30)) {
                         if (!attendance.inTime || logTime < attendance.inTime) {
                             attendance.inTime = logTime;
                         }
                     }
 
-                    // outTime: after or at 5:00 PM IST
                     if ((hour > 17) || (hour === 17 && minute >= 0)) {
                         if (!attendance.outTime || logTime > attendance.outTime) {
                             attendance.outTime = logTime;
@@ -180,8 +182,9 @@ exports.handler = async (event) => {
                         { inTime, outTime },
                         { upsert: true, new: true }
                     );
+                    console.log(`Saving: ${eID} | ${date} | In: ${inTime} | Out: ${outTime}`);
+
                 }
-                console.log(`Saving: ${eID} | ${date} | In: ${inTime} | Out: ${outTime}`);
 
 
                 return {
