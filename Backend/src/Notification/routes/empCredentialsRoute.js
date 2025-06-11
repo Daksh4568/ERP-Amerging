@@ -85,17 +85,7 @@ exports.handler = async (event) => {
 
 
 
-        const config = {
-            user: 'sa',
-            password: '@pplec1t',
-            server: '192.168.1.4',
-            database: 'etimetracklite1',
-            port: 1433,
-            options: {
-                encrypt: false, // Use encryption for data transfer
-                trustServerCertificate: true, // For self-signed certs (local)
-            }
-        };
+
         // Fetch Attendance Data
         // if (path === '/api/attendance' && httpMethod === 'GET') {
         //     try {
@@ -122,75 +112,91 @@ exports.handler = async (event) => {
         //         sql.close(); // Ensure connection is closed
         //     }
         // }
-
+        const config = {
+            user: 'sa',
+            password: '@pplec1t',
+            server: '192.168.1.4',
+            database: 'etimetracklite1',
+            port: 1433,
+            options: {
+                encrypt: false, // Use encryption for data transfer
+                trustServerCertificate: true, // For self-signed certs (local)
+            }
+        };
+        const parseTime = (timeStr) => new Date(`1970-01-01T${timeStr}`);
         if (path === '/api/attendance' && httpMethod === 'GET') {
             try {
                 await sql.connect(config);
 
                 const result = await sql.query(`SELECT * FROM DeviceLogs_6_2025`);
-                const records = result.recordset;
+                const logs = result.recordset;
 
-                const attendanceMap = {}; // { eID_date: { inTime, outTime } }
+                const attendanceMap = new Map();
 
-                for (const entry of records) {
-                    const { empCode, logDate, logTime } = entry;
+                for (const log of logs) {
+                    const eID = log.UserId;
+                    const logDateTime = new Date(log.LogDate);
+                    const logDate = logDateTime.toISOString().split('T')[0]; // YYYY-MM-DD
+                    const logTime = logDateTime.toTimeString().split(' ')[0]; // HH:mm:ss
 
-                    if (!empCode || !logDate || !logTime) continue;
+                    const key = `${eID}_${logDate}`;
+                    const hour = logDateTime.getHours();
+                    const minute = logDateTime.getMinutes();
 
-                    const date = moment(logDate).format("YYYY-MM-DD");
-                    const time = moment(logTime, 'HH:mm:ss');
-
-                    const key = `${empCode}_${date}`;
-                    const hour = time.hour();
-                    const minute = time.minute();
-
-                    // Filter valid inTime and outTime
-                    if (!attendanceMap[key]) {
-                        attendanceMap[key] = { eID: empCode, date, inTime: null, outTime: null };
+                    if (!attendanceMap.has(key)) {
+                        attendanceMap.set(key, { eID, date: logDate, inTime: null, outTime: null });
                     }
 
-                    const entryTime = time.format("HH:mm:ss");
+                    const attendance = attendanceMap.get(key);
 
-                    if (hour < 11 || (hour === 11 && minute <= 30)) {
-                        // Check if inTime is earlier
-                        if (!attendanceMap[key].inTime || entryTime < attendanceMap[key].inTime) {
-                            attendanceMap[key].inTime = entryTime;
+                    // inTime: before or at 11:30 AM
+                    if ((hour < 11) || (hour === 11 && minute <= 30)) {
+                        if (!attendance.inTime || logDateTime < new Date(`${logDate}T${attendance.inTime}`)) {
+                            attendance.inTime = logTime;
                         }
-                    } else if (hour > 15 || (hour === 15 && minute >= 30)) {
-                        // Check if outTime is later
-                        if (!attendanceMap[key].outTime || entryTime > attendanceMap[key].outTime) {
-                            attendanceMap[key].outTime = entryTime;
+                    }
+
+                    // outTime: after or at 3:30 PM
+                    if ((hour > 15) || (hour === 15 && minute >= 30)) {
+                        if (!attendance.outTime || logDateTime > new Date(`${logDate}T${attendance.outTime}`)) {
+                            attendance.outTime = logTime;
                         }
+
                     }
                 }
 
-                // Save all entries (bulk upsert)
-                const bulkOps = Object.values(attendanceMap).map(record => ({
-                    updateOne: {
-                        filter: { eID: record.eID, date: record.date },
-                        update: { $set: { inTime: record.inTime, outTime: record.outTime } },
-                        upsert: true
-                    }
-                }));
+                // Save to MongoDB
+                for (const [_, data] of attendanceMap.entries()) {
+                    const { eID, date, inTime, outTime } = data;
 
-                if (bulkOps.length > 0) {
-                    await EmpAttendance.bulkWrite(bulkOps);
+                    if (!inTime && !outTime) continue; // Skip invalid entries
+
+                    await Attendance.findOneAndUpdate(
+                        { eID, date },
+                        { inTime, outTime },
+                        { upsert: true, new: true }
+                    );
                 }
+                console.log(`Saving: ${eID} | ${date} | In: ${inTime} | Out: ${outTime}`);
+
 
                 return {
                     statusCode: 200,
-                    body: JSON.stringify({ message: "Attendance synced successfully", count: bulkOps.length }),
+                    body: JSON.stringify({ message: 'Attendance synced successfully.' }),
                 };
-            } catch (error) {
-                console.error('Error syncing attendance:', error);
+            }
+            catch (err) {
+                console.error('Attendance sync error:', err);
                 return {
                     statusCode: 500,
-                    body: JSON.stringify({ error: 'Internal Server Error', details: error.message }),
+                    body: JSON.stringify({ error: 'Internal server error' }),
                 };
             } finally {
                 sql.close();
             }
-        }
+        };
+
+
         // Employee Submits Expense
         if (path === "/api/tourExpense" && httpMethod === "POST") {
             const { employee } = await auth(headers);
