@@ -4,7 +4,7 @@ const empAttendanceLogsSchema = new mongoose.Schema({
     eID: {
         type: String,
     },
-    attendanceDate: {
+    date: {
         type: String,
     },
     inTime: {
