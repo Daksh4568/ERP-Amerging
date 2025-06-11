@@ -136,16 +136,11 @@ exports.handler = async (event) => {
                 for (const log of logs) {
                     const eID = log.UserId;
 
-                    // Convert UTC to IST
-                    const logDateTimeUTC = new Date(log.LogDate);
-                    const logDateTime = new Date(logDateTimeUTC.getTime() + (5.5 * 60 * 60 * 1000)); // +5:30 for IST
+                    // ✅ Use LogDate as-is, assuming it's already in IST
+                    const logDateTime = new Date(log.LogDate);
 
                     const logDate = logDateTime.toISOString().split('T')[0]; // YYYY-MM-DD
-                    const logTime = logDateTime.toLocaleTimeString('en-GB', {
-                        hour12: false,
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    }); // HH:mm
+                    const logTime = logDateTime.toTimeString().slice(0, 5); // HH:mm format
 
                     const key = `${eID}_${logDate}`;
                     const hour = logDateTime.getHours();
@@ -157,19 +152,20 @@ exports.handler = async (event) => {
 
                     const attendance = attendanceMap.get(key);
 
+                    // Earliest time before 11:30 AM = inTime
                     if ((hour < 11) || (hour === 11 && minute <= 30)) {
                         if (!attendance.inTime || logTime < attendance.inTime) {
                             attendance.inTime = logTime;
                         }
                     }
 
+                    // Latest time after 5:00 PM = outTime
                     if ((hour > 17) || (hour === 17 && minute >= 0)) {
                         if (!attendance.outTime || logTime > attendance.outTime) {
                             attendance.outTime = logTime;
                         }
                     }
                 }
-
 
                 // Save to MongoDB
                 for (const [_, data] of attendanceMap.entries()) {
