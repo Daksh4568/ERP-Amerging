@@ -135,11 +135,13 @@ exports.handler = async (event) => {
 
                 for (const log of logs) {
                     const eID = log.UserId;
+
+                    // Convert log time from UTC to IST
                     const logDateTimeUTC = new Date(log.LogDate);
-                    const logDateTime = new Date(logDateTimeUTC.getTime() + (5.5 * 60 * 60 * 1000)); // Convert to IST
+                    const logDateTime = new Date(logDateTimeUTC.getTime() + (5.5 * 60 * 60 * 1000)); // UTC + 5:30
 
                     const logDate = logDateTime.toISOString().split('T')[0]; // YYYY-MM-DD
-                    const logTime = logDateTime.toTimeString().split(' ')[0]; // HH:mm:ss
+                    const logTime = logDateTime.toLocaleTimeString('en-GB', { hour12: false }); // HH:mm:ss
 
                     const key = `${eID}_${logDate}`;
                     const hour = logDateTime.getHours();
@@ -153,18 +155,19 @@ exports.handler = async (event) => {
 
                     // inTime: before or at 11:30 AM IST
                     if ((hour < 11) || (hour === 11 && minute <= 30)) {
-                        if (!attendance.inTime || logDateTime < new Date(`${logDate}T${attendance.inTime}`)) {
+                        if (!attendance.inTime || logTime < attendance.inTime) {
                             attendance.inTime = logTime;
                         }
                     }
 
                     // outTime: after or at 5:00 PM IST
                     if ((hour > 17) || (hour === 17 && minute >= 0)) {
-                        if (!attendance.outTime || logDateTime > new Date(`${logDate}T${attendance.outTime}`)) {
+                        if (!attendance.outTime || logTime > attendance.outTime) {
                             attendance.outTime = logTime;
                         }
                     }
                 }
+
 
                 // Save to MongoDB
                 for (const [_, data] of attendanceMap.entries()) {
