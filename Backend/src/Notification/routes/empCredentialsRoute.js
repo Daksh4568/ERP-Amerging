@@ -208,7 +208,7 @@ exports.handler = async (event) => {
             }
         };
 
-        if (path.match(/^\/api\/attendance(\/[^/]+)?$/) && httpMethod === 'GET') {
+        if (path.match(/^\/api\/attendanceLog(\/[^/]+)?$/) && httpMethod === 'GET') {
             const { employee } = await auth(headers);
             authorize(employee, ['Employee', 'Manager', 'admin', 'HR']);
 
