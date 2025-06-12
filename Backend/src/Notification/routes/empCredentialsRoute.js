@@ -208,6 +208,33 @@ exports.handler = async (event) => {
             }
         };
 
+        if (path.match(/^\/api\/attendance(\/[^/]+)?$/) && httpMethod === 'GET') {
+            const { employee } = await auth(headers);
+            authorize(employee, ['Employee', 'Manager', 'admin', 'HR']);
+
+            // Extract eID if present in the URL: /api/attendance or /api/attendance/:eID
+            const segments = path.split('/');
+            const eID = segments.length > 3 ? segments[3] : null;
+
+            let attendanceData;
+            if (eID) {
+                attendanceData = await Attendance.find({ eID });
+            } else {
+                attendanceData = await Attendance.find({});
+            }
+
+            if (!attendanceData || attendanceData.length === 0) {
+                return { statusCode: 404, body: JSON.stringify({ message: "No attendance data found" }) };
+            }
+
+            return {
+                statusCode: 200,
+                body: JSON.stringify({
+                    message: "Attendance data fetched successfully",
+                    data: attendanceData
+                })
+            };
+        }
 
         // Employee Submits Expense
         if (path === "/api/tourExpense" && httpMethod === "POST") {

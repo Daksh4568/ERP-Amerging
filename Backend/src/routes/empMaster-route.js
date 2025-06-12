@@ -124,32 +124,32 @@ exports.handler = async (event) => {
       };
     }
 
-    if (path === '/api/leaves' && httpMethod === 'GET') {
-      const { employee } = await auth(headers);
-      authorize(employee, ['HR', 'admin', 'Manager', 'Employee']);
+    // if (path === '/api/leaves' && httpMethod === 'GET') {
+    //   const { employee } = await auth(headers);
+    //   authorize(employee, ['HR', 'admin', 'Manager', 'Employee']);
 
-      // Parse pagination params
-      const page = parseInt(queryStringParameters?.page) || 1;
-      const limit = parseInt(queryStringParameters?.limit) || 10;
-      const skip = (page - 1) * limit;
+    //   // Parse pagination params
+    //   const page = parseInt(queryStringParameters?.page) || 1;
+    //   const limit = parseInt(queryStringParameters?.limit) || 10;
+    //   const skip = (page - 1) * limit;
 
-      const leaveData = await LeaveApplication.find({})
-        .skip(skip)
-        .limit(limit);
+    //   const leaveData = await LeaveApplication.find({})
+    //     .skip(skip)
+    //     .limit(limit);
 
-      const total = await LeaveApplication.countDocuments({});
+    //   const total = await LeaveApplication.countDocuments({});
 
-      return {
-        statusCode: 200,
-        body: JSON.stringify({
-          data: leaveData,
-          page,
-          limit,
-          total,
-          totalPages: Math.ceil(total / limit),
-        }),
-      };
-    }
+    //   return {
+    //     statusCode: 200,
+    //     body: JSON.stringify({
+    //       data: leaveData,
+    //       page,
+    //       limit,
+    //       total,
+    //       totalPages: Math.ceil(total / limit),
+    //     }),
+    //   };
+    // }
 
     // Apply for leave
     if (path === '/api/apply-leave' && httpMethod === 'POST') {
