@@ -113,15 +113,15 @@ functions:
           path: /api/tourExpense/{expenseRefNo}/accounts
           method: PATCH
 
-    getAttendanceData:
-  handler: src/Notification/routes/empCredentialsRoute.handler
-  events:
-    - httpApi:
-        path: /api/attendanceLog
-        method: GET
-    - httpApi:
-        path: /api/attendanceLog/{eID}
-        method: GET
+  getAttendanceData:
+    handler: src/Notification/routes/empCredentialsRoute.handler
+    events:
+      - httpApi:
+          path: /api/attendanceLog
+          method: GET
+      - httpApi:
+          path: /api/attendanceLog/{eID}
+          method: GET
 
   getLeaveData:
     handler: src/routes/empMaster-route.handler
