@@ -140,12 +140,13 @@ exports.handler = async (event) => {
                     const logDateTime = new Date(log.LogDate);
 
                     const logDate = logDateTime.toISOString().split('T')[0]; // YYYY-MM-DD
-                    const logTime = logDateTime.toTimeString().slice(0, 5); // HH:mm format
-
+                    const logTime = logDateTime.toISOString().split('T')[1].slice(0, 5);
                     const key = `${eID}_${logDate}`;
-                    const hour = logDateTime.getHours();
-                    const minute = logDateTime.getMinutes();
-
+                    // We have to use .getUTCHours() and getMinutes() to ensure we are comparing the time in UTC
+                    //,getHours() and getMinutes() will return the local time of the server, which may not be UTC and it will add //an offset to the time, which can lead to incorrect comparisons.
+                    const hour = logDateTime.getUTCHours();
+                    // const minute = logDateTime.getMinutes();
+                    const minute = logDateTime.getUTCMinutes();
                     if (!attendanceMap.has(key)) {
                         attendanceMap.set(key, { eID, date: logDate, inTime: null, outTime: null });
                     }
@@ -153,12 +154,20 @@ exports.handler = async (event) => {
                     const attendance = attendanceMap.get(key);
 
                     // Earliest time before 11:30 AM = inTime
+                    // if ((hour < 11) || (hour === 11 && minute <= 30)) {
+                    //     if (!attendance.inTime || logTime < attendance.inTime) {
+                    //         attendance.inTime = logTime;
+                    //     }
+                    // }
                     if ((hour < 11) || (hour === 11 && minute <= 30)) {
-                        if (!attendance.inTime || logTime < attendance.inTime) {
+                        if (
+                            !attendance.inTime ||
+                            logDateTime < new Date(`${logDate}T${attendance.inTime}:00Z`)
+                        ) {
+                            console.log(`✅ [Set InTime] ${eID} | ${logDate} | ${logTime}`);
                             attendance.inTime = logTime;
                         }
                     }
-
                     // Latest time after 5:00 PM = outTime
                     if ((hour > 17) || (hour === 17 && minute >= 0)) {
                         if (!attendance.outTime || logTime > attendance.outTime) {
