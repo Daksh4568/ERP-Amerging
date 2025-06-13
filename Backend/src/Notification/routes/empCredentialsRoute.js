@@ -181,17 +181,20 @@ exports.handler = async (event) => {
                     const { eID, date, inTime, outTime } = data;
 
                     if (!inTime && !outTime) continue; // Skip invalid entries
-                    let emplateIn = false;
+                    let empLateIn = false;
                     if (inTime) {
-                        const [h, m] = inTime.split(':').map(Number);
-                        if (h > 9 || (h === 9 && m > 15)) {
-                            emplateIn = true;
+                        const inDateTime = new Date(`${date}T${inTime}:00Z`);
+                        const lateThreshold = new Date(`${date}T03:45:00Z`);
+                        if (inDateTime > lateThreshold) {
+                            empLateIn = true;
                         }
                     }
+                    const status = inTime ? 'Present' : 'Absent';
+
 
                     await Attendance.findOneAndUpdate(
                         { eID, date },
-                        { inTime, outTime, emplateIn, status: 'Present' },
+                        { inTime, outTime, empLateIn, status },
                         { upsert: true, new: true }
                     );
                     console.log(`Saving: ${eID} | ${date} | In: ${inTime} | Out: ${outTime}`);

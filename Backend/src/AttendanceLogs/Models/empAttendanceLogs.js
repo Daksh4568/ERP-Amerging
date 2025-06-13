@@ -13,11 +13,11 @@ const empAttendanceLogsSchema = new mongoose.Schema({
     outTime: {
         type: String,
     },
-    emplateIn: {
+    empLateIn: {
         type: Boolean,
         default: false,
     },
-    emplateBy: {
+    empLateBy: {
         type: String,
     },
     status: {
