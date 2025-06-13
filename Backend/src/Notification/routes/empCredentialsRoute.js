@@ -182,10 +182,15 @@ exports.handler = async (event) => {
 
                     if (!inTime && !outTime) continue; // Skip invalid entries
                     let empLateIn = false;
+
                     if (inTime) {
-                        const inDateTime = new Date(`${date}T${inTime}:00Z`);
-                        const lateThreshold = new Date(`${date}T03:45:00Z`);
-                        if (inDateTime > lateThreshold) {
+                        // Parse inTime and convert to UTC Date
+                        const [hour, minute] = inTime.split(':').map(Number);
+
+                        const inTimeIST = new Date(`${date}T${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}:00+05:30`);
+                        const thresholdIST = new Date(`${date}T09:15:00+05:30`);
+
+                        if (inTimeIST > thresholdIST) {
                             empLateIn = true;
                         }
                     }
