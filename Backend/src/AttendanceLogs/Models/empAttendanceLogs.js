@@ -14,13 +14,15 @@ const empAttendanceLogsSchema = new mongoose.Schema({
         type: String,
     },
     emplateIn: {
-        type: String,
+        type: boolean,
+        default: false,
     },
     emplateBy: {
         type: String,
     },
     status: {
         type: String,
+        enum: ['Present', 'Absent', 'Leave', 'Holiday'],
     },
     addedBy: {
         name: {

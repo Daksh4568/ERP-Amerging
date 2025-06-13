@@ -181,10 +181,17 @@ exports.handler = async (event) => {
                     const { eID, date, inTime, outTime } = data;
 
                     if (!inTime && !outTime) continue; // Skip invalid entries
+                    let emplateIn = false;
+                    if (inTime) {
+                        const [h, m] = inTime.split(':').map(Number);
+                        if (h > 9 || (h === 9 && m > 15)) {
+                            emplateIn = true;
+                        }
+                    }
 
                     await Attendance.findOneAndUpdate(
                         { eID, date },
-                        { inTime, outTime },
+                        { inTime, outTime, emplateIn, status: 'Present' },
                         { upsert: true, new: true }
                     );
                     console.log(`Saving: ${eID} | ${date} | In: ${inTime} | Out: ${outTime}`);
