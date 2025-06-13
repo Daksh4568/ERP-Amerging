@@ -14,7 +14,7 @@ const empAttendanceLogsSchema = new mongoose.Schema({
         type: String,
     },
     emplateIn: {
-        type: boolean,
+        type: Boolean,
         default: false,
     },
     emplateBy: {
