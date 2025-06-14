@@ -113,14 +113,14 @@ exports.handler = async (event) => {
         //     }
         // }
         const config = {
-            user: 'sa',
-            password: '@pplec1t',
-            server: '192.168.1.4',
-            database: 'etimetracklite1',
-            port: 1433,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            server: process.env.DB_SERVER,
+            database: process.env.DB_NAME,
+            port: parseInt(process.env.DB_PORT, 10),
             options: {
-                encrypt: false, // Use encryption for data transfer
-                trustServerCertificate: true, // For self-signed certs (local)
+                encrypt: false,
+                trustServerCertificate: true,
             }
         };
         const parseTime = (timeStr) => new Date(`1970-01-01T${timeStr}`);

@@ -28,7 +28,11 @@ provider:
     EMAIL_USER: internal@amergingtech.com
     EMAIL_PASSWORD: braz dbta pjhm davx
     ENCRYPTION_KEY: 9f1c3a2e4b9a7d5e1c3a6f4b7e9c2a1d8b6e3c7a1d9f2e4b5c8a3d1e7f9c0b2a
-
+    DB_USER: sa
+    DB_PASSWORD: "@pplec1t"
+    DB_SERVER: 192.168.1.4
+    DB_NAME: etimetracklite1
+    DB_PORT: 1433
 functions:
   home:
     handler: src/routes/empMaster-route.handler
