@@ -189,6 +189,17 @@ const handleLeaveNotification = async (notificationData, user) => {
                 };
             }
 
+            // Call this after leave is approved
+            async function markLeaveInAttendance(eID, leaveDate) {
+                // leaveDate should be in the same format as stored in your attendance logs (e.g., 'YYYY-MM-DD')
+                await EmpAttendanceLogs.findOneAndUpdate(
+                    { eID, date: leaveDate },
+                    { status: 'LeaveTaken' },
+                    { upsert: true, new: true }
+                );
+            }
+            await markLeaveInAttendance(leaveApplication.eID, leaveApplication.startDate);
+
             const leaveType = leaveApplication.typeOfLeave;
             const leaveDays = leaveApplication.numberOfDays ||
                 ((new Date(leaveApplication.endDate) - new Date(leaveApplication.startDate)) / (1000 * 60 * 60 * 24) + 1);

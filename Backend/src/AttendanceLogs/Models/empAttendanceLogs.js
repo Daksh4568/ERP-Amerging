@@ -22,7 +22,7 @@ const empAttendanceLogsSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['Present', 'Absent', 'Leave', 'Holiday'],
+        enum: ['Present', 'Absent', 'LeaveTaken', 'Holiday'],
     },
     addedBy: {
         name: {
