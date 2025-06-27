@@ -647,6 +647,35 @@ exports.handler = async (event) => {
         };
       }
     }
+    if (path === "/api/getexpenseAllocation" && httpMethod === "GET") {
+      try {
+        const { employee } = await auth(headers);
+        authorize(employee, ["admin", "HR", "Accounts", "Employee"]);
+
+        const queryParams = event.queryStringParameters || {};
+        const filter = {};
+
+        if (queryParams.eID) {
+          filter.eID = queryParams.eID;
+        }
+
+        const records = await adminAccountsExpenseModel.find(filter).sort({ createdAt: -1 });
+
+        return {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: "Expense allocation records fetched successfully",
+            data: records,
+          }),
+        };
+      } catch (error) {
+        console.error("Error fetching expense allocation records:", error);
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ error: "Internal Server Error" }),
+        };
+      }
+    }
     // if (path === "/api/getexpenseAllocation" && httpMethod === "GET") {
     //   try {
     //     const { employee } = await auth(headers);

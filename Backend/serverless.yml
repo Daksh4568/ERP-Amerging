@@ -288,12 +288,12 @@ functions:
           path: /api/expenseAllocation
           method: POST
 
-  # expenseAllocationGet:
-  #   handler: src/routes/empMaster-route.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/getexpenseAllocation
-  #         method: GET
+  expenseAllocationGet:
+    handler: src/routes/empMaster-route.handler
+    events:
+      - httpApi:
+          path: /api/getexpenseAllocation
+          method: GET
 
   getBalance:
     handler: src/routes/empMaster-route.handler
