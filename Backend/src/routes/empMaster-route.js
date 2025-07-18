@@ -338,7 +338,7 @@ exports.handler = async (event) => {
         };
       }
 
-
+      //Validatig the body contnent 
       try {
         // Authenticate user
         const { employee } = await auth(headers);
